@@ -1,0 +1,7 @@
+{
+  "parent": "toxony:block/template_poison_farmland",
+  "textures": {
+    "dirt": "toxony:block/poison_dirt",
+    "top": "toxony:block/poison_farmland"
+  }
+}

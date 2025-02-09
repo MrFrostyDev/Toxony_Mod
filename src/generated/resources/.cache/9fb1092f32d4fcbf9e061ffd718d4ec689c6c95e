@@ -1,0 +1,11 @@
+// 1.21.1	2025-02-08T23:01:37.9745922	Recipes
+5c662f4c293a3a08f345675461c6552deffb05ce data/minecraft/advancement/recipes/tools/iron_pickaxe.json
+f9e2a5cb9987964f831b4b1d22776d195026dc44 data/minecraft/recipe/iron_pickaxe.json
+8a1d70b88b96fa65fb20e89e65f00fd4d43c78d9 data/toxony/advancement/recipes/alembic/potion.json
+887ae90b5d61478b360f602eddd2c2284dd3d2b3 data/toxony/advancement/recipes/crucible/poisonous_potato.json
+d48b17078978c0f808fa4fb65dca6cde383ff555 data/toxony/advancement/recipes/misc/clay_oil_pot.json
+c842579c58b3f182bd5991da8134bd32f72e6e37 data/toxony/advancement/recipes/mortar/cub_blend.json
+da0d0e33c2bc55f0524f78fd62fe118fb7be762e data/toxony/recipe/alembic/potion.json
+1acabeb23c3cceadbf3c88a2fed1f41731bd7ae7 data/toxony/recipe/clay_oil_pot.json
+7d128b11bb8e27c25f0cf06c917a604bd0ff3d61 data/toxony/recipe/crucible/poisonous_potato.json
+5424f4b5d6354d4ea0acb4f5d66ce559537bce55 data/toxony/recipe/mortar/cub_blend.json

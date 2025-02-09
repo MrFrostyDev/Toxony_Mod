@@ -1,0 +1,25 @@
+{
+	"credit": "YourFrostyFriend, made with Blockbench",
+	"render_type": "cutout",
+	"texture_size": [14, 10],
+	"textures": {
+		"0": "toxony:block/mortar_pestle",
+		"particle": "toxony:block/mortar_pestle"
+	},
+	"elements": [
+		{
+			"name": "ingred_2",
+			"from": [5, 4, 5],
+			"to": [11, 4, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 3, 6]},
+			"faces": {
+				"north": {"uv": [0, 0, 6.85714, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 6.85714, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 6.85714, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 6.85714, 0], "texture": "#0"},
+				"up": {"uv": [4.57143, 8, 9.14286, 14.4], "texture": "#0"},
+				"down": {"uv": [4.57143, 8, 9.14286, 14.4], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,0 +1,6 @@
+// 1.21.1	2025-02-08T23:01:37.9725932	Loot Tables
+b3b06e45f3b27679b3c855cc065baed90d76388e data/toxony/loot_table/blocks/alembic.json
+865d3aa1d70a235a7c40dabeeac4cfe35eae6ef9 data/toxony/loot_table/blocks/copper_crucible.json
+eaf4e73b3db3d7cc4ed6eb6af289696c26ba39d7 data/toxony/loot_table/blocks/mortar_pestle.json
+b4c3527abe15183dafd0ac1c43f1d0c2b51861d3 data/toxony/loot_table/blocks/ocelot_mint.json
+f253b20cea3fa6bc9ce8cedebc3be100d5244f99 data/toxony/loot_table/blocks/wild_ocelot_mint.json

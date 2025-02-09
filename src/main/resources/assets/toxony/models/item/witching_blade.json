@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "toxony:item/witching_blade"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "toxony:active": 1
+      },
+      "model": "toxony:item/witching_blade_active"
+    }
+  ]
+}

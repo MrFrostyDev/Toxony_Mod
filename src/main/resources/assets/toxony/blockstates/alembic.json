@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "toxony:block/alembic"
+    },
+    "facing=east": {
+      "model": "toxony:block/alembic",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "toxony:block/alembic",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "toxony:block/alembic",
+      "y": 270
+    }
+  }
+}

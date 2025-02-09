@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "toxony:block/copper_crucible"
+    },
+    "lit=true": {
+      "model": "toxony:block/copper_crucible_fire"
+    }
+  }
+}

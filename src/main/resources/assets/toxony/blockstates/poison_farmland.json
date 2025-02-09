@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "toxony:block/poison_farmland"
+    },
+    "moisture=1": {
+      "model": "toxony:block/poison_farmland"
+    },
+    "moisture=2": {
+      "model": "toxony:block/poison_farmland"
+    },
+    "moisture=3": {
+      "model": "toxony:block/poison_farmland"
+    },
+    "moisture=4": {
+      "model": "toxony:block/poison_farmland"
+    },
+    "moisture=5": {
+      "model": "toxony:block/poison_farmland"
+    },
+    "moisture=6": {
+      "model": "toxony:block/poison_farmland"
+    },
+    "moisture=7": {
+      "model": "toxony:block/poison_farmland_moist"
+    }
+  }
+}

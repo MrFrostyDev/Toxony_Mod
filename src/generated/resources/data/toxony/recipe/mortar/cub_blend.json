@@ -1,0 +1,22 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:fern"
+    },
+    {
+      "item": "minecraft:poisonous_potato"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:cub_blend"
+  },
+  "use": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  }
+}
