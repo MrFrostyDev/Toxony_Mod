@@ -1,6 +1,7 @@
 {
 	"credit": "YourFrostyFriend, made with Blockbench",
 	"render_type": "cutout",
+	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "toxony:block/ocelot_mint_stage4",

@@ -41,7 +41,7 @@ public class ToxFueledItem extends Item {
 
         if(plyToxData.getTox() > 0 && isActive(stack) && !plyToxData.getDeathState()){
             plyToxData.addTox(-1);
-            PacketDistributor.sendToPlayer(svplayer, new SyncToxPacket(plyToxData));
+            PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
         }
         else{
             stack.set(DataComponentsRegistry.ACTIVE, false);

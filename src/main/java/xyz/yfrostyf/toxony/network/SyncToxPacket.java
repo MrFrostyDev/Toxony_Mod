@@ -1,9 +1,9 @@
 package xyz.yfrostyf.toxony.network;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
@@ -14,44 +14,56 @@ import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.client.ClientToxData;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class SyncToxPacket implements CustomPacketPayload {
-    private ToxData plyToxData = null;
-
-    int tox = 0;
-    int tolerance = 10;
-    int threshold = 0;
-    Map<Integer, Integer> affinities = Affinity.initAffinities();
-    boolean deathState = false;
+public record SyncToxPacket(int tox, int tolerance, int threshold, Map<Affinity, Integer> affinities, boolean deathState) implements CustomPacketPayload {
 
     public static final Type<SyncToxPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "sync_tox"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SyncToxPacket> STREAM_CODEC = CustomPacketPayload.codec(
-            SyncToxPacket::write,
+    public static final StreamCodec<RegistryFriendlyByteBuf, SyncToxPacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.INT, SyncToxPacket::tox,
+            ByteBufCodecs.INT, SyncToxPacket::tolerance,
+            ByteBufCodecs.INT, SyncToxPacket::threshold,
+            ByteBufCodecs.map(HashMap::new, Affinity.STREAM_CODEC, ByteBufCodecs.INT), SyncToxPacket::affinities,
+            ByteBufCodecs.BOOL, SyncToxPacket::deathState,
             SyncToxPacket::new
     );
 
-
-    public SyncToxPacket(ToxData plyToxData){
-        this.plyToxData = plyToxData;
+    public static SyncToxPacket create(ToxData plyToxData){
+        return new SyncToxPacket((int)plyToxData.getTox(),
+                (int)plyToxData.getTolerance(),
+                plyToxData.getThreshold(),
+                plyToxData.getAffinities(),
+                plyToxData.getDeathState());
     }
 
-    public SyncToxPacket(FriendlyByteBuf buf){
-        tox = buf.readInt();
-        tolerance = buf.readInt();
-        threshold = buf.readInt();
-        affinities = buf.readMap(FriendlyByteBuf::readInt, FriendlyByteBuf::readInt);
-        deathState = buf.readBoolean();
-    }
-
-    public void write(FriendlyByteBuf buf){
-        buf.writeInt((int)plyToxData.getTox());
-        buf.writeInt((int)plyToxData.getTolerance());
-        buf.writeInt(plyToxData.getThreshold());
-        buf.writeMap(plyToxData.getAffinities(), FriendlyByteBuf::writeInt, FriendlyByteBuf::writeInt);
-        buf.writeBoolean(plyToxData.getDeathState());
-    }
+//    public SyncToxPacket(FriendlyByteBuf buf){
+//        tox = buf.readInt();
+//        tolerance = buf.readInt();
+//        threshold = buf.readInt();
+//        affinities = buf.readMap(FriendlyByteBuf::read, FriendlyByteBuf::readInt);
+//        deathState = buf.readBoolean();
+//    }
+//
+//    public void write(FriendlyByteBuf buf){
+//        buf.writeInt((int)plyToxData.getTox());
+//        buf.writeInt((int)plyToxData.getTolerance());
+//        buf.writeInt(plyToxData.getThreshold());
+//
+//        Collection<String> resourceLocations = new ArrayList<>();
+//        List<Integer> values = new ArrayList<>();
+//        for(Map.Entry<Affinity, Integer> entry : plyToxData.getKnownAffinities().entrySet()){
+//            resourceLocations.add(ToxonyRegistries.AFFINITY_REGISTRY.getKey(entry.getKey()).toString());
+//            values.add(entry.getValue());
+//        }
+//
+//        buf.writeCollection(resourceLocations, FriendlyByteBuf::writeBytes);
+//        buf.writeVarIntArray(values.stream().mapToInt(i->i).toArray());
+//
+//
+//        buf.writeBoolean(plyToxData.getDeathState());
+//    }
 
     public static void handle(SyncToxPacket syncToxPacket, IPayloadContext context){
         context.enqueueWork(() -> {

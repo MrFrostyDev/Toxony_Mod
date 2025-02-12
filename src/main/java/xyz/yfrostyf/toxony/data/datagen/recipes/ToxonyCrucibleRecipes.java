@@ -5,8 +5,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import xyz.yfrostyf.toxony.data.recipebuilders.CrucibleRecipeBuilder;
+import xyz.yfrostyf.toxony.data.datagen.recipebuilders.CrucibleRecipeBuilder;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -19,10 +19,10 @@ public class ToxonyCrucibleRecipes extends RecipeProvider {
         //
         // Crucible Recipes
         //
-        new CrucibleRecipeBuilder(new ItemStack(Items.POISONOUS_POTATO))
-                .ingredient(Items.BONE)
-                .cookTime(200)
-                .unlockedByItems("has_bone", Items.BONE)
+        new CrucibleRecipeBuilder(new ItemStack(ItemRegistry.TOXIC_PASTE))
+                .ingredient(ItemRegistry.POISON_PASTE.get())
+                .cookTime(300)
+                .unlockedByItems("has_poison_paste", ItemRegistry.POISON_PASTE.get())
                 .build(output);
     }
 }

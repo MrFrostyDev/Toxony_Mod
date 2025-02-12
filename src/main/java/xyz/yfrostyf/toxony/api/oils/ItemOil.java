@@ -2,13 +2,21 @@ package xyz.yfrostyf.toxony.api.oils;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+import net.minecraft.world.item.enchantment.Enchantment;
+import xyz.yfrostyf.toxony.registries.OilsRegistry;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -17,14 +25,13 @@ import java.util.function.Supplier;
 public record ItemOil(Oil oil, int duration, int amplifier, int maxUses, boolean showInTooltip) implements TooltipProvider {
     public static final ItemOil EMPTY = new ItemOil(Oil.EMPTY, 0, 0, 0, false);
     public static final Codec<ItemOil> CODEC = RecordCodecBuilder.create(
-            p_337961_ -> p_337961_.group(
+            instance -> instance.group(
                             Oil.CODEC.fieldOf("oil").forGetter(ItemOil::oil),
                             Codec.INT.fieldOf("duration").forGetter(ItemOil::duration),
                             Codec.INT.fieldOf("amplifier").forGetter(ItemOil::amplifier),
                             Codec.INT.fieldOf("max_uses").forGetter(ItemOil::maxUses),
                             Codec.BOOL.optionalFieldOf("show_in_tooltip", Boolean.valueOf(true)).forGetter(ItemOil::showInTooltip)
-                    )
-                    .apply(p_337961_, ItemOil::new));
+                    ).apply(instance, ItemOil::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ItemOil> STREAM_CODEC = StreamCodec.composite(
             Oil.STREAM_CODEC,
@@ -64,10 +71,9 @@ public record ItemOil(Oil oil, int duration, int amplifier, int maxUses, boolean
         }
     }
 
+    // Using RenderTooltip events instead.
     @Override
-    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltipAdder, TooltipFlag tooltipFlag) {
-
-    }
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltipAdder, TooltipFlag tooltipFlag) {}
 
     public static ItemOil create(Supplier<Oil> oil, int duration, int amplifier, int maxUses, boolean showInTooltip){
         return new ItemOil(oil.get(), duration, amplifier, maxUses, showInTooltip);

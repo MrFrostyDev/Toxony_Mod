@@ -8,7 +8,10 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
+
+import java.util.List;
 
 public class DataComponentsRegistry {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ToxonyMain.MOD_ID);
@@ -37,5 +40,12 @@ public class DataComponentsRegistry {
             builder -> builder
                     .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.INT)
+    );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Affinity>>> AFFINITIES = DATA_COMPONENTS.registerComponentType(
+            "affinities",
+            builder -> builder
+                    .persistent(Affinity.CODEC.listOf())
+                    .networkSynchronized(Affinity.STREAM_CODEC.apply(ByteBufCodecs.list()))
     );
 }

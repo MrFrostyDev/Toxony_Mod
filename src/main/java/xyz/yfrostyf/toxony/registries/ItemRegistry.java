@@ -6,18 +6,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.api.affinity.Affinity;
-import xyz.yfrostyf.toxony.api.items.ToxGiverBlockItem;
-import xyz.yfrostyf.toxony.api.items.ToxGiverItem;
+import xyz.yfrostyf.toxony.api.items.*;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.oils.Oil;
 import xyz.yfrostyf.toxony.items.BlendItem;
@@ -25,10 +21,11 @@ import xyz.yfrostyf.toxony.items.OilPotItem;
 import xyz.yfrostyf.toxony.items.PoisonPasteItem;
 import xyz.yfrostyf.toxony.items.WitchingBladeItem;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ItemRegistry {
-    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, ToxonyMain.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, ToxonyMain.MOD_ID);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
@@ -47,36 +44,77 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> REGENERATION_OIL_POT = createOilPot(
             "regeneration_oil_pot", 5, OilsRegistry.REGENERATION_OIL::get, 200, 0, 100);
 
+    // |----------------------------------------------------------------------------------|
+    // |-------------------------------------Blends---------------------------------------|
+    // |----------------------------------------------------------------------------------|
+
+    public static final DeferredHolder<Item, Item> POISON_BLEND = ITEMS.register("poison_blend", () -> BlendItem.builder()
+            .tox(30)
+            .tolerance(10)
+            .tier(0)
+            .returnItem(() -> new ItemStack(Items.BOWL))
+            .build()
+    );
+    public static final DeferredHolder<Item, Item> TOXIC_BLEND = ITEMS.register("toxic_blend", () -> BlendItem.builder()
+            .tox(50)
+            .tolerance(20)
+            .tier(1)
+            .returnItem(() -> new ItemStack(Items.BOWL))
+            .build()
+    );
+    public static final DeferredHolder<Item, Item> PURE_BLEND = ITEMS.register("pure_blend", () -> BlendItem.builder()
+            .tox(100)
+            .tolerance(30)
+            .tier(2)
+            .returnItem(() -> new ItemStack(Items.BOWL))
+            .build()
+    );
+
     // |-----------------------------------------------------------------------------------|
     // |------------------------------------Ingredients------------------------------------|
     // |-----------------------------------------------------------------------------------|
 
     public static final DeferredHolder<Item, Item> POISON_PASTE = ITEMS.register("poison_paste", () -> new PoisonPasteItem(new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> TOXIC_PASTE = ITEMS.register("toxic_paste", () -> new PoisonPasteItem(new Item.Properties().stacksTo(16)));
-    public static final DeferredHolder<Item, Item> CLAY_OIL_POT = ITEMS.register("clay_oil_pot", () -> new Item(new Item.Properties()));
-    public static final DeferredHolder<Item, Item> EMPTY_OIL_POT = ITEMS.register("empty_oil_pot", () -> new Item(new Item.Properties()));
-    public static final DeferredHolder<Item, Item> CUB_BLEND = ITEMS.register("cub_blend", () -> BlendItem.builder()
-            .tox(10)
+    public static final DeferredHolder<Item, Item> TOXIN = ITEMS.register("toxin", () -> ToxGiverItem.builder()
+            .tox(100)
             .tolerance(10)
-            .tier(1)
-            .affinity(Affinity.WOLF, 1)
-            .effect(new MobEffectInstance(MobEffects.WEAKNESS, 1200, 0, false, false, false))
+            .tier(2)
+            .returnItem(() -> new ItemStack(Items.GLASS_BOTTLE))
+            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 500, 2, false, false, false))
             .build()
     );
-    public static final DeferredHolder<Item, Item> FALSE_BERRIES = ITEMS.register("false_berries", () -> ToxGiverBlockItem.builder()
+
+    public static final DeferredHolder<Item, Item> CLAY_OIL_POT = ITEMS.register("clay_oil_pot", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> EMPTY_OIL_POT = ITEMS.register("empty_oil_pot", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> TOXIC_FORMULA = ITEMS.register("toxic_formula", () -> new Item(new Item.Properties()));
+
+    public static final DeferredHolder<Item, Item> FALSE_BERRIES = ITEMS.register("false_berries", () -> ToxGiverBlockIngredientItem.builder()
+            .affinity(() -> List.of(AffinityRegistry.FOREST.get()))
             .block(BlockRegistry.FALSE_BERRY_BUSH)
             .tox(20)
-            .tolerance(2)
+            .tolerance(1)
             .tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
     );
 
-    public static final DeferredHolder<Item, Item> OCELOT_MINT = ITEMS.register("ocelot_mint", () -> ToxGiverItem.builder()
-            .tox(20)
-            .tolerance(2)
+    public static final DeferredHolder<Item, Item> OCELOT_MINT = ITEMS.register("ocelot_mint", () -> ToxGiverIngredientItem.builder()
+            .affinity(() -> List.of(AffinityRegistry.FOREST.get(), AffinityRegistry.SUN.get()))
+            .tox(5)
+            .tolerance(1)
             .tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
+    public static final DeferredHolder<Item, Item> BRITTLE_SCUTE = ITEMS.register("brittle_scute", () -> ToxIngredientItem.builder()
+            .affinity(() -> List.of(AffinityRegistry.OCEAN.get(), AffinityRegistry.SUN.get()))
+            .build()
+    );
+
+    public static final DeferredHolder<Item, Item> WOLF_TOOTH = ITEMS.register("wolf_tooth", () -> ToxIngredientItem.builder()
+            .affinity(() -> List.of(AffinityRegistry.MOON.get(), AffinityRegistry.FOREST.get()))
             .build()
     );
     // |-----------------------------------------------------------------------------------|

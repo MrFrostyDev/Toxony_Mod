@@ -36,8 +36,8 @@ public class ToxonyMain {
         DataAttachmentRegistry.register(modEventBus);
         DataComponentsRegistry.register(modEventBus);
         BlockRegistry.register(modEventBus);
-        MutagenRegistry.register(modEventBus);
         MobEffectRegistry.register(modEventBus);
+        AffinityRegistry.register(modEventBus);
         OilsRegistry.register(modEventBus);
         MenuRegistry.register(modEventBus);
         RecipeRegistry.register(modEventBus);

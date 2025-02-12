@@ -1,0 +1,10 @@
+{
+	"credit": "YourFrostyFriend",
+	"parent": "toxony:block/template_wild_ocelot_mint",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "toxony:block/ocelot_mint_stage3",
+		"particle": "toxony:block/ocelot_mint_stage3"
+	}
+}

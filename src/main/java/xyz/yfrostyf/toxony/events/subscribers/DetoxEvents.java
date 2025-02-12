@@ -38,7 +38,7 @@ public class DetoxEvents{
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
             plyToxData.addTox(REGEN_POTION_DETOX);
 
-            PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), new SyncToxPacket(plyToxData));
+            PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), SyncToxPacket.create(plyToxData));
         }
     }
 
@@ -57,6 +57,6 @@ public class DetoxEvents{
         ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
         plyToxData.addTox(GOLDEN_APPLE_DETOX);
 
-        PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), new SyncToxPacket(plyToxData));
+        PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), SyncToxPacket.create(plyToxData));
     }
 }

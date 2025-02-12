@@ -17,8 +17,8 @@ public class ServerPlayerLoginEvent {
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer svplayer) {
-            ToxData toxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
-            PacketDistributor.sendToPlayer(svplayer, new SyncToxPacket(toxData));
+            ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
+            PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
         }
     }
 }

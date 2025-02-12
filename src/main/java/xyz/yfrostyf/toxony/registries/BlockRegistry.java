@@ -3,6 +3,7 @@ package xyz.yfrostyf.toxony.registries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -55,6 +56,7 @@ public class BlockRegistry {
                             .noCollission()
                             .sound(SoundType.SWEET_BERRY_BUSH)
                             .pushReaction(PushReaction.DESTROY)
+                            .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 
@@ -66,7 +68,8 @@ public class BlockRegistry {
                             .randomTicks()
                             .noCollission()
                             .sound(SoundType.CROP)
-                            .pushReaction(PushReaction.DESTROY),
+                            .pushReaction(PushReaction.DESTROY)
+                            .isRedstoneConductor((state,level,pos) -> false),
                     List.of(MobEffects.POISON)
             )
     );
@@ -79,7 +82,8 @@ public class BlockRegistry {
                             .randomTicks()
                             .noCollission()
                             .sound(SoundType.CROP)
-                            .pushReaction(PushReaction.DESTROY),
+                            .pushReaction(PushReaction.DESTROY)
+                            .isRedstoneConductor((state,level,pos) -> false),
                     List.of(MobEffects.POISON)
             )
     );
@@ -91,21 +95,30 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> MORTAR_PESTLE = BLOCKS.register(
             "mortar_pestle",
             () -> new MortarPestleBlock(
-                BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.STONE)
+                BlockBehaviour.Properties.of()
+                        .strength(0.5f)
+                        .sound(SoundType.STONE)
+                        .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 
     public static final DeferredHolder<Block, Block> COPPER_CRUCIBLE = BLOCKS.register(
             "copper_crucible",
             () -> new CopperCrucibleBlock(
-                    BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.COPPER)
+                    BlockBehaviour.Properties.of()
+                            .strength(0.5f)
+                            .sound(SoundType.COPPER)
+                            .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 
     public static final DeferredHolder<Block, Block> ALEMBIC = BLOCKS.register(
             "alembic",
             () -> new AlembicBlock(
-                    BlockBehaviour.Properties.of().strength(0.8f).sound(SoundType.COPPER)
+                    BlockBehaviour.Properties.of()
+                            .strength(0.8f)
+                            .sound(SoundType.COPPER)
+                            .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 

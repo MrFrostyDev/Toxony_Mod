@@ -15,7 +15,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
-import xyz.yfrostyf.toxony.registries.MutagenRegistry;
+import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
 import java.util.Random;
 
@@ -65,7 +65,7 @@ public class SpiderMutagenEffect extends MutagenEffect {
             MobEffectInstance effectInst = event.getEffectInstance();
 
             if(effectInst == null){return;}
-            if(!effectInst.is(MutagenRegistry.SPIDER_MUTAGEN)){return;}
+            if(!effectInst.is(MobEffectRegistry.SPIDER_MUTAGEN)){return;}
 
             removeModifier(event.getEntity(), Attributes.MOVEMENT_EFFICIENCY, moveeffModifier);
         }
@@ -75,7 +75,7 @@ public class SpiderMutagenEffect extends MutagenEffect {
             if (event.getSource().getEntity() == null) {return;}
             if (!(event.getSource().getEntity() instanceof LivingEntity entity)){return;}
 
-            MobEffectInstance attackerMutagen = entity.getEffect(MutagenRegistry.SPIDER_MUTAGEN);
+            MobEffectInstance attackerMutagen = entity.getEffect(MobEffectRegistry.SPIDER_MUTAGEN);
 
             if(attackerMutagen == null){return;}
             if(attackerMutagen.getAmplifier() < 1){return;}

@@ -7,7 +7,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -15,7 +14,7 @@ import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
-import xyz.yfrostyf.toxony.registries.MutagenRegistry;
+
 import java.util.Random;
 
 public class WolfMutagenEffect extends MutagenEffect {
@@ -45,7 +44,7 @@ public class WolfMutagenEffect extends MutagenEffect {
             MobEffectInstance effectInst = event.getEffectInstance();
 
             if(effectInst == null){return;}
-            if(!effectInst.is(MutagenRegistry.WOLF_MUTAGEN)){return;}
+            if(!effectInst.is(MobEffectRegistry.WOLF_MUTAGEN)){return;}
 
             removeModifier(event.getEntity(), Attributes.ATTACK_DAMAGE, damageBoostModifier);
 
@@ -60,7 +59,7 @@ public class WolfMutagenEffect extends MutagenEffect {
             if (event.getSource().getEntity() == null) {return;}
             if (!(event.getSource().getEntity() instanceof LivingEntity entity)){return;}
 
-            MobEffectInstance attackerMutagen = entity.getEffect(MutagenRegistry.WOLF_MUTAGEN);
+            MobEffectInstance attackerMutagen = entity.getEffect(MobEffectRegistry.WOLF_MUTAGEN);
 
             if(attackerMutagen == null){return;}
             if(attackerMutagen.getAmplifier() < 2){return;}

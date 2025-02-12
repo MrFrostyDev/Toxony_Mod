@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.Mod;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class ClientToxData {
         toxData.setThreshold(inThreshold);
     }
 
-    public static void setAffinities(Map<Integer, Integer> inAffinities){
+    public static void setAffinities(Map<Affinity, Integer> inAffinities){
         toxData.setAffinities(inAffinities);
     }
 

@@ -1,11 +1,21 @@
-// 1.21.1	2025-02-08T23:01:37.9745922	Recipes
-5c662f4c293a3a08f345675461c6552deffb05ce data/minecraft/advancement/recipes/tools/iron_pickaxe.json
-f9e2a5cb9987964f831b4b1d22776d195026dc44 data/minecraft/recipe/iron_pickaxe.json
-8a1d70b88b96fa65fb20e89e65f00fd4d43c78d9 data/toxony/advancement/recipes/alembic/potion.json
-887ae90b5d61478b360f602eddd2c2284dd3d2b3 data/toxony/advancement/recipes/crucible/poisonous_potato.json
+// 1.21.1	2025-02-12T03:15:53.8265421	Recipes
+b887b0d42dd1e8d4db4bf994ae4b0f04180b94de data/toxony/advancement/recipes/alembic/potionnull.json
+0fdee9fe7e07ba5cd65159ec353d8ed440c7416d data/toxony/advancement/recipes/crucible/toxic_paste.json
 d48b17078978c0f808fa4fb65dca6cde383ff555 data/toxony/advancement/recipes/misc/clay_oil_pot.json
-c842579c58b3f182bd5991da8134bd32f72e6e37 data/toxony/advancement/recipes/mortar/cub_blend.json
-da0d0e33c2bc55f0524f78fd62fe118fb7be762e data/toxony/recipe/alembic/potion.json
+9511d190669ae1cd32d5532af85936d3762888c0 data/toxony/advancement/recipes/misc/toxic_formula.json
+3b17238c3ae089083f955bd63e446802ca998a98 data/toxony/advancement/recipes/mortar/poison_blend.json
+a0428d5b7b42080fe2114a8525accdfb5edda03f data/toxony/advancement/recipes/mortar/poison_blend_alt.json
+01024142398ab3eeff954f45b1c318d0e89d3cd3 data/toxony/advancement/recipes/mortar/poison_paste.json
+4848fa043c96d9bbf738eaac1472cb444c5339fa data/toxony/advancement/recipes/mortar/pure_blend.json
+75c8878d74bb87ba4d7ab3cdd10c455665144d1d data/toxony/advancement/recipes/mortar/pure_blend_alt.json
+4417fd06cb7eea6551570c6a56d54ca11f601e21 data/toxony/advancement/recipes/mortar/toxic_blend.json
+da0d0e33c2bc55f0524f78fd62fe118fb7be762e data/toxony/recipe/alembic/potionnull.json
 1acabeb23c3cceadbf3c88a2fed1f41731bd7ae7 data/toxony/recipe/clay_oil_pot.json
-7d128b11bb8e27c25f0cf06c917a604bd0ff3d61 data/toxony/recipe/crucible/poisonous_potato.json
-5424f4b5d6354d4ea0acb4f5d66ce559537bce55 data/toxony/recipe/mortar/cub_blend.json
+324494721e537527ce3cea9da301521b996337be data/toxony/recipe/crucible/toxic_paste.json
+47b762a9ae4a2802bc1c9c6fd3bd0bac19bc427e data/toxony/recipe/mortar/poison_blend.json
+156bfedc8f70e4e946625c79551a427f672fbbe7 data/toxony/recipe/mortar/poison_blend_alt.json
+40548d6728446c8681572795f48abae8fd5bca93 data/toxony/recipe/mortar/poison_paste.json
+10e3bc7fd8d4d8c2a3fedebaa6cbf1dd2b6ea052 data/toxony/recipe/mortar/pure_blend.json
+ccdcfef529f6aab0729bf23aff254b9cfae209a3 data/toxony/recipe/mortar/pure_blend_alt.json
+a39b17010b331be89f1215b79dc10d67b0fb396b data/toxony/recipe/mortar/toxic_blend.json
+2df72e31284902c11e902e13e12be55d52f3f6aa data/toxony/recipe/toxic_formula.json

@@ -44,7 +44,7 @@ public class DeathStateEvents {
             ToxonyMain.LOGGER.info("[Overtox Trigger]: Tox: {}, Tolerance: {}, Death State: {}", plyToxData.getTox(), plyToxData.getTolerance(), plyToxData.getDeathState());
         }
 
-        PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), new SyncToxPacket(plyToxData));
+        PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), SyncToxPacket.create(plyToxData));
     }
 
 }

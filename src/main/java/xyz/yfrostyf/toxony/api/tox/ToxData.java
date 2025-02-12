@@ -1,19 +1,27 @@
 package xyz.yfrostyf.toxony.api.tox;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.NeoForge;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.events.ChangeThresholdEvent;
 import xyz.yfrostyf.toxony.api.events.ChangeToleranceEvent;
 import xyz.yfrostyf.toxony.api.events.ChangeToxEvent;
+import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ToxData {
 
@@ -30,7 +38,7 @@ public class ToxData {
     private float tox = 0;
     private float tolerance = DEFAULT_TOLERANCE;
     private int threshold = 0;
-    private Map<Integer, Integer> affinities = Affinity.initAffinities();
+    private Map<Affinity, Integer> affinities = new HashMap<>(20);
     private boolean deathState = false;
 
     // Non-Synced Data
@@ -128,17 +136,37 @@ public class ToxData {
 
     // |========================= Affinity Data =========================|
 
-    public Map<Integer, Integer> getAffinities(){
+    public Map<Affinity, Integer> getAffinities(){
         return affinities;
     }
 
-    public void setAffinities(Map<Integer, Integer> inAffinities){
-        affinities = inAffinities;
+    public void setAffinities(Map<Affinity, Integer> affinities){
+        this.affinities = affinities;
     }
 
-    public void addAffinity(int affinity, int value){
-        int oldValue = affinities.get(affinity);
-        affinities.put(affinity, oldValue + value);
+    public Integer getAffinityAmount(Affinity affinity){
+        if(!this.haveAffinity(affinity)) return -1;
+        return affinities.get(affinity);
+    }
+
+    public void setAffinity(Affinity affinity, int value){
+        if(!this.haveAffinity(affinity)){
+            affinities.put(affinity, value);
+            return;
+        }
+        affinities.replace(affinity, value);
+    }
+
+    public void addAffinity(Affinity affinity, int value){
+        if(!this.haveAffinity(affinity)){
+            affinities.put(affinity, value);
+            return;
+        }
+        this.setAffinity(affinity, affinities.get(affinity) + value);
+    }
+
+    public boolean haveAffinity(Affinity affinity){
+        return affinities.containsKey(affinity);
     }
 
     // Utility function to save and load NBT data. This is used for the PlayerToxSerializer.
@@ -146,8 +174,20 @@ public class ToxData {
         compound.putInt("tox", (int)this.tox);
         compound.putInt("tolerance", (int)this.tolerance);
         compound.putInt("threshold", this.threshold);
-        compound.putIntArray("affinityKeys", affinities.keySet().stream().toList());
-        compound.putIntArray("affinityValues", affinities.values().stream().toList());
+
+
+        ListTag affinityStringsList = new ListTag();
+        List<Integer> affinityValuesList = new ArrayList<>();
+        for(Affinity affinity : affinities.keySet()){
+            affinityStringsList.add(StringTag.valueOf(
+                    ToxonyRegistries.AFFINITY_REGISTRY.getKey(affinity).toString()
+            ));
+            affinityValuesList.add(affinities.get(affinity));
+        }
+
+        compound.put("affinities", affinityStringsList);
+        compound.putIntArray("affinity_values", affinityValuesList);
+
         compound.putBoolean("deathState", this.deathState);
     }
 
@@ -155,15 +195,18 @@ public class ToxData {
         tox = compound.getInt("tox");
         tolerance = compound.getInt("tolerance");
         threshold = compound.getInt("threshold");
-        int[] affinityKeys = compound.getIntArray("affinityKeys");
-        int[] affinityValues = compound.getIntArray("affinityValues");
 
-        Map<Integer, Integer> readMap = new HashMap<>();
-        for (int i = 0; i < affinityKeys.length; i++) {
-            readMap.put(affinityKeys[i], affinityValues[i]);
+        ListTag affinityStringsList = compound.getList("affinities", Tag.TAG_STRING);
+        int[] affinityValues = compound.getIntArray("affinity_values");
+
+        Map<Affinity, Integer> readAffinityMap = new HashMap<>();
+        for (int i=0; i<affinityStringsList.size(); i++) {
+            Affinity in = ToxonyRegistries.AFFINITY_REGISTRY.get(ResourceLocation.parse(affinityStringsList.getString(i)));
+            assert in != null;
+            readAffinityMap.put(in, affinityValues[i]);
         }
 
-        affinities = readMap;
+        affinities = readAffinityMap;
         deathState = compound.getBoolean("deathState");
     }
 

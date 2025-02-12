@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -57,12 +58,14 @@ public class MortarPestleBlock extends Block implements EntityBlock {
 
         // Check if item in hand is the right useItem. Ignore if useItem is an empty stack.
         if(level.isClientSide() && blockEntity.isPestling && blockEntity.pestleCount >= PESTLE_TOTAL_COUNT){
-            ItemStack useItem = blockEntity.findRecipe().get().value().getUseItem();
-            if(player.getMainHandItem().getItem() != useItem.getItem() && !useItem.isEmpty()){
-                Minecraft.getInstance().gui.setOverlayMessage(
-                        Component.translatable("message.toxony.mortar.warning", useItem.getDisplayName()),
-                        false
-                );
+            if(blockEntity.findRecipe().isPresent()){
+                ItemStack useItem = blockEntity.findRecipe().get().value().getUseItem();
+                if(player.getMainHandItem().getItem() != useItem.getItem() && !useItem.isEmpty()){
+                    Minecraft.getInstance().gui.setOverlayMessage(
+                            Component.translatable("message.toxony.mortar.warning", useItem.getDisplayName()),
+                            false
+                    );
+                }
             }
         }
 
@@ -76,7 +79,7 @@ public class MortarPestleBlock extends Block implements EntityBlock {
             return InteractionResult.CONSUME;
         }
         else if (blockEntity.pestleCount >= PESTLE_TOTAL_COUNT && blockEntity.pestleTick <= 0) {
-            blockEntity.finishPestling(player);
+            blockEntity.finishPestling(player, (ServerLevel) level);
             return InteractionResult.SUCCESS;
         }
         else if (blockEntity.pestleTick <= 0){

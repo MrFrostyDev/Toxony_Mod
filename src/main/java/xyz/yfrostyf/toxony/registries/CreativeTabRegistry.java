@@ -21,7 +21,6 @@ public class CreativeTabRegistry {
             .icon(() -> new ItemStack(ItemRegistry.MORTAR_PESTLE.get()))
             //Add your items to the tab.
             .displayItems((params, output) -> {
-                output.accept(ItemRegistry.CUB_BLEND.get());
                 output.accept(ItemRegistry.WITCHING_BLADE.get());
                 output.accept(ItemRegistry.MORTAR_PESTLE.get());
                 output.accept(ItemRegistry.COPPER_CRUCIBLE.get());

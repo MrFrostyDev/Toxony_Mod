@@ -1,7 +1,7 @@
 package xyz.yfrostyf.toxony.api.items;
 
 import net.minecraft.core.Holder;
-import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -15,80 +15,66 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.network.PacketDistributor;
-import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
-import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.function.Supplier;
 
 public class ToxGiverBlockItem extends BlockItem {
     protected final float tox;
     protected final float tolerance;
     protected final float tier;
-    protected final Map<Integer, Integer> affinities;
+    protected final Supplier<ItemStack> returnItem;
     protected final List<MobEffectInstance> mobEffectInstances;
     protected static final int EAT_DURATION = 60;
 
-    public ToxGiverBlockItem(Block block, Properties properties, float tox, float tolerance, int tier, Map<Integer, Integer> affinities, List<MobEffectInstance> mobEffectInstances) {
+    public ToxGiverBlockItem(Block block, Properties properties, float tox, float tolerance, int tier, Supplier<ItemStack> returnItem, List<MobEffectInstance> mobEffectInstances) {
         super(block, properties);
         this.tox = tox;
         this.tolerance = tolerance;
         this.tier = tier;
-        this.affinities = affinities;
+        this.returnItem = returnItem;
         this.mobEffectInstances = mobEffectInstances;
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        if (entity instanceof ServerPlayer svplayer) {
+        if(!(entity instanceof Player player))return stack;
+        ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
+        plyToxData.addTox(tox);
 
-            ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
-            plyToxData.addTox(tox);
+        if(!plyToxData.getDeathState()){
+            if(plyToxData.getThreshold() >= tier){
+                plyToxData.addTolerance(tolerance);
+            }
+        }
 
-            if(!plyToxData.getDeathState()){
-                if(plyToxData.getThreshold() >= tier){
-                    plyToxData.addTolerance(tolerance);
-                }
+        mobEffectInstances.forEach((mobEffectInstance) -> {
+            boolean hasEffect = player.hasEffect(mobEffectInstance.getEffect());
+            Holder<MobEffect> effect = mobEffectInstance.getEffect();
+            int effectAmp = mobEffectInstance.getAmplifier();
+
+            int oldEffectDuration = 0;
+            int oldEffectAmp = 0;
+
+            if(hasEffect){
+                oldEffectDuration = player.getEffect(mobEffectInstance.getEffect()).getDuration();
+                oldEffectAmp = player.getEffect(mobEffectInstance.getEffect()).getAmplifier();
+                player.removeEffect(effect);
             }
 
-            for (Map.Entry<Integer, Integer> entry : affinities.entrySet()) {
-                plyToxData.addAffinity(entry.getKey(), entry.getValue());
+            if (mobEffectInstance.getEffect().value().isInstantenous()) {
+                (mobEffectInstance.getEffect().value()).applyInstantenousEffect(player, player, entity, effectAmp, (double)1.0F);
+            } else {
+                player.addEffect(new MobEffectInstance(effect, mobEffectInstance.getDuration() + oldEffectDuration, Math.max(oldEffectAmp, effectAmp)));
             }
+        });
 
-            PacketDistributor.sendToPlayer(svplayer, new SyncToxPacket(plyToxData));
-
-            mobEffectInstances.forEach((mobEffectInstance) -> {
-                boolean hasEffect = svplayer.hasEffect(mobEffectInstance.getEffect());
-                Holder<MobEffect> effect = mobEffectInstance.getEffect();
-                int effectAmp = mobEffectInstance.getAmplifier();
-
-                int oldEffectDuration = 0;
-                int oldEffectAmp = 0;
-
-                if(hasEffect){
-                    oldEffectDuration = svplayer.getEffect(mobEffectInstance.getEffect()).getDuration();
-                    oldEffectAmp = svplayer.getEffect(mobEffectInstance.getEffect()).getAmplifier();
-                    svplayer.removeEffect(effect);
-                }
-
-                if (mobEffectInstance.getEffect().value().isInstantenous()) {
-                    (mobEffectInstance.getEffect().value()).applyInstantenousEffect(svplayer, svplayer, entity, effectAmp, (double)1.0F);
-                } else {
-                    svplayer.addEffect(new MobEffectInstance(effect, mobEffectInstance.getDuration() + oldEffectDuration, Math.max(oldEffectAmp, effectAmp)));
-                }
-            });
-
-            return stack;
-        }
-        else{
-            stack.consume(1, entity);
-            return stack;
-        }
+        return ItemUtils.createFilledResult(stack, player, returnItem.get());
     }
+
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
@@ -125,8 +111,8 @@ public class ToxGiverBlockItem extends BlockItem {
         protected int tox = 0;
         protected int tolerance = 0;
         protected int tier = 0;
-        protected Map<Integer,Integer> affinities = Affinity.initAffinities();
-        protected List<MobEffectInstance> mobEffectInstances = new ArrayList<MobEffectInstance>();
+        protected Supplier<ItemStack> returnItem = () -> new ItemStack(Items.AIR);
+        protected List<MobEffectInstance> mobEffectInstances = new ArrayList<>();
 
         public Builder block(Holder<Block> block){
             this.block = block.value();
@@ -153,12 +139,6 @@ public class ToxGiverBlockItem extends BlockItem {
             return this;
         }
 
-        public Builder affinity(int affinity, int value){
-            int oldValue = affinities.get(affinity);
-            affinities.put(affinity, oldValue + value);
-            return this;
-        }
-
         public Builder effect(MobEffectInstance mobEffectInstance){
             mobEffectInstances.add(mobEffectInstance);
             return this;
@@ -169,8 +149,13 @@ public class ToxGiverBlockItem extends BlockItem {
             return this;
         }
 
+        public Builder returnItem(Supplier<ItemStack> returnItem){
+            this.returnItem = returnItem;
+            return this;
+        }
+
         public ToxGiverBlockItem build(){
-            return new ToxGiverBlockItem(block, properties, this.tox, this.tolerance, this.tier, this.affinities, this.mobEffectInstances);
+            return new ToxGiverBlockItem(block, properties, this.tox, this.tolerance, this.tier, this.returnItem, this.mobEffectInstances);
         }
     }
 }

@@ -7,8 +7,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Recipe;
-import xyz.yfrostyf.toxony.data.recipebuilders.AlembicRecipeBuilder;
+import xyz.yfrostyf.toxony.data.datagen.recipebuilders.AlembicRecipeBuilder;
 
 import java.util.concurrent.CompletableFuture;
 

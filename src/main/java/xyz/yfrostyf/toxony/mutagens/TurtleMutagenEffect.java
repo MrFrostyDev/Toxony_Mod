@@ -19,7 +19,8 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
-import xyz.yfrostyf.toxony.registries.MutagenRegistry;
+import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -65,7 +66,7 @@ public class TurtleMutagenEffect extends MutagenEffect {
             MobEffectInstance effectInst = event.getEffectInstance();
 
             if(effectInst == null){return;}
-            if(!effectInst.is(MutagenRegistry.TURTLE_MUTAGEN)){return;}
+            if(!effectInst.is(MobEffectRegistry.TURTLE_MUTAGEN)){return;}
 
             if(effectInst.getAmplifier() >= 1) {
                 removeModifier(event.getEntity(), net.neoforged.neoforge.common.NeoForgeMod.SWIM_SPEED, swimModifier);
@@ -78,7 +79,7 @@ public class TurtleMutagenEffect extends MutagenEffect {
 
         @SubscribeEvent
         public static void onLivingDamage(LivingDamageEvent.Pre event){
-            MobEffectInstance victimMutagen = event.getEntity().getEffect(MutagenRegistry.TURTLE_MUTAGEN);
+            MobEffectInstance victimMutagen = event.getEntity().getEffect(MobEffectRegistry.TURTLE_MUTAGEN);
 
             if (victimMutagen == null) {return;}
 

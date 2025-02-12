@@ -12,7 +12,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
-import xyz.yfrostyf.toxony.registries.MutagenRegistry;
+import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
 public class CatMutagenEffect extends MutagenEffect {
     private static final AttributeModifier fallModifier = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_fall_modifier"), -0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
@@ -46,7 +46,7 @@ public class CatMutagenEffect extends MutagenEffect {
             MobEffectInstance effectInst = event.getEffectInstance();
 
             if(effectInst == null){return;}
-            if(!effectInst.is(MutagenRegistry.CAT_MUTAGEN)){return;}
+            if(!effectInst.is(MobEffectRegistry.CAT_MUTAGEN)){return;}
 
             removeModifier(event.getEntity(), Attributes.FALL_DAMAGE_MULTIPLIER, fallModifier);
 

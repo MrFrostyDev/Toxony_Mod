@@ -20,9 +20,6 @@ import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import java.util.List;
 
 public class WildOcelotMintBlock extends WildPoisonCropBlock {
-    private static final VoxelShape SAPLING_SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
-    private static final VoxelShape MID_GROWTH_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
-
     public WildOcelotMintBlock(Properties properties, List<Holder<MobEffect>> contactEffects) {
         super(properties, contactEffects);
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));

@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
@@ -28,10 +29,18 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.Nullable;
+import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
+import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.blocks.MortarPestleBlock;
 import xyz.yfrostyf.toxony.client.gui.MortarPestleMenu;
+import xyz.yfrostyf.toxony.items.BlendItem;
 import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
+import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static xyz.yfrostyf.toxony.registries.BlockRegistry.MORTAR_PESTLE_ENTITY;
@@ -156,33 +165,46 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
         this.setResultItem(this.findRecipe()
                 .map(RecipeHolder::value)
                 .map(MortarPestleRecipe::getResultItem)
-                .orElse(ItemStack.EMPTY)
-        );
+                .orElse(ItemStack.EMPTY));
+
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);
     }
 
-    public void finishPestling(Player player){
+    public void finishPestling(Player player, ServerLevel svlevel){
         if(this.level == null) return;
 
         ItemStack itemStackInHand = player.getItemInHand(InteractionHand.MAIN_HAND);
         ItemStack useItem = findRecipe().map(RecipeHolder::value).map(MortarPestleRecipe::getUseItem).orElse(ItemStack.EMPTY);
+        List<ItemStack> ingredientsCache = new ArrayList<>();
+
         for (int i=0; i<this.getItemContainer().getSlots(); i++){
-            this.getItemContainer().extractItem(i, 1, false);
+            ingredientsCache.add(this.getItemContainer().extractItem(i, 1, false));
         }
-        if(this.pestleCount >= PESTLE_TOTAL_COUNT){
-            if(itemStackInHand.getItem() == useItem.getItem() || useItem.isEmpty()) {
-                itemStackInHand.consume(1, player);
-                if (!player.addItem(this.getResultItem())) {
-                    Block.popResource(this.level, this.getBlockPos(), this.getResultItem());
+
+        if(itemStackInHand.getItem() == useItem.getItem() || useItem.isEmpty()) {
+
+            // If item is a blend, handle affinities
+            if(this.resultItem.getItem() instanceof BlendItem) {
+                List<Affinity> affinities = new ArrayList<>();
+                for (ItemStack item : ingredientsCache) {
+                    Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(item, svlevel);
+                    if (!affinity.isEmpty()) affinities.add(affinity);
                 }
-                this.isPestling = false;
-                this.pestleCount = 0;
-                this.setResultItem(this.findRecipe()
-                        .map(RecipeHolder::value)
-                        .map(MortarPestleRecipe::getResultItem)
-                        .orElse(ItemStack.EMPTY)
-                );
+                ToxonyMain.LOGGER.info("[finishPestling handling affinities], affinities: {}", affinities);
+                this.resultItem.set(DataComponentsRegistry.AFFINITIES, affinities);
             }
+
+            itemStackInHand.consume(1, player);
+            if (!player.addItem(this.getResultItem())) {
+                Block.popResource(this.level, this.getBlockPos(), this.getResultItem());
+            }
+            this.isPestling = false;
+            this.pestleCount = 0;
+            this.setResultItem(this.findRecipe()
+                    .map(RecipeHolder::value)
+                    .map(MortarPestleRecipe::getResultItem)
+                    .orElse(ItemStack.EMPTY)
+            );
         }
 
         level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);

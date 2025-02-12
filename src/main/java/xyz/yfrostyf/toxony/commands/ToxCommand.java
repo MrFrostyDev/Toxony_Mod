@@ -2,20 +2,20 @@ package xyz.yfrostyf.toxony.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
-import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.api.client.ClientToxData;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
 import java.util.Collection;
+import java.util.HashMap;
+
+// thank you [IronsSpellsNSpellbooks Mod]
 
 import static xyz.yfrostyf.toxony.registries.DataAttachmentRegistry.TOX_DATA;
 
@@ -51,7 +51,7 @@ public class ToxCommand {
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
             var base = isSet ? 0 : plyToxData.getTox();
             plyToxData.setTox(amount + base);
-            PacketDistributor.sendToPlayer(svplayer, new SyncToxPacket(plyToxData));
+            PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
         }));
 
         String setString = isSet ? "set" : "add";
@@ -69,7 +69,7 @@ public class ToxCommand {
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
             var base = isSet ? 0 : plyToxData.getTolerance();
             plyToxData.setTolerance(amount + base);
-            PacketDistributor.sendToPlayer(svplayer, new SyncToxPacket(plyToxData));
+            PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
         }));
 
         String setString = isSet ? "set" : "add";
