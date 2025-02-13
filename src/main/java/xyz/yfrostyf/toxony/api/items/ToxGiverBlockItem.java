@@ -15,8 +15,13 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.network.PacketDistributor;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
+import xyz.yfrostyf.toxony.api.util.AffinityUtil;
+import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
+import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +54,12 @@ public class ToxGiverBlockItem extends BlockItem {
             if(plyToxData.getThreshold() >= tier){
                 plyToxData.addTolerance(tolerance);
             }
+        }
+
+        if(level instanceof ServerLevel svlevel && stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)) {
+            Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(stack, svlevel);
+            AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, 1);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, SyncToxPacket.create(plyToxData));
         }
 
         mobEffectInstances.forEach((mobEffectInstance) -> {

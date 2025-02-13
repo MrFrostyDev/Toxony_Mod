@@ -17,7 +17,7 @@ import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import java.util.HashMap;
 import java.util.Map;
 
-public record SyncToxPacket(int tox, int tolerance, int threshold, Map<Affinity, Integer> affinities, boolean deathState) implements CustomPacketPayload {
+public record SyncToxPacket(int tox, int tolerance, int threshold, Map<Affinity, Integer> affinities, Map<ResourceLocation, Integer> knownIngredients, boolean deathState) implements CustomPacketPayload {
 
     public static final Type<SyncToxPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "sync_tox"));
 
@@ -26,6 +26,7 @@ public record SyncToxPacket(int tox, int tolerance, int threshold, Map<Affinity,
             ByteBufCodecs.INT, SyncToxPacket::tolerance,
             ByteBufCodecs.INT, SyncToxPacket::threshold,
             ByteBufCodecs.map(HashMap::new, Affinity.STREAM_CODEC, ByteBufCodecs.INT), SyncToxPacket::affinities,
+            ByteBufCodecs.map(HashMap::new, ResourceLocation.STREAM_CODEC, ByteBufCodecs.INT), SyncToxPacket::knownIngredients,
             ByteBufCodecs.BOOL, SyncToxPacket::deathState,
             SyncToxPacket::new
     );
@@ -35,7 +36,28 @@ public record SyncToxPacket(int tox, int tolerance, int threshold, Map<Affinity,
                 (int)plyToxData.getTolerance(),
                 plyToxData.getThreshold(),
                 plyToxData.getAffinities(),
+                plyToxData.getKnownIngredients(),
                 plyToxData.getDeathState());
+    }
+    public static void handle(SyncToxPacket syncToxPacket, IPayloadContext context){
+        context.enqueueWork(() -> {
+            if(!(context.player() instanceof LocalPlayer player)){return;}
+
+            ClientToxData.setTox(syncToxPacket.tox);
+            ClientToxData.setTolerance(syncToxPacket.tolerance);
+            ClientToxData.setThreshold(syncToxPacket.threshold);
+            ClientToxData.setAffinities(syncToxPacket.affinities);
+            ClientToxData.setKnownIngredients(syncToxPacket.knownIngredients);
+            ClientToxData.setDeathState(syncToxPacket.deathState);
+
+            context.player().setData(DataAttachmentRegistry.TOX_DATA, ClientToxData.getToxData());
+
+        }).exceptionally(e -> {
+            // Handle exception
+            context.disconnect(Component.translatable("toxony.networking.sync_tox.failed", e.getMessage()));
+            return null;
+        });
+
     }
 
 //    public SyncToxPacket(FriendlyByteBuf buf){
@@ -64,26 +86,6 @@ public record SyncToxPacket(int tox, int tolerance, int threshold, Map<Affinity,
 //
 //        buf.writeBoolean(plyToxData.getDeathState());
 //    }
-
-    public static void handle(SyncToxPacket syncToxPacket, IPayloadContext context){
-        context.enqueueWork(() -> {
-            if(!(context.player() instanceof LocalPlayer player)){return;}
-
-            ClientToxData.setTox(syncToxPacket.tox);
-            ClientToxData.setTolerance(syncToxPacket.tolerance);
-            ClientToxData.setThreshold(syncToxPacket.threshold);
-            ClientToxData.setAffinities(syncToxPacket.affinities);
-            ClientToxData.setDeathState(syncToxPacket.deathState);
-
-            context.player().setData(DataAttachmentRegistry.TOX_DATA, ClientToxData.getToxData());
-
-        }).exceptionally(e -> {
-            // Handle exception
-            context.disconnect(Component.translatable("toxony.networking.sync_tox.failed", e.getMessage()));
-            return null;
-        });
-
-    }
 
     @Override
     public Type<? extends CustomPacketPayload> type(){

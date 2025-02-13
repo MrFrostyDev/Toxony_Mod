@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.items;
 
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,6 +16,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.items.ToxGiverItem;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
+import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -45,7 +47,7 @@ public class BlendItem extends ToxGiverItem {
         if(level instanceof ServerLevel svlevel && stack.has(DataComponentsRegistry.AFFINITIES)) {
             List<Affinity> affinities = stack.get(DataComponentsRegistry.AFFINITIES);
             for (Affinity affinity : affinities) {
-                plyToxData.addAffinity(affinity, Math.max(new Random().nextInt(5), 2));
+                AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, Math.max(new Random().nextInt(5), 2));
             }
             PacketDistributor.sendToPlayer((ServerPlayer) player, SyncToxPacket.create(plyToxData));
         }
@@ -71,7 +73,7 @@ public class BlendItem extends ToxGiverItem {
             }
         });
 
-        return ItemUtils.createFilledResult(super.finishUsingItem(stack, level, entity), player, new ItemStack(Items.BOWL), false);
+        return ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BOWL), false);
     }
 
     public static Builder builder(){

@@ -1,6 +1,7 @@
 package xyz.yfrostyf.toxony.api.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.Mod;
 import xyz.yfrostyf.toxony.ToxonyMain;
@@ -28,8 +29,12 @@ public class ClientToxData {
         toxData.setThreshold(inThreshold);
     }
 
-    public static void setAffinities(Map<Affinity, Integer> inAffinities){
-        toxData.setAffinities(inAffinities);
+    public static void setKnownIngredients(Map<ResourceLocation, Integer> inKnownIngredients){
+        toxData.setKnownIngredients(inKnownIngredients);
+    }
+
+    public static void setAffinities(Map<Affinity, Integer> intAffinities){
+        toxData.setAffinities(intAffinities);
     }
 
     public static void setDeathState(boolean inDeathState){

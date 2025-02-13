@@ -87,7 +87,7 @@ public class ToxCommand {
         String setString = plyToxData.getDeathState() ? "death." : "";
         source.sendSuccess(() -> Component.translatable("commands.tox.get."+ setString + "success", svplayer.getDisplayName(), plyToxData.getTox(), plyToxData.getTolerance()), true);
         source.sendSuccess(() -> Component.translatable("commands.tox.get.success.affinities", svplayer.getDisplayName(), plyToxData.getAffinities().toString()), true);
-
+        source.sendSuccess(() -> Component.translatable("commands.tox.get.success.known_ingredients", svplayer.getDisplayName(), plyToxData.getKnownIngredients().toString()), true);
         return (int) plyToxData.getTox();
     }
 }

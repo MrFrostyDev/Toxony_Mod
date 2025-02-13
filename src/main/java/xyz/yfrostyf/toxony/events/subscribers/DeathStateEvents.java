@@ -21,7 +21,6 @@ public class DeathStateEvents {
     // Event removes player from death state if they lose tox or kills
     // them if they gain tox while in death state.
     //
-
     @SubscribeEvent
     public static void onChangeTox(ChangeToxEvent event){
         if(!(event.getEntity() instanceof ServerPlayer svplayer)){return;}
@@ -32,19 +31,20 @@ public class DeathStateEvents {
         if(!event.isAdding()){
             plyToxData.setDeathState(false);
         }
+
         if(event.isAdding()) {
             event.setCanceled(true);
             plyToxData.setDeathState(false);
             plyToxData.setTox(plyToxData.getTox() - TOLERANCE_DEDUCTION*2);
             plyToxData.setTolerance(plyToxData.getTolerance() - TOLERANCE_DEDUCTION);
+
             event.getEntity().hurt(new ToxinDamageSource(
-                    event.getEntity().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC_KILL), event.getEntity()),
+                            event.getEntity().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC_KILL), event.getEntity()),
                     9999
             );
-            ToxonyMain.LOGGER.info("[Overtox Trigger]: Tox: {}, Tolerance: {}, Death State: {}", plyToxData.getTox(), plyToxData.getTolerance(), plyToxData.getDeathState());
         }
 
-        PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), SyncToxPacket.create(plyToxData));
+        PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
     }
 
 }

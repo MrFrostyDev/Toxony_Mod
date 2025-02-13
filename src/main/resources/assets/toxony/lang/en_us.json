@@ -7,6 +7,7 @@
 
   "item.toxony.witching_blade": "Witching Blade",
 
+  "item.toxony.ocelot_mint": "Ocelot Mint",
   "item.toxony.false_berries": "Sweet Berries",
   "item.toxony.cub_blend": "Cub Blend",
 
@@ -34,6 +35,7 @@
   "commands.tox.add.success": "Added tox to [%s] by %s",
   "commands.tox.get.success": "[%s] has %s tox, %s tolerance and is not in death state",
   "commands.tox.get.success.affinities": "[%s] has these affinities: %s",
+  "commands.tox.get.success.known_ingredients": "[%s] knows about these ingredients: %s",
   "commands.tox.get.death.success": "[%s] has %s tox, %s tolerance and is in death state",
 
   "commands.tolerance.set.success": "Set tolerance of [%s] to %s",

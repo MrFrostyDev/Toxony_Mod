@@ -15,7 +15,7 @@ public class AffinityRegistry {
 
     public static final DeferredHolder<Affinity, Affinity> MOON = AFFINITIES.register("moon", () -> Affinity.create(
             "Moon",
-            0,
+            1,
             () -> List.of(
                     MobEffectRegistry.WOLF_MUTAGEN,
                     MobEffectRegistry.CAT_MUTAGEN
@@ -23,30 +23,30 @@ public class AffinityRegistry {
     ));
     public static final DeferredHolder<Affinity, Affinity> SUN = AFFINITIES.register("sun", () -> Affinity.create(
             "Sun",
-            1,
+            2,
             () -> List.of(
                     MobEffectRegistry.TURTLE_MUTAGEN,
                     MobEffectRegistry.CAT_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> OCEAN = AFFINITIES.register("ocean", () -> Affinity.create(
-            "ocean",
-            2,
+            "Ocean",
+            3,
             () -> List.of(
                     MobEffectRegistry.TURTLE_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> FOREST = AFFINITIES.register("forest", () -> Affinity.create(
-            "forest",
-            3,
+            "Forest",
+            4,
             () -> List.of(
                     MobEffectRegistry.WOLF_MUTAGEN,
                     MobEffectRegistry.SPIDER_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> END = AFFINITIES.register("end", () -> Affinity.create(
-            "end",
-            4,
+            "End",
+            5,
             () -> List.of()
     ));
 

@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -13,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.events.ChangeThresholdEvent;
@@ -31,6 +33,7 @@ public class ToxData {
     public static final int MAX_TOLERANCE = 999;
     public static final int MIN_TOLERANCE = 10;
     public static final int DEFAULT_TOLERANCE = 30;
+    public static final int MINIMUM_KNOW = 2;
 
     private Player player;
 
@@ -39,6 +42,7 @@ public class ToxData {
     private float tolerance = DEFAULT_TOLERANCE;
     private int threshold = 0;
     private Map<Affinity, Integer> affinities = new HashMap<>(20);
+    private Map<ResourceLocation, Integer> knownIngredients = new HashMap<>(20); // Used as a Set for searching capabilities.
     private boolean deathState = false;
 
     // Non-Synced Data
@@ -66,7 +70,7 @@ public class ToxData {
 
         if (event.getNewTox() > tolerance) {
             event.setNewTox(tolerance);
-            deathState = true;
+            setDeathState(true);
         }
         if (event.getNewTox() < 0) {
             event.setNewTox(0);
@@ -134,6 +138,16 @@ public class ToxData {
         setThreshold(0);
     }
 
+    // |========================= DeathState Data =========================|
+
+    public void setDeathState(boolean setState){
+        this.deathState = setState;
+    }
+
+    public boolean getDeathState(){
+        return deathState;
+    }
+
     // |========================= Affinity Data =========================|
 
     public Map<Affinity, Integer> getAffinities(){
@@ -169,6 +183,40 @@ public class ToxData {
         return affinities.containsKey(affinity);
     }
 
+    // |========================= Known Ingredients Data =========================|
+
+    public void addKnownIngredients(ItemStack itemstack){
+        ResourceLocation resourceLocation = itemstack.getItemHolder().getKey().location();
+        if(!this.hasKnownIngredient(itemstack)){
+            this.knownIngredients.put(resourceLocation, 1);
+            return;
+        }
+        this.knownIngredients.replace(resourceLocation, knownIngredients.get(resourceLocation) + 1);
+    }
+
+    public void setKnownIngredients(Map<ResourceLocation, Integer> knownIngredients){
+        this.knownIngredients = knownIngredients;
+    }
+
+    public Map<ResourceLocation, Integer> getKnownIngredients(){
+        return knownIngredients;
+    }
+
+    public int getIngredientProgress(ItemStack itemstack){
+        ResourceLocation location = itemstack.getItemHolder().getKey().location();
+        if(!this.hasKnownIngredient(itemstack))return 0;
+        return knownIngredients.get(location);
+    }
+
+    private boolean hasKnownIngredient(ItemStack itemstack){
+        return knownIngredients.containsKey(itemstack.getItemHolder().getKey().location());
+    }
+
+    public boolean knowsIngredient(ItemStack itemstack){
+        if(!this.hasKnownIngredient(itemstack))return false;
+        return (knownIngredients.get(itemstack.getItemHolder().getKey().location()) >= MINIMUM_KNOW);
+    }
+
     // Utility function to save and load NBT data. This is used for the PlayerToxSerializer.
     public void saveNBTData(CompoundTag compound, HolderLookup.Provider provider) {
         compound.putInt("tox", (int)this.tox);
@@ -180,13 +228,28 @@ public class ToxData {
         List<Integer> affinityValuesList = new ArrayList<>();
         for(Affinity affinity : affinities.keySet()){
             affinityStringsList.add(StringTag.valueOf(
-                    ToxonyRegistries.AFFINITY_REGISTRY.getKey(affinity).toString()
+                    ToxonyRegistries.AFFINITY_REGISTRY
+                            .holders()
+                            .filter(ref -> Objects.equals(ref.value().getName(), affinity.getName()))
+                            .findFirst()
+                            .get().getKey()
+                            .location()
+                            .toString()
             ));
             affinityValuesList.add(affinities.get(affinity));
         }
 
+        ListTag ingredientsStringsList = new ListTag();
+        List<Integer> ingredientsValuesList = new ArrayList<>();
+        for(ResourceLocation resourceLocation : knownIngredients.keySet()){
+            ingredientsStringsList.add(StringTag.valueOf(resourceLocation.toString()));
+            ingredientsValuesList.add(knownIngredients.get(resourceLocation));
+        }
+
         compound.put("affinities", affinityStringsList);
         compound.putIntArray("affinity_values", affinityValuesList);
+        compound.put("known_ingredients", ingredientsStringsList);
+        compound.putIntArray("known_ingredients_values", ingredientsValuesList);
 
         compound.putBoolean("deathState", this.deathState);
     }
@@ -198,6 +261,8 @@ public class ToxData {
 
         ListTag affinityStringsList = compound.getList("affinities", Tag.TAG_STRING);
         int[] affinityValues = compound.getIntArray("affinity_values");
+        ListTag ingredientsStringsList = compound.getList("known_ingredients", Tag.TAG_STRING);
+        int[] ingredientsValuesList = compound.getIntArray("known_ingredients_values");
 
         Map<Affinity, Integer> readAffinityMap = new HashMap<>();
         for (int i=0; i<affinityStringsList.size(); i++) {
@@ -205,18 +270,13 @@ public class ToxData {
             assert in != null;
             readAffinityMap.put(in, affinityValues[i]);
         }
+        Map<ResourceLocation, Integer> readIngredientsMap = new HashMap<>();
+        for (int i=0; i<ingredientsStringsList.size(); i++) {
+            readIngredientsMap.put(ResourceLocation.parse(ingredientsStringsList.getString(i)), ingredientsValuesList[i]);
+        }
 
         affinities = readAffinityMap;
+        knownIngredients = readIngredientsMap;
         deathState = compound.getBoolean("deathState");
-    }
-
-    // |========================= DeathState Data =========================|
-
-    public void setDeathState(boolean setState){
-        deathState = setState;
-    }
-
-    public boolean getDeathState(){
-        return deathState;
     }
 }
