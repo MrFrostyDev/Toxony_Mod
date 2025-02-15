@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -55,7 +56,7 @@ public class DataComponentsRegistry {
             "affinity",
             builder -> builder
                     .persistent(ResourceKey.codec(ToxonyRegistries.AFFINITY_REGISTRY_KEY).listOf())
-                    .networkSynchronized(ResourceKey.streamCodec(ToxonyRegistries.AFFINITY_REGISTRY_KEY).apply(ByteBufCodecs.list()))
+                    .networkSynchronized(StreamCodec.unit(List.of()))
                     .cacheEncoding()
     );
 }

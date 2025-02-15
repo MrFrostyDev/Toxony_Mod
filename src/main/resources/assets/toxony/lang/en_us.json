@@ -4,12 +4,17 @@
   "block.toxony.mortar_pestle": "Mortar and Pestle",
   "block.toxony.copper_crucible": "Copper Crucible",
   "block.toxony.alembic": "Alembic",
+  "block.toxony.valentines_box": "Valentines Box",
 
   "item.toxony.witching_blade": "Witching Blade",
 
   "item.toxony.ocelot_mint": "Ocelot Mint",
   "item.toxony.false_berries": "Sweet Berries",
   "item.toxony.cub_blend": "Cub Blend",
+
+  "item.toxony.milk_chocolate": "Milk Chocolate",
+  "item.toxony.mint_chocolate": "Mint Chocolate",
+  "item.toxony.dark_chocolate": "Dark Chocolate",
 
   "item.toxony.mortar_pestle": "Mortar and Pestle",
   "item.toxony.copper_crucible": "Copper Crucible",
@@ -21,6 +26,7 @@
 
   "effect.toxony.hunt": "Hunt",
   "effect.toxony.toxin": "Toxin",
+
   "effect.toxony.wolf_mutagen": "Mutagen",
   "effect.toxony.cat_mutagen": "Mutagen",
   "effect.toxony.turtle_mutagen": "Mutagen",
@@ -29,7 +35,12 @@
   "death.toxony.damage.toxin": "%1$s was overwhelmed by the toxins in their body",
 
   "message.toxony.mortar.warning": "You need a %s to collect this item.",
-  "message.toxony.oil.empty": "This item has ran out of oil.",
+  "message.toxony.tolerance.weak_tier_warning": "This poison is too weak to increase your tolerance.",
+
+  "message.toxony.valetines_box.empty" : "The box is empty. So sorry :c",
+  "message.toxony.valetines_box.warning" : "The box is closed! Crouch to open it!",
+
+  "message.toxony.oil.empty": "The oil on this weapon has dried out.",
 
   "commands.tox.set.success": "Set tox of [%s] to %s",
   "commands.tox.add.success": "Added tox to [%s] by %s",

@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
 
 import java.util.function.Supplier;
 

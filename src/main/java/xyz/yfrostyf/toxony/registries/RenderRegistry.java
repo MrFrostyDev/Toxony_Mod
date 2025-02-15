@@ -1,6 +1,5 @@
 package xyz.yfrostyf.toxony.registries;
 
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;

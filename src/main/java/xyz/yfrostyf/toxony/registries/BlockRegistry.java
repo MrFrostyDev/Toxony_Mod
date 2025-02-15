@@ -3,7 +3,6 @@ package xyz.yfrostyf.toxony.registries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -153,5 +152,15 @@ public class BlockRegistry {
                     // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
                     ALEMBIC.get()
             ).build(null)
+    );
+
+    // |-----------------------------------------------------------------------------------|
+    // |------------------------------------Misc Items-------------------------------------|
+    // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Block, Block> VALENTINES_BOX = BLOCKS.register(
+            "valentines_box",
+            () -> new ValentinesBoxBlock(
+                    BlockBehaviour.Properties.of().strength(0.2F).sound(SoundType.WOOL)
+            )
     );
 }

@@ -1,0 +1,10 @@
+{
+	"credit": "MrFrostyDev",
+	"parent": "toxony:block/valentines_box",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "toxony:block/valentines_box_choc6",
+		"particle": "toxony:block/valentines_box_choc6"
+	}
+}

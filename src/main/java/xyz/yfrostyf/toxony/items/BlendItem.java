@@ -1,6 +1,5 @@
 package xyz.yfrostyf.toxony.items;
 
-import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,6 +16,7 @@ import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.items.ToxGiverItem;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
+import xyz.yfrostyf.toxony.api.util.ToxUtil;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -38,11 +38,7 @@ public class BlendItem extends ToxGiverItem {
         ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
         plyToxData.addTox(tox);
 
-        if(!plyToxData.getDeathState()){
-            if(plyToxData.getThreshold() >= tier){
-                plyToxData.addTolerance(tolerance);
-            }
-        }
+        ToxUtil.addToleranceWithTier(plyToxData, tolerance, tier, level);
 
         if(level instanceof ServerLevel svlevel && stack.has(DataComponentsRegistry.AFFINITIES)) {
             List<Affinity> affinities = stack.get(DataComponentsRegistry.AFFINITIES);

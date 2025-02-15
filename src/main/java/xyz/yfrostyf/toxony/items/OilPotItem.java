@@ -4,14 +4,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.util.OilUtil;
 
@@ -41,7 +39,6 @@ public class OilPotItem extends Item {
         if (entity instanceof ServerPlayer svplayer && level instanceof ServerLevel svlevel) {
 
             OilUtil.updateOil(applied, getItemOil());
-            ToxonyMain.LOGGER.info("[OilPotItem oil applied]: {}", getItemOil());
             if(stack.isDamageableItem()){
                 stack.hurtAndBreak(1, svlevel, svplayer,
                         (item) -> ItemUtils.createFilledResult(stack, svplayer, this.resultingItem())

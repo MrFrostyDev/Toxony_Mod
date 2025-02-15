@@ -1,15 +1,12 @@
 package xyz.yfrostyf.toxony.registries;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -24,6 +21,7 @@ import xyz.yfrostyf.toxony.items.PoisonPasteItem;
 import xyz.yfrostyf.toxony.items.WitchingBladeItem;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ItemRegistry {
@@ -52,18 +50,21 @@ public class ItemRegistry {
     // |-------------------------------------Blends---------------------------------------|
     // |----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> POISON_BLEND = ITEMS.register("poison_blend", () -> BlendItem.builder()
-            .tox(30).tolerance(10).tier(0)
+            .tox(20).tolerance(8).tier(0)
             .returnItem(() -> new ItemStack(Items.BOWL))
+            .effect(new MobEffectInstance(MobEffects.POISON, 800, 0))
             .build()
     );
     public static final DeferredHolder<Item, Item> TOXIC_BLEND = ITEMS.register("toxic_blend", () -> BlendItem.builder()
-            .tox(50).tolerance(20).tier(1)
+            .tox(35).tolerance(18).tier(1)
             .returnItem(() -> new ItemStack(Items.BOWL))
+            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 800, 0))
             .build()
     );
     public static final DeferredHolder<Item, Item> PURE_BLEND = ITEMS.register("pure_blend", () -> BlendItem.builder()
-            .tox(100).tolerance(30).tier(2)
+            .tox(55).tolerance(30).tier(2)
             .returnItem(() -> new ItemStack(Items.BOWL))
+            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 1200, 1))
             .build()
     );
 
@@ -74,7 +75,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> TOXIC_PASTE = ITEMS.register("toxic_paste", () -> new PoisonPasteItem(new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> TOXIC_FORMULA = ITEMS.register("toxic_formula", () -> new PoisonPasteItem(new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> TOXIN = ITEMS.register("toxin", () -> ToxGiverItem.builder()
-            .tox(50).tolerance(10).tier(2)
+            .tox(40).tolerance(20).tier(2)
             .returnItem(() -> new ItemStack(Items.GLASS_BOTTLE))
             .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 500, 2, false, false, false))
             .build()
@@ -83,7 +84,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> FALSE_BERRIES = ITEMS.register("false_berries", () -> ToxGiverBlockItem.builder()
             .properties(createAffinitiesProperty(AffinityRegistry.FOREST.getKey()))
             .block(BlockRegistry.FALSE_BERRY_BUSH)
-            .tox(5).tolerance(1).tier(0)
+            .tox(3).tolerance(1).tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
     );
@@ -123,10 +124,40 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> OCELOT_MINT_SEED = ITEMS.register("ocelot_mint_seed", () -> new ItemNameBlockItem(BlockRegistry.OCELOT_MINT.get(), new Item.Properties()));
 
 
+    // |-----------------------------------------------------------------------------------|
+    // |------------------------------------Misc Items-------------------------------------|
+    // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Item, Item> VALENTINES_BOX = ITEMS.register("valentines_box", () -> new BlockItem(BlockRegistry.VALENTINES_BOX.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> MINT_CHOCOLATE = ITEMS.register("mint_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
+            2, 2,
+            true, 2,
+            Optional.empty(),
+            List.of(new FoodProperties.PossibleEffect(
+                    () -> new MobEffectInstance(MobEffects.WATER_BREATHING, 100, 0), 0.5F)
+            )
+    ))));
+    public static final DeferredHolder<Item, Item> MILK_CHOCOLATE = ITEMS.register("milk_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
+            2, 2,
+            true, 2,
+            Optional.empty(),
+            List.of(new FoodProperties.PossibleEffect(
+                    () -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 200, 0), 0.5F)
+            )
+    ))));
+    public static final DeferredHolder<Item, Item> DARK_CHOCOLATE = ITEMS.register("dark_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
+            2, 2,
+            true, 2,
+            Optional.empty(),
+            List.of(new FoodProperties.PossibleEffect(
+                    () -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0), 0.5F)
+            )
+    ))));
+
 
     // |----------------------------------------------------------------------------------|
     // |------------------------------------Methods---------------------------------------|
     // |----------------------------------------------------------------------------------|
+    @SafeVarargs
     public static Item.Properties createAffinitiesProperty(ResourceKey<Affinity>... affinities){
         List<ResourceKey<Affinity>> list = List.of(affinities);
         return new Item.Properties().component(DataComponentsRegistry.POSSIBLE_AFFINITIES, list);

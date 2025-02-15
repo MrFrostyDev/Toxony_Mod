@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=north,open=false": {
+      "model": "toxony:block/valentines_box"
+    },
+    "facing=east,open=false": {
+      "model": "toxony:block/valentines_box",
+      "y": 90
+    },
+    "facing=south,open=false": {
+      "model": "toxony:block/valentines_box",
+      "y": 180
+    },
+    "facing=west,open=false": {
+      "model": "toxony:block/valentines_box",
+      "y": 270
+    },
+    "facing=north,open=true,chocolates=6": {
+      "model": "toxony:block/valentines_box_choc6"
+    },
+    "facing=east,open=true,chocolates=6": {
+      "model": "toxony:block/valentines_box_choc6",
+      "y": 90
+    },
+    "facing=south,open=true,chocolates=6": {
+      "model": "toxony:block/valentines_box_choc6",
+      "y": 180
+    },
+    "facing=west,open=true,chocolates=6": {
+      "model": "toxony:block/valentines_box_choc6",
+      "y": 270
+    },
+    "facing=north,open=true,chocolates=5": {
+      "model": "toxony:block/valentines_box_choc5"
+    },
+    "facing=east,open=true,chocolates=5": {
+      "model": "toxony:block/valentines_box_choc5",
+      "y": 90
+    },
+    "facing=south,open=true,chocolates=5": {
+      "model": "toxony:block/valentines_box_choc5",
+      "y": 180
+    },
+    "facing=west,open=true,chocolates=5": {
+      "model": "toxony:block/valentines_box_choc5",
+      "y": 270
+    },
+    "facing=north,open=true,chocolates=4": {
+      "model": "toxony:block/valentines_box_choc4"
+    },
+    "facing=east,open=true,chocolates=4": {
+      "model": "toxony:block/valentines_box_choc4",
+      "y": 90
+    },
+    "facing=south,open=true,chocolates=4": {
+      "model": "toxony:block/valentines_box_choc4",
+      "y": 180
+    },
+    "facing=west,open=true,chocolates=4": {
+      "model": "toxony:block/valentines_box_choc4",
+      "y": 270
+    },
+    "facing=north,open=true,chocolates=3": {
+      "model": "toxony:block/valentines_box_choc3"
+    },
+    "facing=east,open=true,chocolates=3": {
+      "model": "toxony:block/valentines_box_choc3",
+      "y": 90
+    },
+    "facing=south,open=true,chocolates=3": {
+      "model": "toxony:block/valentines_box_choc3",
+      "y": 180
+    },
+    "facing=west,open=true,chocolates=3": {
+      "model": "toxony:block/valentines_box_choc3",
+      "y": 270
+    },
+    "facing=north,open=true,chocolates=2": {
+      "model": "toxony:block/valentines_box_choc2"
+    },
+    "facing=east,open=true,chocolates=2": {
+      "model": "toxony:block/valentines_box_choc2",
+      "y": 90
+    },
+    "facing=south,open=true,chocolates=2": {
+      "model": "toxony:block/valentines_box_choc2",
+      "y": 180
+    },
+    "facing=west,open=true,chocolates=2": {
+      "model": "toxony:block/valentines_box_choc2",
+      "y": 270
+    },
+    "facing=north,open=true,chocolates=1": {
+      "model": "toxony:block/valentines_box_choc1"
+    },
+    "facing=east,open=true,chocolates=1": {
+      "model": "toxony:block/valentines_box_choc1",
+      "y": 90
+    },
+    "facing=south,open=true,chocolates=1": {
+      "model": "toxony:block/valentines_box_choc1",
+      "y": 180
+    },
+    "facing=west,open=true,chocolates=1": {
+      "model": "toxony:block/valentines_box_choc1",
+      "y": 270
+    },
+    "facing=north,open=true,chocolates=0": {
+      "model": "toxony:block/valentines_box_choc0"
+    },
+    "facing=east,open=true,chocolates=0": {
+      "model": "toxony:block/valentines_box_choc0",
+      "y": 90
+    },
+    "facing=south,open=true,chocolates=0": {
+      "model": "toxony:block/valentines_box_choc0",
+      "y": 180
+    },
+    "facing=west,open=true,chocolates=0": {
+      "model": "toxony:block/valentines_box_choc0",
+      "y": 270
+    }
+  }
+}

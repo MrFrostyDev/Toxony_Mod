@@ -19,6 +19,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
+import xyz.yfrostyf.toxony.api.util.ToxUtil;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -50,38 +51,30 @@ public class ToxGiverBlockItem extends BlockItem {
         ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
         plyToxData.addTox(tox);
 
-        if(!plyToxData.getDeathState()){
-            if(plyToxData.getThreshold() >= tier){
-                plyToxData.addTolerance(tolerance);
-            }
-        }
+        ToxUtil.addToleranceWithTier(plyToxData, tolerance, tier, level);
 
-        if(level instanceof ServerLevel svlevel && stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)) {
-            Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(stack, svlevel);
-            AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, 1);
+        if(level instanceof ServerLevel svlevel) {
+           if(stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)){
+                Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(stack, svlevel);
+                AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, 1);
+           }
+
+            mobEffectInstances.forEach((mobEffectInstance) -> {
+                Holder<MobEffect> effect = mobEffectInstance.getEffect();
+
+                int oldDuration = 0;
+                if(player.hasEffect(effect) && !effect.value().isInstantenous()){
+                    oldDuration = player.getEffect(effect).getDuration();
+                }
+
+                if (effect.value().isInstantenous()) {
+                    (mobEffectInstance.getEffect().value()).applyInstantenousEffect(player, player, entity, mobEffectInstance.getAmplifier(), (double)1.0F);
+                } else {
+                    player.addEffect(new MobEffectInstance(effect, mobEffectInstance.getDuration() + oldDuration, mobEffectInstance.getAmplifier()));
+                }
+            });
             PacketDistributor.sendToPlayer((ServerPlayer) player, SyncToxPacket.create(plyToxData));
         }
-
-        mobEffectInstances.forEach((mobEffectInstance) -> {
-            boolean hasEffect = player.hasEffect(mobEffectInstance.getEffect());
-            Holder<MobEffect> effect = mobEffectInstance.getEffect();
-            int effectAmp = mobEffectInstance.getAmplifier();
-
-            int oldEffectDuration = 0;
-            int oldEffectAmp = 0;
-
-            if(hasEffect){
-                oldEffectDuration = player.getEffect(mobEffectInstance.getEffect()).getDuration();
-                oldEffectAmp = player.getEffect(mobEffectInstance.getEffect()).getAmplifier();
-                player.removeEffect(effect);
-            }
-
-            if (mobEffectInstance.getEffect().value().isInstantenous()) {
-                (mobEffectInstance.getEffect().value()).applyInstantenousEffect(player, player, entity, effectAmp, (double)1.0F);
-            } else {
-                player.addEffect(new MobEffectInstance(effect, mobEffectInstance.getDuration() + oldEffectDuration, Math.max(oldEffectAmp, effectAmp)));
-            }
-        });
 
         return ItemUtils.createFilledResult(stack, player, returnItem.get());
     }
