@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.blocks.entities;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -170,24 +171,24 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);
     }
 
-    public void finishPestling(Player player, ServerLevel svlevel){
-        if(this.level == null) return;
+    public void finishPestling(Player player, Level level){
 
         ItemStack itemStackInHand = player.getItemInHand(InteractionHand.MAIN_HAND);
         ItemStack useItem = findRecipe().map(RecipeHolder::value).map(MortarPestleRecipe::getUseItem).orElse(ItemStack.EMPTY);
         List<ItemStack> ingredientsCache = new ArrayList<>();
 
-        for (int i=0; i<this.getItemContainer().getSlots(); i++){
-            ingredientsCache.add(this.getItemContainer().extractItem(i, 1, false));
-        }
-
         if(itemStackInHand.getItem() == useItem.getItem() || useItem.isEmpty()) {
+            if(level.isClientSide()) return;
+
+            for (int i=0; i<this.getItemContainer().getSlots(); i++){
+                ingredientsCache.add(this.getItemContainer().extractItem(i, 1, false));
+            }
 
             // If item is a blend, handle affinities
             if(this.resultItem.getItem() instanceof BlendItem) {
                 List<Affinity> affinities = new ArrayList<>();
                 for (ItemStack item : ingredientsCache) {
-                    Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(item, svlevel);
+                    Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(item, level);
                     if (!affinity.isEmpty()) affinities.add(affinity);
                 }
                 ToxonyMain.LOGGER.info("[finishPestling handling affinities], affinities: {}", affinities);
@@ -205,9 +206,14 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
                     .map(MortarPestleRecipe::getResultItem)
                     .orElse(ItemStack.EMPTY)
             );
+            level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);
         }
-
-        level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);
+        else{
+            Minecraft.getInstance().gui.setOverlayMessage(
+                    Component.translatable("message.toxony.mortar.warning", useItem.getDisplayName()),
+                    false
+            );
+        }
     }
 
     public void setResultItem(ItemStack item){

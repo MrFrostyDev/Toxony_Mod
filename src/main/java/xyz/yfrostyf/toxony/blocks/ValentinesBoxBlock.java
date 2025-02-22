@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -34,6 +33,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ValentinesBoxBlock extends HorizontalDirectionalBlock {
+    private static final Random RANDOM = new Random();
     public static final MapCodec<ValentinesBoxBlock> CODEC = simpleCodec(ValentinesBoxBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
@@ -68,7 +68,7 @@ public class ValentinesBoxBlock extends HorizontalDirectionalBlock {
 
                 List<Item> chocolates = List.of(ItemRegistry.MILK_CHOCOLATE.get(), ItemRegistry.MINT_CHOCOLATE.get(), ItemRegistry.DARK_CHOCOLATE.get());
                 level.setBlock(pos, state.setValue(CHOCOLATE_COUNT, state.getValue(CHOCOLATE_COUNT)-1), Block.UPDATE_ALL);
-                player.addItem(new ItemStack(chocolates.get(new Random().nextInt(chocolates.size()))));
+                player.addItem(new ItemStack(chocolates.get(RANDOM.nextInt(chocolates.size()))));
             }
             else{
                 Minecraft.getInstance().gui.setOverlayMessage(

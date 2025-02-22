@@ -26,6 +26,7 @@ public class SpiderMutagenEffect extends MutagenEffect {
     public SpiderMutagenEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
+    private static final Random RANDOM = new Random();
 
     @Override
     public void onEffectStarted(LivingEntity entity, int amplifier) {
@@ -81,7 +82,7 @@ public class SpiderMutagenEffect extends MutagenEffect {
             if(attackerMutagen.getAmplifier() < 1){return;}
 
             if(!event.getEntity().hasEffect(MobEffects.POISON)){
-                if(new Random().nextInt(4 ) == 0){
+                if(RANDOM.nextInt(4 ) == 0){
                     event.getEntity().addEffect(new MobEffectInstance(MobEffects.POISON, 180, 0));
                     entity.playSound(SoundEvents.BEE_STING, 3, 1);
                 }

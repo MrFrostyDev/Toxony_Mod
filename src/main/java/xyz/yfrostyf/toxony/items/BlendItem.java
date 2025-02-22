@@ -26,7 +26,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class BlendItem extends ToxGiverItem {
-
+    private static final Random RANDOM = new Random();
 
     public BlendItem(Properties properties, float tox, float tolerance, int tier, Supplier<ItemStack> returnItem, List<MobEffectInstance> mobEffectInstances) {
         super(properties, tox, tolerance, tier, returnItem, mobEffectInstances);
@@ -43,7 +43,7 @@ public class BlendItem extends ToxGiverItem {
         if(level instanceof ServerLevel svlevel && stack.has(DataComponentsRegistry.AFFINITIES)) {
             List<Affinity> affinities = stack.get(DataComponentsRegistry.AFFINITIES);
             for (Affinity affinity : affinities) {
-                AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, Math.max(new Random().nextInt(5), 2));
+                AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, Math.max(RANDOM.nextInt(5), 2));
             }
             PacketDistributor.sendToPlayer((ServerPlayer) player, SyncToxPacket.create(plyToxData));
         }

@@ -5,8 +5,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.crafting.IngredientType;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.recipes.AffinityIngredient;
 import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
 import xyz.yfrostyf.toxony.recipes.CrucibleRecipe;
 import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
@@ -16,10 +19,12 @@ import java.util.function.Supplier;
 public class RecipeRegistry {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, ToxonyMain.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, ToxonyMain.MOD_ID);
+    public static final DeferredRegister<IngredientType<?>> INGREDIENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.INGREDIENT_TYPES, ToxonyMain.MOD_ID);
 
     public static void register(IEventBus event){
         RECIPE_TYPES.register(event);
         RECIPE_SERIALIZERS.register(event);
+        INGREDIENT_TYPES.register(event);
     }
 
     // Recipe Types
@@ -57,5 +62,11 @@ public class RecipeRegistry {
     public static final Supplier<RecipeSerializer<?>> ALEMBIC_SERIALIZER = RECIPE_SERIALIZERS.register(
             "alembic",
             AlembicRecipe.Serializer::new);
+
+    // Ingredient Types
+    public static final Supplier<IngredientType<AffinityIngredient>> AFFINITY = INGREDIENT_TYPES.register(
+            "affinity",
+            () -> new IngredientType<>(AffinityIngredient.CODEC, AffinityIngredient.STREAM_CODEC)
+    );
 
 }

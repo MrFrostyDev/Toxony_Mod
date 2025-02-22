@@ -32,6 +32,12 @@ public class ItemRegistry {
     }
 
     // |-----------------------------------------------------------------------------------|
+    // |--------------------------------------Tools----------------------------------------|
+    // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Item, Item> MAGNIFYING_GLASS = ITEMS.register("magnifying_glass", () -> new Item(new Item.Properties()));
+
+
+    // |-----------------------------------------------------------------------------------|
     // |-------------------------------------Oil Pots--------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> CLAY_OIL_POT = ITEMS.register("clay_oil_pot", () -> new Item(new Item.Properties()));
@@ -96,6 +102,13 @@ public class ItemRegistry {
             .build()
     );
 
+    public static final DeferredHolder<Item, Item> SNOW_MINT = ITEMS.register("snow_mint", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.COLD.getKey()))
+            .tox(3).tolerance(1).tier(1)
+            .effect(new MobEffectInstance(MobEffects.POISON, 800, 0, false, false, false))
+            .build()
+    );
+
     public static final DeferredHolder<Item, Item> BRITTLE_SCUTE = ITEMS.register("brittle_scute", () -> new Item(
             createAffinitiesProperty(AffinityRegistry.SUN.getKey(), AffinityRegistry.OCEAN.getKey())
     ));
@@ -122,6 +135,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> COPPER_CRUCIBLE = ITEMS.register("copper_crucible", () -> new BlockItem(BlockRegistry.COPPER_CRUCIBLE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALEMBIC = ITEMS.register("alembic", () -> new BlockItem(BlockRegistry.ALEMBIC.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> OCELOT_MINT_SEED = ITEMS.register("ocelot_mint_seed", () -> new ItemNameBlockItem(BlockRegistry.OCELOT_MINT.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> SNOW_MINT_SEED = ITEMS.register("snow_mint_seed", () -> new ItemNameBlockItem(BlockRegistry.SNOW_MINT.get(), new Item.Properties()));
 
 
     // |-----------------------------------------------------------------------------------|
@@ -130,7 +144,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> VALENTINES_BOX = ITEMS.register("valentines_box", () -> new BlockItem(BlockRegistry.VALENTINES_BOX.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> MINT_CHOCOLATE = ITEMS.register("mint_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
-            true, 2,
+            false, 2,
             Optional.empty(),
             List.of(new FoodProperties.PossibleEffect(
                     () -> new MobEffectInstance(MobEffects.WATER_BREATHING, 100, 0), 0.5F)
@@ -138,7 +152,7 @@ public class ItemRegistry {
     ))));
     public static final DeferredHolder<Item, Item> MILK_CHOCOLATE = ITEMS.register("milk_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
-            true, 2,
+            false, 2,
             Optional.empty(),
             List.of(new FoodProperties.PossibleEffect(
                     () -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 200, 0), 0.5F)
@@ -146,7 +160,7 @@ public class ItemRegistry {
     ))));
     public static final DeferredHolder<Item, Item> DARK_CHOCOLATE = ITEMS.register("dark_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
-            true, 2,
+            false, 2,
             Optional.empty(),
             List.of(new FoodProperties.PossibleEffect(
                     () -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0), 0.5F)

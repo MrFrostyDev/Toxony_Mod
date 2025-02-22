@@ -14,8 +14,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
+import xyz.yfrostyf.toxony.recipes.AffinityIngredient;
 import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
 
 import java.util.*;
@@ -50,6 +53,11 @@ public class MortarPestleRecipeBuilder implements RecipeBuilder {
 
     public MortarPestleRecipeBuilder ingredient(TagKey<Item> item) {
         ingredients.add(Ingredient.of(item));
+        return this;
+    }
+
+    public MortarPestleRecipeBuilder ingredient(Affinity affinity) {
+        ingredients.add(new Ingredient(new AffinityIngredient(affinity)));
         return this;
     }
 

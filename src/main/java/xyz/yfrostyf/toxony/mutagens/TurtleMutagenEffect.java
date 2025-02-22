@@ -36,6 +36,7 @@ public class TurtleMutagenEffect extends MutagenEffect {
     );
 
     private static final float TURTLE_DAMAGE_MODIFIER = 0.85f;
+    private static final Random RANDOM = new Random();
 
 
     public TurtleMutagenEffect(MobEffectCategory category, int color) {
@@ -89,7 +90,7 @@ public class TurtleMutagenEffect extends MutagenEffect {
 
             Holder<DamageType> damageType = event.getSource().typeHolder();
             if (!damageTypeExceptions.contains(damageType) && !(event.getEntity().hasEffect(MobEffects.DAMAGE_RESISTANCE))){
-                if(new Random().nextInt(5 ) == 0){
+                if(RANDOM.nextInt(5 ) == 0){
                     event.getEntity().addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 120, 0, false, true, true));
                     event.getEntity().playSound(SoundEvents.SHIELD_BLOCK, 6, 1.2f);
                 }

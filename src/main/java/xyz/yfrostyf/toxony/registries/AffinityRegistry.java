@@ -49,6 +49,26 @@ public class AffinityRegistry {
             5,
             () -> List.of()
     ));
+    public static final DeferredHolder<Affinity, Affinity> COLD = AFFINITIES.register("cold", () -> Affinity.create(
+            "Cold",
+            6,
+            () -> List.of(
+                    MobEffectRegistry.WOLF_MUTAGEN
+            )
+    ));
+    public static final DeferredHolder<Affinity, Affinity> NETHER = AFFINITIES.register("nether", () -> Affinity.create(
+            "Nether",
+            7,
+            () -> List.of(
+                    MobEffectRegistry.WOLF_MUTAGEN
+            )
+    ));
+    public static final DeferredHolder<Affinity, Affinity> DEATH = AFFINITIES.register("death", () -> Affinity.create(
+            "Death",
+            8,
+            () -> List.of()
+    ));
+
 
     public static void register(IEventBus eventBus){
         AFFINITIES.register(eventBus);

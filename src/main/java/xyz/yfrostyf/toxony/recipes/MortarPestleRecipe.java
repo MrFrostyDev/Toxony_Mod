@@ -29,7 +29,6 @@ public class MortarPestleRecipe implements Recipe<RecipeWrapper> {
 
     @Override
     public boolean matches(RecipeWrapper input, Level level) {
-        ToxonyMain.LOGGER.info("[MortarPestleRecipe matches called]");
         if (input.size() != this.recipeIngredients.size()) return false;
 
         var nonEmptyItems = new ArrayList<ItemStack>(input.size());

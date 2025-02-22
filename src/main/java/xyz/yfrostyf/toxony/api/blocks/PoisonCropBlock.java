@@ -5,40 +5,56 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Ravager;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.network.PacketDistributor;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
+import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
+import xyz.yfrostyf.toxony.network.ServerSendMessagePacket;
+import xyz.yfrostyf.toxony.registries.BlockRegistry;
+import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
-import java.util.List;
+import java.util.*;
+import java.util.function.Supplier;
 
 public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
+    public static final Holder<Block> EMPTY = BuiltInRegistries.BLOCK.getHolder(BuiltInRegistries.BLOCK.getDefaultKey()).get();
     public static final MapCodec<PoisonCropBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> // Given an instance
             instance.group(
                     propertiesCodec(),
-                    MobEffect.CODEC.listOf().fieldOf("effects").forGetter(PoisonCropBlock::getContactEffects)
+                    BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("grown_item").forGetter(PoisonCropBlock::getGrownItem),
+                    MobEffect.CODEC.listOf().fieldOf("effects").forGetter(PoisonCropBlock::getContactEffects),
+                    BuiltInRegistries.BLOCK.holderByNameCodec().listOf().fieldOf("evolved_blocks").forGetter(PoisonCropBlock::getEvolvedBlocks)
             ).apply(instance, PoisonCropBlock::new)
     );
 
     public static final int MAX_AGE = 5;
+    public static final int MINIMUM_EVOLVE_THRESHOLD = 5;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_5;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
             Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
@@ -50,10 +66,28 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
     };
 
     protected final List<Holder<MobEffect>> contactEffects;
+    protected final Supplier<Holder<Item>> grownItem;
+    protected final Supplier<List<Holder<Block>>> evolvedBlocks;
 
-    public PoisonCropBlock(Properties properties, List<Holder<MobEffect>> contactEffects) {
+    public PoisonCropBlock(Properties properties,
+                           Supplier<Holder<Item>> grownItem,
+                           List<Holder<MobEffect>> contactEffects,
+                           Supplier<List<Holder<Block>>> evolvedBlocks) {
         super(properties);
+        this.grownItem = grownItem;
         this.contactEffects = contactEffects;
+        this.evolvedBlocks = evolvedBlocks;
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
+    }
+
+    private PoisonCropBlock(Properties properties,
+                            Holder<Item> grownItem,
+                            List<Holder<MobEffect>> contactEffects,
+                            List<Holder<Block>> evolvedBlocks) {
+        super(properties);
+        this.grownItem = () -> grownItem;
+        this.contactEffects = contactEffects;
+        this.evolvedBlocks = () -> evolvedBlocks;
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
     }
 
@@ -62,7 +96,75 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
         return CODEC;
     }
 
-    public List<Holder<MobEffect>> getContactEffects() {return contactEffects;}
+    public List<Holder<MobEffect>> getContactEffects() {
+        return contactEffects;
+    }
+
+    public Holder<Item> getGrownItem(){
+        return grownItem.get();
+    }
+
+    public List<Holder<Block>> getEvolvedBlocks() {
+        return evolvedBlocks.get();
+    }
+
+    public Affinity getBlockAffinity(Level level){
+        return AffinityUtil.readAffinityFromIngredientMap(new ItemStack(grownItem.get()), level);
+    }
+
+    protected boolean tryTransformEvolved(ItemStack stack, BlockState state, ServerLevel svlevel, BlockPos pos, Player player){
+        if(stack.get(DataComponentsRegistry.POSSIBLE_AFFINITIES).isEmpty()) return false;
+
+        boolean success = false;
+        for(Holder<Block> holder : evolvedBlocks.get()){
+            if (holder.value() instanceof PoisonCropBlock poisonCropBlock){
+                if(poisonCropBlock.getBlockAffinity(svlevel).equals(AffinityUtil.readAffinityFromIngredientMap(stack, svlevel))){
+                    svlevel.setBlock(pos, holder.value().defaultBlockState(), Block.UPDATE_ALL);
+                    success = true;
+                }
+            }
+            else throw new ClassCastException("This block contains incorrect data within its possible evolved blocks.");
+        }
+        stack.consume(1, player);
+        return success;
+    }
+
+    // |===========================================================================|
+    // |============================= Block Behaviour =============================|
+    // |===========================================================================|
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        int age = this.getAge(state);
+        ItemStack graftStack = player.getMainHandItem().has(DataComponentsRegistry.POSSIBLE_AFFINITIES) ? player.getMainHandItem() : player.getOffhandItem();
+        if (!graftStack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES) || !(level instanceof ServerLevel svlevel)) return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        if(age <= 1){
+            boolean success = tryTransformEvolved(stack, state, svlevel, pos, player);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, ServerSendMessagePacket.create(success ? "message.toxony.graft.success" : "message.toxony.graft.fail"));
+            if(!success){
+                svlevel.setBlock(pos, BlockRegistry.FAILED_PLANT.value().defaultBlockState(), Block.UPDATE_ALL);
+            }
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    /**
+     * Performs a random tick on a block.
+     */
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!level.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+        if (level.getRawBrightness(pos, 0) >= 9) {
+            int age = this.getAge(state);
+            if (age < this.getMaxAge()) {
+                float f = getGrowthSpeed(state, level, pos);
+                if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos, state, random.nextInt((int)(40.0F / f) + 1) == 0)) {
+                    level.setBlock(pos, this.getStateForAge(age + 1), Block.UPDATE_CLIENTS);
+                    net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(level, pos, state);
+                }
+            }
+        }
+    }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -99,36 +201,14 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
         return !this.isMaxAge(state);
     }
 
-    /**
-     * Performs a random tick on a block.
-     */
-    @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!level.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-        if (level.getRawBrightness(pos, 0) >= 9) {
-            int i = this.getAge(state);
-            if (i < this.getMaxAge()) {
-                float f = getGrowthSpeed(state, level, pos);
-                if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos, state, random.nextInt((int)(40.0F / f) + 1) == 0)) {
-                    level.setBlock(pos, this.getStateForAge(i + 1), Block.UPDATE_CLIENTS);
-                    net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(level, pos, state);
-                }
-            }
-        }
-    }
-
     public void growCrops(Level level, BlockPos pos, BlockState state) {
-        int i = this.getAge(state) + this.getBonemealAgeIncrease(level);
-        int j = this.getMaxAge();
-        if (i > j) {
-            i = j;
+        int inc = this.getBonemealAgeIncrease(level);
+        int age = this.getAge(state) + inc;
+        int maxAge = this.getMaxAge();
+        if (age > maxAge) {
+            age = maxAge;
         }
-
-        level.setBlock(pos, this.getStateForAge(i), Block.UPDATE_CLIENTS);
-    }
-
-    protected int getBonemealAgeIncrease(Level level) {
-        return Mth.nextInt(level.random, 1, 2);
+        level.setBlock(pos, this.getStateForAge(age), Block.UPDATE_CLIENTS);
     }
 
     protected static float getGrowthSpeed(BlockState blockState, BlockGetter blockGetter, BlockPos pos) {
@@ -173,7 +253,6 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
                 f /= 2.0F;
             }
         }
-
         return f;
     }
 
@@ -182,8 +261,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
         BlockPos blockpos = pos.below();
         BlockState belowBlockState = level.getBlockState(blockpos);
         net.neoforged.neoforge.common.util.TriState soilDecision = belowBlockState.canSustainPlant(level, blockpos, Direction.UP, state);
-        if (soilDecision.isDefault() && belowBlockState.getBlock() instanceof PoisonFarmBlock) return true;
-        return false;
+        return soilDecision.isDefault() && belowBlockState.getBlock() instanceof PoisonFarmBlock;
     }
 
     public static boolean hasSufficientLight(LevelReader level, BlockPos pos) {
@@ -214,9 +292,12 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
                 }
             }
         }
-
         super.entityInside(state, level, pos, entity);
     }
+
+    // |===========================================================================|
+    // |=========================== Bonemeal Behaviour  ===========================|
+    // |===========================================================================|
 
     @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
@@ -226,6 +307,10 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
         return true;
+    }
+
+    protected int getBonemealAgeIncrease(Level level) {
+        return Mth.nextInt(level.random, 1, 1);
     }
 
     @Override

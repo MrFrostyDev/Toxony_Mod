@@ -15,6 +15,7 @@ import java.util.Random;
 
 public class HuntMobEffect extends MobEffect {
     private static final int color = 0x6e2f2B;
+    private static final Random RANDOM = new Random();
 
     public HuntMobEffect(MobEffectCategory category) {
         super(category, color);
@@ -34,7 +35,7 @@ public class HuntMobEffect extends MobEffect {
 
                 if(attMutagen == null){return;}
                 if(attMutagen.getAmplifier() < 2){return;}
-                if(new Random().nextInt(4 ) == 0){
+                if(RANDOM.nextInt(4 ) == 0){
                     event.getEntity().addEffect(new MobEffectInstance(MobEffectRegistry.HUNT, 200, 0));
                 }
             }

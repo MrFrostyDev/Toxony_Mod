@@ -27,6 +27,12 @@ public class PayloadRegistry {
                 SyncIngredientAffinityMapPacket::handle
         );
 
+        registrar.playToClient(
+                ServerSendMessagePacket.TYPE,
+                ServerSendMessagePacket.STREAM_CODEC,
+                ServerSendMessagePacket::handle
+        );
+
         registrar.playToServer(
                 ClientStartPestlingPacket.TYPE,
                 ClientStartPestlingPacket.STREAM_CODEC,

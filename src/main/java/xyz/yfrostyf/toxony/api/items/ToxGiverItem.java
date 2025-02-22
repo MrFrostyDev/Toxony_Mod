@@ -52,12 +52,12 @@ public class ToxGiverItem extends Item
 
         ToxUtil.addToleranceWithTier(plyToxData, tolerance, tier, level);
 
-        if(level instanceof ServerLevel svlevel) {
-            if (stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)) {
-                Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(stack, svlevel);
-                AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, 1);
-            }
+        if (stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)) {
+            Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(stack, level);
+            AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, 1);
+        }
 
+        if(level instanceof ServerLevel svlevel) {
             mobEffectInstances.forEach((mobEffectInstance) -> {
                 Holder<MobEffect> effect = mobEffectInstance.getEffect();
 

@@ -1,7 +1,10 @@
 package xyz.yfrostyf.toxony.registries;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -17,6 +20,7 @@ import xyz.yfrostyf.toxony.blocks.*;
 import xyz.yfrostyf.toxony.blocks.entities.AlembicBlockEntity;
 import xyz.yfrostyf.toxony.blocks.entities.CopperCrucibleBlockEntity;
 import xyz.yfrostyf.toxony.blocks.entities.MortarPestleBlockEntity;
+import xyz.yfrostyf.toxony.blocks.plants.FailedPlantBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
 import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
@@ -35,55 +39,54 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> POISON_FARMLAND = BLOCKS.register(
             "poison_farmland",
-            () -> new PoisonFarmBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.DIRT)
-                            .randomTicks()
-                            .strength(0.6F)
-                            .sound(SoundType.GRAVEL)
-                            .isViewBlocking((state, get, pos) -> true)
-                            .isSuffocating((state, get, pos) -> true)
+            () -> new PoisonFarmBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.DIRT)
+                    .randomTicks()
+                    .strength(0.6F)
+                    .sound(SoundType.GRAVEL)
+                    .isViewBlocking((state, get, pos) -> true)
+                    .isSuffocating((state, get, pos) -> true)
             )
     );
 
     public static final DeferredHolder<Block, Block> FALSE_BERRY_BUSH = BLOCKS.register(
             "false_berry_bush",
-            () -> new FalseBerryBushBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.PLANT)
-                            .randomTicks()
-                            .noCollission()
-                            .sound(SoundType.SWEET_BERRY_BUSH)
-                            .pushReaction(PushReaction.DESTROY)
-                            .isRedstoneConductor((state,level,pos) -> false)
+            () -> new FalseBerryBushBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .randomTicks()
+                    .noCollission()
+                    .sound(SoundType.SWEET_BERRY_BUSH)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 
     public static final DeferredHolder<Block, Block> WILD_OCELOT_MINT = BLOCKS.register(
             "wild_ocelot_mint",
-            () -> new WildOcelotMintBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.PLANT)
-                            .randomTicks()
-                            .noCollission()
-                            .sound(SoundType.CROP)
-                            .pushReaction(PushReaction.DESTROY)
-                            .isRedstoneConductor((state,level,pos) -> false),
+            () -> new WildOcelotMintBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .randomTicks()
+                    .noCollission()
+                    .sound(SoundType.CROP)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor((state,level,pos) -> false),
                     List.of(MobEffects.POISON)
             )
     );
 
-    public static final DeferredHolder<Block, Block> OCELOT_MINT = BLOCKS.register(
-            "ocelot_mint",
-            () -> new PoisonCropBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.PLANT)
-                            .randomTicks()
-                            .noCollission()
-                            .sound(SoundType.CROP)
-                            .pushReaction(PushReaction.DESTROY)
-                            .isRedstoneConductor((state,level,pos) -> false),
-                    List.of(MobEffects.POISON)
+    public static final DeferredHolder<Block, Block> OCELOT_MINT = createPoisonCrop("ocelot_mint",
+            ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), List.of());
+
+    public static final DeferredHolder<Block, Block> SNOW_MINT = createPoisonCrop("snow_mint",
+            ItemRegistry.SNOW_MINT, List.of(MobEffects.POISON), List.of());
+
+    public static final DeferredHolder<Block, Block> FAILED_PLANT = BLOCKS.register("failed_plant",
+            () -> new FailedPlantBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .noCollission()
+                    .sound(SoundType.CROP)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 
@@ -93,31 +96,28 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> MORTAR_PESTLE = BLOCKS.register(
             "mortar_pestle",
-            () -> new MortarPestleBlock(
-                BlockBehaviour.Properties.of()
-                        .strength(0.5f)
-                        .sound(SoundType.STONE)
-                        .isRedstoneConductor((state,level,pos) -> false)
+            () -> new MortarPestleBlock(BlockBehaviour.Properties.of()
+                    .strength(0.5f)
+                    .sound(SoundType.STONE)
+                    .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 
     public static final DeferredHolder<Block, Block> COPPER_CRUCIBLE = BLOCKS.register(
             "copper_crucible",
-            () -> new CopperCrucibleBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(0.5f)
-                            .sound(SoundType.COPPER)
-                            .isRedstoneConductor((state,level,pos) -> false)
+            () -> new CopperCrucibleBlock(BlockBehaviour.Properties.of()
+                    .strength(0.5f)
+                    .sound(SoundType.COPPER)
+                    .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 
     public static final DeferredHolder<Block, Block> ALEMBIC = BLOCKS.register(
             "alembic",
-            () -> new AlembicBlock(
-                    BlockBehaviour.Properties.of()
-                            .strength(0.8f)
-                            .sound(SoundType.COPPER)
-                            .isRedstoneConductor((state,level,pos) -> false)
+            () -> new AlembicBlock(BlockBehaviour.Properties.of()
+                    .strength(0.8f)
+                    .sound(SoundType.COPPER)
+                    .isRedstoneConductor((state,level,pos) -> false)
             )
     );
 
@@ -159,8 +159,27 @@ public class BlockRegistry {
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Block, Block> VALENTINES_BOX = BLOCKS.register(
             "valentines_box",
-            () -> new ValentinesBoxBlock(
-                    BlockBehaviour.Properties.of().strength(0.2F).sound(SoundType.WOOL)
+            () -> new ValentinesBoxBlock(BlockBehaviour.Properties.of()
+                    .strength(0.2F)
+                    .sound(SoundType.WOOL)
             )
     );
+
+    // |----------------------------------------------------------------------------------|
+    // |------------------------------------Methods---------------------------------------|
+    // |----------------------------------------------------------------------------------|
+    private static DeferredHolder<Block, Block> createPoisonCrop(String name, Holder<Item> grownItem, List<Holder<MobEffect>> effects, List<Holder<Block>> evolvedBlocks){
+        return BLOCKS.register(name, () -> new PoisonCropBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.PLANT)
+                .randomTicks()
+                .noCollission()
+                .sound(SoundType.CROP)
+                .pushReaction(PushReaction.DESTROY)
+                .isRedstoneConductor((state,level,pos) -> false),
+                () -> grownItem,
+                effects,
+                () -> evolvedBlocks
+                )
+        );
+    }
 }

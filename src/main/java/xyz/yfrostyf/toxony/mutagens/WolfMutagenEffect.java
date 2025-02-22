@@ -25,6 +25,7 @@ public class WolfMutagenEffect extends MutagenEffect {
     public WolfMutagenEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
+    private static final Random RANDOM = new Random();
 
     @Override
     public void onEffectStarted(LivingEntity entity, int amplifier) {
@@ -64,7 +65,7 @@ public class WolfMutagenEffect extends MutagenEffect {
             if(attackerMutagen == null){return;}
             if(attackerMutagen.getAmplifier() < 2){return;}
 
-            if(new Random().nextInt(4 ) == 0){
+            if(RANDOM.nextInt(4 ) == 0){
                 event.getEntity().addEffect(new MobEffectInstance(MobEffectRegistry.HUNT, 120, 0));
                 entity.playSound(SoundEvents.WOLF_GROWL, 6, 1);
             }

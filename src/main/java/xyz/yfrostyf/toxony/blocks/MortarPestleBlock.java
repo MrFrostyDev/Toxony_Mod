@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -30,6 +31,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.blocks.entities.MortarPestleBlockEntity;
+import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 
 public class MortarPestleBlock extends Block implements EntityBlock {
@@ -50,44 +52,18 @@ public class MortarPestleBlock extends Block implements EntityBlock {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(!(level.getBlockEntity(pos) instanceof MortarPestleBlockEntity blockEntity))return InteractionResult.FAIL;
 
-        // Client/Server Side actions
-        //
-        if (blockEntity.isPestling && blockEntity.pestleTick <= 0 && blockEntity.pestleCount < PESTLE_TOTAL_COUNT){
-            player.playSound(SoundEvents.GRINDSTONE_USE);
-        }
-
-        // Check if item in hand is the right useItem. Ignore if useItem is an empty stack.
-        if(level.isClientSide() && blockEntity.isPestling && blockEntity.pestleCount >= PESTLE_TOTAL_COUNT){
-            if(blockEntity.findRecipe().isPresent()){
-                ItemStack useItem = blockEntity.findRecipe().get().value().getUseItem();
-                if(player.getMainHandItem().getItem() != useItem.getItem() && !useItem.isEmpty()){
-                    Minecraft.getInstance().gui.setOverlayMessage(
-                            Component.translatable("message.toxony.mortar.warning", useItem.getDisplayName()),
-                            false
-                    );
-                }
-            }
-        }
-
-        // Server Side actions
-        //
-        if (level.isClientSide())return InteractionResult.SUCCESS;
-        level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
-
         if (!blockEntity.isPestling) {
             player.openMenu(blockEntity, pos);
             return InteractionResult.CONSUME;
         }
         else if (blockEntity.pestleCount >= PESTLE_TOTAL_COUNT && blockEntity.pestleTick <= 0) {
-            blockEntity.finishPestling(player, (ServerLevel) level);
+            blockEntity.finishPestling(player, level);
             return InteractionResult.SUCCESS;
         }
         else if (blockEntity.pestleTick <= 0){
             blockEntity.pestleTick = PESTLE_TOTAL_TICK;
             blockEntity.pestleCount++;
             player.playSound(SoundEvents.GRINDSTONE_USE);
-
-            ToxonyMain.LOGGER.info("[MortarPestleBlock pestling]: count: {}", blockEntity.pestleCount);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.FAIL;

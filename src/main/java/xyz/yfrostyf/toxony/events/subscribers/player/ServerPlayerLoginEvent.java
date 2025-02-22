@@ -14,6 +14,8 @@ import xyz.yfrostyf.toxony.network.SyncIngredientAffinityMapPacket;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
+import javax.management.InstanceNotFoundException;
+
 @EventBusSubscriber(modid = ToxonyMain.MOD_ID, value = Dist.DEDICATED_SERVER)
 public class ServerPlayerLoginEvent {
 
@@ -22,7 +24,7 @@ public class ServerPlayerLoginEvent {
         if (event.getEntity() instanceof ServerPlayer svplayer) {
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
             PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
-            PacketDistributor.sendToPlayer(svplayer, SyncIngredientAffinityMapPacket.create(AffinityUtil.getIngredientAffinityMap((ServerLevel) svplayer.level())));
+            PacketDistributor.sendToPlayer(svplayer, SyncIngredientAffinityMapPacket.create(AffinityUtil.getIngredientAffinityMap(svplayer.level())));
         }
     }
 }

@@ -19,6 +19,8 @@ import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import java.util.*;
 
 public class IngredientAffinityMapData extends SavedData {
+    private static final Random RANDOM = new Random();
+
     // Mapped ResourceLocation's to Affinities
     Map<ResourceLocation, Affinity> ingredientToAffinityMap;
 
@@ -55,12 +57,12 @@ public class IngredientAffinityMapData extends SavedData {
         List<ResourceKey<Affinity>> possibleAffinities = new ArrayList<>(holder.value().components().get(DataComponentsRegistry.POSSIBLE_AFFINITIES.get()));
         if(possibleAffinities.isEmpty()) return null;
 
-        ResourceKey<Affinity> randKey = possibleAffinities.remove(new Random().nextInt(possibleAffinities.size()));
+        ResourceKey<Affinity> randKey = possibleAffinities.remove(RANDOM.nextInt(possibleAffinities.size()));
         Affinity selectedAffinity = ToxonyRegistries.AFFINITY_REGISTRY.get(randKey);
         int i = 0;
         while(i < possibleAffinities.size()){
             if(!map.containsValue(selectedAffinity))break;
-            randKey = possibleAffinities.remove(new Random().nextInt(possibleAffinities.size()));
+            randKey = possibleAffinities.remove(RANDOM.nextInt(possibleAffinities.size()));
             selectedAffinity = ToxonyRegistries.AFFINITY_REGISTRY.get(randKey);
             i++;
         }
