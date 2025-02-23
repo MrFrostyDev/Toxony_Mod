@@ -1,6 +1,10 @@
 {
   "values": [
     "toxony:wild_ocelot_mint",
-    "toxony:ocelot_mint"
+    "toxony:ocelot_mint",
+    "toxony:wild_nightshade",
+    "toxony:nightshade",
+    "toxony:wild_water_hemlock",
+    "toxony:water_hemlock"
   ]
 }

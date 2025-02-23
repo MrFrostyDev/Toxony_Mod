@@ -109,6 +109,34 @@ public class ItemRegistry {
             .build()
     );
 
+    public static final DeferredHolder<Item, Item> NIGHTSHADE = ITEMS.register("nightshade", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey(), AffinityRegistry.FOREST.getKey()))
+            .tox(2).tolerance(1).tier(0)
+            .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
+    public static final DeferredHolder<Item, Item> SUNSPOT = ITEMS.register("sunpot", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.SUN.getKey()))
+            .tox(2).tolerance(1).tier(1)
+            .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
+    public static final DeferredHolder<Item, Item> WATER_HEMLOCK = ITEMS.register("water_hemlock", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.WIND.getKey()))
+            .tox(2).tolerance(1).tier(0)
+            .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
+    public static final DeferredHolder<Item, Item> MOONLIGHT_HEMLOCK = ITEMS.register("moonlight_hemlock", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey()))
+            .tox(2).tolerance(1).tier(1)
+            .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
     public static final DeferredHolder<Item, Item> BRITTLE_SCUTE = ITEMS.register("brittle_scute", () -> new Item(
             createAffinitiesProperty(AffinityRegistry.SUN.getKey(), AffinityRegistry.OCEAN.getKey())
     ));
@@ -134,8 +162,13 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> MORTAR_PESTLE = ITEMS.register("mortar_pestle", () -> new BlockItem(BlockRegistry.MORTAR_PESTLE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> COPPER_CRUCIBLE = ITEMS.register("copper_crucible", () -> new BlockItem(BlockRegistry.COPPER_CRUCIBLE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALEMBIC = ITEMS.register("alembic", () -> new BlockItem(BlockRegistry.ALEMBIC.get(), new Item.Properties()));
+
     public static final DeferredHolder<Item, Item> OCELOT_MINT_SEED = ITEMS.register("ocelot_mint_seed", () -> new ItemNameBlockItem(BlockRegistry.OCELOT_MINT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> SNOW_MINT_SEED = ITEMS.register("snow_mint_seed", () -> new ItemNameBlockItem(BlockRegistry.SNOW_MINT.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> NIGHTSHADE_SEED = ITEMS.register("nightshade_seed", () -> new ItemNameBlockItem(BlockRegistry.NIGHTSHADE.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> SUNSPOT_SEED = ITEMS.register("sunspot_seed", () -> new ItemNameBlockItem(BlockRegistry.SUNSPOT.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> WATER_HEMLOCK_SEED = ITEMS.register("water_hemlock_seed", () -> new ItemNameBlockItem(BlockRegistry.WATER_HEMLOCK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> MOONLIGHT_HEMLOCK_SEED = ITEMS.register("moonlight_hemlock_seed", () -> new ItemNameBlockItem(BlockRegistry.MOONLIGHT_HEMLOCK.get(), new Item.Properties()));
 
 
     // |-----------------------------------------------------------------------------------|
@@ -150,6 +183,7 @@ public class ItemRegistry {
                     () -> new MobEffectInstance(MobEffects.WATER_BREATHING, 100, 0), 0.5F)
             )
     ))));
+
     public static final DeferredHolder<Item, Item> MILK_CHOCOLATE = ITEMS.register("milk_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
             false, 2,
@@ -158,6 +192,7 @@ public class ItemRegistry {
                     () -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 200, 0), 0.5F)
             )
     ))));
+
     public static final DeferredHolder<Item, Item> DARK_CHOCOLATE = ITEMS.register("dark_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
             false, 2,
@@ -166,7 +201,6 @@ public class ItemRegistry {
                     () -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0), 0.5F)
             )
     ))));
-
 
     // |----------------------------------------------------------------------------------|
     // |------------------------------------Methods---------------------------------------|

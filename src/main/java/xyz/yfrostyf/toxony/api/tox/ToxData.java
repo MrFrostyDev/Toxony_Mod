@@ -38,7 +38,7 @@ public class ToxData {
     private float tolerance = DEFAULT_TOLERANCE;
     private int threshold = 0;
     private Map<Affinity, Integer> affinities = new HashMap<>(20);
-    private Map<ResourceLocation, Integer> knownIngredients = new HashMap<>(20); // Used as a Set for searching capabilities.
+    private Map<ResourceLocation, Integer> knownIngredients = new HashMap<>(30); // Used as a Set for searching capabilities.
     private boolean deathState = false;
 
     // Non-Synced Data

@@ -1,6 +1,6 @@
 {
 	"credit": "MrFrostyDev",
-	"parent": "toxony:block/template_wild_ocelot_mint",
+	"parent": "toxony:block/template_wild_poison_plant",
 	"render_type": "cutout",
 	"texture_size": [32, 32],
 	"textures": {

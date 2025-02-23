@@ -23,7 +23,11 @@ public class ToxonyBlockTagsProvider extends BlockTagsProvider {
         this.tag(TagRegistry.POISONOUS_PLANTS_BLOCK_TAG)
                 .add(
                         BlockRegistry.WILD_OCELOT_MINT.get(),
-                        BlockRegistry.OCELOT_MINT.get()
+                        BlockRegistry.OCELOT_MINT.get(),
+                        BlockRegistry.WILD_NIGHTSHADE.get(),
+                        BlockRegistry.NIGHTSHADE.get(),
+                        BlockRegistry.WILD_WATER_HEMLOCK.get(),
+                        BlockRegistry.WATER_HEMLOCK.get()
                 );
     }
 }

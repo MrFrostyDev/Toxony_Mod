@@ -16,6 +16,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.blocks.PoisonCropBlock;
+import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.*;
 import xyz.yfrostyf.toxony.blocks.entities.AlembicBlockEntity;
 import xyz.yfrostyf.toxony.blocks.entities.CopperCrucibleBlockEntity;
@@ -85,6 +86,48 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> SNOW_MINT = createPoisonCrop(
             "snow_mint",
             ItemRegistry.SNOW_MINT, List.of(MobEffects.POISON), null);
+
+    public static final DeferredHolder<Block, Block> WILD_NIGHTSHADE = BLOCKS.register(
+            "wild_nightshade",
+            () -> new WildPoisonCropBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .randomTicks()
+                    .noCollission()
+                    .sound(SoundType.CROP)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor((state,level,pos) -> false),
+                    List.of(MobEffects.POISON)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> NIGHTSHADE = createPoisonCrop(
+            "nightshade",
+            ItemRegistry.NIGHTSHADE, List.of(MobEffects.POISON), BlockRegistry.SUNSPOT);
+
+    public static final DeferredHolder<Block, Block> SUNSPOT = createPoisonCrop(
+            "sunspot",
+            ItemRegistry.SUNSPOT, List.of(MobEffects.POISON), null);
+
+    public static final DeferredHolder<Block, Block> WILD_WATER_HEMLOCK = BLOCKS.register(
+            "wild_water_hemlock",
+            () -> new WildPoisonCropBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .randomTicks()
+                    .noCollission()
+                    .sound(SoundType.CROP)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor((state,level,pos) -> false),
+                    List.of(MobEffects.POISON)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> WATER_HEMLOCK = createPoisonCrop(
+            "water_hemlock",
+            ItemRegistry.WATER_HEMLOCK, List.of(MobEffects.POISON), BlockRegistry.MOONLIGHT_HEMLOCK);
+
+    public static final DeferredHolder<Block, Block> MOONLIGHT_HEMLOCK = createPoisonCrop(
+            "moonlight_hemlock",
+            ItemRegistry.MOONLIGHT_HEMLOCK, List.of(MobEffects.POISON), null);
 
     public static final DeferredHolder<Block, Block> FAILED_PLANT = BLOCKS.register(
             "failed_plant",

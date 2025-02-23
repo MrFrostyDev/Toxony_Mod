@@ -18,6 +18,8 @@ public class ToxonyBiomeModifier {
 
     public static final ResourceKey<BiomeModifier> ADD_PATCH_FALSE_BERRY_BUSH = registerKey("add_patch_false_berry_bush");
     public static final ResourceKey<BiomeModifier> ADD_WILD_OCELOT_MINT = registerKey("add_wild_ocelot_mint");
+    public static final ResourceKey<BiomeModifier> ADD_WILD_NIGHTSHADE = registerKey("add_wild_nightshade");
+    public static final ResourceKey<BiomeModifier> ADD_WILD_WATER_HEMLOCK = registerKey("add_wild_water_hemlock");
 
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context){
@@ -33,6 +35,18 @@ public class ToxonyBiomeModifier {
         context.register(ADD_WILD_OCELOT_MINT, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.JUNGLE), biomes.getOrThrow(Biomes.SPARSE_JUNGLE)),
                 HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_OCELOT_MINT_PLACED)),
+                GenerationStep.Decoration.VEGETAL_DECORATION
+        ));
+
+        context.register(ADD_WILD_NIGHTSHADE, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.DARK_FOREST)),
+                HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_NIGHTSHADE_PLACED)),
+                GenerationStep.Decoration.VEGETAL_DECORATION
+        ));
+
+        context.register(ADD_WILD_WATER_HEMLOCK, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.SWAMP), biomes.getOrThrow(Biomes.MANGROVE_SWAMP)),
+                HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_WATER_HEMLOCK_PLACED)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
     }

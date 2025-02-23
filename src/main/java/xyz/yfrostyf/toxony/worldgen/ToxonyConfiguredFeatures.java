@@ -23,7 +23,11 @@ import java.util.List;
 public class ToxonyConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?,?>> PATCH_FALSE_BERRY_BUSH = registerKey("patch_false_berry_bush");
-    public static final ResourceKey<ConfiguredFeature<?,?>> WILD_OCELOT_MINT = registerKey("patch_wild_ocelot_mint");
+    public static final ResourceKey<ConfiguredFeature<?,?>> WILD_OCELOT_MINT = registerKey("wild_ocelot_mint");
+    public static final ResourceKey<ConfiguredFeature<?,?>> WILD_NIGHTSHADE = registerKey("wild_nightshade");
+    public static final ResourceKey<ConfiguredFeature<?,?>> WILD_WATER_HEMLOCK = registerKey("wild_water_hemlock");
+
+
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
         register(context, PATCH_FALSE_BERRY_BUSH, Feature.RANDOM_PATCH,
@@ -41,6 +45,26 @@ public class ToxonyConfiguredFeatures {
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_OCELOT_MINT.get().defaultBlockState()
+                                        .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
+                        ),
+                        List.of(Blocks.GRASS_BLOCK)
+                ));
+
+        register(context, WILD_NIGHTSHADE, Feature.FLOWER,
+                FeatureUtils.simplePatchConfiguration(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(BlockRegistry.WILD_NIGHTSHADE.get().defaultBlockState()
+                                        .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
+                        ),
+                        List.of(Blocks.GRASS_BLOCK)
+                ));
+
+        register(context, WILD_WATER_HEMLOCK, Feature.FLOWER,
+                FeatureUtils.simplePatchConfiguration(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(BlockRegistry.WILD_WATER_HEMLOCK.get().defaultBlockState()
                                         .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
                         ),
                         List.of(Blocks.GRASS_BLOCK)

@@ -37,8 +37,10 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
         this.tag(TagRegistry.POISONOUS_PLANTS_ITEM_TAG)
                 .add(
                         Items.POISONOUS_POTATO,
+                        ItemRegistry.FALSE_BERRIES.get(),
                         ItemRegistry.OCELOT_MINT.get(),
-                        ItemRegistry.FALSE_BERRIES.get()
+                        ItemRegistry.NIGHTSHADE.get(),
+                        ItemRegistry.WATER_HEMLOCK.get()
                 );
     }
 }

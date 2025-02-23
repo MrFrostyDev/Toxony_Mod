@@ -1,5 +1,5 @@
 {
-  "feature": "toxony:patch_wild_ocelot_mint",
+  "feature": "toxony:wild_ocelot_mint",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
