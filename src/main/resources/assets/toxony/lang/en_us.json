@@ -34,8 +34,9 @@
 
   "death.toxony.damage.toxin": "%1$s was overwhelmed by the toxins in their body",
 
-  "message.toxony.graft.success": "Attempting to graft this item to the plant produced no results.",
-  "message.toxony.graft.fail": "The plant seems to have changed from grafting this item.",
+  "message.toxony.graft.success": "The plant seems to have changed from grafting this item.",
+  "message.toxony.graft.fail": "Attempting to graft this item to the plant produced no results.",
+  "message.toxony.graft.unknown": "You don't have enough knowledge about this item or the plant to graft.",
 
   "message.toxony.mortar.warning": "You need a %s to collect this item.",
   "message.toxony.tolerance.weak_tier_warning": "This poison is too weak to increase your tolerance.",

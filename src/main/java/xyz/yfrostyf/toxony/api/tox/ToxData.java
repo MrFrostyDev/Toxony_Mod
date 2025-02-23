@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.api.tox;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -8,6 +9,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
@@ -206,9 +208,17 @@ public class ToxData {
         return knownIngredients.containsKey(itemstack.getItemHolder().getKey().location());
     }
 
+    /**
+     * Check if the player knows the random affinity chosen for this item stack.
+     */
     public boolean knowsIngredient(ItemStack itemstack){
         if(!this.hasKnownIngredient(itemstack))return false;
         return (knownIngredients.get(itemstack.getItemHolder().getKey().location()) >= MINIMUM_KNOW);
+    }
+
+    public boolean knowsIngredient(Holder<Item> holder){
+        if(!this.hasKnownIngredient(new ItemStack(holder)))return false;
+        return (knownIngredients.get(holder.getKey().location()) >= MINIMUM_KNOW);
     }
 
     // Utility function to save and load NBT data. This is used for the PlayerToxSerializer.

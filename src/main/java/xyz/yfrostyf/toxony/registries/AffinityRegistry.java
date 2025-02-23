@@ -44,10 +44,12 @@ public class AffinityRegistry {
                     MobEffectRegistry.SPIDER_MUTAGEN
             )
     ));
-    public static final DeferredHolder<Affinity, Affinity> END = AFFINITIES.register("end", () -> Affinity.create(
-            "End",
+    public static final DeferredHolder<Affinity, Affinity> WIND = AFFINITIES.register("wind", () -> Affinity.create(
+            "Wind",
             5,
-            () -> List.of()
+            () -> List.of(
+                    MobEffectRegistry.TURTLE_MUTAGEN
+            )
     ));
     public static final DeferredHolder<Affinity, Affinity> COLD = AFFINITIES.register("cold", () -> Affinity.create(
             "Cold",
@@ -56,16 +58,28 @@ public class AffinityRegistry {
                     MobEffectRegistry.WOLF_MUTAGEN
             )
     ));
+    public static final DeferredHolder<Affinity, Affinity> SOUL = AFFINITIES.register("soul", () -> Affinity.create(
+            "Soul",
+            7,
+            () -> List.of()
+    ));
+    public static final DeferredHolder<Affinity, Affinity> DECAY = AFFINITIES.register("decay", () -> Affinity.create(
+            "Decay",
+            8,
+            () -> List.of(
+                    MobEffectRegistry.SPIDER_MUTAGEN
+            )
+    ));
     public static final DeferredHolder<Affinity, Affinity> NETHER = AFFINITIES.register("nether", () -> Affinity.create(
             "Nether",
-            7,
+            9,
             () -> List.of(
                     MobEffectRegistry.WOLF_MUTAGEN
             )
     ));
-    public static final DeferredHolder<Affinity, Affinity> DEATH = AFFINITIES.register("death", () -> Affinity.create(
-            "Death",
-            8,
+    public static final DeferredHolder<Affinity, Affinity> END = AFFINITIES.register("end", () -> Affinity.create(
+            "End",
+            10,
             () -> List.of()
     ));
 

@@ -26,6 +26,7 @@ import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
 import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class BlockRegistry {
@@ -37,6 +38,9 @@ public class BlockRegistry {
         BLOCKS.register(eventBus);
     }
 
+    // |--------------------------------------------------------------------------------------|
+    // |------------------------------------Block Plants--------------------------------------|
+    // |--------------------------------------------------------------------------------------|
     public static final DeferredHolder<Block, Block> POISON_FARMLAND = BLOCKS.register(
             "poison_farmland",
             () -> new PoisonFarmBlock(BlockBehaviour.Properties.of()
@@ -74,13 +78,16 @@ public class BlockRegistry {
             )
     );
 
-    public static final DeferredHolder<Block, Block> OCELOT_MINT = createPoisonCrop("ocelot_mint",
-            ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), List.of());
+    public static final DeferredHolder<Block, Block> OCELOT_MINT = createPoisonCrop(
+            "ocelot_mint",
+            ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), BlockRegistry.SNOW_MINT);
 
-    public static final DeferredHolder<Block, Block> SNOW_MINT = createPoisonCrop("snow_mint",
-            ItemRegistry.SNOW_MINT, List.of(MobEffects.POISON), List.of());
+    public static final DeferredHolder<Block, Block> SNOW_MINT = createPoisonCrop(
+            "snow_mint",
+            ItemRegistry.SNOW_MINT, List.of(MobEffects.POISON), null);
 
-    public static final DeferredHolder<Block, Block> FAILED_PLANT = BLOCKS.register("failed_plant",
+    public static final DeferredHolder<Block, Block> FAILED_PLANT = BLOCKS.register(
+            "failed_plant",
             () -> new FailedPlantBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
                     .noCollission()
@@ -168,7 +175,7 @@ public class BlockRegistry {
     // |----------------------------------------------------------------------------------|
     // |------------------------------------Methods---------------------------------------|
     // |----------------------------------------------------------------------------------|
-    private static DeferredHolder<Block, Block> createPoisonCrop(String name, Holder<Item> grownItem, List<Holder<MobEffect>> effects, List<Holder<Block>> evolvedBlocks){
+    private static DeferredHolder<Block, Block> createPoisonCrop(String name, Holder<Item> grownItem, List<Holder<MobEffect>> effects, Holder<Block> evolvedBlock){
         return BLOCKS.register(name, () -> new PoisonCropBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.PLANT)
                 .randomTicks()
@@ -178,8 +185,7 @@ public class BlockRegistry {
                 .isRedstoneConductor((state,level,pos) -> false),
                 () -> grownItem,
                 effects,
-                () -> evolvedBlocks
-                )
+                () -> Optional.ofNullable(evolvedBlock))
         );
     }
 }

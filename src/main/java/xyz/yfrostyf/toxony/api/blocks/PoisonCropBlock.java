@@ -33,12 +33,16 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
+import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
 import xyz.yfrostyf.toxony.network.ServerSendMessagePacket;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
+import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
+import xyz.yfrostyf.toxony.registries.TagRegistry;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -49,7 +53,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
                     propertiesCodec(),
                     BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("grown_item").forGetter(PoisonCropBlock::getGrownItem),
                     MobEffect.CODEC.listOf().fieldOf("effects").forGetter(PoisonCropBlock::getContactEffects),
-                    BuiltInRegistries.BLOCK.holderByNameCodec().listOf().fieldOf("evolved_blocks").forGetter(PoisonCropBlock::getEvolvedBlocks)
+                    BuiltInRegistries.BLOCK.holderByNameCodec().optionalFieldOf("evolved_blocks").forGetter(PoisonCropBlock::getEvolvedBlock)
             ).apply(instance, PoisonCropBlock::new)
     );
 
@@ -65,29 +69,29 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
             Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
     };
 
-    protected final List<Holder<MobEffect>> contactEffects;
     protected final Supplier<Holder<Item>> grownItem;
-    protected final Supplier<List<Holder<Block>>> evolvedBlocks;
+    protected final List<Holder<MobEffect>> contactEffects;
+    protected final Supplier<Optional<Holder<Block>>> evolvedBlock;
 
     public PoisonCropBlock(Properties properties,
                            Supplier<Holder<Item>> grownItem,
                            List<Holder<MobEffect>> contactEffects,
-                           Supplier<List<Holder<Block>>> evolvedBlocks) {
+                           @Nullable Supplier<Optional<Holder<Block>>> evolvedBlock){
         super(properties);
         this.grownItem = grownItem;
         this.contactEffects = contactEffects;
-        this.evolvedBlocks = evolvedBlocks;
+        this.evolvedBlock = evolvedBlock == null ? Optional::empty : evolvedBlock;
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
     }
 
     private PoisonCropBlock(Properties properties,
                             Holder<Item> grownItem,
                             List<Holder<MobEffect>> contactEffects,
-                            List<Holder<Block>> evolvedBlocks) {
+                            Optional<Holder<Block>> evolvedBlock) {
         super(properties);
         this.grownItem = () -> grownItem;
         this.contactEffects = contactEffects;
-        this.evolvedBlocks = () -> evolvedBlocks;
+        this.evolvedBlock = () -> evolvedBlock;
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
     }
 
@@ -100,33 +104,40 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
         return contactEffects;
     }
 
-    public Holder<Item> getGrownItem(){
+    public Optional<Holder<Block>> getEvolvedBlock() {
+        return evolvedBlock.get();
+    }
+
+    public Holder<Item> getGrownItem() {
         return grownItem.get();
     }
 
-    public List<Holder<Block>> getEvolvedBlocks() {
-        return evolvedBlocks.get();
-    }
-
     public Affinity getBlockAffinity(Level level){
-        return AffinityUtil.readAffinityFromIngredientMap(new ItemStack(grownItem.get()), level);
+        return AffinityUtil.readAffinityFromIngredientMap(new ItemStack(this.getGrownItem()), level);
     }
 
-    protected boolean tryTransformEvolved(ItemStack stack, BlockState state, ServerLevel svlevel, BlockPos pos, Player player){
-        if(stack.get(DataComponentsRegistry.POSSIBLE_AFFINITIES).isEmpty()) return false;
+    protected void tryTransformEvolved(ItemStack stack, BlockState state, ServerLevel svlevel, BlockPos pos, Player player){
+        if(stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)
+                || stack.is(TagRegistry.POISONOUS_PLANTS_ITEM_TAG)
+                || evolvedBlock.get().isEmpty()) return;
 
-        boolean success = false;
-        for(Holder<Block> holder : evolvedBlocks.get()){
-            if (holder.value() instanceof PoisonCropBlock poisonCropBlock){
-                if(poisonCropBlock.getBlockAffinity(svlevel).equals(AffinityUtil.readAffinityFromIngredientMap(stack, svlevel))){
-                    svlevel.setBlock(pos, holder.value().defaultBlockState(), Block.UPDATE_ALL);
-                    success = true;
-                }
-            }
-            else throw new ClassCastException("This block contains incorrect data within its possible evolved blocks.");
+        ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
+        if(!plyToxData.knowsIngredient(stack) || !plyToxData.knowsIngredient(this.getGrownItem())){
+            PacketDistributor.sendToPlayer((ServerPlayer) player, ServerSendMessagePacket.create("message.toxony.graft.unknown"));
+            return;
         }
+
+        Holder<Block> holder = evolvedBlock.get().get();
+        boolean success = false;
+        if (holder.value() instanceof PoisonCropBlock poisonCropBlock){
+            if(poisonCropBlock.getBlockAffinity(svlevel).equals(AffinityUtil.readAffinityFromIngredientMap(stack, svlevel))){
+                success = true;
+            }
+        }
+        else throw new ClassCastException("This block contains incorrect data within its possible evolved blocks.");
+
         stack.consume(1, player);
-        return success;
+        svlevel.setBlock(pos, success ? poisonCropBlock.defaultBlockState() : BlockRegistry.FAILED_PLANT.value().defaultBlockState(), Block.UPDATE_ALL);
     }
 
     // |===========================================================================|
@@ -139,11 +150,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
         ItemStack graftStack = player.getMainHandItem().has(DataComponentsRegistry.POSSIBLE_AFFINITIES) ? player.getMainHandItem() : player.getOffhandItem();
         if (!graftStack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES) || !(level instanceof ServerLevel svlevel)) return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         if(age <= 1){
-            boolean success = tryTransformEvolved(stack, state, svlevel, pos, player);
-            PacketDistributor.sendToPlayer((ServerPlayer) player, ServerSendMessagePacket.create(success ? "message.toxony.graft.success" : "message.toxony.graft.fail"));
-            if(!success){
-                svlevel.setBlock(pos, BlockRegistry.FAILED_PLANT.value().defaultBlockState(), Block.UPDATE_ALL);
-            }
+            tryTransformEvolved(stack, state, svlevel, pos, player);
         }
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
