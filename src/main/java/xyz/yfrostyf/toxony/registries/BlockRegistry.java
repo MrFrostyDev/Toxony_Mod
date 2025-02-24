@@ -21,7 +21,6 @@ import xyz.yfrostyf.toxony.blocks.*;
 import xyz.yfrostyf.toxony.blocks.entities.AlembicBlockEntity;
 import xyz.yfrostyf.toxony.blocks.entities.CopperCrucibleBlockEntity;
 import xyz.yfrostyf.toxony.blocks.entities.MortarPestleBlockEntity;
-import xyz.yfrostyf.toxony.blocks.plants.FailedPlantBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
 import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
@@ -81,11 +80,11 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> OCELOT_MINT = createPoisonCrop(
             "ocelot_mint",
-            ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), BlockRegistry.SNOW_MINT);
+            () -> ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), () -> BlockRegistry.SNOW_MINT);
 
     public static final DeferredHolder<Block, Block> SNOW_MINT = createPoisonCrop(
             "snow_mint",
-            ItemRegistry.SNOW_MINT, List.of(MobEffects.POISON), null);
+            () -> ItemRegistry.SNOW_MINT, List.of(MobEffects.POISON), null);
 
     public static final DeferredHolder<Block, Block> WILD_NIGHTSHADE = BLOCKS.register(
             "wild_nightshade",
@@ -102,11 +101,11 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> NIGHTSHADE = createPoisonCrop(
             "nightshade",
-            ItemRegistry.NIGHTSHADE, List.of(MobEffects.POISON), BlockRegistry.SUNSPOT);
+            () -> ItemRegistry.NIGHTSHADE, List.of(MobEffects.POISON), () -> BlockRegistry.SUNSPOT);
 
     public static final DeferredHolder<Block, Block> SUNSPOT = createPoisonCrop(
             "sunspot",
-            ItemRegistry.SUNSPOT, List.of(MobEffects.POISON), null);
+            () -> ItemRegistry.SUNSPOT, List.of(MobEffects.POISON), null);
 
     public static final DeferredHolder<Block, Block> WILD_WATER_HEMLOCK = BLOCKS.register(
             "wild_water_hemlock",
@@ -123,22 +122,11 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> WATER_HEMLOCK = createPoisonCrop(
             "water_hemlock",
-            ItemRegistry.WATER_HEMLOCK, List.of(MobEffects.POISON), BlockRegistry.MOONLIGHT_HEMLOCK);
+            () -> ItemRegistry.WATER_HEMLOCK, List.of(MobEffects.POISON), () -> BlockRegistry.MOONLIGHT_HEMLOCK);
 
     public static final DeferredHolder<Block, Block> MOONLIGHT_HEMLOCK = createPoisonCrop(
             "moonlight_hemlock",
-            ItemRegistry.MOONLIGHT_HEMLOCK, List.of(MobEffects.POISON), null);
-
-    public static final DeferredHolder<Block, Block> FAILED_PLANT = BLOCKS.register(
-            "failed_plant",
-            () -> new FailedPlantBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.PLANT)
-                    .noCollission()
-                    .sound(SoundType.CROP)
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor((state,level,pos) -> false)
-            )
-    );
+            () -> ItemRegistry.MOONLIGHT_HEMLOCK, List.of(MobEffects.POISON), null);
 
     // |--------------------------------------------------------------------------------------|
     // |------------------------------------Block Entities------------------------------------|
@@ -218,7 +206,7 @@ public class BlockRegistry {
     // |----------------------------------------------------------------------------------|
     // |------------------------------------Methods---------------------------------------|
     // |----------------------------------------------------------------------------------|
-    private static DeferredHolder<Block, Block> createPoisonCrop(String name, Holder<Item> grownItem, List<Holder<MobEffect>> effects, Holder<Block> evolvedBlock){
+    private static DeferredHolder<Block, Block> createPoisonCrop(String name, Supplier<Holder<Item>> grownItem, List<Holder<MobEffect>> effects, Supplier<Holder<Block>> evolvedBlock){
         return BLOCKS.register(name, () -> new PoisonCropBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.PLANT)
                 .randomTicks()
@@ -226,9 +214,9 @@ public class BlockRegistry {
                 .sound(SoundType.CROP)
                 .pushReaction(PushReaction.DESTROY)
                 .isRedstoneConductor((state,level,pos) -> false),
-                () -> grownItem,
+                grownItem,
                 effects,
-                () -> Optional.ofNullable(evolvedBlock))
-        );
+                () -> Optional.ofNullable(evolvedBlock.get())
+        ));
     }
 }
