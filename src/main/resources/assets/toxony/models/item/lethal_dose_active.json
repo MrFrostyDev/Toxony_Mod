@@ -1,0 +1,6 @@
+{
+  "parent": "toxony:item/template_scalpel",
+  "textures": {
+    "layer0": "toxony:item/lethal_dose_active"
+  }
+}

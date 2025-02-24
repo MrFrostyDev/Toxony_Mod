@@ -1,0 +1,14 @@
+{
+  "parent": "toxony:item/template_scalpel",
+  "textures": {
+    "layer0": "toxony:item/lethal_dose"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "toxony:active": 1
+      },
+      "model": "toxony:item/lethal_dose_active"
+    }
+  ]
+}

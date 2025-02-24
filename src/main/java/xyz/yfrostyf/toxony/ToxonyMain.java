@@ -13,6 +13,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 import xyz.yfrostyf.toxony.data.DataInitialize;
 
+import xyz.yfrostyf.toxony.data.datagen.registries.LootModifierSerializerRegistry;
 import xyz.yfrostyf.toxony.registries.*;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -42,6 +43,7 @@ public class ToxonyMain {
         MenuRegistry.register(modEventBus);
         RecipeRegistry.register(modEventBus);
         CreativeTabRegistry.register(modEventBus);
+        LootModifierSerializerRegistry.register(modEventBus);
 
         modEventBus.addListener(DataInitialize::gatherData);
 

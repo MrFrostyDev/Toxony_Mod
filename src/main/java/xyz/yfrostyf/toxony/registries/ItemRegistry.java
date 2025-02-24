@@ -5,8 +5,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -15,10 +19,7 @@ import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.items.*;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.oils.Oil;
-import xyz.yfrostyf.toxony.items.BlendItem;
-import xyz.yfrostyf.toxony.items.OilPotItem;
-import xyz.yfrostyf.toxony.items.PoisonPasteItem;
-import xyz.yfrostyf.toxony.items.WitchingBladeItem;
+import xyz.yfrostyf.toxony.items.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,12 @@ public class ItemRegistry {
     // |--------------------------------------Tools----------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> MAGNIFYING_GLASS = ITEMS.register("magnifying_glass", () -> new Item(new Item.Properties()));
-
+    public static final DeferredHolder<Item, Item> COPPER_SCALPEL = ITEMS.register("copper_scalpel", () -> new ScalpelItem(new Item.Properties()
+            .durability(100).attributes(ScalpelItem.createAttributes(3.0F, 2.0F))
+    ));
+    public static final DeferredHolder<Item, Item> NETHERITE_SCALPEL = ITEMS.register("netherite_scalpel", () -> new ScalpelItem(new Item.Properties()
+            .durability(1450).attributes(ScalpelItem.createAttributes(6.0F, 2.0F))
+    ));
 
     // |-----------------------------------------------------------------------------------|
     // |-------------------------------------Oil Pots--------------------------------------|
@@ -149,7 +155,14 @@ public class ItemRegistry {
     // |------------------------------------Tox Fueled-------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> WITCHING_BLADE = ITEMS.register("witching_blade", () -> WitchingBladeItem.builder()
-            .properties(new Item.Properties().attributes(WitchingBladeItem.createAttributes(6, -2.4F)))
+            .properties(new Item.Properties().attributes(WitchingBladeItem.createAttributes(6.0F, -2.4F)).durability(1600))
+            .tickrate(40)
+            .cooldown(60)
+            .sound(SoundEvents.FIRECHARGE_USE)
+            .build()
+    );
+    public static final DeferredHolder<Item, Item> LETHAL_DOSE = ITEMS.register("lethal_dose", () -> ToxScalpelItem.builder()
+            .properties(new Item.Properties().attributes(ScalpelItem.createAttributes(6.0F, -1.4F)).durability(1650))
             .tickrate(40)
             .cooldown(60)
             .sound(SoundEvents.FIRECHARGE_USE)

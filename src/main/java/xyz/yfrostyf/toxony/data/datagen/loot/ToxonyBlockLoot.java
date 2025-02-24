@@ -37,7 +37,7 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
     }
 
     @Override
-    protected void generate() {
+    public void generate() {
         dropSelf(BlockRegistry.MORTAR_PESTLE.get());
         dropSelf(BlockRegistry.COPPER_CRUCIBLE.get());
         dropSelf(BlockRegistry.ALEMBIC.get());
@@ -65,15 +65,12 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
         this.add(cropBlock, this.applyExplosionDecay(
                 cropBlock,
                 LootTable.lootTable()
-                        .withPool(
-                                LootPool.lootPool()
-                                        .when(
-                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
-                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildPoisonCropBlock.AGE, WildPoisonCropBlock.MAX_AGE))
-                                        )
-                                        .add(LootItem.lootTableItem(grownCropItem))
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-                                        .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                        .withPool(LootPool.lootPool()
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildPoisonCropBlock.AGE, WildPoisonCropBlock.MAX_AGE)))
+                                .add(LootItem.lootTableItem(grownCropItem))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
                         )
             )
         );
@@ -82,18 +79,15 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
     protected void dropPoisonPlantDrops(Block cropBlock, Item grownCropItem){
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         this.add(cropBlock, this.applyExplosionDecay(
-                        cropBlock,
-                        LootTable.lootTable()
-                                .withPool(
-                                        LootPool.lootPool()
-                                                .when(
-                                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
-                                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PoisonCropBlock.AGE, PoisonCropBlock.MAX_AGE))
-                                                )
-                                                .add(LootItem.lootTableItem(grownCropItem))
-                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-                                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
-                                )
+                cropBlock,
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PoisonCropBlock.AGE, PoisonCropBlock.MAX_AGE)))
+                                .add(LootItem.lootTableItem(grownCropItem))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                        )
                 )
         );
     }

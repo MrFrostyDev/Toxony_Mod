@@ -1,0 +1,7 @@
+{
+	"credit": "MrFrostyDev, made with Blockbench",
+	"parent": "toxony:item/template_scalpel",
+	"textures": {
+		"layer0": "toxony:item/netherite_scalpel"
+	}
+}

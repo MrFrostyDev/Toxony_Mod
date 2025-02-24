@@ -24,6 +24,11 @@ public class TagRegistry {
     // |-------------------------------------Item Tags--------------------------------------|
     // |------------------------------------------------------------------------------------|
 
+    public static final TagKey<Item> SCALPEL_ITEM_TAG = TagKey.create(
+            Registries.ITEM,
+            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "scalpels")
+    );
+
     public static final TagKey<Item> POISONOUS_PLANTS_ITEM_TAG = TagKey.create(
             Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "plants/poisonous")
