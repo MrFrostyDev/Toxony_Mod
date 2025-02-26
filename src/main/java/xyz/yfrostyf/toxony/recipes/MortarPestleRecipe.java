@@ -38,7 +38,6 @@ public class MortarPestleRecipe implements Recipe<RecipeWrapper> {
                 nonEmptyItems.add(item);
             }
         }
-        ToxonyMain.LOGGER.info("[MortarPestleRecipe matches]: IngredientList: {}, RecipeMatcher: {}", nonEmptyItems, RecipeMatcher.findMatches(nonEmptyItems, this.recipeIngredients) != null);
         return RecipeMatcher.findMatches(nonEmptyItems, this.recipeIngredients) != null;
     }
 
@@ -87,8 +86,8 @@ public class MortarPestleRecipe implements Recipe<RecipeWrapper> {
 
     public static class Serializer implements RecipeSerializer<MortarPestleRecipe>{
         public static final MapCodec<MortarPestleRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
-                ItemStack.STRICT_CODEC.fieldOf("use").forGetter(r -> r.useItem),
+                ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
+                ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("use").forGetter(r -> r.useItem),
                 Ingredient.LIST_CODEC_NONEMPTY.fieldOf("ingredients").xmap(ingredients -> {
                     NonNullList<Ingredient> nonNullList = NonNullList.create();
                     nonNullList.addAll(ingredients);

@@ -10,29 +10,31 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import xyz.yfrostyf.toxony.recipes.inputs.PairCombineRecipeInput;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
 
 
-public class AlembicRecipe implements Recipe<SingleRecipeInput> {
+public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
     final ItemStack outputItem;
-    final Ingredient ingredient;
+    final Ingredient recipeIngredient;
+    final Ingredient recipeIngredientToConvert;
     final int boilTime;
 
-    public AlembicRecipe(ItemStack outputItem, Ingredient ingredient, int boilTime){
+    public AlembicRecipe(ItemStack outputItem, Ingredient recipeIngredient, Ingredient recipeIngredientToConvert, int boilTime){
         this.outputItem = outputItem;
-        this.ingredient = ingredient;
+        this.recipeIngredient = recipeIngredient;
+        this.recipeIngredientToConvert = recipeIngredientToConvert;
         this.boilTime = boilTime;
     }
 
     @Override
-    public boolean matches(SingleRecipeInput input, Level level) {
-        if (ingredient == null) return false;
-
-        return ingredient.test(input.item());
+    public boolean matches(PairCombineRecipeInput input, Level level) {
+        if(input.getItem(0).isEmpty() || input.getItemToConvert().isEmpty()) return false;
+        return recipeIngredient.test(input.getItem(0)) && recipeIngredientToConvert.test(input.getItemToConvert());
     }
 
     @Override
-    public ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(PairCombineRecipeInput input, HolderLookup.Provider registries) {
         return outputItem.copy();
     }
 
@@ -53,8 +55,9 @@ public class AlembicRecipe implements Recipe<SingleRecipeInput> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> nonnulllist = NonNullList.create();
-        nonnulllist.add(this.ingredient);
+        NonNullList<Ingredient> nonnulllist = NonNullList.createWithCapacity(2);
+        nonnulllist.add(this.recipeIngredient);
+        nonnulllist.add(this.recipeIngredientToConvert);
         return nonnulllist;
     }
 
@@ -74,8 +77,9 @@ public class AlembicRecipe implements Recipe<SingleRecipeInput> {
 
     public static class Serializer implements RecipeSerializer<AlembicRecipe>{
         public static final MapCodec<AlembicRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
-                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(r -> r.ingredient),
+                ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
+                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(r -> r.recipeIngredient),
+                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient_to_convert").forGetter(r -> r.recipeIngredientToConvert),
                 Codec.INT.fieldOf("boiltime").orElse(200).forGetter(r -> r.boilTime)
         ).apply(inst, AlembicRecipe::new));
 
@@ -95,15 +99,17 @@ public class AlembicRecipe implements Recipe<SingleRecipeInput> {
 
         private static void toNetwork(RegistryFriendlyByteBuf buffer, AlembicRecipe recipe) {
             ItemStack.STREAM_CODEC.encode(buffer, recipe.outputItem);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.ingredient);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.recipeIngredient);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.recipeIngredientToConvert);
             buffer.writeVarInt(recipe.boilTime);
         }
 
         private static AlembicRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
             ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buffer);
             Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+            Ingredient ingredientToConvert = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             int boilTime = buffer.readVarInt();
-            return new AlembicRecipe(itemstack, ingredient, boilTime);
+            return new AlembicRecipe(itemstack, ingredient, ingredientToConvert, boilTime);
         }
     }
 }

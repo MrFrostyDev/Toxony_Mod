@@ -39,7 +39,7 @@ public class DeathStateEvents {
             plyToxData.setTolerance(plyToxData.getTolerance() - TOLERANCE_DEDUCTION);
 
             event.getEntity().hurt(new ToxinDamageSource(
-                            event.getEntity().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC_KILL), event.getEntity()),
+                            event.getEntity().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC_KILL), null),
                     9999
             );
         }

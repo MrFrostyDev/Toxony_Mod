@@ -182,12 +182,16 @@ public class ToxData {
     // |========================= Known Ingredients Data =========================|
 
     public void addKnownIngredients(ItemStack itemstack){
+        addKnownIngredients(itemstack, 1);
+    }
+
+    public void addKnownIngredients(ItemStack itemstack, int amount){
         ResourceLocation resourceLocation = itemstack.getItemHolder().getKey().location();
         if(!this.hasKnownIngredient(itemstack)){
-            this.knownIngredients.put(resourceLocation, 1);
+            this.knownIngredients.put(resourceLocation, amount);
             return;
         }
-        this.knownIngredients.replace(resourceLocation, knownIngredients.get(resourceLocation) + 1);
+        this.knownIngredients.replace(resourceLocation, knownIngredients.get(resourceLocation) + amount);
     }
 
     public void setKnownIngredients(Map<ResourceLocation, Integer> knownIngredients){

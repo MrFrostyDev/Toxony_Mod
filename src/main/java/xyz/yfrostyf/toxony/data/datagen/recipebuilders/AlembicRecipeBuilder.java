@@ -10,6 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -23,9 +24,10 @@ import java.util.Map;
 
 
 public class AlembicRecipeBuilder implements RecipeBuilder {
-    protected String suffix;
+    protected String suffix = "";
     protected ItemStack result;
     protected Ingredient ingredient;
+    protected Ingredient ingredientToConvert;
     protected int boiltime;
     protected Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
@@ -47,6 +49,26 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
 
     public AlembicRecipeBuilder ingredient(ItemStack item) {
         this.ingredient = Ingredient.of(item);
+        return this;
+    }
+
+    public AlembicRecipeBuilder ingredient(TagKey<Item> item) {
+        this.ingredient = Ingredient.of(item);
+        return this;
+    }
+
+    public AlembicRecipeBuilder ingredientToConvert(ItemLike item) {
+        this.ingredientToConvert = Ingredient.of(item);
+        return this;
+    }
+
+    public AlembicRecipeBuilder ingredientToConvert(ItemStack item) {
+        this.ingredientToConvert = Ingredient.of(item);
+        return this;
+    }
+
+    public AlembicRecipeBuilder ingredientToConvert(TagKey<Item> item) {
+        this.ingredientToConvert = Ingredient.of(item);
         return this;
     }
 
@@ -90,7 +112,7 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(advancement::addCriterion);
         // Our factory parameters.
-        AlembicRecipe recipe = new AlembicRecipe(this.result, this.ingredient, this.boiltime);
+        AlembicRecipe recipe = new AlembicRecipe(this.result, this.ingredient, this.ingredientToConvert, this.boiltime);
         // Pass the id, the recipe, and the recipe advancement into the RecipeOutput.
         output.accept(id, recipe, advancement.build(id.withPrefix("recipes/")));
     }

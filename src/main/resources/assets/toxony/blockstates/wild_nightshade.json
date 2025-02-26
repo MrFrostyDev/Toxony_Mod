@@ -1,16 +1,16 @@
 {
   "variants": {
     "age=0": {
-      "model": "toxony:block/wild_nightshade_stage0"
-    },
-    "age=1": {
-      "model": "toxony:block/wild_nightshade_stage1"
-    },
-    "age=2": {
       "model": "toxony:block/wild_nightshade_stage2"
     },
-    "age=3": {
+    "age=1": {
       "model": "toxony:block/wild_nightshade_stage3"
+    },
+    "age=2": {
+      "model": "toxony:block/wild_nightshade_stage4"
+    },
+    "age=3": {
+      "model": "toxony:block/wild_nightshade_stage5"
     }
   }
 }

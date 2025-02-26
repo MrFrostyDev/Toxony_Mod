@@ -12,6 +12,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.util.OilUtil;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.function.Supplier;
 
@@ -56,7 +57,7 @@ public class OilPotItem extends Item {
      * The item returned after the oil has been used up and this item breaks.
      */
     private ItemStack resultingItem(){
-        return new ItemStack(Items.BOWL);
+        return new ItemStack(ItemRegistry.EMPTY_OIL_POT);
     }
 
     @Override

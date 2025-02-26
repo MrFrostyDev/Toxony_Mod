@@ -33,7 +33,7 @@ public class ToxinMobEffect extends MobEffect {
         int tick = entity.level().getServer().getTickCount();
         if(tick % getTickRateFromAmp(amplifier) == 0){
             entity.hurt(new ToxinDamageSource(
-                    entity.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MAGIC), entity),
+                    entity.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.MAGIC), null),
                     3.0F
             );
         }

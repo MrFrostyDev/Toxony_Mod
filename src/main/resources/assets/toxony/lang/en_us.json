@@ -6,18 +6,26 @@
   "block.toxony.alembic": "Alembic",
   "block.toxony.valentines_box": "Valentines Box",
 
+  "item.toxony.toxic_paste": "Toxic Paste",
+  "item.toxony.poison_paste": "Poison Paste",
+  "item.toxony.toxin": "Toxin",
+  "item.toxony.redstone_mixture": "Redstone Mixture",
+  "item.toxony.redstone_solution": "Redstone Solution",
+  "item.toxony.affinity_solution": "Affinity Solution",
+
   "item.toxony.copper_scalpel": "Copper Scalpel",
   "item.toxony.netherite_scalpel": "Netherite Scalpel",
   "item.toxony.lethal_dose": "Lethal Dose",
 
+  "item.toxony.copper_needle": "Copper Needle",
   "item.toxony.magnifying_glass": "Magnifying Glass",
   "item.toxony.witching_blade": "Witching Blade",
 
+  "item.toxony.wolf_tooth": "Wolf Tooth",
   "item.toxony.ocelot_mint": "Ocelot Mint",
   "item.toxony.nightshade": "Nightshade",
   "item.toxony.water_hemlock": "Water Hemlock",
   "item.toxony.false_berries": "Sweet Berries",
-  "item.toxony.cub_blend": "Cub Blend",
 
   "item.toxony.milk_chocolate": "Milk Chocolate",
   "item.toxony.mint_chocolate": "Mint Chocolate",
@@ -40,6 +48,9 @@
   "effect.toxony.spider_mutagen": "Mutagen",
 
   "death.toxony.damage.toxin": "%1$s was overwhelmed by the toxins in their body",
+  "death.toxony.damage.needle": "%1$s produced worthwhile results for %2$s's experiment",
+
+  "message.toxony.needle.fail": "Target now weak enough to inject.",
 
   "message.toxony.graft.success": "The plant seems to have changed from grafting this item.",
   "message.toxony.graft.fail": "Attempting to graft this item to the plant produced no results.",
@@ -63,5 +74,32 @@
   "commands.tolerance.set.success": "Set tolerance of [%s] to %s",
   "commands.tolerance.add.success": "Added tolerance to [%s] by %s",
 
-  "toxony.networking.sync_tox.failed": "Failed to sync tox data to player: %s"
+  "toxony.networking.sync_tox.failed": "Failed to sync tox data to player: %s",
+
+  "item.toxony.copper_needle.effect.awkward": "Copper Needle",
+  "item.toxony.copper_needle.effect.mundane": "Copper Needle",
+  "item.toxony.copper_needle.effect.thick": "Copper Needle",
+  "item.toxony.copper_needle.effect.empty": "Copper Needle",
+  "item.toxony.copper_needle.effect.water": "Copper Needle of Water",
+  "item.toxony.copper_needle.effect.fire_resistance": "Copper Needle of Fire Resistance",
+  "item.toxony.copper_needle.effect.harming": "Copper Needle of Harming",
+  "item.toxony.copper_needle.effect.healing": "Copper Needle of Healing",
+  "item.toxony.copper_needle.effect.infested": "Copper Needle of Infestation",
+  "item.toxony.copper_needle.effect.invisibility": "Copper Needle of Invisibility",
+  "item.toxony.copper_needle.effect.leaping": "Copper Needle of Leaping",
+  "item.toxony.copper_needle.effect.levitation": "Copper Needle of Levitation",
+  "item.toxony.copper_needle.effect.luck": "Copper Needle of Luck",
+  "item.toxony.copper_needle.effect.night_vision": "Copper Needle of Night Vision",
+  "item.toxony.copper_needle.effect.oozing": "Copper Needle of Oozing",
+  "item.toxony.copper_needle.effect.poison": "Copper Needle of Poison",
+  "item.toxony.copper_needle.effect.regeneration": "Copper Needle of Regeneration",
+  "item.toxony.copper_needle.effect.slow_falling": "Copper Needle of Slow Falling",
+  "item.toxony.copper_needle.effect.slowness": "Copper Needle of Slowness",
+  "item.toxony.copper_needle.effect.strength": "Copper Needle of Strength",
+  "item.toxony.copper_needle.effect.swiftness": "Copper Needle of Swiftness",
+  "item.toxony.copper_needle.effect.turtle_master": "Copper Needle of the Turtle Master",
+  "item.toxony.copper_needle.effect.water_breathing": "Copper Needle of Water Breathing",
+  "item.toxony.copper_needle.effect.weakness": "Copper Needle of Weakness",
+  "item.toxony.copper_needle.effect.weaving": "Copper Needle of Weaving",
+  "item.toxony.copper_needle.effect.wind_charged": "Copper Needle of Wind Charging"
 }

@@ -1,10 +1,17 @@
 package xyz.yfrostyf.toxony.data.datagen.recipes;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
+import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -34,11 +41,32 @@ public class ToxonyCraftingTableRecipes extends RecipeProvider {
                 // If you want to add conditions to the recipe, those can be set on the output.
                 .save(output);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.TOXIC_FORMULA.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.ALEMBIC.get())
+                .pattern("C  ")
+                .pattern("CI ")
+                .pattern("B C")
+                .define('B', ItemRegistry.ALEMBIC_BASE.get())
+                .define('C', Items.COPPER_INGOT)
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.ALEMBIC_BASE.get())
+                .pattern(" Q ")
+                .pattern("CGC")
+                .pattern("CCC")
+                .define('G', Items.GOLD_INGOT)
+                .define('C', Items.COPPER_INGOT)
+                .define('Q', Items.QUARTZ)
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.REDSTONE_MIXTURE.get())
                 .requires(ItemRegistry.TOXIC_PASTE.get())
-                .requires(Items.NETHER_WART)
-                .requires(Items.POTION)
+                .requires(DataComponentIngredient.of(false, PotionContents.createItemStack(Items.GLASS_BOTTLE, Potions.WATER)))
+                .requires(Items.REDSTONE)
                 .unlockedBy("has_toxic_paste", has(ItemRegistry.TOXIC_PASTE.get()))
                 .save(output);
+
     }
 }

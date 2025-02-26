@@ -47,12 +47,6 @@ public class AlembicMenu extends AbstractContainerMenu {
         // Alembic Slot | Result
         this.addSlot(new SlotItemHandler(inventory, 0, 116, 46){
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                // Only allow glass bottles to be placed in this slot.
-                return stack.is(Items.GLASS_BOTTLE);
-            }
-
-            @Override
             public void setChanged(){
                 // Detect change for input slot.
                 AlembicMenu.this.slotsChanged(this.container);
@@ -158,25 +152,10 @@ public class AlembicMenu extends AbstractContainerMenu {
                     }
                 }
             }
-            else if(selectedSlot.getItem().is(Items.GLASS_BOTTLE)){
-                // Check if we can move it into the input slot.
-                if (!this.moveItemStackTo(rawStack, 0, 1, false)) {
-                    // Checks if it was selected in inventory
-                    if (selectedSlotIndex < 30) {
-                        // Try to move item into hotbar
-                        if (!this.moveItemStackTo(rawStack, 30, 39, false)) {
-                            return ItemStack.EMPTY; // If cannot move, no longer quick move
-                        }
-                    }
-                    // Assume we select a hotbar item, then try to move into player inventory slot
-                    else if (!this.moveItemStackTo(rawStack, 3, 30, false)) {
-                        return ItemStack.EMPTY; // If cannot move, no longer quick move
-                    }
-                }
-            }
-            else{
-                // Check if we can move it into the input slot.
-                if (!this.moveItemStackTo(rawStack, 1, 2, false)) {
+            // Check if we can move it into the input slot.
+            else if (!this.moveItemStackTo(rawStack, 1, 2, false)) {
+                // Check if we can move it into the result slot
+                if (!this.moveItemStackTo(rawStack, 0, 1, false)){
                     // Checks if it was selected in inventory
                     if (selectedSlotIndex < 30) {
                         // Try to move item into hotbar

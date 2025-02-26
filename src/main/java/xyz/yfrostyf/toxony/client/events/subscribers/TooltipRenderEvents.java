@@ -8,8 +8,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.client.gui.OilTooltip;
-import xyz.yfrostyf.toxony.client.gui.ToxIngredientTooltip;
+import xyz.yfrostyf.toxony.client.gui.tooltips.OilTooltip;
+import xyz.yfrostyf.toxony.client.gui.tooltips.StoredNeedleStackTooltip;
+import xyz.yfrostyf.toxony.client.gui.tooltips.ToxIngredientTooltip;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
@@ -23,6 +24,9 @@ public class TooltipRenderEvents {
         // Left for FormattedText, Right for TooltipComponents
         if(itemstack.has(DataComponentsRegistry.OIL)){
             event.getTooltipElements().add(Either.right(new OilTooltip.OilTooltipComponent(itemstack)));
+        }
+        if(itemstack.has(DataComponentsRegistry.NEEDLE_STORED_ITEM)){
+            event.getTooltipElements().add(Either.right(new StoredNeedleStackTooltip.StoredNeedleStackTooltipComponent(itemstack)));
         }
         if(itemstack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)
                 && Minecraft.getInstance().player.isHolding(ItemRegistry.MAGNIFYING_GLASS.get())){

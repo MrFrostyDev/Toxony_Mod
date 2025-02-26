@@ -40,14 +40,17 @@ import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.blocks.AlembicBlock;
 import xyz.yfrostyf.toxony.client.gui.AlembicMenu;
 import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
+import xyz.yfrostyf.toxony.recipes.inputs.PairCombineRecipeInput;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
+import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
 
 import java.util.Optional;
 
 
 public class AlembicBlockEntity extends BlockEntity implements IItemHandler, MenuProvider {
-    public static final int MAX_FUEL = 1000;
+    public static final int MAX_FUEL = 5000;
     public static final int POTION_BOIL_TIME = 400;
     private static final int CONTAINER_SIZE = 3;
 
@@ -128,15 +131,15 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
 
         // Process when alembic has fuel
         if (blockEntity.hasFuel()) {
-            // If there is a bottle in the output and alembic has a result item, check if its finished boiling or not
-            if(output.is(Items.GLASS_BOTTLE) && !result.isEmpty()){
+            // If Alembic has a result item, check if its finished boiling or not
+            if(!result.isEmpty()){
                 if(blockEntity.boilProgress < blockEntity.boilTotalTime){
                     blockEntity.boilProgress = Mth.clamp(blockEntity.boilProgress + 1, 0, blockEntity.boilTotalTime);
                     blockEntity.fuel--;
                 }
                 else{
                     blockEntity.itemContainer.setStackInSlot(0, result);
-                    blockEntity.itemContainer.setStackInSlot(1, new ItemStack(Items.GLASS_BOTTLE));
+                    blockEntity.itemContainer.setStackInSlot(1, ItemStack.EMPTY);
                     blockEntity.resetAlembic();
                 }
             }
@@ -150,10 +153,12 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
             Optional<RecipeHolder<AlembicRecipe>> optionalRecipe = blockEntity.findRecipe();
             ItemStack resultPotion = AlembicBlockEntity.findPotionAmplify(input);
             if(optionalRecipe.isPresent()){
-                blockEntity.setResultItem(optionalRecipe.get().value().assemble(
-                        new SingleRecipeInput(input),
-                        level.registryAccess()
-                ));
+                ItemStack newResultItem = optionalRecipe.get().value().assemble(
+                        new PairCombineRecipeInput(input, output),
+                        level.registryAccess());
+
+                newResultItem = handleNeedleStoredItem(input, newResultItem);
+                blockEntity.setResultItem(newResultItem);
                 blockEntity.boilTotalTime = optionalRecipe.get().value().getBoilTime();
             }
             else if(!resultPotion.isEmpty()){
@@ -177,9 +182,11 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
 
     public Optional<RecipeHolder<AlembicRecipe>> findRecipe() {
         if (this.level == null) return Optional.empty();
+        ItemStack inputItem = this.itemContainer.getStackInSlot(1);
+        ItemStack inputToConvertItem = this.itemContainer.getStackInSlot(0);
         if(this.itemContainer.getStackInSlot(1).isEmpty()) return Optional.empty();
 
-        SingleRecipeInput input = new SingleRecipeInput(this.itemContainer.getStackInSlot(1));
+        PairCombineRecipeInput input = new PairCombineRecipeInput(inputItem, inputToConvertItem);
         return this.level.getRecipeManager().getRecipeFor(
                 RecipeRegistry.ALEMBIC_RECIPE.get(),
                 input,
@@ -207,6 +214,13 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
         return ItemStack.EMPTY;
     }
 
+    private static ItemStack handleNeedleStoredItem(ItemStack inputItem, ItemStack resultItem){
+        if(!inputItem.has(DataComponentsRegistry.POSSIBLE_AFFINITIES) || resultItem.has(DataComponentsRegistry.NEEDLE_STORED_ITEM)) return resultItem;
+        ItemStack newResultItem = resultItem.copy();
+        newResultItem.set(DataComponentsRegistry.NEEDLE_STORED_ITEM, inputItem.getItemHolder());
+        return newResultItem;
+    }
+
     public void resetAlembic(){
         this.boilProgress = 0;
         this.setResultItem(ItemStack.EMPTY);
@@ -214,13 +228,6 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
 
     public void setResultItem(ItemStack item){
         this.resultItem = item.copy();
-    }
-
-    public boolean hasItemInInventory(){
-        if (getItemContainer().getStackInSlot(0) != ItemStack.EMPTY) {
-                return true;
-        }
-        return false;
     }
 
     public ItemStack getResultItem(){

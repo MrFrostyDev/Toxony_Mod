@@ -14,6 +14,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.checkerframework.checker.units.qual.N;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.items.*;
@@ -35,12 +36,18 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |--------------------------------------Tools----------------------------------------|
     // |-----------------------------------------------------------------------------------|
-    public static final DeferredHolder<Item, Item> MAGNIFYING_GLASS = ITEMS.register("magnifying_glass", () -> new Item(new Item.Properties()));
-    public static final DeferredHolder<Item, Item> COPPER_SCALPEL = ITEMS.register("copper_scalpel", () -> new ScalpelItem(new Item.Properties()
-            .durability(100).attributes(ScalpelItem.createAttributes(3.0F, 2.0F))
+    public static final DeferredHolder<Item, Item> TOX_VIAL = ITEMS.register("tox_vial", () -> new VialItem(new Item.Properties().stacksTo(32)));
+
+    public static final DeferredHolder<Item, Item> REDSTONE_MIXTURE = ITEMS.register("redstone_mixture", () -> new Item(new Item.Properties().stacksTo(32)));
+    public static final DeferredHolder<Item, Item> REDSTONE_SOLUTION = ITEMS.register("redstone_solution", () -> new Item(new Item.Properties().stacksTo(32)));
+    public static final DeferredHolder<Item, Item> AFFINITY_SOLUTION = ITEMS.register("affinity_solution", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredHolder<Item, Item> MAGNIFYING_GLASS = ITEMS.register("magnifying_glass", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredHolder<Item, Item> COPPER_NEEDLE = ITEMS.register("copper_needle", () -> new NeedleItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredHolder<Item, Item> COPPER_SCALPEL = ITEMS.register("copper_scalpel", () -> new ScalpelItem(new Item.Properties().stacksTo(1)
+            .durability(100).attributes(ScalpelItem.createAttributes(3.0F, -2.0F))
     ));
-    public static final DeferredHolder<Item, Item> NETHERITE_SCALPEL = ITEMS.register("netherite_scalpel", () -> new ScalpelItem(new Item.Properties()
-            .durability(1450).attributes(ScalpelItem.createAttributes(6.0F, 2.0F))
+    public static final DeferredHolder<Item, Item> NETHERITE_SCALPEL = ITEMS.register("netherite_scalpel", () -> new ScalpelItem(new Item.Properties().stacksTo(1)
+            .durability(1450).attributes(ScalpelItem.createAttributes(5.0F, -2.0F))
     ));
 
     // |-----------------------------------------------------------------------------------|
@@ -62,21 +69,24 @@ public class ItemRegistry {
     // |-------------------------------------Blends---------------------------------------|
     // |----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> POISON_BLEND = ITEMS.register("poison_blend", () -> BlendItem.builder()
-            .tox(20).tolerance(8).tier(0)
+            .properties(new Item.Properties().stacksTo(1))
+            .tox(30).tolerance(15).tier(0)
             .returnItem(() -> new ItemStack(Items.BOWL))
-            .effect(new MobEffectInstance(MobEffects.POISON, 800, 0))
+            .effect(new MobEffectInstance(MobEffects.POISON, 1000, 0))
             .build()
     );
     public static final DeferredHolder<Item, Item> TOXIC_BLEND = ITEMS.register("toxic_blend", () -> BlendItem.builder()
-            .tox(35).tolerance(18).tier(1)
+            .properties(new Item.Properties().stacksTo(1))
+            .tox(40).tolerance(25).tier(1)
             .returnItem(() -> new ItemStack(Items.BOWL))
-            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 800, 0))
+            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 1000, 0))
             .build()
     );
     public static final DeferredHolder<Item, Item> PURE_BLEND = ITEMS.register("pure_blend", () -> BlendItem.builder()
-            .tox(55).tolerance(30).tier(2)
+            .properties(new Item.Properties().stacksTo(1))
+            .tox(65).tolerance(40).tier(2)
             .returnItem(() -> new ItemStack(Items.BOWL))
-            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 1200, 1))
+            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 1800, 0))
             .build()
     );
 
@@ -155,14 +165,14 @@ public class ItemRegistry {
     // |------------------------------------Tox Fueled-------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> WITCHING_BLADE = ITEMS.register("witching_blade", () -> WitchingBladeItem.builder()
-            .properties(new Item.Properties().attributes(WitchingBladeItem.createAttributes(6.0F, -2.4F)).durability(1600))
+            .properties(new Item.Properties().stacksTo(1).attributes(WitchingBladeItem.createAttributes(6.0F, -2.4F)).durability(1600))
             .tickrate(40)
             .cooldown(60)
             .sound(SoundEvents.FIRECHARGE_USE)
             .build()
     );
     public static final DeferredHolder<Item, Item> LETHAL_DOSE = ITEMS.register("lethal_dose", () -> ToxScalpelItem.builder()
-            .properties(new Item.Properties().attributes(ScalpelItem.createAttributes(6.0F, -1.4F)).durability(1650))
+            .properties(new Item.Properties().stacksTo(1).attributes(ScalpelItem.createAttributes(5.0F, -2.0F)).durability(1650))
             .tickrate(40)
             .cooldown(60)
             .sound(SoundEvents.FIRECHARGE_USE)
@@ -172,9 +182,9 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |------------------------------------Block Items------------------------------------|
     // |-----------------------------------------------------------------------------------|
-    public static final DeferredHolder<Item, Item> MORTAR_PESTLE = ITEMS.register("mortar_pestle", () -> new BlockItem(BlockRegistry.MORTAR_PESTLE.get(), new Item.Properties()));
-    public static final DeferredHolder<Item, Item> COPPER_CRUCIBLE = ITEMS.register("copper_crucible", () -> new BlockItem(BlockRegistry.COPPER_CRUCIBLE.get(), new Item.Properties()));
-    public static final DeferredHolder<Item, Item> ALEMBIC = ITEMS.register("alembic", () -> new BlockItem(BlockRegistry.ALEMBIC.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> MORTAR_PESTLE = ITEMS.register("mortar_pestle", () -> new BlockItem(BlockRegistry.MORTAR_PESTLE.get(), new Item.Properties().stacksTo(16)));
+    public static final DeferredHolder<Item, Item> COPPER_CRUCIBLE = ITEMS.register("copper_crucible", () -> new BlockItem(BlockRegistry.COPPER_CRUCIBLE.get(), new Item.Properties().stacksTo(16)));
+    public static final DeferredHolder<Item, Item> ALEMBIC = ITEMS.register("alembic", () -> new BlockItem(BlockRegistry.ALEMBIC.get(), new Item.Properties().stacksTo(1)));
 
     public static final DeferredHolder<Item, Item> OCELOT_MINT_SEED = ITEMS.register("ocelot_mint_seed", () -> new ItemNameBlockItem(BlockRegistry.OCELOT_MINT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> SNOW_MINT_SEED = ITEMS.register("snow_mint_seed", () -> new ItemNameBlockItem(BlockRegistry.SNOW_MINT.get(), new Item.Properties()));
@@ -187,7 +197,9 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |------------------------------------Misc Items-------------------------------------|
     // |-----------------------------------------------------------------------------------|
-    public static final DeferredHolder<Item, Item> VALENTINES_BOX = ITEMS.register("valentines_box", () -> new BlockItem(BlockRegistry.VALENTINES_BOX.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> ALEMBIC_BASE = ITEMS.register("alembic_base", () -> new Item(new Item.Properties().stacksTo(16)));
+
+    public static final DeferredHolder<Item, Item> VALENTINES_BOX = ITEMS.register("valentines_box", () -> new BlockItem(BlockRegistry.VALENTINES_BOX.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> MINT_CHOCOLATE = ITEMS.register("mint_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
             false, 2,
@@ -225,7 +237,7 @@ public class ItemRegistry {
     }
 
     private static DeferredHolder<Item, Item> createOilPot(String name, int durability, Supplier<Oil> oil, int duration, int amplifier, int maxUses){
-        return ITEMS.register(name, () -> new OilPotItem(new Item.Properties().durability(durability), () -> new ItemOil(oil.get(), duration, amplifier, maxUses, true)));
+        return ITEMS.register(name, () -> new OilPotItem(new Item.Properties().durability(durability).stacksTo(1), () -> new ItemOil(oil.get(), duration, amplifier, maxUses, true)));
     }
 
 }

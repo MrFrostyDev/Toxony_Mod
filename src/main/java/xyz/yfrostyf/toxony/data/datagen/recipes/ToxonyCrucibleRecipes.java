@@ -21,8 +21,14 @@ public class ToxonyCrucibleRecipes extends RecipeProvider {
         //
         new CrucibleRecipeBuilder(new ItemStack(ItemRegistry.TOXIC_PASTE))
                 .ingredient(ItemRegistry.POISON_PASTE.get())
-                .cookTime(300)
+                .cookTime(400)
                 .unlockedByItems("has_poison_paste", ItemRegistry.POISON_PASTE.get())
+                .build(output);
+
+        new CrucibleRecipeBuilder(new ItemStack(ItemRegistry.REDSTONE_SOLUTION))
+                .ingredient(ItemRegistry.REDSTONE_MIXTURE.get())
+                .cookTime(600)
+                .unlockedByItems("has_redstone_mixture", ItemRegistry.REDSTONE_MIXTURE.get())
                 .build(output);
     }
 }

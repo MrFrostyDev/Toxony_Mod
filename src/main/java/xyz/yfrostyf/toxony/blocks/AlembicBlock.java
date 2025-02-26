@@ -64,8 +64,20 @@ public class AlembicBlock extends HorizontalDirectionalBlock implements EntityBl
         if (level.isClientSide())return InteractionResult.SUCCESS;
         level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
 
-        player.openMenu(blockEntity, pos);
-        return InteractionResult.CONSUME;
+        if(state.getValue(PART) == ChestType.RIGHT){
+            Direction directionToBody = getNeighbourDirection(state.getValue(PART), state.getValue(FACING));
+            BlockPos neighbourBlockPos = pos.relative(directionToBody);
+            if(level.getBlockEntity(neighbourBlockPos) instanceof AlembicBlockEntity neighbourBlockEntity){
+                player.openMenu(neighbourBlockEntity, neighbourBlockPos);
+                return InteractionResult.CONSUME;
+            }
+        }
+        else{
+            player.openMenu(blockEntity, pos);
+            return InteractionResult.CONSUME;
+        }
+
+        return InteractionResult.PASS;
     }
 
     @Override

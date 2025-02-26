@@ -4,7 +4,7 @@
 	"render_type": "cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "toxony:block/ocelot_mint_stage4",
-		"particle": "toxony:block/ocelot_mint_stage4"
+		"0": "toxony:block/ocelot_mint_stage2",
+		"particle": "toxony:block/ocelot_mint_stage2"
 	}
 }

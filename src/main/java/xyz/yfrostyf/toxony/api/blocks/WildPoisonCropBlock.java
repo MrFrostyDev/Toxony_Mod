@@ -104,11 +104,7 @@ public class WildPoisonCropBlock extends BushBlock implements BonemealableBlock 
 
     protected void effectOnContact(LivingEntity livingEntity, BlockState state){
         for(Holder<MobEffect> effect : contactEffects) {
-            if (state.getValue(AGE) > 0 && state.getValue(AGE) < MAX_AGE) {
-                livingEntity.addEffect(new MobEffectInstance(effect, 400, 0));
-            } else {
-                livingEntity.addEffect(new MobEffectInstance(effect, 300, 1));
-            }
+            livingEntity.addEffect(new MobEffectInstance(effect, 400, 0));
         }
     }
 

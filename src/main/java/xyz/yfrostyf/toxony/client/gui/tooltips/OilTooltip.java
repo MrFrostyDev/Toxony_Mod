@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.client.gui;
+package xyz.yfrostyf.toxony.client.gui.tooltips;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;

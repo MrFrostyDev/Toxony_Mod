@@ -10,6 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -42,6 +43,11 @@ public class CrucibleRecipeBuilder implements RecipeBuilder {
     }
 
     public CrucibleRecipeBuilder ingredient(ItemLike item) {
+        this.ingredient = Ingredient.of(item);
+        return this;
+    }
+
+    public CrucibleRecipeBuilder ingredient(TagKey<Item> item) {
         this.ingredient = Ingredient.of(item);
         return this;
     }

@@ -1,12 +1,15 @@
 package xyz.yfrostyf.toxony.data.datagen.recipes;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import xyz.yfrostyf.toxony.data.datagen.recipebuilders.MortarPestleRecipeBuilder;
 import xyz.yfrostyf.toxony.registries.AffinityRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
@@ -27,16 +30,6 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .use(Items.BOWL)
                 .unlockedByTag("has_poisonous_ingredient", TagRegistry.POISONOUS_INGREDIENTS_ITEM_TAG)
                 .unlockedByTag("has_poisonous_plant", TagRegistry.POISONOUS_PLANTS_ITEM_TAG)
-                .build(output);
-
-        // Test Recipes
-        new MortarPestleRecipeBuilder(new ItemStack(Items.FERN))
-                .ingredient(AffinityRegistry.FOREST.get())
-                .ingredient(AffinityRegistry.FOREST.get())
-                .ingredient(AffinityRegistry.SUN.get())
-                .ingredient(ItemRegistry.OCELOT_MINT.get())
-                .use(Items.GLASS_BOTTLE)
-                .unlockedByItems("has_glass_bottle", Items.GLASS_BOTTLE)
                 .build(output);
 
         // Oil Recipes

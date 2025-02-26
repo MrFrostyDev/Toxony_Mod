@@ -1,11 +1,15 @@
 package xyz.yfrostyf.toxony.registries;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -31,6 +35,7 @@ public class DataComponentsRegistry {
                     // The codec to read/write the data across the network
                     .networkSynchronized(ByteBufCodecs.BOOL)
     );
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemOil>> OIL = DATA_COMPONENTS.registerComponentType(
             "oil",
             builder -> builder
@@ -53,10 +58,18 @@ public class DataComponentsRegistry {
     );
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ResourceKey<Affinity>>>> POSSIBLE_AFFINITIES = DATA_COMPONENTS.registerComponentType(
-            "affinity",
+            "possible_affinities",
             builder -> builder
                     .persistent(ResourceKey.codec(ToxonyRegistries.AFFINITY_REGISTRY_KEY).listOf())
                     .networkSynchronized(StreamCodec.unit(List.of()))
+                    .cacheEncoding()
+    );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Holder<Item>>> NEEDLE_STORED_ITEM = DATA_COMPONENTS.registerComponentType(
+            "needle_stored_item",
+            builder -> builder
+                    .persistent(BuiltInRegistries.ITEM.holderByNameCodec())
+                    .networkSynchronized(ByteBufCodecs.holderRegistry(Registries.ITEM))
                     .cacheEncoding()
     );
 }
