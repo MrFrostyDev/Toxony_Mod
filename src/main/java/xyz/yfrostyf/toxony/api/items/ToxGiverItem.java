@@ -2,7 +2,6 @@ package xyz.yfrostyf.toxony.api.items;
 
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -13,12 +12,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
-import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
@@ -33,7 +30,7 @@ public class ToxGiverItem extends Item
     protected final float tier;
     protected final Supplier<ItemStack> returnItem;
     protected final List<MobEffectInstance> mobEffectInstances;
-    protected static final int EAT_DURATION = 60;
+    protected static final int EAT_DURATION = 32;
 
     public ToxGiverItem(Properties properties, float tox, float tolerance, int tier, Supplier<ItemStack> returnItem, List<MobEffectInstance> mobEffectInstances) {
         super(properties);
@@ -72,7 +69,6 @@ public class ToxGiverItem extends Item
                     player.addEffect(new MobEffectInstance(effect, mobEffectInstance.getDuration() + oldDuration, mobEffectInstance.getAmplifier()));
                 }
             });
-            PacketDistributor.sendToPlayer((ServerPlayer) player, SyncToxPacket.create(plyToxData));
         }
 
         return ItemUtils.createFilledResult(stack, player, returnItem.get());

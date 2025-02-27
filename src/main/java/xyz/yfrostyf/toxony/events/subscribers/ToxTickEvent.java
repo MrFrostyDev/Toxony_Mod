@@ -25,10 +25,9 @@ public class ToxTickEvent {
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
 
             if ((plyToxData.getTox() > 0) && !plyToxData.getDeathState()){
-                plyToxData.setTox(plyToxData.getTox() - 1);
-                PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
+                plyToxData.addTox(-1);
+                PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData.getTox()));
             }
-
         });
     }
 }

@@ -1,6 +1,7 @@
 package xyz.yfrostyf.toxony.events.subscribers;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -26,8 +27,7 @@ public class DetoxEvents{
     //
     @SubscribeEvent
     public static void onRegenPotionDrink(LivingEntityUseItemEvent.Finish event){
-        if (event.getEntity().level().isClientSide) {return;}
-        if (!(event.getEntity() instanceof ServerPlayer svplayer)) {return;}
+        if (!(event.getEntity() instanceof Player player)) {return;}
 
        ItemStack item = event.getItem();
 
@@ -35,10 +35,8 @@ public class DetoxEvents{
 
         if (!item.has(POTION_CONTENTS) || item.get(POTION_CONTENTS).potion().isEmpty()) return;
         if (item.get(POTION_CONTENTS).potion().filter(holder -> holder == Potions.REGENERATION || holder == Potions.LONG_REGENERATION || holder == Potions.STRONG_REGENERATION).isPresent()) {
-            ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
+            ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
             plyToxData.addTox(REGEN_POTION_DETOX);
-
-            PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), SyncToxPacket.create(plyToxData));
         }
     }
 
@@ -47,16 +45,12 @@ public class DetoxEvents{
     //
     @SubscribeEvent
     public static void onGoldenAppleEat(LivingEntityUseItemEvent.Finish event) {
-        if (event.getEntity().level().isClientSide) {return;}
+        if (!(event.getEntity() instanceof Player player)) {return;}
 
         Item item = event.getItem().getItem();
 
         if ((item != Items.GOLDEN_APPLE) && (item != Items.ENCHANTED_GOLDEN_APPLE)){return;}
-        if (!(event.getEntity() instanceof ServerPlayer svplayer)) {return;}
-
-        ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
+        ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
         plyToxData.addTox(GOLDEN_APPLE_DETOX);
-
-        PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), SyncToxPacket.create(plyToxData));
     }
 }

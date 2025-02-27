@@ -9,6 +9,9 @@
   "item.toxony.toxic_paste": "Toxic Paste",
   "item.toxony.poison_paste": "Poison Paste",
   "item.toxony.toxin": "Toxin",
+  "item.toxony.poison_blend": "Poison Blend",
+  "item.toxony.toxic_blend": "Toxic Blend",
+  "item.toxony.pure_blend": "Pure Blend",
   "item.toxony.redstone_mixture": "Redstone Mixture",
   "item.toxony.redstone_solution": "Redstone Solution",
   "item.toxony.affinity_solution": "Affinity Solution",
@@ -68,6 +71,7 @@
   "commands.tox.add.success": "Added tox to [%s] by %s",
   "commands.tox.get.success": "[%s] has %s tox, %s tolerance and is not in death state",
   "commands.tox.get.success.affinities": "[%s] has these affinities: %s",
+  "commands.tox.get.success.mutagens": "[%s] has the following mutagens: %s",
   "commands.tox.get.success.known_ingredients": "[%s] knows about these ingredients: %s",
   "commands.tox.get.death.success": "[%s] has %s tox, %s tolerance and is in death state",
 
@@ -75,6 +79,7 @@
   "commands.tolerance.add.success": "Added tolerance to [%s] by %s",
 
   "toxony.networking.sync_tox.failed": "Failed to sync tox data to player: %s",
+  "toxony.networking.sync_affinity_map.failed": "Failed to sync affinity map to player: %s",
 
   "item.toxony.copper_needle.effect.awkward": "Copper Needle",
   "item.toxony.copper_needle.effect.mundane": "Copper Needle",

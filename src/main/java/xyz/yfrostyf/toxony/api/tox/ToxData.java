@@ -2,34 +2,41 @@ package xyz.yfrostyf.toxony.api.tox;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.NeoForge;
+import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.events.ChangeThresholdEvent;
 import xyz.yfrostyf.toxony.api.events.ChangeToleranceEvent;
 import xyz.yfrostyf.toxony.api.events.ChangeToxEvent;
+import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
 import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
 
 import java.util.*;
 
 public class ToxData {
-
     // Heavily based on Irons-Spells-n-Spellbooks MagicData class
     // Thank you very much for the reference!
 
     public static final int MAX_TOLERANCE = 999;
+    public static final int MAX_MUTAGENS = 3; // Be aware of the max tolerance as if that changes, this must as well.
     public static final int MIN_TOLERANCE = 10;
     public static final int DEFAULT_TOLERANCE = 30;
     public static final int MINIMUM_KNOW = 2;
+    public static final int THRESHOLD_MULTIPLIER = 100;
 
     private Player player;
 
@@ -38,6 +45,7 @@ public class ToxData {
     private float tolerance = DEFAULT_TOLERANCE;
     private int threshold = 0;
     private Map<Affinity, Integer> affinities = new HashMap<>(20);
+    private List<Holder<MobEffect>> mutagens = new ArrayList<>(MAX_MUTAGENS);
     private Map<ResourceLocation, Integer> knownIngredients = new HashMap<>(30); // Used as a Set for searching capabilities.
     private boolean deathState = false;
 
@@ -48,8 +56,24 @@ public class ToxData {
         this.player = player;
     }
 
-    public Player getPlayer() {
-        return player;
+    /**
+    *   Wrapper method for data sync methods when handling ToxData server packet information to client.
+    **/
+    @OnlyIn(Dist.CLIENT)
+    public void handleSyncedToxData(float tox,
+                              float tolerance,
+                              int threshold,
+                              Map<Affinity, Integer> affinities,
+                              List<Holder<MobEffect>> mutagens,
+                              Map<ResourceLocation, Integer> knownIngredients,
+                              boolean deathState) {
+        this.setToxSynced(tox);
+        this.setToleranceSynced(tolerance);
+        this.setThresholdSynced(threshold);
+        this.setAffinities(affinities);
+        this.setMutagens(mutagens);
+        this.knownIngredients = knownIngredients;
+        this.setDeathState(deathState);
     }
 
     // |========================= Tox Data =========================|
@@ -58,26 +82,45 @@ public class ToxData {
         return tox;
     }
 
-    public void setTox(float inTox){
-        boolean isServerPlayer = this.player instanceof ServerPlayer;
+    public void setToxSynced(float inTox){
+        if (inTox > tolerance) {
+            this.tox = inTox;
+            setDeathState(true);
+        }
+        else if (inTox <= 0) {
+            this.tox = 0;
+            this.resetThreshold();
+            this.clearMutagens();
+        }
+        else{
+            this.tox = inTox;
+        }
 
-        ChangeToxEvent event = new ChangeToxEvent(isServerPlayer ? player : null, this, this.tox, inTox);
-        if (NeoForge.EVENT_BUS.post(event).isCanceled() && isServerPlayer)return;
+        while(this.tox > thresholdTolGoal){
+            this.setThresholdSynced(this.threshold + 1);
+        }
+    }
+
+    public void setTox(float inTox){
+        ChangeToxEvent event = new ChangeToxEvent(player, this, this.tox, inTox);
+        if (NeoForge.EVENT_BUS.post(event).isCanceled())return;
 
         if (event.getNewTox() > tolerance) {
             event.setNewTox(tolerance);
             setDeathState(true);
         }
-        if (event.getNewTox() < 0) {
+        if (event.getNewTox() <= 0) {
             event.setNewTox(0);
+            this.resetThreshold();
+            this.clearMutagens();
         }
 
         this.tox = event.getNewTox();
 
         // After setting tox, check if current threshold goal has been reached!
         // While loop to check if multiple thresholds were reached at once.
-        while(this.tox > thresholdTolGoal){
-            setThreshold(this.threshold + 1);
+        while(this.tox > this.thresholdTolGoal){
+            this.setThreshold(this.threshold + 1);
         }
     }
 
@@ -91,11 +134,21 @@ public class ToxData {
         return tolerance;
     }
 
-    public void setTolerance(float inTolerance){
-        boolean isServerPlayer = this.player instanceof ServerPlayer;
+    private void setToleranceSynced(float inTolerance){
+        if (inTolerance > MAX_TOLERANCE) {
+            this.tolerance = MAX_TOLERANCE;
+        }
+        else if (inTolerance < MIN_TOLERANCE) {
+            this.tolerance = MIN_TOLERANCE;
+        }
+        else{
+            this.tolerance = inTolerance;
+        }
+    }
 
-        ChangeToleranceEvent event = new ChangeToleranceEvent(isServerPlayer ? player : null, this, this.tox, inTolerance);
-        if (NeoForge.EVENT_BUS.post(event).isCanceled() && isServerPlayer)return;
+    public void setTolerance(float inTolerance){
+        ChangeToleranceEvent event = new ChangeToleranceEvent(player, this, this.tox, inTolerance);
+        if (NeoForge.EVENT_BUS.post(event).isCanceled())return;
 
         if (event.getNewTolerance() > MAX_TOLERANCE) {
             event.setNewTolerance(MAX_TOLERANCE);
@@ -120,18 +173,22 @@ public class ToxData {
         return thresholdTolGoal;
     }
 
-    public void setThreshold(int inThreshold){
-        boolean isServerPlayer = this.player instanceof ServerPlayer;
+    private void setThresholdSynced(int inThreshold){
+        this.threshold = inThreshold;
+        this.thresholdTolGoal = ToxUtil.TriangularNumbersMult(this.threshold, THRESHOLD_MULTIPLIER);
+    }
 
-        ChangeThresholdEvent event = new ChangeThresholdEvent(isServerPlayer ? player : null, this, this.threshold, inThreshold);
-        if (NeoForge.EVENT_BUS.post(event).isCanceled() && isServerPlayer)return;
+    public void setThreshold(int inThreshold){
+        ChangeThresholdEvent event = new ChangeThresholdEvent(player, this, this.threshold, inThreshold);
+        if (NeoForge.EVENT_BUS.post(event).isCanceled())return;
 
         this.threshold = event.getNewThreshold();
-        this.thresholdTolGoal = ToxUtil.TriangularNumbersMult(this.threshold, 100);
+        this.thresholdTolGoal = ToxUtil.TriangularNumbersMult(this.threshold, THRESHOLD_MULTIPLIER);
     }
 
     public void resetThreshold(){
-        setThreshold(0);
+        this.threshold = 0;
+        this.thresholdTolGoal = 100;
     }
 
     // |========================= DeathState Data =========================|
@@ -142,6 +199,49 @@ public class ToxData {
 
     public boolean getDeathState(){
         return deathState;
+    }
+
+    // |========================= Mutagens Data =========================|
+
+    public List<Holder<MobEffect>> getMutagens() {
+        return mutagens;
+    }
+
+    public void addMutagen(Holder<MobEffect> effect) {
+        if(this.mutagens.size() == MAX_MUTAGENS){
+            this.mutagens.remove(0);
+        }
+        this.mutagens.add(effect);
+    }
+
+    public void setMutagens(List<Holder<MobEffect>> mutagens) {
+        this.mutagens = mutagens;
+    }
+
+    // Remove active mutagens and add new mutagens from this data
+    public void applyMutagens(){
+        List<MobEffectInstance> activeEffects = new ArrayList<>(player.getActiveEffects());
+        for(MobEffectInstance effectInstance : activeEffects){
+            if (effectInstance.getEffect().value() instanceof MutagenEffect){
+                player.removeEffectNoUpdate(effectInstance.getEffect());
+            }
+        }
+        for(Holder<MobEffect> effect : mutagens){
+            ToxUtil.applyMutagenEffect(player, BuiltInRegistries.MOB_EFFECT.wrapAsHolder(effect.value()));
+        }
+        ToxonyMain.LOGGER.info("[applyMutagens]: mutagens: {}", mutagens);
+    }
+
+    public void addAndApplyMutagens(Iterable<Holder<MobEffect>> effects){
+        for(Holder<MobEffect> effect : effects){
+            this.addMutagen(effect);
+        }
+        this.applyMutagens();
+    }
+
+    public void clearMutagens(){
+        this.mutagens.clear();
+        this.applyMutagens();
     }
 
     // |========================= Affinity Data =========================|
@@ -194,10 +294,6 @@ public class ToxData {
         this.knownIngredients.replace(resourceLocation, knownIngredients.get(resourceLocation) + amount);
     }
 
-    public void setKnownIngredients(Map<ResourceLocation, Integer> knownIngredients){
-        this.knownIngredients = knownIngredients;
-    }
-
     public Map<ResourceLocation, Integer> getKnownIngredients(){
         return knownIngredients;
     }
@@ -247,6 +343,19 @@ public class ToxData {
             affinityValuesList.add(affinities.get(affinity));
         }
 
+        ListTag mutagenStringList = new ListTag();
+        for(Holder<MobEffect> effect : mutagens){
+            mutagenStringList.add(StringTag.valueOf(
+                    BuiltInRegistries.MOB_EFFECT
+                            .holders()
+                            .filter(ref -> Objects.equals(ref.value(), effect.value()))
+                            .findFirst()
+                            .get().getKey()
+                            .location()
+                            .toString()
+            ));
+        }
+
         ListTag ingredientsStringsList = new ListTag();
         List<Integer> ingredientsValuesList = new ArrayList<>();
         for(ResourceLocation resourceLocation : knownIngredients.keySet()){
@@ -256,6 +365,7 @@ public class ToxData {
 
         compound.put("affinities", affinityStringsList);
         compound.putIntArray("affinity_values", affinityValuesList);
+        compound.put("mutagens", mutagenStringList);
         compound.put("known_ingredients", ingredientsStringsList);
         compound.putIntArray("known_ingredients_values", ingredientsValuesList);
 
@@ -266,9 +376,11 @@ public class ToxData {
         tox = compound.getInt("tox");
         tolerance = compound.getInt("tolerance");
         threshold = compound.getInt("threshold");
+        thresholdTolGoal = ToxUtil.TriangularNumbersMult(threshold, THRESHOLD_MULTIPLIER);
 
         ListTag affinityStringsList = compound.getList("affinities", Tag.TAG_STRING);
         int[] affinityValues = compound.getIntArray("affinity_values");
+        ListTag mutagenStringList = compound.getList("mutagens", Tag.TAG_STRING);
         ListTag ingredientsStringsList = compound.getList("known_ingredients", Tag.TAG_STRING);
         int[] ingredientsValuesList = compound.getIntArray("known_ingredients_values");
 
@@ -278,13 +390,32 @@ public class ToxData {
             assert in != null;
             readAffinityMap.put(in, affinityValues[i]);
         }
+
+        List<Holder<MobEffect>> mutagensList = new ArrayList<>();
+        for (int i=0; i<mutagenStringList.size(); i++) {
+            Holder<MobEffect> in = BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.parse(mutagenStringList.getString(i))).get();
+            mutagensList.add(in);
+        }
         Map<ResourceLocation, Integer> readIngredientsMap = new HashMap<>();
         for (int i=0; i<ingredientsStringsList.size(); i++) {
             readIngredientsMap.put(ResourceLocation.parse(ingredientsStringsList.getString(i)), ingredientsValuesList[i]);
         }
 
         affinities = readAffinityMap;
+        mutagens = mutagensList;
         knownIngredients = readIngredientsMap;
         deathState = compound.getBoolean("deathState");
+    }
+
+    @Override
+    public String toString() {
+        String strply = "Player: " + player.toString() + ",\n";
+        String message = strply + "tox: "+tox+"\n"
+                + "tolerance: "+tolerance+"\n"
+                + "threshold: "+threshold+"\n"
+                + "affinities: "+affinities+"\n"
+                + "knownIngredients: "+knownIngredients+"\n"
+                + "deathstate: "+deathState+"\n";
+        return message;
     }
 }

@@ -20,6 +20,7 @@ import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
+import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -73,7 +74,6 @@ public class ToxGiverBlockItem extends BlockItem {
                     player.addEffect(new MobEffectInstance(effect, mobEffectInstance.getDuration() + oldDuration, mobEffectInstance.getAmplifier()));
                 }
             });
-            PacketDistributor.sendToPlayer((ServerPlayer) player, SyncToxPacket.create(plyToxData));
         }
 
         return ItemUtils.createFilledResult(stack, player, returnItem.get());

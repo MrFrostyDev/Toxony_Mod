@@ -22,6 +22,7 @@ import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.oils.Oil;
 import xyz.yfrostyf.toxony.items.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -198,6 +199,12 @@ public class ItemRegistry {
     // |------------------------------------Misc Items-------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> ALEMBIC_BASE = ITEMS.register("alembic_base", () -> new Item(new Item.Properties().stacksTo(16)));
+
+    public static final DeferredHolder<Item, Item> TOXIN_PLACEBO = ITEMS.register("toxin_placebo", () -> new ToxGiverItem.Builder()
+            .tox(50).tolerance(150).tier(3)
+            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 100, 0, false, false, false))
+            .build()
+    );
 
     public static final DeferredHolder<Item, Item> VALENTINES_BOX = ITEMS.register("valentines_box", () -> new BlockItem(BlockRegistry.VALENTINES_BOX.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> MINT_CHOCOLATE = ITEMS.register("mint_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(

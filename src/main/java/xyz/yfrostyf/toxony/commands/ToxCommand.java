@@ -8,7 +8,10 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
+import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.api.client.ClientToxData;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
+import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
@@ -51,7 +54,7 @@ public class ToxCommand {
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
             var base = isSet ? 0 : plyToxData.getTox();
             plyToxData.setTox(amount + base);
-            PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
+            PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(amount + base));
         }));
 
         String setString = isSet ? "set" : "add";
@@ -69,7 +72,7 @@ public class ToxCommand {
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
             var base = isSet ? 0 : plyToxData.getTolerance();
             plyToxData.setTolerance(amount + base);
-            PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
+            PacketDistributor.sendToPlayer(svplayer, SyncToxDataPacket.create(plyToxData));
         }));
 
         String setString = isSet ? "set" : "add";
@@ -87,7 +90,9 @@ public class ToxCommand {
         String setString = plyToxData.getDeathState() ? "death." : "";
         source.sendSuccess(() -> Component.translatable("commands.tox.get."+ setString + "success", svplayer.getDisplayName(), plyToxData.getTox(), plyToxData.getTolerance()), true);
         source.sendSuccess(() -> Component.translatable("commands.tox.get.success.affinities", svplayer.getDisplayName(), plyToxData.getAffinities().toString()), true);
+        source.sendSuccess(() -> Component.translatable("commands.tox.get.success.mutagens", svplayer.getDisplayName(), plyToxData.getMutagens().toString()), true);
         source.sendSuccess(() -> Component.translatable("commands.tox.get.success.known_ingredients", svplayer.getDisplayName(), plyToxData.getKnownIngredients().toString()), true);
+
         return (int) plyToxData.getTox();
     }
 }

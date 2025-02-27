@@ -22,8 +22,7 @@ public class DataAttachmentRegistry {
             "tox_data",
 
             // The object data that's stored in the ATTACHMENT_TYPES registry, which is a AttachmentType<ToxData>
-            // ServerOnly
-            () -> AttachmentType.builder((holder) -> holder instanceof ServerPlayer svplayer ? new ToxData(svplayer) : ClientToxData.getToxData()).serialize(new PlayerToxSerializer())
+            () -> AttachmentType.builder((holder) -> holder instanceof ServerPlayer svplayer ? new ToxData(svplayer) : ClientToxData.newToxData()).serialize(new PlayerToxSerializer())
                     .copyOnDeath()
                     .build()
     );

@@ -3,6 +3,7 @@ package xyz.yfrostyf.toxony.events.subscribers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -23,7 +24,6 @@ public class DeathStateEvents {
     //
     @SubscribeEvent
     public static void onChangeTox(ChangeToxEvent event){
-        if(!(event.getEntity() instanceof ServerPlayer svplayer)){return;}
         if (!event.getToxData().getDeathState()){return;}
 
         ToxData plyToxData = event.getToxData();
@@ -43,8 +43,6 @@ public class DeathStateEvents {
                     9999
             );
         }
-
-        PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData));
     }
 
 }

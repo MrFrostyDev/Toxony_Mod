@@ -22,6 +22,12 @@ public class PayloadRegistry {
         );
 
         registrar.playToClient(
+                SyncToxDataPacket.TYPE,
+                SyncToxDataPacket.STREAM_CODEC,
+                SyncToxDataPacket::handle
+        );
+
+        registrar.playToClient(
                 SyncIngredientAffinityMapPacket.TYPE,
                 SyncIngredientAffinityMapPacket.STREAM_CODEC,
                 SyncIngredientAffinityMapPacket::handle

@@ -11,13 +11,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.items.ToxGiverItem;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
-import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
@@ -40,12 +38,11 @@ public class BlendItem extends ToxGiverItem {
 
         ToxUtil.addToleranceWithTier(plyToxData, tolerance, tier, level);
 
-        if(level instanceof ServerLevel svlevel && stack.has(DataComponentsRegistry.AFFINITIES)) {
+        if(stack.has(DataComponentsRegistry.AFFINITIES)) {
             List<Affinity> affinities = stack.get(DataComponentsRegistry.AFFINITIES);
             for (Affinity affinity : affinities) {
                 AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, Math.max(RANDOM.nextInt(5), 2));
             }
-            PacketDistributor.sendToPlayer((ServerPlayer) player, SyncToxPacket.create(plyToxData));
         }
 
         mobEffectInstances.forEach((mobEffectInstance) -> {

@@ -26,25 +26,25 @@ public class ToxonyPlacedFeature {
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, PATCH_FALSE_BERRY_BUSH_PLACED, configuredFeatures.getOrThrow(ToxonyConfiguredFeatures.PATCH_FALSE_BERRY_BUSH),
-                List.of(RarityFilter.onAverageOnceEvery(64),
+                List.of(RarityFilter.onAverageOnceEvery(48),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()));
 
         register(context, WILD_OCELOT_MINT_PLACED, configuredFeatures.getOrThrow(ToxonyConfiguredFeatures.WILD_OCELOT_MINT),
-                List.of(RarityFilter.onAverageOnceEvery(64),
+                List.of(RarityFilter.onAverageOnceEvery(48),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()));
 
         register(context, WILD_NIGHTSHADE_PLACED, configuredFeatures.getOrThrow(ToxonyConfiguredFeatures.WILD_NIGHTSHADE),
-                List.of(RarityFilter.onAverageOnceEvery(64),
+                List.of(RarityFilter.onAverageOnceEvery(48),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()));
 
         register(context, WILD_WATER_HEMLOCK_PLACED, configuredFeatures.getOrThrow(ToxonyConfiguredFeatures.WILD_WATER_HEMLOCK),
-                List.of(RarityFilter.onAverageOnceEvery(64),
+                List.of(RarityFilter.onAverageOnceEvery(48),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()));
