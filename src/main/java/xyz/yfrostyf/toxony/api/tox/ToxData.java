@@ -35,7 +35,7 @@ public class ToxData {
     public static final int MAX_MUTAGENS = 3; // Be aware of the max tolerance as if that changes, this must as well.
     public static final int MIN_TOLERANCE = 10;
     public static final int DEFAULT_TOLERANCE = 30;
-    public static final int MINIMUM_KNOW = 2;
+    public static final int MINIMUM_KNOW = 20;
     public static final int THRESHOLD_MULTIPLIER = 100;
 
     private Player player;
@@ -54,6 +54,10 @@ public class ToxData {
 
     public ToxData(Player player){
         this.player = player;
+    }
+
+    public Player getPlayer(){
+        return this.player;
     }
 
     /**

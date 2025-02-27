@@ -47,7 +47,7 @@ public class ToxUtil {
 
     /**
     *   Adds a mob effect as if it was a Mutagen (Infinite duration, no visuals, stacking duplicates).
-     *   If the entity doesn't have it, the effect is added. If they do, amplify the effect by 1.
+    *   If the entity doesn't have it, the effect is added. If they do, amplify the effect by 1.
     */
     public static void applyMutagenEffect(LivingEntity entity, Holder<MobEffect> effect) {
         if (!entity.hasEffect(effect)) {

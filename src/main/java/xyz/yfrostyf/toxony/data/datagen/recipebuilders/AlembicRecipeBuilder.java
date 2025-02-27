@@ -57,6 +57,11 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
+    public AlembicRecipeBuilder ingredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+        return this;
+    }
+
     public AlembicRecipeBuilder ingredientToConvert(ItemLike item) {
         this.ingredientToConvert = Ingredient.of(item);
         return this;
@@ -69,6 +74,11 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
 
     public AlembicRecipeBuilder ingredientToConvert(TagKey<Item> item) {
         this.ingredientToConvert = Ingredient.of(item);
+        return this;
+    }
+
+    public AlembicRecipeBuilder ingredientToConvert(Ingredient ingredient) {
+        this.ingredientToConvert = ingredient;
         return this;
     }
 

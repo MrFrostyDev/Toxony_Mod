@@ -17,7 +17,7 @@ import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import java.util.function.Supplier;
 
 public class OilPotItem extends Item {
-    private static final int USE_DURATION = 60;
+    private static final int USE_DURATION = 64;
     private final Supplier<ItemOil> itemOil;
 
     public OilPotItem(Properties properties, Supplier<ItemOil> itemOil) {
@@ -63,12 +63,16 @@ public class OilPotItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack oilPot = player.getMainHandItem().is(this) ? player.getMainHandItem() : player.getOffhandItem();
-        ItemStack applied = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
+        ItemStack otherStack = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
 
-        if(applied.is(getItemOil().oil().supportedItems()) && !getItemOil().isEmpty()){
+        if(otherStack.is(ItemRegistry.BASE_OIL)){
+            otherStack.consume(1, player);
+            oilPot.setDamageValue(0);
+        }
+        else if(otherStack.is(getItemOil().oil().supportedItems()) && !getItemOil().isEmpty()){
             return ItemUtils.startUsingInstantly(level, player, hand);
         }
-        return InteractionResultHolder.fail(oilPot);
+        return InteractionResultHolder.pass(oilPot);
     }
 
     @Override

@@ -1,14 +1,13 @@
-// 1.21.1	2025-02-25T13:47:46.6473491	Recipes
+// 1.21.1	2025-02-27T08:47:44.9870511	Recipes
 e4637caab11620579928495aeda8586a9f33b739 data/toxony/advancement/recipes/alembic/affinity_solution.json
 ef60b375dc590e01e993e5356fdab69e03f87f99 data/toxony/advancement/recipes/alembic/affinity_solution_alt.json
-8a1d70b88b96fa65fb20e89e65f00fd4d43c78d9 data/toxony/advancement/recipes/alembic/potion.json
+579afe9af41decd1656894c145da2e8a10f1a6ba data/toxony/advancement/recipes/alembic/toxic_formula.json
 d63607dbde61f32439370861e20bcdd99d0989ba data/toxony/advancement/recipes/crucible/redstone_solution.json
 0fdee9fe7e07ba5cd65159ec353d8ed440c7416d data/toxony/advancement/recipes/crucible/toxic_paste.json
 70f231aca4bb8e2aa1c49d4672d1811501bc0fef data/toxony/advancement/recipes/misc/alembic.json
 609029be2c0e0850fb7945e85ee7aed424c4693d data/toxony/advancement/recipes/misc/alembic_base.json
 d48b17078978c0f808fa4fb65dca6cde383ff555 data/toxony/advancement/recipes/misc/clay_oil_pot.json
 a466609166fcac57b1a83b2ffe3d4af5f4f20625 data/toxony/advancement/recipes/misc/redstone_mixture.json
-b35f35f0929ed8f215c58997c651495250a7b0e7 data/toxony/advancement/recipes/mortar/fern.json
 3b17238c3ae089083f955bd63e446802ca998a98 data/toxony/advancement/recipes/mortar/poison_blend.json
 a0428d5b7b42080fe2114a8525accdfb5edda03f data/toxony/advancement/recipes/mortar/poison_blend_alt.json
 e4f0b632db5f7bbd470f1f28f8c71f05f02585cb data/toxony/advancement/recipes/mortar/poison_oil_pot.json
@@ -20,12 +19,11 @@ e4f0b632db5f7bbd470f1f28f8c71f05f02585cb data/toxony/advancement/recipes/mortar/
 d4d9ba98aae075bee9513313028eeb5ee0590569 data/toxony/recipe/alembic.json
 539a54023f91d05c99661cb139b548ac45aff700 data/toxony/recipe/alembic/affinity_solution.json
 b3456fbded851e0bc781805d6977e09883916e20 data/toxony/recipe/alembic/affinity_solution_alt.json
-f6e8190853b0a6e6d9bcb393130e1ca9c7cc029f data/toxony/recipe/alembic/potion.json
+d469fe235f88a26fc81d546c874b707460174c66 data/toxony/recipe/alembic/toxic_formula.json
 2ca344e6d2787b6479bb3995717e9cf498270746 data/toxony/recipe/alembic_base.json
 1acabeb23c3cceadbf3c88a2fed1f41731bd7ae7 data/toxony/recipe/clay_oil_pot.json
 7f0af7fd7a01e0c912ddde3dcaed2ad9c683b547 data/toxony/recipe/crucible/redstone_solution.json
 67353ea6118a16a0776352383eb03d5fcf56a737 data/toxony/recipe/crucible/toxic_paste.json
-bdb9e778414fc2be63f8942e975283478f028616 data/toxony/recipe/mortar/fern.json
 c1401d277bf107d9c6b7eeda80e57f266c61b948 data/toxony/recipe/mortar/poison_blend.json
 38a327dda796c88d28c20716db8f9f0d35f2b2b2 data/toxony/recipe/mortar/poison_blend_alt.json
 53b1f05c451a9834d0147f5399710585f1d2d726 data/toxony/recipe/mortar/poison_oil_pot.json
@@ -34,4 +32,4 @@ ce5d0df9452229423a975a1d341ca683a4a610b6 data/toxony/recipe/mortar/pure_blend.js
 aafe345250164f2a44a7ba9275d326dad1bce0a4 data/toxony/recipe/mortar/pure_blend_alt.json
 51e148f66b097d1d999666f1ce73330368db3c5f data/toxony/recipe/mortar/toxic_blend.json
 617bd38b602f0db6bda93ed00be34995435605b0 data/toxony/recipe/mortar/toxin_oil_pot.json
-f87bdf08c04506c60af41a2ce1ec6a7b83dc0aae data/toxony/recipe/redstone_mixture.json
+306aea37ff7b3f15d39a1339f094f4e1496d1b37 data/toxony/recipe/redstone_mixture.json

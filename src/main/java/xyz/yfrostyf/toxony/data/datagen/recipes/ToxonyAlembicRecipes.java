@@ -6,8 +6,9 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
+import xyz.yfrostyf.toxony.api.util.VialUtil;
 import xyz.yfrostyf.toxony.data.datagen.recipebuilders.AlembicRecipeBuilder;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
@@ -21,11 +22,11 @@ public class ToxonyAlembicRecipes extends RecipeProvider {
     }
 
     public static void get(RecipeOutput output){
-        new AlembicRecipeBuilder(PotionContents.createItemStack(Items.POTION, Potions.WATER))
-                .ingredient(Items.HONEY_BOTTLE)
-                .ingredientToConvert(Items.GLASS_BOTTLE)
-                .boilTime(200)
-                .unlockedByItems("has_honey", Items.HONEY_BOTTLE)
+        new AlembicRecipeBuilder(new ItemStack(ItemRegistry.TOXIC_FORMULA.get()))
+                .ingredient(Items.NETHER_WART)
+                .ingredientToConvert(DataComponentIngredient.of(false, VialUtil.createPotionItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER)))
+                .boilTime(1200)
+                .unlockedByItems("has_toxic_paste", ItemRegistry.TOXIC_FORMULA.get())
                 .build(output);
 
         new AlembicRecipeBuilder(new ItemStack(ItemRegistry.AFFINITY_SOLUTION.get()))

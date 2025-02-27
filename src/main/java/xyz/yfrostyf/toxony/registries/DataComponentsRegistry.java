@@ -8,7 +8,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -65,8 +64,8 @@ public class DataComponentsRegistry {
                     .cacheEncoding()
     );
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Holder<Item>>> NEEDLE_STORED_ITEM = DATA_COMPONENTS.registerComponentType(
-            "needle_stored_item",
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Holder<Item>>> AFFINITY_STORED_ITEM = DATA_COMPONENTS.registerComponentType(
+            "affinity_stored_item",
             builder -> builder
                     .persistent(BuiltInRegistries.ITEM.holderByNameCodec())
                     .networkSynchronized(ByteBufCodecs.holderRegistry(Registries.ITEM))

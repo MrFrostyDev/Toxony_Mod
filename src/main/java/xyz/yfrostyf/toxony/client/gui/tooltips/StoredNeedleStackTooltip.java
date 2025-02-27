@@ -35,7 +35,7 @@ public class StoredNeedleStackTooltip implements ClientTooltipComponent {
 
     @Override
     public void renderImage(Font font, int x, int y, GuiGraphics guiGraphics) {
-        ItemStack stack = new ItemStack(itemstack.getOrDefault(DataComponentsRegistry.NEEDLE_STORED_ITEM, BuiltInRegistries.ITEM.wrapAsHolder(Items.AIR)));
+        ItemStack stack = new ItemStack(itemstack.getOrDefault(DataComponentsRegistry.AFFINITY_STORED_ITEM, BuiltInRegistries.ITEM.wrapAsHolder(Items.AIR)));
         if (stack.isEmpty()) return;
 
         guiGraphics.renderItem(stack, x+1, y+1, 0);

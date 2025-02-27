@@ -15,7 +15,7 @@ import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ToxonyCraftingTableRecipes extends RecipeProvider {
+public class    ToxonyCraftingTableRecipes extends RecipeProvider {
 
     public ToxonyCraftingTableRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
@@ -63,7 +63,7 @@ public class ToxonyCraftingTableRecipes extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.REDSTONE_MIXTURE.get())
                 .requires(ItemRegistry.TOXIC_PASTE.get())
-                .requires(DataComponentIngredient.of(false, PotionContents.createItemStack(Items.GLASS_BOTTLE, Potions.WATER)))
+                .requires(DataComponentIngredient.of(false, PotionContents.createItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER)))
                 .requires(Items.REDSTONE)
                 .unlockedBy("has_toxic_paste", has(ItemRegistry.TOXIC_PASTE.get()))
                 .save(output);

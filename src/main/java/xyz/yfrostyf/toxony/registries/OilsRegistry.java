@@ -34,6 +34,24 @@ public class OilsRegistry {
             List.of(MobEffects.REGENERATION)
     ));
 
+    public static final DeferredHolder<Oil, Oil> SLOWNESS_OIL = OILS.register("slowness_oil", () -> new Oil(
+            Component.translatable("oil.toxony.slowness"),
+            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            List.of(MobEffects.MOVEMENT_SLOWDOWN)
+    ));
+
+    public static final DeferredHolder<Oil, Oil> FATIGUE_OIL = OILS.register("fatigue_oil", () -> new Oil(
+            Component.translatable("oil.toxony.fatigue"),
+            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            List.of(MobEffects.MOVEMENT_SLOWDOWN, MobEffects.DIG_SLOWDOWN, MobEffects.WEAKNESS)
+    ));
+
+    public static final DeferredHolder<Oil, Oil> FIRE_RESISTANCE_OIL = OILS.register("fire_resistance_oil", () -> new Oil(
+            Component.translatable("oil.toxony.fire_resistance"),
+            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            List.of(MobEffects.FIRE_RESISTANCE)
+    ));
+
     public static void register(IEventBus eventBus){
         OILS.register(eventBus);
     }

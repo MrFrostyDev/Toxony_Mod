@@ -2,7 +2,6 @@ package xyz.yfrostyf.toxony.api.items;
 
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -15,13 +14,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
-import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
-import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
@@ -35,7 +31,7 @@ public class ToxGiverBlockItem extends BlockItem {
     protected final float tier;
     protected final Supplier<ItemStack> returnItem;
     protected final List<MobEffectInstance> mobEffectInstances;
-    protected static final int EAT_DURATION = 60;
+    protected static final int EAT_DURATION = 32;
 
     public ToxGiverBlockItem(Block block, Properties properties, float tox, float tolerance, int tier, Supplier<ItemStack> returnItem, List<MobEffectInstance> mobEffectInstances) {
         super(block, properties);

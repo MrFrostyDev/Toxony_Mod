@@ -25,7 +25,7 @@ public class TooltipRenderEvents {
         if(itemstack.has(DataComponentsRegistry.OIL)){
             event.getTooltipElements().add(Either.right(new OilTooltip.OilTooltipComponent(itemstack)));
         }
-        if(itemstack.has(DataComponentsRegistry.NEEDLE_STORED_ITEM)){
+        if(itemstack.has(DataComponentsRegistry.AFFINITY_STORED_ITEM)){
             event.getTooltipElements().add(Either.right(new StoredNeedleStackTooltip.StoredNeedleStackTooltipComponent(itemstack)));
         }
         if(itemstack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)

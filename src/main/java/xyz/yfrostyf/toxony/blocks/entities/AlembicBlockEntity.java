@@ -23,13 +23,11 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -43,7 +41,6 @@ import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
 import xyz.yfrostyf.toxony.recipes.inputs.PairCombineRecipeInput;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
-import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
 
 import java.util.Optional;
@@ -215,9 +212,9 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
     }
 
     private static ItemStack handleNeedleStoredItem(ItemStack inputItem, ItemStack resultItem){
-        if(!inputItem.has(DataComponentsRegistry.POSSIBLE_AFFINITIES) || resultItem.has(DataComponentsRegistry.NEEDLE_STORED_ITEM)) return resultItem;
+        if(!inputItem.has(DataComponentsRegistry.POSSIBLE_AFFINITIES) || resultItem.has(DataComponentsRegistry.AFFINITY_STORED_ITEM)) return resultItem;
         ItemStack newResultItem = resultItem.copy();
-        newResultItem.set(DataComponentsRegistry.NEEDLE_STORED_ITEM, inputItem.getItemHolder());
+        newResultItem.set(DataComponentsRegistry.AFFINITY_STORED_ITEM, inputItem.getItemHolder());
         return newResultItem;
     }
 

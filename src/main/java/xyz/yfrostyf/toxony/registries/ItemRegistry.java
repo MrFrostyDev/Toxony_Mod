@@ -37,13 +37,16 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |--------------------------------------Tools----------------------------------------|
     // |-----------------------------------------------------------------------------------|
-    public static final DeferredHolder<Item, Item> TOX_VIAL = ITEMS.register("tox_vial", () -> new VialItem(new Item.Properties().stacksTo(32)));
+    public static final DeferredHolder<Item, Item> GLASS_VIAL = ITEMS.register("glass_vial", () -> new VialItem(new Item.Properties().stacksTo(32)));
+    public static final DeferredHolder<Item, Item> TOX_VIAL = ITEMS.register("tox_vial", () -> new FullVialItem(new Item.Properties().stacksTo(32)));
+
 
     public static final DeferredHolder<Item, Item> REDSTONE_MIXTURE = ITEMS.register("redstone_mixture", () -> new Item(new Item.Properties().stacksTo(32)));
     public static final DeferredHolder<Item, Item> REDSTONE_SOLUTION = ITEMS.register("redstone_solution", () -> new Item(new Item.Properties().stacksTo(32)));
     public static final DeferredHolder<Item, Item> AFFINITY_SOLUTION = ITEMS.register("affinity_solution", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> MAGNIFYING_GLASS = ITEMS.register("magnifying_glass", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> COPPER_NEEDLE = ITEMS.register("copper_needle", () -> new NeedleItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredHolder<Item, Item> TOX_NEEDLE = ITEMS.register("tox_needle", () -> new ToxNeedleItem(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> COPPER_SCALPEL = ITEMS.register("copper_scalpel", () -> new ScalpelItem(new Item.Properties().stacksTo(1)
             .durability(100).attributes(ScalpelItem.createAttributes(3.0F, -2.0F))
     ));
@@ -54,17 +57,27 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |-------------------------------------Oil Pots--------------------------------------|
     // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Item, Item> BASE_OIL = ITEMS.register("base_oil", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> CLAY_OIL_POT = ITEMS.register("clay_oil_pot", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> EMPTY_OIL_POT = ITEMS.register("empty_oil_pot", () -> new Item(new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> POISON_OIL_POT = createOilPot(
-            "poison_oil_pot", 5, OilsRegistry.POISON_OIL::get, 200, 0, 100);
+            "poison_oil_pot", 3, OilsRegistry.POISON_OIL::get, 200, 0, 100);
 
     public static final DeferredHolder<Item, Item> TOXIN_OIL_POT = createOilPot(
-            "toxin_oil_pot", 5, OilsRegistry.TOXIN_OIL::get, 120, 0, 100);
+            "toxin_oil_pot", 3, OilsRegistry.TOXIN_OIL::get, 120, 0, 100);
 
     public static final DeferredHolder<Item, Item> REGENERATION_OIL_POT = createOilPot(
-            "regeneration_oil_pot", 5, OilsRegistry.REGENERATION_OIL::get, 200, 0, 100);
+            "regeneration_oil_pot", 3, OilsRegistry.REGENERATION_OIL::get, 200, 0, 100);
+
+    public static final DeferredHolder<Item, Item> FIRE_RESISTANCE_OIL_POT = createOilPot(
+            "fire_resistance_oil_pot", 3, OilsRegistry.FIRE_RESISTANCE_OIL::get, 200, 0, 100);
+
+    public static final DeferredHolder<Item, Item> SLOWNESS_OIL_POT = createOilPot(
+            "slowness_oil_pot", 3, OilsRegistry.SLOWNESS_OIL::get, 300, 0, 100);
+
+    public static final DeferredHolder<Item, Item> FATIGUE_OIL_POT = createOilPot(
+            "fatigue_oil_pot", 3, OilsRegistry.FATIGUE_OIL::get, 300, 1, 100);
 
     // |----------------------------------------------------------------------------------|
     // |-------------------------------------Blends---------------------------------------|
@@ -76,6 +89,7 @@ public class ItemRegistry {
             .effect(new MobEffectInstance(MobEffects.POISON, 1000, 0))
             .build()
     );
+
     public static final DeferredHolder<Item, Item> TOXIC_BLEND = ITEMS.register("toxic_blend", () -> BlendItem.builder()
             .properties(new Item.Properties().stacksTo(1))
             .tox(40).tolerance(25).tier(1)
@@ -83,6 +97,7 @@ public class ItemRegistry {
             .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 1000, 0))
             .build()
     );
+
     public static final DeferredHolder<Item, Item> PURE_BLEND = ITEMS.register("pure_blend", () -> BlendItem.builder()
             .properties(new Item.Properties().stacksTo(1))
             .tox(65).tolerance(40).tier(2)
@@ -100,7 +115,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> TOXIN = ITEMS.register("toxin", () -> ToxGiverItem.builder()
             .tox(40).tolerance(20).tier(2)
             .returnItem(() -> new ItemStack(Items.GLASS_BOTTLE))
-            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 500, 2, false, false, false))
+            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 400, 1, false, false, false))
             .build()
     );
 

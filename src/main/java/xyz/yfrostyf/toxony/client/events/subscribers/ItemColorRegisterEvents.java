@@ -18,7 +18,7 @@ public class ItemColorRegisterEvents {
         event.register((stack, tintIndex) -> tintIndex > 0
                         ? -1
                         : FastColor.ARGB32.opaque(stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor()),
-                ItemRegistry.COPPER_NEEDLE.get(),
+                ItemRegistry.TOX_NEEDLE.get(),
                 ItemRegistry.TOX_VIAL.get()
         );
     }
