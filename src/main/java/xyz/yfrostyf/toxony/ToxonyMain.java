@@ -34,6 +34,7 @@ public class ToxonyMain {
 
 
         ItemRegistry.register(modEventBus);
+        EntityRegistry.register(modEventBus);
         DataAttachmentRegistry.register(modEventBus);
         DataComponentsRegistry.register(modEventBus);
         BlockRegistry.register(modEventBus);
@@ -42,6 +43,7 @@ public class ToxonyMain {
         OilsRegistry.register(modEventBus);
         MenuRegistry.register(modEventBus);
         RecipeRegistry.register(modEventBus);
+        ParticleRegistry.register(modEventBus);
         CreativeTabRegistry.register(modEventBus);
         LootModifierSerializerRegistry.register(modEventBus);
 

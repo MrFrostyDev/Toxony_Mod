@@ -15,7 +15,6 @@ public class OilUtil {
 
         int curOilUses = stack.get(DataComponentsRegistry.OIL_USES);
         int maxOilUses = stack.get(DataComponentsRegistry.OIL).maxUses();
-        ToxonyMain.LOGGER.info("[OilUtil useOil] maxUses: {}, currentUses: {}", maxOilUses, curOilUses);
 
         if(stack.set(DataComponentsRegistry.OIL_USES, curOilUses+amount) >= maxOilUses){
             if(!level.isClientSide()){

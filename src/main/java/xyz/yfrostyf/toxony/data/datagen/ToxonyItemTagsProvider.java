@@ -4,13 +4,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
 
@@ -33,14 +28,14 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.LETHAL_DOSE.get()
                 );
 
-        this.tag(TagRegistry.SCALPEL_ITEM_TAG)
+        this.tag(TagRegistry.SCALPEL_ITEM)
                 .add(
                         ItemRegistry.COPPER_SCALPEL.get(),
                         ItemRegistry.NETHERITE_SCALPEL.get(),
                         ItemRegistry.LETHAL_DOSE.get()
                 );
 
-        this.tag(TagRegistry.POISONOUS_INGREDIENTS_ITEM_TAG)
+        this.tag(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
                 .add(
                         Items.SPIDER_EYE,
                         Items.PUFFERFISH,
@@ -49,7 +44,7 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
 
                 );
 
-        this.tag(TagRegistry.POISONOUS_PLANTS_ITEM_TAG)
+        this.tag(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .add(
                         Items.POISONOUS_POTATO,
                         ItemRegistry.FALSE_BERRIES.get(),

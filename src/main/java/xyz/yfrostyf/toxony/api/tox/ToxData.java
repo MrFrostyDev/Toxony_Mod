@@ -291,11 +291,7 @@ public class ToxData {
 
     public void addKnownIngredients(ItemStack itemstack, int amount){
         ResourceLocation resourceLocation = itemstack.getItemHolder().getKey().location();
-        if(!this.hasKnownIngredient(itemstack)){
-            this.knownIngredients.put(resourceLocation, amount);
-            return;
-        }
-        this.knownIngredients.replace(resourceLocation, knownIngredients.get(resourceLocation) + amount);
+        this.knownIngredients.merge(resourceLocation, amount, Integer::sum);
     }
 
     public Map<ResourceLocation, Integer> getKnownIngredients(){
@@ -304,8 +300,7 @@ public class ToxData {
 
     public int getIngredientProgress(ItemStack itemstack){
         ResourceLocation location = itemstack.getItemHolder().getKey().location();
-        if(!this.hasKnownIngredient(itemstack))return 0;
-        return knownIngredients.get(location);
+        return knownIngredients.getOrDefault(location, 0);
     }
 
     private boolean hasKnownIngredient(ItemStack itemstack){

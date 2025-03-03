@@ -5,6 +5,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -126,7 +127,7 @@ public class ToxNeedleItem extends Item {
         if(toxData.getIngredientProgress(storedStack) >= ToxData.MINIMUM_KNOW){
             if(player.level().isClientSide()){
                 Minecraft.getInstance().gui.setOverlayMessage(
-                        Component.translatable("message.toxony.needle.knowledge.success", stack.getDisplayName()),
+                        Component.translatable("message.toxony.needle.knowledge.success", Component.translatable(storedStack.getDescriptionId()).getString()),
                         false
                 );
             }
@@ -134,7 +135,7 @@ public class ToxNeedleItem extends Item {
         else{
             if(player.level().isClientSide()){
                 Minecraft.getInstance().gui.setOverlayMessage(
-                        Component.translatable("message.toxony.needle.knowledge.fail", stack.getDisplayName()),
+                        Component.translatable("message.toxony.needle.knowledge.fail", Component.translatable(storedStack.getDescriptionId()).getString()),
                         false
                 );
             }

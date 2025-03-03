@@ -40,7 +40,6 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> GLASS_VIAL = ITEMS.register("glass_vial", () -> new VialItem(new Item.Properties().stacksTo(32)));
     public static final DeferredHolder<Item, Item> TOX_VIAL = ITEMS.register("tox_vial", () -> new FullVialItem(new Item.Properties().stacksTo(32)));
 
-
     public static final DeferredHolder<Item, Item> REDSTONE_MIXTURE = ITEMS.register("redstone_mixture", () -> new Item(new Item.Properties().stacksTo(32)));
     public static final DeferredHolder<Item, Item> REDSTONE_SOLUTION = ITEMS.register("redstone_solution", () -> new Item(new Item.Properties().stacksTo(32)));
     public static final DeferredHolder<Item, Item> AFFINITY_SOLUTION = ITEMS.register("affinity_solution", () -> new Item(new Item.Properties().stacksTo(16)));
@@ -57,6 +56,10 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |-------------------------------------Oil Pots--------------------------------------|
     // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Item, Item> OIL_POT_SASH = ITEMS.register("oil_pot_sash", () -> new OilPotSashItem(new Item.Properties().durability(16)));
+    public static final DeferredHolder<Item, Item> OIL_POT_BANDOLIER = ITEMS.register("oil_pot_bandolier", () -> new OilPotSashItem(new Item.Properties().durability(40)));
+
+
     public static final DeferredHolder<Item, Item> BASE_OIL = ITEMS.register("base_oil", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> CLAY_OIL_POT = ITEMS.register("clay_oil_pot", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> EMPTY_OIL_POT = ITEMS.register("empty_oil_pot", () -> new Item(new Item.Properties()));
@@ -181,14 +184,14 @@ public class ItemRegistry {
     // |------------------------------------Tox Fueled-------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> WITCHING_BLADE = ITEMS.register("witching_blade", () -> WitchingBladeItem.builder()
-            .properties(new Item.Properties().stacksTo(1).attributes(WitchingBladeItem.createAttributes(6.0F, -2.4F)).durability(1600))
+            .properties(new Item.Properties().attributes(WitchingBladeItem.createAttributes(6.0F, -2.4F)).durability(1600))
             .tickrate(40)
             .cooldown(60)
             .sound(SoundEvents.FIRECHARGE_USE)
             .build()
     );
     public static final DeferredHolder<Item, Item> LETHAL_DOSE = ITEMS.register("lethal_dose", () -> ToxScalpelItem.builder()
-            .properties(new Item.Properties().stacksTo(1).attributes(ScalpelItem.createAttributes(5.0F, -2.0F)).durability(1650))
+            .properties(new Item.Properties().attributes(ScalpelItem.createAttributes(5.0F, -2.0F)).durability(1650))
             .tickrate(40)
             .cooldown(60)
             .sound(SoundEvents.FIRECHARGE_USE)

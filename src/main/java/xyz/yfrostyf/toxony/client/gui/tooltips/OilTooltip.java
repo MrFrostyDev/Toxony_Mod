@@ -33,7 +33,7 @@ public class OilTooltip implements ClientTooltipComponent {
 
     @Override
     public int getWidth(Font font) {
-        return 20;
+        return BAR_OIL_WIDTH;
     }
 
     @Override
@@ -63,28 +63,30 @@ public class OilTooltip implements ClientTooltipComponent {
     @Override
     public void renderImage(Font font, int x, int y, GuiGraphics guiGraphics) {
         ItemOil itemoil = itemstack.getOrDefault(DataComponentsRegistry.OIL, ItemOil.EMPTY);
+        int uses = itemstack.getOrDefault(DataComponentsRegistry.OIL_USES, -1);
         if (itemoil.isEmpty()) return;
-        int uses = itemstack.getOrDefault(DataComponentsRegistry.OIL_USES, 0);
 
         Holder<MobEffect> holder = itemoil.oil().effects().getFirst();
         MobEffectTextureManager mobEffectTextureManager = Minecraft.getInstance().getMobEffectTextures();
         TextureAtlasSprite textureatlassprite = mobEffectTextureManager.get(holder);
 
-        int oilBarWidth = Mth.ceil(BAR_OIL_WIDTH * Math.min((float)(itemoil.maxUses()-uses)/(float)itemoil.maxUses(), 1));
+        if(uses >= 0){
+            int oilBarWidth = Mth.ceil(BAR_OIL_WIDTH * Math.min((float)(itemoil.maxUses()-uses)/(float)itemoil.maxUses(), 1));
 
-        // Max Bar | (ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight)
-        guiGraphics.blit(RESOURCE,
-                x+ICON_WIDTH-1, y+6,
-                BAR_UOFFSET, BAR_MAX_VOFFSET,
-                BAR_MAX_WIDTH, BAR_HEIGHT,
-                TEXTURE_WIDTH, TEXTURE_HEIGHT);
+            // Max Bar | (ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight)
+            guiGraphics.blit(RESOURCE,
+                    x+ICON_WIDTH-1, y+6,
+                    BAR_UOFFSET, BAR_MAX_VOFFSET,
+                    BAR_MAX_WIDTH, BAR_HEIGHT,
+                    TEXTURE_WIDTH, TEXTURE_HEIGHT);
 
-        // Oil Bar
-        guiGraphics.blit(RESOURCE,
-                x+ICON_WIDTH-1, y+6,
-                BAR_UOFFSET, BAR_OIL_VOFFSET,
-                oilBarWidth, BAR_HEIGHT,
-                TEXTURE_WIDTH, TEXTURE_HEIGHT);
+            // Oil Bar
+            guiGraphics.blit(RESOURCE,
+                    x+ICON_WIDTH-1, y+6,
+                    BAR_UOFFSET, BAR_OIL_VOFFSET,
+                    oilBarWidth, BAR_HEIGHT,
+                    TEXTURE_WIDTH, TEXTURE_HEIGHT);
+        }
 
         // Icon
         guiGraphics.blit(RESOURCE,

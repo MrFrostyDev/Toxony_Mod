@@ -36,7 +36,7 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
 
     private void dropUniqueWhilePoisoned(String name, Item dropItem, int min, int max){
         EntityEquipmentPredicate equipmentPredicate = EntityEquipmentPredicate.Builder.equipment().mainhand(
-                ItemPredicate.Builder.item().of(TagRegistry.SCALPEL_ITEM_TAG)).build();
+                ItemPredicate.Builder.item().of(TagRegistry.SCALPEL_ITEM)).build();
 
         LootItemCondition.Builder attackerHasScalpelPredicate = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER, EntityPredicate.Builder.entity()
                 .equipment(equipmentPredicate));

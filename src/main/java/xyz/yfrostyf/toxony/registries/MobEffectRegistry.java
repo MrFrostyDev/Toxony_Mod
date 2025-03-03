@@ -7,12 +7,13 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.effects.FlammableMobEffect;
 import xyz.yfrostyf.toxony.effects.HuntMobEffect;
 import xyz.yfrostyf.toxony.effects.ToxinMobEffect;
-import xyz.yfrostyf.toxony.mutagens.CatMutagenEffect;
-import xyz.yfrostyf.toxony.mutagens.SpiderMutagenEffect;
-import xyz.yfrostyf.toxony.mutagens.TurtleMutagenEffect;
-import xyz.yfrostyf.toxony.mutagens.WolfMutagenEffect;
+import xyz.yfrostyf.toxony.effects.mutagens.CatMutagenEffect;
+import xyz.yfrostyf.toxony.effects.mutagens.SpiderMutagenEffect;
+import xyz.yfrostyf.toxony.effects.mutagens.TurtleMutagenEffect;
+import xyz.yfrostyf.toxony.effects.mutagens.WolfMutagenEffect;
 
 public class MobEffectRegistry {
     private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, ToxonyMain.MOD_ID);
@@ -30,6 +31,11 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> TOXIN = MOB_EFFECTS.register(
             "toxin",
             () -> new ToxinMobEffect(MobEffectCategory.HARMFUL)
+    );
+
+    public static final DeferredHolder<MobEffect, MobEffect> FLAMMABLE = MOB_EFFECTS.register(
+            "flammable",
+            () -> new FlammableMobEffect(MobEffectCategory.HARMFUL)
     );
 
     public static final DeferredRegister<MobEffect> MOB_MUTAGENS = DeferredRegister.create(Registries.MOB_EFFECT, ToxonyMain.MOD_ID);

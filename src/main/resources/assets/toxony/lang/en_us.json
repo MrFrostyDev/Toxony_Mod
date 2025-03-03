@@ -20,6 +20,8 @@
   "item.toxony.netherite_scalpel": "Netherite Scalpel",
   "item.toxony.lethal_dose": "Lethal Dose",
 
+  "item.toxony.oil_pot_sash": "Oil Pot Sash",
+  "item.toxony.oil_pot_bandolier": "Oil Pot Bandolier",
   "item.toxony.copper_needle": "Copper Needle",
   "item.toxony.glass_vial": "Glass Vial",
   "item.toxony.magnifying_glass": "Magnifying Glass",
@@ -45,6 +47,7 @@
 
   "effect.toxony.hunt": "Hunt",
   "effect.toxony.toxin": "Toxin",
+  "effect.toxony.flammable": "Flammable",
 
   "effect.toxony.wolf_mutagen": "Mutagen",
   "effect.toxony.cat_mutagen": "Mutagen",
@@ -55,8 +58,8 @@
   "death.toxony.damage.needle": "%1$s produced worthwhile results for %2$s's experiment",
 
   "message.toxony.needle.fail": "Target now weak enough to inject.",
-  "message.toxony.needle.knowledge.fail": "You gained some insight about %s's affinity.",
-  "message.toxony.needle.knowledge.success": "You have gained sufficient knowledge for %s, and now know it affinity.",
+  "message.toxony.needle.knowledge.fail": "You gained some insight about %s.",
+  "message.toxony.needle.knowledge.success": "You have gained sufficient knowledge for %s.",
 
   "message.toxony.graft.success": "The plant seems to have changed from grafting this item.",
   "message.toxony.graft.fail": "Attempting to graft this item to the plant produced no results.",

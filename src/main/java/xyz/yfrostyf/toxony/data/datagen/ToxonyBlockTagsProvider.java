@@ -20,7 +20,7 @@ public class ToxonyBlockTagsProvider extends BlockTagsProvider {
     // Add your tag entries here.
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
-        this.tag(TagRegistry.POISONOUS_PLANTS_BLOCK_TAG)
+        this.tag(TagRegistry.POISONOUS_PLANTS_BLOCK)
                 .add(
                         BlockRegistry.WILD_OCELOT_MINT.get(),
                         BlockRegistry.OCELOT_MINT.get(),

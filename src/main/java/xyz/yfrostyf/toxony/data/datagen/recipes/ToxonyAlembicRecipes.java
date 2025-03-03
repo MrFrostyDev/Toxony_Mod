@@ -30,14 +30,14 @@ public class ToxonyAlembicRecipes extends RecipeProvider {
                 .build(output);
 
         new AlembicRecipeBuilder(new ItemStack(ItemRegistry.AFFINITY_SOLUTION.get()))
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM_TAG)
+                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .ingredientToConvert(ItemRegistry.REDSTONE_SOLUTION.get())
                 .boilTime(800)
                 .unlockedByItems("has_redstone_solution", ItemRegistry.REDSTONE_SOLUTION.get())
                 .build(output);
 
         new AlembicRecipeBuilder(new ItemStack(ItemRegistry.AFFINITY_SOLUTION.get()))
-                .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM_TAG)
+                .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
                 .ingredientToConvert(ItemRegistry.REDSTONE_SOLUTION.get())
                 .boilTime(800)
                 .unlockedByItems("has_redstone_solution", ItemRegistry.REDSTONE_SOLUTION.get())

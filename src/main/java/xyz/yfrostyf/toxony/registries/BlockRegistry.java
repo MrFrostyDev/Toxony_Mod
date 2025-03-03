@@ -6,6 +6,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -195,6 +196,19 @@ public class BlockRegistry {
     // |-----------------------------------------------------------------------------------|
     // |------------------------------------Misc Items-------------------------------------|
     // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Block, Block> OIL_LAYER = BLOCKS.register(
+            "oil_layer",
+            () -> new OilLayerBlock(BlockBehaviour.Properties.of()
+                    .sound(SoundType.SLIME_BLOCK)
+                    .noCollission()
+                    .randomTicks()
+                    .mapColor(MapColor.SNOW)
+                    .strength(3.0F)
+                    .pushReaction(PushReaction.DESTROY)
+                    .ignitedByLava()
+            )
+    );
+
     public static final DeferredHolder<Block, Block> VALENTINES_BOX = BLOCKS.register(
             "valentines_box",
             () -> new ValentinesBoxBlock(BlockBehaviour.Properties.of()

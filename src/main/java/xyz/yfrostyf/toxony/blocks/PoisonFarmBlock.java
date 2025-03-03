@@ -62,7 +62,7 @@ public class PoisonFarmBlock extends Block {
     // Only allow toxic/poisonous plants
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
-        return plant.is(TagRegistry.POISONOUS_PLANTS_BLOCK_TAG) ? TriState.DEFAULT : TriState.FALSE;
+        return plant.is(TagRegistry.POISONOUS_PLANTS_BLOCK) ? TriState.DEFAULT : TriState.FALSE;
     }
 
     @Override

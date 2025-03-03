@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.mutagens;
+package xyz.yfrostyf.toxony.effects.mutagens;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectCategory;

@@ -9,11 +9,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -116,7 +114,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
 
     protected ItemInteractionResult tryTransformEvolved(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player){
         if(!stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)
-                || !stack.is(TagRegistry.POISONOUS_PLANTS_ITEM_TAG)
+                || !stack.is(TagRegistry.POISONOUS_PLANTS_ITEM)
                 || stack.getItem().equals(this.grownItem.get().value())) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
         ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);

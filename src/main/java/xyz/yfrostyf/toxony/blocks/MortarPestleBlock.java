@@ -34,12 +34,12 @@ public class MortarPestleBlock extends Block implements EntityBlock {
 
     public static final MapCodec<MortarPestleBlock> CODEC = simpleCodec(MortarPestleBlock::new);
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
-    public static final IntegerProperty HAS_INGREDIENTS = IntegerProperty.create("has_ingredients", 0, 3);
+    public static final IntegerProperty INGREDIENTS = IntegerProperty.create("ingredients", 0, 5);
     protected static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 5, 13);
 
     public MortarPestleBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HAS_INGREDIENTS, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(INGREDIENTS, 0));
     }
 
     @Override
@@ -87,7 +87,7 @@ public class MortarPestleBlock extends Block implements EntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         // this is where the properties are actually added to the state
-        builder.add(FACING, HAS_INGREDIENTS);
+        builder.add(FACING, INGREDIENTS);
     }
 
     @Override

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "toxony:block/oil_layer"
+    }
+  }
+}

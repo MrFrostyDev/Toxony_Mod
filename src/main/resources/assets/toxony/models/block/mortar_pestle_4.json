@@ -1,0 +1,9 @@
+{
+	"credit": "MrFrostyDev",
+	"parent": "toxony:block/mortar_pestle_1",
+	"render_type": "cutout",
+	"textures": {
+		"0": "toxony:block/mortar_pestle_4",
+		"particle": "toxony:block/mortar_pestle_4"
+	}
+}

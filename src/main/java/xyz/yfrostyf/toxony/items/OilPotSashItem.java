@@ -1,0 +1,65 @@
+package xyz.yfrostyf.toxony.items;
+
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
+import net.minecraft.world.level.Level;
+import xyz.yfrostyf.toxony.entities.item.ThrownOilPot;
+import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
+
+public class OilPotSashItem extends Item implements ProjectileItem {
+    public OilPotSashItem(Properties properties) {
+        super(properties);
+    }
+
+    /**
+     * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see {@link #onItemUse}.
+     */
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand thisHand) {
+        ItemStack thisStack = player.getItemInHand(thisHand);
+        InteractionHand otherHand = thisHand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        ItemStack otherStack = player.getItemInHand(otherHand);
+
+        if(otherStack.getItem() instanceof OilPotItem oilPotItem && !otherStack.is(this)){
+            thisStack.set(DataComponentsRegistry.OIL, oilPotItem.getItemOil());
+            thisStack.setDamageValue(0);
+            player.playSound(SoundEvents.HONEYCOMB_WAX_ON);
+            return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
+        }
+        else if(thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.BASE_OIL)){
+            thisStack.setDamageValue(0);
+            player.playSound(SoundEvents.SLIME_BLOCK_PLACE);
+            return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
+        }
+        else if(thisStack.has(DataComponentsRegistry.OIL)){
+            if (!level.isClientSide) {
+                ThrownOilPot thrownOilPot = new ThrownOilPot(level, player, thisStack);
+                thrownOilPot.setItem(thisStack);
+                thrownOilPot.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 0.5F, 1.0F);
+                level.addFreshEntity(thrownOilPot);
+            }
+
+            thisStack.hurtAndBreak(1, player, thisHand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+            player.playSound(SoundEvents.SPLASH_POTION_THROW);
+            return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
+        }
+        return InteractionResultHolder.pass(thisStack);
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
+        ThrownOilPot thrownOilPot = new ThrownOilPot(level, stack, pos.x(), pos.y(), pos.z());
+        thrownOilPot.setItem(stack);
+        return thrownOilPot;
+    }
+}

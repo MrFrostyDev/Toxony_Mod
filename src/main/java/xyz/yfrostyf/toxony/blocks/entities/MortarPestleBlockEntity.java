@@ -46,8 +46,8 @@ import java.util.Optional;
 import static xyz.yfrostyf.toxony.registries.BlockRegistry.MORTAR_PESTLE_ENTITY;
 
 public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler, MenuProvider {
+    public static final float DEFAULT_PESTLE_TICK = 20;
     private static final int CONTAINER_SIZE = 4;
-    private static final int DEFAULT_PESTLE_TICK = 20;
     public static final int PESTLE_TOTAL_COUNT = 3;
 
     public boolean isPestling;
@@ -116,20 +116,27 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
 
         // Manage block state for MortarPestleBlock
         if (!(state.getBlock() instanceof MortarPestleBlock)) return;
-        BlockState blockState;
-        if(blockEntity.isPestling && blockEntity.pestleCount >= PESTLE_TOTAL_COUNT){
-            blockState = state.setValue(MortarPestleBlock.HAS_INGREDIENTS, 3);
+        if(blockEntity.isPestling && blockEntity.pestleTick > 0) return;
+
+        BlockState blockState = state;
+        if(blockEntity.pestleCount >= PESTLE_TOTAL_COUNT){
+            blockState = blockState.setValue(MortarPestleBlock.INGREDIENTS, 5);
         }
-        else if (blockEntity.getResultItem() != ItemStack.EMPTY) {
-            blockState = state.setValue(MortarPestleBlock.HAS_INGREDIENTS, 2);
+        else if(blockEntity.pestleCount == PESTLE_TOTAL_COUNT-1){
+            blockState = blockState.setValue(MortarPestleBlock.INGREDIENTS, 4);
         }
-        else if (!blockEntity.isPestling && blockEntity.hasItemInInventory()) {
-            blockState = state.setValue(MortarPestleBlock.HAS_INGREDIENTS, 1);
+        else if(blockEntity.pestleCount == PESTLE_TOTAL_COUNT-2){
+            blockState = blockState.setValue(MortarPestleBlock.INGREDIENTS, 3);
+        }
+        else if (!blockEntity.getResultItem().isEmpty()) {
+            blockState = blockState.setValue(MortarPestleBlock.INGREDIENTS, 2);
+        }
+        else if (blockEntity.hasItemInInventory()) {
+            blockState = blockState.setValue(MortarPestleBlock.INGREDIENTS, 1);
         }
         else{
-            blockState = state.setValue(MortarPestleBlock.HAS_INGREDIENTS, 0);
+            blockState = blockState.setValue(MortarPestleBlock.INGREDIENTS, 0);
         }
-        level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
         level.setBlock(pos, blockState, Block.UPDATE_CLIENTS);
     }
 
@@ -209,7 +216,7 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
         }
         else{
             Minecraft.getInstance().gui.setOverlayMessage(
-                    Component.translatable("message.toxony.mortar.warning", useItem.getDisplayName()),
+                    Component.translatable("message.toxony.mortar.warning", Component.translatable(useItem.getDescriptionId())),
                     false
             );
         }
@@ -221,7 +228,7 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
 
     public boolean hasItemInInventory(){
         for(int i=0;i<getItemContainer().getSlots();i++){
-            if (getItemContainer().getStackInSlot(i) != ItemStack.EMPTY) {
+            if (!getItemContainer().getStackInSlot(i).isEmpty()) {
                 return true;
             }
         }

@@ -9,7 +9,7 @@ import xyz.yfrostyf.toxony.client.gui.tooltips.OilTooltip;
 import xyz.yfrostyf.toxony.client.gui.tooltips.StoredNeedleStackTooltip;
 import xyz.yfrostyf.toxony.client.gui.tooltips.ToxIngredientTooltip;
 
-//thank you [FarmersDelight Mod]
+//thank you [FarmersDelight Mod] for the reference
 
 @EventBusSubscriber(modid = ToxonyMain.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class TooltipRegisterEvents {

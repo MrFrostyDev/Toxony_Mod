@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.blocks.entities.MortarPestleBlockEntity;
-import xyz.yfrostyf.toxony.registries.RenderRegistry;
+import xyz.yfrostyf.toxony.client.events.subscribers.RenderRegisterEvents;
 
 public class MortarPestleRenderer implements BlockEntityRenderer<MortarPestleBlockEntity> {
     private final ModelPart pestleModel;
@@ -34,13 +34,13 @@ public class MortarPestleRenderer implements BlockEntityRenderer<MortarPestleBlo
     }
 
     public MortarPestleRenderer(BlockEntityRendererProvider.Context context){
-        this.pestleModel = Minecraft.getInstance().getEntityModels().bakeLayer(RenderRegistry.MORTAR_PESTLE_LAYER).getChild("pestle");
+        this.pestleModel = Minecraft.getInstance().getEntityModels().bakeLayer(RenderRegisterEvents.MORTAR_PESTLE_LAYER).getChild("pestle");
     }
 
     @Override
     public void render(MortarPestleBlockEntity block, float partialTick, PoseStack poseStack, MultiBufferSource buf, int packedLight, int packedOverlay) {
         RenderSystem.setShaderTexture(0, PESTLE_TEXTURE);
-        float coEff = block.pestleTick == 0 ? 0 : (block.pestleTick - partialTick) / 20.0f;
+        float coEff = block.pestleTick == 0 ? 0 : (block.pestleTick - partialTick) / MortarPestleBlockEntity.DEFAULT_PESTLE_TICK;
         poseStack.pushPose();
         poseStack.translate(0.5, 0.2, 0.5);
         poseStack.mulPose(Axis.YP.rotationDegrees(45 + coEff * 360));

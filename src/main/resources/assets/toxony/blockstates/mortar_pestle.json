@@ -2,37 +2,47 @@
   "multipart": [
     {
       "apply": {
-        "model": "toxony:block/mortar_pestle"
+        "model": "toxony:block/mortar_pestle_0"
       }
     },
     {
       "apply": {
-        "model": "toxony:block/mortar_pestle_empty"
-      },
-      "has_ingredients": 0
-    },
-    {
-      "apply": {
-        "model": "toxony:block/mortar_pestle_some"
+        "model": "toxony:block/mortar_pestle_1"
       },
       "when": {
-        "has_ingredients": 1
+        "ingredients": 1
       }
     },
     {
       "apply": {
-        "model": "toxony:block/mortar_pestle_full"
+        "model": "toxony:block/mortar_pestle_2"
       },
       "when": {
-        "has_ingredients": 2
+        "ingredients": 2
       }
     },
     {
       "apply": {
-        "model": "toxony:block/mortar_pestle_finished"
+        "model": "toxony:block/mortar_pestle_3"
       },
       "when": {
-        "has_ingredients": 3
+        "ingredients": 3
+      }
+    },
+    {
+      "apply": {
+        "model": "toxony:block/mortar_pestle_4"
+      },
+      "when": {
+        "ingredients": 4
+      }
+    },
+    {
+      "apply": {
+        "model": "toxony:block/mortar_pestle_5"
+      },
+      "when": {
+        "ingredients": 5
       }
     }
   ]
