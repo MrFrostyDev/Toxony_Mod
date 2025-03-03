@@ -1,10 +1,8 @@
 package xyz.yfrostyf.toxony.events.subscribers;
 
-import net.minecraft.core.Holder;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
@@ -22,18 +20,10 @@ public class OilEvents {
         ItemOil itemoil = itemInHand.getOrDefault(DataComponentsRegistry.OIL, ItemOil.EMPTY);
         if(itemInHand.isEmpty() || itemoil.isEmpty())return;
 
-        LivingEntity targetEntity = (LivingEntity)event.getTarget();
-
-        for (Holder<MobEffect> effect : itemoil.oil().effects()) {
-            if (effect.value().isInstantenous()) {
-                effect.value().applyInstantenousEffect(event.getEntity(), event.getEntity(), targetEntity, itemoil.amplifier(), 1);
-            } else {
-                if(!targetEntity.hasEffect(effect)){
-                    OilUtil.useOil(event.getEntity().level(), itemInHand, 1);
-                    MobEffectInstance effectInstance = new MobEffectInstance(effect, itemoil.duration(), itemoil.amplifier());
-                    targetEntity.addEffect(effectInstance, event.getEntity());
-                }
-            }
+        Level level = event.getEntity().level();
+        if(event.getTarget() instanceof LivingEntity targetEntity){
+            itemoil.getOil().applyOil(itemoil, event.getEntity(), targetEntity, level);
+            OilUtil.useOil(level, itemInHand, 1);
         }
     }
 }

@@ -35,13 +35,49 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
                 .build(output);
 
-        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.TOXIN_OIL_POT.get()))
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.FIRE_RESISTANCE_OIL_POT.get()))
                 .ingredient(Items.HONEYCOMB)
-                .ingredient(ItemRegistry.TOXIN.get())
+                .ingredient(Items.MAGMA_CREAM)
                 .use(ItemRegistry.EMPTY_OIL_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
                 .build(output);
 
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.FATIGUE_OIL_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(Items.FERMENTED_SPIDER_EYE)
+                .use(ItemRegistry.EMPTY_OIL_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
+                .build(output);
+
+        // Oil Tier 2 Recipes
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.TOXIN_TOX_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(ItemRegistry.TOXIN.get())
+                .use(ItemRegistry.EMPTY_TOX_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
+                .build(output);
+
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.REGENERATION_TOX_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(Items.GHAST_TEAR)
+                .use(ItemRegistry.EMPTY_TOX_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
+                .build(output);
+
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.ANCHOR_TOX_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(Items.FERMENTED_SPIDER_EYE)
+                .use(ItemRegistry.EMPTY_TOX_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
+                .build(output);
+
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.WITCHFIRE_TOX_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(Items.BLAZE_POWDER)
+                .ingredient(ItemRegistry.TOXIN.get())
+                .use(ItemRegistry.EMPTY_TOX_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
+                .build(output);
 
         // Blend Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.POISON_BLEND.get()))

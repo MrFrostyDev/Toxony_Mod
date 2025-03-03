@@ -63,24 +63,33 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> BASE_OIL = ITEMS.register("base_oil", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> CLAY_OIL_POT = ITEMS.register("clay_oil_pot", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> EMPTY_OIL_POT = ITEMS.register("empty_oil_pot", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> EMPTY_TOX_POT = ITEMS.register("empty_tox_pot", () -> new Item(new Item.Properties()));
+
 
     public static final DeferredHolder<Item, Item> POISON_OIL_POT = createOilPot(
-            "poison_oil_pot", 3, OilsRegistry.POISON_OIL::get, 200, 0, 100);
-
-    public static final DeferredHolder<Item, Item> TOXIN_OIL_POT = createOilPot(
-            "toxin_oil_pot", 3, OilsRegistry.TOXIN_OIL::get, 120, 0, 100);
-
-    public static final DeferredHolder<Item, Item> REGENERATION_OIL_POT = createOilPot(
-            "regeneration_oil_pot", 3, OilsRegistry.REGENERATION_OIL::get, 200, 0, 100);
+            "poison_oil_pot", 5, OilsRegistry.POISON_OIL::get, 200, 0, 150);
 
     public static final DeferredHolder<Item, Item> FIRE_RESISTANCE_OIL_POT = createOilPot(
-            "fire_resistance_oil_pot", 3, OilsRegistry.FIRE_RESISTANCE_OIL::get, 200, 0, 100);
-
-    public static final DeferredHolder<Item, Item> SLOWNESS_OIL_POT = createOilPot(
-            "slowness_oil_pot", 3, OilsRegistry.SLOWNESS_OIL::get, 300, 0, 100);
+            "fire_resistance_oil_pot", 5, OilsRegistry.FIRE_RESISTANCE_OIL::get, 200, 0, 150);
 
     public static final DeferredHolder<Item, Item> FATIGUE_OIL_POT = createOilPot(
-            "fatigue_oil_pot", 3, OilsRegistry.FATIGUE_OIL::get, 300, 1, 100);
+            "fatigue_oil_pot", 5, OilsRegistry.FATIGUE_OIL::get, 300, 0, 150);
+
+
+    // |-------------------------------Tier 2 -------------------------------|
+
+    public static final DeferredHolder<Item, Item> TOXIN_TOX_POT = createOilPot(
+            "toxin_tox_pot", 3, OilsRegistry.TOXIN_OIL::get, 120, 0, 100);
+
+    public static final DeferredHolder<Item, Item> REGENERATION_TOX_POT = createOilPot(
+            "regeneration_tox_pot", 3, OilsRegistry.REGENERATION_OIL::get, 200, 0, 100);
+
+    public static final DeferredHolder<Item, Item> ANCHOR_TOX_POT = createOilPot(
+            "anchor_tox_pot", 3, OilsRegistry.ANCHOR_OIL::get, 300, 1, 100);
+
+    public static final DeferredHolder<Item, Item> WITCHFIRE_TOX_POT = createOilPot(
+            "witchfire_tox_pot", 3, OilsRegistry.WITCHFIRE_OIL::get, 200, 0, 100);
+
 
     // |----------------------------------------------------------------------------------|
     // |-------------------------------------Blends---------------------------------------|
@@ -172,6 +181,20 @@ public class ItemRegistry {
             .build()
     );
 
+    public static final DeferredHolder<Item, Item> COLDSNAP_LEAF = ITEMS.register("coldsnap_leaf", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.WIND.getKey()))
+            .tox(2).tolerance(1).tier(0)
+            .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
+    public static final DeferredHolder<Item, Item> WHIRLSNAP_LEAF = ITEMS.register("whirlsnap_leaf", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey()))
+            .tox(2).tolerance(1).tier(1)
+            .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
     public static final DeferredHolder<Item, Item> BRITTLE_SCUTE = ITEMS.register("brittle_scute", () -> new Item(
             createAffinitiesProperty(AffinityRegistry.SUN.getKey(), AffinityRegistry.OCEAN.getKey())
     ));
@@ -211,6 +234,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SUNSPOT_SEED = ITEMS.register("sunspot_seed", () -> new ItemNameBlockItem(BlockRegistry.SUNSPOT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> WATER_HEMLOCK_SEED = ITEMS.register("water_hemlock_seed", () -> new ItemNameBlockItem(BlockRegistry.WATER_HEMLOCK.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> MOONLIGHT_HEMLOCK_SEED = ITEMS.register("moonlight_hemlock_seed", () -> new ItemNameBlockItem(BlockRegistry.MOONLIGHT_HEMLOCK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> COLDSNAP_SEED = ITEMS.register("coldsnap_seed", () -> new ItemNameBlockItem(BlockRegistry.COLDSNAP.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> WHIRLSNAP_SEED = ITEMS.register("whirlsnap_seed", () -> new ItemNameBlockItem(BlockRegistry.WHIRLSNAP.get(), new Item.Properties()));
 
 
     // |-----------------------------------------------------------------------------------|
@@ -218,16 +243,10 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> ALEMBIC_BASE = ITEMS.register("alembic_base", () -> new Item(new Item.Properties().stacksTo(16)));
 
-    public static final DeferredHolder<Item, Item> TOXIN_PLACEBO = ITEMS.register("toxin_placebo", () -> new ToxGiverItem.Builder()
-            .tox(50).tolerance(150).tier(3)
-            .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 100, 0, false, false, false))
-            .build()
-    );
-
     public static final DeferredHolder<Item, Item> VALENTINES_BOX = ITEMS.register("valentines_box", () -> new BlockItem(BlockRegistry.VALENTINES_BOX.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> MINT_CHOCOLATE = ITEMS.register("mint_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
-            false, 2,
+            false, 1,
             Optional.empty(),
             List.of(new FoodProperties.PossibleEffect(
                     () -> new MobEffectInstance(MobEffects.WATER_BREATHING, 100, 0), 0.5F)
@@ -236,7 +255,7 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> MILK_CHOCOLATE = ITEMS.register("milk_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
-            false, 2,
+            false, 1,
             Optional.empty(),
             List.of(new FoodProperties.PossibleEffect(
                     () -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 200, 0), 0.5F)
@@ -245,7 +264,7 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> DARK_CHOCOLATE = ITEMS.register("dark_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(
             2, 2,
-            false, 2,
+            false, 1,
             Optional.empty(),
             List.of(new FoodProperties.PossibleEffect(
                     () -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0), 0.5F)

@@ -41,9 +41,20 @@
   "item.toxony.copper_crucible": "Copper Crucible",
   "item.toxony.alembic": "Alembic",
 
+  "item.toxony.poison_oil_pot": "Poison Oil Pot",
+  "item.toxony.fire_resistance_oil_pot": "Fire Resistance Oil Pot",
+  "item.toxony.fatigue_oil_pot": "Fatigue Oil Pot",
+  "item.toxony.toxin_tox_pot": "Toxin Oil Pot",
+  "item.toxony.regeneration_tox_pot": "Regeneration Oil Pot",
+  "item.toxony.anchor_tox_pot": "Anchor Oil Pot",
+  "item.toxony.witchfire_tox_pot": "Witchfire Oil Pot",
+
   "oil.toxony.poison": "Poison Oil",
   "oil.toxony.toxin": "Toxin Oil",
-  "oil.toxony.regeneration": "Regeneration Oil",
+  "oil.toxony.fatigue": "Fatigue Oil",
+  "oil.toxony.anchor": "Anchor Oil",
+  "oil.toxony.fire_resistance": "Fire Resistance Oil",
+  "oil.toxony.witchfire": "Witchfire Oil",
 
   "effect.toxony.hunt": "Hunt",
   "effect.toxony.toxin": "Toxin",

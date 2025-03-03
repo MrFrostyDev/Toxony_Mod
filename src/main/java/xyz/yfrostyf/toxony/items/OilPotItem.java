@@ -34,7 +34,7 @@ public class OilPotItem extends Item {
         if(!(entity instanceof Player player))return stack;
         ItemStack applied = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
 
-        if (!applied.is(getItemOil().oil().supportedItems())) return stack;
+        if (!applied.is(getItemOil().oil().getSupportedItems())) return stack;
         if (getItemOil().isEmpty()) return stack;
 
         if (entity instanceof ServerPlayer svplayer && level instanceof ServerLevel svlevel) {
@@ -69,7 +69,7 @@ public class OilPotItem extends Item {
             otherStack.consume(1, player);
             oilPot.setDamageValue(0);
         }
-        else if(otherStack.is(getItemOil().oil().supportedItems()) && !getItemOil().isEmpty()){
+        else if(otherStack.is(getItemOil().oil().getSupportedItems()) && !getItemOil().isEmpty()){
             return ItemUtils.startUsingInstantly(level, player, hand);
         }
         return InteractionResultHolder.pass(oilPot);

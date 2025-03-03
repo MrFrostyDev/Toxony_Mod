@@ -63,6 +63,16 @@ public class OilLayerBlock extends Block {
     }
 
     @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        AABB area = new AABB(pos).inflate(2);
+        Stream<BlockState> blocksInArea = level.getBlockStates(area);
+        if (blocksInArea.anyMatch(block -> block.is(TagRegistry.OPEN_FLAME))){
+            level.setBlock(pos, Blocks.FIRE.defaultBlockState(), UPDATE_ALL);
+        }
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+    }
+
+    @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
         BlockState neighbourBlockState = level.getBlockState(neighborPos);
         if(neighbourBlockState.is(BlockTags.FIRE)){
@@ -90,7 +100,7 @@ public class OilLayerBlock extends Block {
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         AABB area = new AABB(pos).inflate(3);
         Stream<BlockState> blocksInArea = level.getBlockStates(area);
-        if (blocksInArea.anyMatch(block -> block.is(BlockTags.FIRE))){
+        if (blocksInArea.anyMatch(block -> block.is(TagRegistry.OPEN_FLAME))){
             level.setBlock(pos, Blocks.FIRE.defaultBlockState(), UPDATE_ALL);
         }
         super.tick(state, level, pos, random);

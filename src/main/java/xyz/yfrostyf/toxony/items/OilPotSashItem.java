@@ -49,6 +49,7 @@ public class OilPotSashItem extends Item implements ProjectileItem {
                 level.addFreshEntity(thrownOilPot);
             }
 
+            player.getCooldowns().addCooldown(thisStack.getItem(), 30);
             thisStack.hurtAndBreak(1, player, thisHand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
             player.playSound(SoundEvents.SPLASH_POTION_THROW);
             return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());

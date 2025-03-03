@@ -147,7 +147,7 @@ public class ThrownOilPot extends ThrowableItemProjectile implements ItemSupplie
                         }
                         MobEffectInstance mobeffectInstOil = new MobEffectInstance(MobEffectRegistry.FLAMMABLE, 600, 0);
                         livingentity.addEffect(mobeffectInstOil, entity);
-                        for (Holder<MobEffect> holder : itemOil.oil().effects()) {
+                        for (Holder<MobEffect> holder : itemOil.oil().getEffects()) {
                             MobEffectInstance mobeffectInst = new MobEffectInstance(holder, 400, itemOil.amplifier());
                             if (holder.value().isInstantenous()) {
                                 holder.value().applyInstantenousEffect(this, this.getOwner(), livingentity, mobeffectInst.getAmplifier(), distMult);

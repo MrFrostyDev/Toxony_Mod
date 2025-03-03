@@ -22,10 +22,13 @@ public class TagRegistry {
 
 
     public static final TagKey<Block> OIL_LAYER_CANNOT_SURVIVE_ON = TagKey.create(
-            // The registry key. The type of the registry must match the generic type of the tag.
             Registries.BLOCK,
-            // The location of the tag. This example will put our tag at data/examplemod/tags/blocks/example_tag.json.
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "oil_layer_cannot_survive_on")
+    );
+
+    public static final TagKey<Block> OPEN_FLAME = TagKey.create(
+            Registries.BLOCK,
+            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "open_flame")
     );
 
     // |------------------------------------------------------------------------------------|

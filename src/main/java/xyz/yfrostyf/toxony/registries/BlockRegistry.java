@@ -129,6 +129,27 @@ public class BlockRegistry {
             "moonlight_hemlock",
             () -> ItemRegistry.MOONLIGHT_HEMLOCK, List.of(MobEffects.POISON), null);
 
+    public static final DeferredHolder<Block, Block> WILD_COLDSNAP = BLOCKS.register(
+            "wild_coldsnap",
+            () -> new WildPoisonCropBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .randomTicks()
+                    .noCollission()
+                    .sound(SoundType.CROP)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor((state,level,pos) -> false),
+                    List.of(MobEffects.POISON)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> COLDSNAP = createPoisonCrop(
+            "coldsnap",
+            () -> ItemRegistry.COLDSNAP_LEAF, List.of(MobEffects.POISON), () -> BlockRegistry.WHIRLSNAP);
+
+    public static final DeferredHolder<Block, Block> WHIRLSNAP = createPoisonCrop(
+            "whirlsnap",
+            () -> ItemRegistry.WHIRLSNAP_LEAF, List.of(MobEffects.POISON), null);
+
     // |--------------------------------------------------------------------------------------|
     // |------------------------------------Block Entities------------------------------------|
     // |--------------------------------------------------------------------------------------|

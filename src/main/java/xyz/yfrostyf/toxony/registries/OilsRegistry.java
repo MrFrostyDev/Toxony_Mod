@@ -28,18 +28,6 @@ public class OilsRegistry {
             List.of(MobEffectRegistry.TOXIN)
     ));
 
-    public static final DeferredHolder<Oil, Oil> REGENERATION_OIL = OILS.register("regeneration_oil", () -> new Oil(
-            Component.translatable("oil.toxony.regeneration"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
-            List.of(MobEffects.REGENERATION)
-    ));
-
-    public static final DeferredHolder<Oil, Oil> SLOWNESS_OIL = OILS.register("slowness_oil", () -> new Oil(
-            Component.translatable("oil.toxony.slowness"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
-            List.of(MobEffects.MOVEMENT_SLOWDOWN)
-    ));
-
     public static final DeferredHolder<Oil, Oil> FATIGUE_OIL = OILS.register("fatigue_oil", () -> new Oil(
             Component.translatable("oil.toxony.fatigue"),
             BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
@@ -50,6 +38,25 @@ public class OilsRegistry {
             Component.translatable("oil.toxony.fire_resistance"),
             BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
             List.of(MobEffects.FIRE_RESISTANCE)
+    ));
+
+    public static final DeferredHolder<Oil, Oil> ANCHOR_OIL = OILS.register("anchor_oil", () -> new Oil(
+            Component.translatable("oil.toxony.anchor"),
+            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            List.of(MobEffects.MOVEMENT_SLOWDOWN)
+    ));
+
+    public static final DeferredHolder<Oil, Oil> REGENERATION_OIL = OILS.register("regeneration_oil", () -> new Oil(
+            Component.translatable("oil.toxony.regeneration"),
+            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            List.of(MobEffects.REGENERATION)
+    ));
+
+
+    public static final DeferredHolder<Oil, Oil> WITCHFIRE_OIL = OILS.register("witchfire_oil", () -> new Oil(
+            Component.translatable("oil.toxony.witchfire"),
+            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            List.of(MobEffectRegistry.TOXIN, MobEffectRegistry.FLAMMABLE)
     ));
 
     public static void register(IEventBus eventBus){

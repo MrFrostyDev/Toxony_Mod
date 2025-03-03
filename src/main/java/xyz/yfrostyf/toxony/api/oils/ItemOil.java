@@ -2,21 +2,13 @@ package xyz.yfrostyf.toxony.api.oils;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
-import net.minecraft.world.item.enchantment.Enchantment;
-import xyz.yfrostyf.toxony.registries.OilsRegistry;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -46,6 +38,10 @@ public record ItemOil(Oil oil, int duration, int amplifier, int maxUses, boolean
             ItemOil::showInTooltip,
             ItemOil::new
     );
+
+    public Oil getOil() {
+        return oil;
+    }
 
     public boolean isEmpty() {
         return this.oil == Oil.EMPTY;

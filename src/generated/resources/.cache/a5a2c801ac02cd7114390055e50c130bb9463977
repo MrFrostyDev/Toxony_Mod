@@ -1,2 +1,3 @@
-// 1.21.1	2025-02-23T15:26:03.6042011	Tags for minecraft:block mod id toxony
-27951e47b215896e584455ebff739b7f53e9d8d1 data/toxony/tags/block/plants/poisonous.json
+// 1.21.1	2025-03-03T15:07:33.1505578	Tags for minecraft:block mod id toxony
+3deb608e2c15a202649df5a87590f2fd649aab6a data/toxony/tags/block/open_flame.json
+62c3801b3f54aeb823bd2e3d5693193145904190 data/toxony/tags/block/plants/poisonous.json
