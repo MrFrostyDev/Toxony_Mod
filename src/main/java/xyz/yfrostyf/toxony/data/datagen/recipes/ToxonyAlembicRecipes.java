@@ -22,11 +22,12 @@ public class ToxonyAlembicRecipes extends RecipeProvider {
     }
 
     public static void get(RecipeOutput output){
-        new AlembicRecipeBuilder(new ItemStack(ItemRegistry.TOXIC_FORMULA.get()))
-                .ingredient(Items.NETHER_WART)
-                .ingredientToConvert(DataComponentIngredient.of(false, VialUtil.createPotionItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER)))
-                .boilTime(1200)
-                .unlockedByItems("has_toxic_paste", ItemRegistry.TOXIC_FORMULA.get())
+        new AlembicRecipeBuilder(new ItemStack(ItemRegistry.TOXIN.get()))
+                .ingredient(ItemRegistry.TOXIC_FORMULA.get())
+                .ingredientToConvert(ItemRegistry.GLASS_VIAL.get())
+                .remainingItem(new ItemStack(ItemRegistry.GLASS_VIAL.get()))
+                .boilTime(800)
+                .unlockedByItems("has_toxic_formula", ItemRegistry.TOXIC_FORMULA.get())
                 .build(output);
 
         new AlembicRecipeBuilder(new ItemStack(ItemRegistry.AFFINITY_SOLUTION.get()))

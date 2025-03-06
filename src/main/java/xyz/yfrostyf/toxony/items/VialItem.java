@@ -15,6 +15,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import xyz.yfrostyf.toxony.api.util.VialUtil;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 public class VialItem extends Item {
     public VialItem(Properties properties) {
@@ -43,7 +44,7 @@ public class VialItem extends Item {
                 );
                 level.gameEvent(player, GameEvent.FLUID_PICKUP, blockpos);
                 return InteractionResultHolder.sidedSuccess(
-                        ItemUtils.createFilledResult(itemstack, player, VialUtil.createPotionItemStack(Items.POTION, Potions.WATER)), level.isClientSide()
+                        ItemUtils.createFilledResult(itemstack, player, VialUtil.createPotionItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER)), level.isClientSide()
                 );
             }
         }

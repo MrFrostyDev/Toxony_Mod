@@ -22,7 +22,6 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .ingredient(Items.BONE_MEAL)
                 .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
                 .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
-                .use(Items.BOWL)
                 .unlockedByTag("has_poisonous_ingredient", TagRegistry.POISONOUS_INGREDIENTS_ITEM)
                 .unlockedByTag("has_poisonous_plant", TagRegistry.POISONOUS_PLANTS_ITEM)
                 .build(output);

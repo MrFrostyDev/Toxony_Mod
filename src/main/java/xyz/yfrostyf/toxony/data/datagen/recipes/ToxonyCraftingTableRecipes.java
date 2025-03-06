@@ -68,5 +68,12 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_toxic_paste", has(ItemRegistry.TOXIC_PASTE.get()))
                 .save(output);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.TOXIC_FORMULA.get())
+                .requires(ItemRegistry.TOXIC_PASTE.get())
+                .requires(DataComponentIngredient.of(false, PotionContents.createItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER)))
+                .requires(Items.NETHER_WART)
+                .unlockedBy("has_toxic_paste", has(ItemRegistry.TOXIC_PASTE.get()))
+                .save(output);
+
     }
 }

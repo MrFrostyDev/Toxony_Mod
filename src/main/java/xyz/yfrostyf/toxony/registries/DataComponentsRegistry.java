@@ -49,11 +49,12 @@ public class DataComponentsRegistry {
                     .networkSynchronized(ByteBufCodecs.INT)
     );
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Affinity>>> AFFINITIES = DATA_COMPONENTS.registerComponentType(
-            "affinities",
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Holder<Item>>>> AFFINITY_STORED_ITEMS = DATA_COMPONENTS.registerComponentType(
+            "affinity_stored_items",
             builder -> builder
-                    .persistent(Affinity.CODEC.listOf())
-                    .networkSynchronized(Affinity.STREAM_CODEC.apply(ByteBufCodecs.list()))
+                    .persistent(BuiltInRegistries.ITEM.holderByNameCodec().listOf())
+                    .networkSynchronized(ByteBufCodecs.holderRegistry(Registries.ITEM).apply(ByteBufCodecs.list()))
+                    .cacheEncoding()
     );
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ResourceKey<Affinity>>>> POSSIBLE_AFFINITIES = DATA_COMPONENTS.registerComponentType(

@@ -27,7 +27,7 @@ import java.util.*;
 public class MortarPestleRecipeBuilder implements RecipeBuilder {
     protected String suffix = "";
     protected ItemStack result;
-    protected ItemStack use;
+    protected Optional<ItemStack> use = Optional.empty();
     protected NonNullList<Ingredient> ingredients = NonNullList.create();
     protected Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
@@ -62,7 +62,7 @@ public class MortarPestleRecipeBuilder implements RecipeBuilder {
     }
 
     public MortarPestleRecipeBuilder use(ItemLike item) {
-        this.use = new ItemStack(item);
+        this.use = Optional.of(new ItemStack(item));
         return this;
     }
     public MortarPestleRecipeBuilder unlockedByItems(String criterionName, ItemLike... items) {

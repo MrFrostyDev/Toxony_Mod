@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.registries;
+package xyz.yfrostyf.toxony.client.events.subscribers;
 
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -8,21 +8,18 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.client.gui.AlembicScreen;
-import xyz.yfrostyf.toxony.client.gui.CopperCrucibleScreen;
-import xyz.yfrostyf.toxony.client.gui.MortarPestleScreen;
-import xyz.yfrostyf.toxony.client.gui.ToxBar;
-
-import static xyz.yfrostyf.toxony.registries.MenuRegistry.*;
+import xyz.yfrostyf.toxony.client.gui.*;
+import xyz.yfrostyf.toxony.registries.MenuRegistry;
 
 @EventBusSubscriber(modid = ToxonyMain.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class GuiRegistry {
 
     @SubscribeEvent
     private static void onRegisterMenu(RegisterMenuScreensEvent event) {
-        event.register(MORTAR_PESTLE_MENU.get(), MortarPestleScreen::new);
-        event.register(COPPER_CRUCIBLE_MENU.get(), CopperCrucibleScreen::new);
-        event.register(ALEMBIC_MENU.get(), AlembicScreen::new);
+        event.register(MenuRegistry.MORTAR_PESTLE_MENU.get(), MortarPestleScreen::new);
+        event.register(MenuRegistry.COPPER_CRUCIBLE_MENU.get(), CopperCrucibleScreen::new);
+        event.register(MenuRegistry.ALEMBIC_MENU.get(), AlembicScreen::new);
+        event.register(MenuRegistry.ALCHEMICAL_FORGE_MENU.get(), AlchemicalForgeScreen::new);
     }
 
     @SubscribeEvent

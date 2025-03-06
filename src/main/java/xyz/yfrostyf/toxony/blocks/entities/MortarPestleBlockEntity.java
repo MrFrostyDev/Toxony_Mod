@@ -2,6 +2,7 @@ package xyz.yfrostyf.toxony.blocks.entities;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
@@ -29,9 +31,6 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.Nullable;
-import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.api.affinity.Affinity;
-import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.blocks.MortarPestleBlock;
 import xyz.yfrostyf.toxony.client.gui.MortarPestleMenu;
 import xyz.yfrostyf.toxony.items.BlendItem;
@@ -180,7 +179,7 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
     public void finishPestling(Player player, Level level){
 
         ItemStack itemStackInHand = player.getItemInHand(InteractionHand.MAIN_HAND);
-        ItemStack useItem = findRecipe().map(RecipeHolder::value).map(MortarPestleRecipe::getUseItem).orElse(ItemStack.EMPTY);
+        ItemStack useItem = findRecipe().map(RecipeHolder::value).get().getUseItem().orElse(ItemStack.EMPTY);
         List<ItemStack> ingredientsCache = new ArrayList<>();
 
         if(itemStackInHand.getItem() == useItem.getItem() || useItem.isEmpty()) {
@@ -190,18 +189,18 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
                 ingredientsCache.add(this.getItemContainer().extractItem(i, 1, false));
             }
 
-            // If item is a blend, handle affinities
+            // If item is a blend, handle affinity stored items
             if(this.resultItem.getItem() instanceof BlendItem) {
-                List<Affinity> affinities = new ArrayList<>();
+                List<Holder<Item>> stored_items = new ArrayList<>();
                 for (ItemStack item : ingredientsCache) {
-                    Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(item, level);
-                    if (!affinity.isEmpty()) affinities.add(affinity);
+                    if (item.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)) stored_items.add(item.getItemHolder());
                 }
-                ToxonyMain.LOGGER.info("[finishPestling handling affinities], affinities: {}", affinities);
-                this.resultItem.set(DataComponentsRegistry.AFFINITIES, affinities);
+                this.resultItem.set(DataComponentsRegistry.AFFINITY_STORED_ITEMS, stored_items);
             }
 
-            itemStackInHand.consume(1, player);
+            if(!useItem.isEmpty()){
+                itemStackInHand.consume(1, player);
+            }
             if (!player.addItem(this.getResultItem())) {
                 Block.popResource(this.level, this.getBlockPos(), this.getResultItem());
             }

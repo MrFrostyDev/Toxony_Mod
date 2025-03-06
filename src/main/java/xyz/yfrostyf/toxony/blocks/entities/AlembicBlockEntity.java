@@ -55,6 +55,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
     public int boilProgress;
     public int boilTotalTime;
     public ItemStack resultItem;
+    public ItemStack returnStack;
     public ItemStackHandler itemContainer;
     private RecipeType<AlembicRecipe> recipeType;
 
@@ -95,6 +96,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
         this.boilProgress = 0;
         this.boilTotalTime = 0;
         resultItem = ItemStack.EMPTY;
+        returnStack = ItemStack.EMPTY;
         itemContainer = new ItemStackHandler(CONTAINER_SIZE){
             @Override
             public int getSlotLimit(int slot) {
@@ -136,7 +138,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
                 }
                 else{
                     blockEntity.itemContainer.setStackInSlot(0, result);
-                    blockEntity.itemContainer.setStackInSlot(1, ItemStack.EMPTY);
+                    blockEntity.itemContainer.setStackInSlot(1, blockEntity.returnStack);
                     blockEntity.resetAlembic();
                 }
             }
@@ -156,6 +158,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
 
                 newResultItem = handleNeedleStoredItem(input, newResultItem);
                 blockEntity.setResultItem(newResultItem);
+                blockEntity.returnStack = optionalRecipe.get().value().getRemainingingItem();
                 blockEntity.boilTotalTime = optionalRecipe.get().value().getBoilTime();
             }
             else if(!resultPotion.isEmpty()){
@@ -220,6 +223,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
 
     public void resetAlembic(){
         this.boilProgress = 0;
+        this.returnStack = ItemStack.EMPTY;
         this.setResultItem(ItemStack.EMPTY);
     }
 
@@ -256,7 +260,8 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
         for(int i=0;i<CONTAINER_SIZE;i++){
             list.add(i, itemContainer.getStackInSlot(i).copy()); // store output item
         }
-        list.addLast(resultItem); // store result item in sent list.
+        list.add(this.returnStack); // store remaining item in sent list
+        list.add(resultItem); // store result item in sent list.
 
         ContainerHelper.saveAllItems(tag, list, registries);
 
@@ -269,13 +274,16 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
 
-        NonNullList<ItemStack> list = NonNullList.withSize(4, ItemStack.EMPTY);
+        NonNullList<ItemStack> list = NonNullList.withSize(5, ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, list, registries);
 
-        for(int i=0;i<CONTAINER_SIZE;i++){
+        int i = 0;
+        while(i<CONTAINER_SIZE){
             this.insertItem(i, list.get(i), false);
+            i++;
         }
-        this.setResultItem(list.getLast()); // receive result item in sent list.
+        this.returnStack = list.get(i); // receive remaining item in sent list.
+        this.setResultItem(list.get(i+1)); // receive result item in sent list.
 
         this.fuel = tag.getInt("Fuel");
         this.boilProgress = tag.getInt("BoilProgress");

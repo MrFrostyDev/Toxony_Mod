@@ -41,13 +41,18 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
         dropSelf(BlockRegistry.MORTAR_PESTLE.get());
         dropSelf(BlockRegistry.COPPER_CRUCIBLE.get());
         dropSelf(BlockRegistry.ALEMBIC.get());
+        dropSelf(BlockRegistry.ALCHEMICAL_FORGE_PART.get());
+
+        dropOther(BlockRegistry.ALCHEMICAL_FORGE.get(), BlockRegistry.ALCHEMICAL_FORGE_PART.get());
 
         dropWildPoisonPlantDrops(BlockRegistry.WILD_OCELOT_MINT.get(), ItemRegistry.OCELOT_MINT.get());
         dropWildPoisonPlantDrops(BlockRegistry.WILD_NIGHTSHADE.get(), ItemRegistry.NIGHTSHADE.get());
         dropWildPoisonPlantDrops(BlockRegistry.WILD_WATER_HEMLOCK.get(), ItemRegistry.WATER_HEMLOCK.get());
+        dropWildPoisonPlantDrops(BlockRegistry.WILD_COLDSNAP.get(), ItemRegistry.COLDSNAP_LEAF.get());
         dropPoisonPlantDrops(BlockRegistry.OCELOT_MINT.get(), ItemRegistry.OCELOT_MINT.get());
         dropPoisonPlantDrops(BlockRegistry.NIGHTSHADE.get(), ItemRegistry.NIGHTSHADE.get());
         dropPoisonPlantDrops(BlockRegistry.WATER_HEMLOCK.get(), ItemRegistry.WATER_HEMLOCK.get());
+        dropPoisonPlantDrops(BlockRegistry.COLDSNAP.get(), ItemRegistry.COLDSNAP_LEAF.get());
     }
 
     @Override

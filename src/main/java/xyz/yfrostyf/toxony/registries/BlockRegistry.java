@@ -6,7 +6,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -19,9 +18,11 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.blocks.PoisonCropBlock;
 import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.*;
+import xyz.yfrostyf.toxony.blocks.entities.AlchemicalForgeBlockEntity;
 import xyz.yfrostyf.toxony.blocks.entities.AlembicBlockEntity;
 import xyz.yfrostyf.toxony.blocks.entities.CopperCrucibleBlockEntity;
 import xyz.yfrostyf.toxony.blocks.entities.MortarPestleBlockEntity;
+import xyz.yfrostyf.toxony.blocks.AlchemicalForgeBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
 import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
@@ -181,6 +182,26 @@ public class BlockRegistry {
             )
     );
 
+    public static final DeferredHolder<Block, Block> ALCHEMICAL_FORGE = BLOCKS.register(
+            "alchemical_forge",
+            () -> new AlchemicalForgeBlock(BlockBehaviour.Properties.of()
+                    .strength(4.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.NETHERITE_BLOCK)
+                    .isRedstoneConductor((state,level,pos) -> false)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> ALCHEMICAL_FORGE_PART = BLOCKS.register(
+            "alchemical_forge_part",
+            () -> new AlchemicalForgePartBlock(BlockBehaviour.Properties.of()
+                    .strength(2.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.NETHERITE_BLOCK)
+                    .isRedstoneConductor((state,level,pos) -> false)
+            )
+    );
+
     public static final Supplier<BlockEntityType<MortarPestleBlockEntity>> MORTAR_PESTLE_ENTITY = BLOCK_ENTITY_TYPES.register(
             "mortar_pestle_entity",
             () -> BlockEntityType.Builder.of(
@@ -211,6 +232,17 @@ public class BlockRegistry {
                     // A vararg of blocks that can have this block entity.
                     // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
                     ALEMBIC.get()
+            ).build(null)
+    );
+
+    public static final Supplier<BlockEntityType<AlchemicalForgeBlockEntity>> ALCHEMICAL_FORGE_ENTITY = BLOCK_ENTITY_TYPES.register(
+            "alchemical_forge_entity",
+            () -> BlockEntityType.Builder.of(
+                    // The supplier to use for constructing the block entity instances.
+                    AlchemicalForgeBlockEntity::new,
+                    // A vararg of blocks that can have this block entity.
+                    // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
+                    ALCHEMICAL_FORGE.get()
             ).build(null)
     );
 

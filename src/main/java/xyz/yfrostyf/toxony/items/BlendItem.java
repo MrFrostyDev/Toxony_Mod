@@ -7,19 +7,22 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.items.ToxGiverItem;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
+import xyz.yfrostyf.toxony.client.gui.tooltips.StoredAffinityStacksTooltip;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -38,10 +41,13 @@ public class BlendItem extends ToxGiverItem {
 
         ToxUtil.addToleranceWithTier(plyToxData, tolerance, tier, level);
 
-        if(stack.has(DataComponentsRegistry.AFFINITIES)) {
-            List<Affinity> affinities = stack.get(DataComponentsRegistry.AFFINITIES);
-            for (Affinity affinity : affinities) {
-                AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, Math.max(RANDOM.nextInt(5), 2));
+        if(stack.has(DataComponentsRegistry.AFFINITY_STORED_ITEMS)) {
+            List<Holder<Item>> stored_items = stack.get(DataComponentsRegistry.AFFINITY_STORED_ITEMS);
+            for (Holder<Item> stored_item : stored_items) {
+                ItemStack affinityStack = new ItemStack(stored_item);
+                if(affinityStack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)){
+                    AffinityUtil.addAffinityByItem(plyToxData, affinityStack, AffinityUtil.readAffinityFromIngredientMap(affinityStack), Math.max(RANDOM.nextInt(4), 2));
+                }
             }
         }
 
@@ -67,6 +73,11 @@ public class BlendItem extends ToxGiverItem {
         });
 
         return ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BOWL), false);
+    }
+
+    @Override
+    public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        return Optional.of(new StoredAffinityStacksTooltip.StoredAffinityStacksTooltipComponent(stack));
     }
 
     public static Builder builder(){

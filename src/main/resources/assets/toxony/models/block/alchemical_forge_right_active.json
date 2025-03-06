@@ -1,0 +1,25 @@
+{
+	"credit": "MrFrostyDev_made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"north": "toxony:block/alchemical_forge_front",
+		"east": "toxony:block/alchemical_forge_side",
+		"up": "toxony:block/alchemical_forge_top_right_active",
+		"down": "toxony:block/alchemical_forge_bottom",
+		"particle": "toxony:block/alchemical_forge_top_right_active"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#north", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#east", "cullface": "east"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#north", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#east", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#up", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#down", "cullface": "down"}
+			}
+		}
+	]
+}

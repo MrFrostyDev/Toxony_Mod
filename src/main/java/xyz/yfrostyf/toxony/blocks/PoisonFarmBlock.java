@@ -120,7 +120,7 @@ public class PoisonFarmBlock extends Block {
     public static void infectNeighbours(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
         for(BlockPos blockPos : Set.of(pos.north(), pos.east(), pos.south(), pos.west())){
             BlockState curBlockState = level.getBlockState(blockPos);
-            if (curBlockState.getBlock() instanceof FarmBlock || curBlockState.getBlock() instanceof GrassBlock) {
+            if (curBlockState.is(Blocks.FARMLAND) || curBlockState.is(BlockTags.DIRT) && !curBlockState.is(Blocks.COARSE_DIRT)) {
                 level.setBlock(blockPos, Blocks.COARSE_DIRT.defaultBlockState(), Block.UPDATE_ALL);
             }
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(entity, curBlockState));

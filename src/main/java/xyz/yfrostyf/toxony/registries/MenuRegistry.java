@@ -6,6 +6,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.client.gui.AlchemicalForgeMenu;
 import xyz.yfrostyf.toxony.client.gui.AlembicMenu;
 import xyz.yfrostyf.toxony.client.gui.CopperCrucibleMenu;
 import xyz.yfrostyf.toxony.client.gui.MortarPestleMenu;
@@ -31,5 +32,10 @@ public class MenuRegistry {
     public static final Supplier<MenuType<AlembicMenu>> ALEMBIC_MENU = MENUS.register(
             "alembic_menu",
             () -> IMenuTypeExtension.create(AlembicMenu::new)
+    );
+
+    public static final Supplier<MenuType<AlchemicalForgeMenu>> ALCHEMICAL_FORGE_MENU = MENUS.register(
+            "alchemical_forge_menu",
+            () -> IMenuTypeExtension.create(AlchemicalForgeMenu::new)
     );
 }

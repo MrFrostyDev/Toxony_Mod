@@ -12,6 +12,7 @@
   "item.toxony.poison_blend": "Poison Blend",
   "item.toxony.toxic_blend": "Toxic Blend",
   "item.toxony.pure_blend": "Pure Blend",
+  "item.toxony.toxic_formula": "Toxic Formula",
   "item.toxony.redstone_mixture": "Redstone Mixture",
   "item.toxony.redstone_solution": "Redstone Solution",
   "item.toxony.affinity_solution": "Affinity Solution",
@@ -20,12 +21,15 @@
   "item.toxony.netherite_scalpel": "Netherite Scalpel",
   "item.toxony.lethal_dose": "Lethal Dose",
 
-  "item.toxony.oil_pot_sash": "Oil Pot Sash",
-  "item.toxony.oil_pot_bandolier": "Oil Pot Bandolier",
+  "item.toxony.empty_oil_pot": "Empty Oil Pot",
+  "item.toxony.empty_tox_pot": "Empty Tox Pot",
   "item.toxony.copper_needle": "Copper Needle",
   "item.toxony.glass_vial": "Glass Vial",
   "item.toxony.magnifying_glass": "Magnifying Glass",
   "item.toxony.witching_blade": "Witching Blade",
+
+  "item.toxony.oil_pot_sash": "Oil Pot Sash",
+  "item.toxony.oil_pot_bandolier": "Oil Pot Bandolier",
 
   "item.toxony.wolf_tooth": "Wolf Tooth",
   "item.toxony.ocelot_mint": "Ocelot Mint",
@@ -77,6 +81,7 @@
   "message.toxony.graft.unknown": "You don't have enough knowledge about this item or the plant to graft.",
 
   "message.toxony.mortar.warning": "You need a %s to collect this item.",
+  "message.toxony.alchemical_forge.active": "The forge is %s done.",
   "message.toxony.tolerance.weak_tier_warning": "This poison is too weak to increase your tolerance.",
 
   "message.toxony.valetines_box.empty" : "The box is empty. So sorry :c",
@@ -99,11 +104,11 @@
   "toxony.networking.sync_affinity_map.failed": "Failed to sync affinity map to player: %s",
 
   "item.toxony.tox_vial": "Tox Vial",
-  "item.toxony.tox_vial.effect.awkward": "Water Vial",
-  "item.toxony.tox_vial.effect.mundane": "Water Vial",
-  "item.toxony.tox_vial.effect.thick": "Water Vial",
-  "item.toxony.tox_vial.effect.empty": "Water Vial",
-  "item.toxony.tox_vial.effect.water": "Water Vial",
+  "item.toxony.tox_vial.effect.awkward": "Vial of Awkward Water",
+  "item.toxony.tox_vial.effect.mundane": "Vial of Mundane Water",
+  "item.toxony.tox_vial.effect.thick": "Vial of Thick Water",
+  "item.toxony.tox_vial.effect.empty": "Empty Vial",
+  "item.toxony.tox_vial.effect.water": "Vial Of Water",
   "item.toxony.tox_vial.effect.fire_resistance": "Vial of Fire Resistance",
   "item.toxony.tox_vial.effect.harming": "Vial of Harming",
   "item.toxony.tox_vial.effect.healing": "Vial of Healing",

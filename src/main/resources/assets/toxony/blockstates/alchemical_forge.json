@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "type=left,facing=north,lit=false": {
+      "model": "toxony:block/alchemical_forge_left"
+    },
+    "type=left,facing=east,lit=false": {
+      "model": "toxony:block/alchemical_forge_left",
+      "y": 90
+    },
+    "type=left,facing=south,lit=false": {
+      "model": "toxony:block/alchemical_forge_left",
+      "y": 180
+    },
+    "type=left,facing=west,lit=false": {
+      "model": "toxony:block/alchemical_forge_left",
+      "y": 270
+    },
+    "type=right,facing=north,lit=false": {
+      "model": "toxony:block/alchemical_forge_right"
+    },
+    "type=right,facing=east,lit=false": {
+      "model": "toxony:block/alchemical_forge_right",
+      "y": 90
+    },
+    "type=right,facing=south,lit=false": {
+      "model": "toxony:block/alchemical_forge_right",
+      "y": 180
+    },
+    "type=right,facing=west,lit=false": {
+      "model": "toxony:block/alchemical_forge_right",
+      "y": 270
+    },
+    "type=left,facing=north,lit=true": {
+      "model": "toxony:block/alchemical_forge_left_active"
+    },
+    "type=left,facing=east,lit=true": {
+      "model": "toxony:block/alchemical_forge_left_active",
+      "y": 90
+    },
+    "type=left,facing=south,lit=true": {
+      "model": "toxony:block/alchemical_forge_left_active",
+      "y": 180
+    },
+    "type=left,facing=west,lit=true": {
+      "model": "toxony:block/alchemical_forge_left_active",
+      "y": 270
+    },
+    "type=right,facing=north,lit=true": {
+      "model": "toxony:block/alchemical_forge_right_active"
+    },
+    "type=right,facing=east,lit=true": {
+      "model": "toxony:block/alchemical_forge_right_active",
+      "y": 90
+    },
+    "type=right,facing=south,lit=true": {
+      "model": "toxony:block/alchemical_forge_right_active",
+      "y": 180
+    },
+    "type=right,facing=west,lit=true": {
+      "model": "toxony:block/alchemical_forge_right_active",
+      "y": 270
+    }
+  }
+}

@@ -49,8 +49,13 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         Items.POISONOUS_POTATO,
                         ItemRegistry.FALSE_BERRIES.get(),
                         ItemRegistry.OCELOT_MINT.get(),
+                        ItemRegistry.SNOW_MINT.get(),
                         ItemRegistry.NIGHTSHADE.get(),
-                        ItemRegistry.WATER_HEMLOCK.get()
+                        ItemRegistry.SUNSPOT.get(),
+                        ItemRegistry.WATER_HEMLOCK.get(),
+                        ItemRegistry.MOONLIGHT_HEMLOCK.get(),
+                        ItemRegistry.COLDSNAP_LEAF.get(),
+                        ItemRegistry.WHIRLSNAP_LEAF.get()
                 );
     }
 }

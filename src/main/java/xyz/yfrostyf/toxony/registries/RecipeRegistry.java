@@ -9,10 +9,7 @@ import net.neoforged.neoforge.common.crafting.IngredientType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.recipes.AffinityIngredient;
-import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
-import xyz.yfrostyf.toxony.recipes.CrucibleRecipe;
-import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
+import xyz.yfrostyf.toxony.recipes.*;
 
 import java.util.function.Supplier;
 
@@ -49,6 +46,13 @@ public class RecipeRegistry {
             )
     );
 
+    public static final Supplier<RecipeType<AlchemicalForgeRecipe>> ALCHEMICAL_FORGE_RECIPE = RECIPE_TYPES.register(
+            "alchemical_forge",
+            () -> RecipeType.<AlchemicalForgeRecipe>simple(
+                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "alchemical_forge")
+            )
+    );
+
 
     // Recipe Serializers
     public static final Supplier<RecipeSerializer<?>> MORTAR_PESTLE_SERIALIZER = RECIPE_SERIALIZERS.register(
@@ -62,6 +66,10 @@ public class RecipeRegistry {
     public static final Supplier<RecipeSerializer<?>> ALEMBIC_SERIALIZER = RECIPE_SERIALIZERS.register(
             "alembic",
             AlembicRecipe.Serializer::new);
+
+    public static final Supplier<RecipeSerializer<?>> ALCHEMICAL_FORGE_SERIALIZER = RECIPE_SERIALIZERS.register(
+            "alchemical_forge",
+            AlchemicalForgeRecipe.Serializer::new);
 
     // Ingredient Types
     public static final Supplier<IngredientType<AffinityIngredient>> AFFINITY = INGREDIENT_TYPES.register(

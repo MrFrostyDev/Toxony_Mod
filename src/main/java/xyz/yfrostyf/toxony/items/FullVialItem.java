@@ -11,6 +11,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 public class FullVialItem extends PotionItem {
@@ -78,4 +79,10 @@ public class FullVialItem extends PotionItem {
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        if(stack.has(DataComponents.POTION_CONTENTS) && !stack.get(DataComponents.POTION_CONTENTS).is(Potions.WATER)
+                || stack.has(DataComponentsRegistry.AFFINITY_STORED_ITEM)) return true;
+        return super.isFoil(stack);
+    }
 }

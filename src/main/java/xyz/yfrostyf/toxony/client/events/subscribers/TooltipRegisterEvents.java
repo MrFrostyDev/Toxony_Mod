@@ -7,6 +7,7 @@ import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactori
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.client.gui.tooltips.OilTooltip;
 import xyz.yfrostyf.toxony.client.gui.tooltips.StoredNeedleStackTooltip;
+import xyz.yfrostyf.toxony.client.gui.tooltips.StoredAffinityStacksTooltip;
 import xyz.yfrostyf.toxony.client.gui.tooltips.ToxIngredientTooltip;
 
 //thank you [FarmersDelight Mod] for the reference
@@ -19,6 +20,7 @@ public class TooltipRegisterEvents {
     @SubscribeEvent
     public static void registerCustomTooltipRenderers(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(OilTooltip.OilTooltipComponent.class, OilTooltip::new);
+        event.register(StoredAffinityStacksTooltip.StoredAffinityStacksTooltipComponent.class, StoredAffinityStacksTooltip::new);
         event.register(StoredNeedleStackTooltip.StoredNeedleStackTooltipComponent.class, StoredNeedleStackTooltip::new);
         event.register(ToxIngredientTooltip.ToxIngredientComponent.class, ToxIngredientTooltip::new);
     }

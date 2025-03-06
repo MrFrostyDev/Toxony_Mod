@@ -9,13 +9,13 @@ import java.util.Optional;
 
 @Mod(value = ToxonyMain.MOD_ID, dist = Dist.CLIENT)
 public class ClientIngredientAffinityMapData {
-    private static Optional<IngredientAffinityMapData> ingredientAffinityMapData = Optional.empty();
+    private static IngredientAffinityMapData ingredientAffinityMapData;
 
     public static void setData (IngredientAffinityMapData IngredientAffinityMapData){
-        ingredientAffinityMapData = Optional.of(IngredientAffinityMapData);
+        ingredientAffinityMapData = IngredientAffinityMapData;
     }
 
     public static Optional<IngredientAffinityMapData> getData(){
-        return ingredientAffinityMapData;
+        return Optional.ofNullable(ingredientAffinityMapData);
     }
 }

@@ -13,18 +13,22 @@ import net.minecraft.world.level.Level;
 import xyz.yfrostyf.toxony.recipes.inputs.PairCombineRecipeInput;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
 
+import java.util.Optional;
+
 
 public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
     final ItemStack outputItem;
+    final ItemStack remainingingItem;
     final Ingredient recipeIngredient;
     final Ingredient recipeIngredientToConvert;
     final int boilTime;
 
-    public AlembicRecipe(ItemStack outputItem, Ingredient recipeIngredient, Ingredient recipeIngredientToConvert, int boilTime){
+    public AlembicRecipe(ItemStack outputItem, Ingredient recipeIngredient, Ingredient recipeIngredientToConvert, int boilTime, Optional<ItemStack> remainingingItem){
         this.outputItem = outputItem;
         this.recipeIngredient = recipeIngredient;
         this.recipeIngredientToConvert = recipeIngredientToConvert;
         this.boilTime = boilTime;
+        this.remainingingItem = remainingingItem.orElse(ItemStack.EMPTY);
     }
 
     @Override
@@ -51,6 +55,10 @@ public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
     @Override
     public ItemStack getResultItem(HolderLookup.Provider registries) {
         return outputItem.copy();
+    }
+
+    public ItemStack getRemainingingItem() {
+        return remainingingItem;
     }
 
     @Override
@@ -80,7 +88,8 @@ public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
                 ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
                 Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(r -> r.recipeIngredient),
                 Ingredient.CODEC_NONEMPTY.fieldOf("ingredient_to_convert").forGetter(r -> r.recipeIngredientToConvert),
-                Codec.INT.fieldOf("boiltime").orElse(200).forGetter(r -> r.boilTime)
+                Codec.INT.fieldOf("boiltime").orElse(200).forGetter(r -> r.boilTime),
+                ItemStack.STRICT_SINGLE_ITEM_CODEC.optionalFieldOf("remaining").forGetter(r -> r.remainingingItem != ItemStack.EMPTY ? Optional.of(r.remainingingItem) : Optional.empty())
         ).apply(inst, AlembicRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, AlembicRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
@@ -102,6 +111,7 @@ public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
             Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.recipeIngredient);
             Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.recipeIngredientToConvert);
             buffer.writeVarInt(recipe.boilTime);
+            ItemStack.OPTIONAL_STREAM_CODEC.encode(buffer, recipe.remainingingItem);
         }
 
         private static AlembicRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
@@ -109,7 +119,8 @@ public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
             Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             Ingredient ingredientToConvert = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             int boilTime = buffer.readVarInt();
-            return new AlembicRecipe(itemstack, ingredient, ingredientToConvert, boilTime);
+            ItemStack remaining = ItemStack.OPTIONAL_STREAM_CODEC.decode(buffer);
+            return new AlembicRecipe(itemstack, ingredient, ingredientToConvert, boilTime, Optional.of(remaining));
         }
     }
 }

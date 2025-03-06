@@ -44,5 +44,11 @@ public class PayloadRegistry {
                 ClientStartPestlingPacket.STREAM_CODEC,
                 ClientStartPestlingPacket::handle
         );
+
+        registrar.playToServer(
+                ClientStartAlchemicalForgePacket.TYPE,
+                ClientStartAlchemicalForgePacket.STREAM_CODEC,
+                ClientStartAlchemicalForgePacket::handle
+        );
     }
 }

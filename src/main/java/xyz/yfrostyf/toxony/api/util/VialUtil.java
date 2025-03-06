@@ -10,14 +10,20 @@ import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
 public class VialUtil {
     public static ItemStack createAffinityStoredItemStack(Item item, Holder<Item> holder) {
-        ItemStack itemstack = new ItemStack(item);
-        itemstack.set(DataComponentsRegistry.AFFINITY_STORED_ITEM, holder);
-        return itemstack;
+        ItemStack itemStack = new ItemStack(item);
+        itemStack.set(DataComponentsRegistry.AFFINITY_STORED_ITEM, holder);
+        return itemStack;
     }
 
     public static ItemStack createPotionItemStack(Item item, Holder<Potion> potion) {
-        ItemStack itemstack = new ItemStack(item);
-        itemstack.set(DataComponents.POTION_CONTENTS, new PotionContents(potion));
-        return itemstack;
+        ItemStack itemStack = new ItemStack(item);
+        itemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(potion));
+        return itemStack;
+    }
+
+    public static ItemStack createAffinitySolutionItemStack(Item item, Item stored){
+        ItemStack itemStack = new ItemStack(item);
+        itemStack.set(DataComponentsRegistry.AFFINITY_STORED_ITEM, new ItemStack(stored).getItemHolder());
+        return itemStack;
     }
 }

@@ -2,6 +2,7 @@ package xyz.yfrostyf.toxony.data.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -46,6 +47,12 @@ public class ToxonyBlockTagsProvider extends BlockTagsProvider {
                         Blocks.FIRE,
                         Blocks.WALL_TORCH,
                         Blocks.SOUL_WALL_TORCH
+                );
+
+        this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(
+                        BlockRegistry.ALCHEMICAL_FORGE.get(),
+                        BlockRegistry.ALCHEMICAL_FORGE_PART.get()
                 );
     }
 }

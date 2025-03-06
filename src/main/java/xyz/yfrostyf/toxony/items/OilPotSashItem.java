@@ -33,15 +33,17 @@ public class OilPotSashItem extends Item implements ProjectileItem {
         if(otherStack.getItem() instanceof OilPotItem oilPotItem && !otherStack.is(this)){
             thisStack.set(DataComponentsRegistry.OIL, oilPotItem.getItemOil());
             thisStack.setDamageValue(0);
-            player.playSound(SoundEvents.HONEYCOMB_WAX_ON);
+            otherStack.consume(1, player);
+            player.playSound(SoundEvents.BOTTLE_FILL);
             return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
         }
         else if(thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.BASE_OIL)){
             thisStack.setDamageValue(0);
-            player.playSound(SoundEvents.SLIME_BLOCK_PLACE);
+            player.playSound(SoundEvents.BOTTLE_FILL);
+            otherStack.consume(1, player);
             return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
         }
-        else if(thisStack.has(DataComponentsRegistry.OIL)){
+        else if(thisStack.has(DataComponentsRegistry.OIL) && thisStack.getDamageValue() < thisStack.getMaxDamage()){
             if (!level.isClientSide) {
                 ThrownOilPot thrownOilPot = new ThrownOilPot(level, player, thisStack);
                 thrownOilPot.setItem(thisStack);
@@ -50,10 +52,11 @@ public class OilPotSashItem extends Item implements ProjectileItem {
             }
 
             player.getCooldowns().addCooldown(thisStack.getItem(), 30);
-            thisStack.hurtAndBreak(1, player, thisHand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+            thisStack.setDamageValue(thisStack.getDamageValue() + 1);
             player.playSound(SoundEvents.SPLASH_POTION_THROW);
             return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
         }
+
         return InteractionResultHolder.pass(thisStack);
     }
 

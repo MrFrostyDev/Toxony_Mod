@@ -53,9 +53,14 @@ public class ToxIngredientTooltip implements ClientTooltipComponent {
         int index = 0;
 
         if(plyToxData.knowsIngredient(itemstack)){
-            Map<ResourceLocation, Affinity> map = ClientIngredientAffinityMapData.getData().get().getIngredientToAffinityMap();
-            Affinity affinity = map.get(itemstack.getItemHolder().getKey().location());
-            index = affinity.getIndex();
+            if(ClientIngredientAffinityMapData.getData().isPresent()){
+                Map<ResourceLocation, Affinity> map = ClientIngredientAffinityMapData.getData().get().getIngredientToAffinityMap();
+                Affinity affinity = map.get(itemstack.getItemHolder().getKey().location());
+                if(affinity != null){
+                    index = affinity.getIndex();
+                }
+            }
+
         }
 
         // Max Bar | (ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight)

@@ -21,11 +21,13 @@ import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 
 public class AlembicRecipeBuilder implements RecipeBuilder {
     protected String suffix = "";
     protected ItemStack result;
+    protected ItemStack remainingItem;
     protected Ingredient ingredient;
     protected Ingredient ingredientToConvert;
     protected int boiltime;
@@ -87,6 +89,11 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
+    public AlembicRecipeBuilder remainingItem(ItemStack remaining) {
+        this.remainingItem = remaining;
+        return this;
+    }
+
     public AlembicRecipeBuilder unlockedByItems(String criterionName, ItemLike... items) {
         return unlockedBy(criterionName, InventoryChangeTrigger.TriggerInstance.hasItems(items));
     }
@@ -122,7 +129,7 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(advancement::addCriterion);
         // Our factory parameters.
-        AlembicRecipe recipe = new AlembicRecipe(this.result, this.ingredient, this.ingredientToConvert, this.boiltime);
+        AlembicRecipe recipe = new AlembicRecipe(this.result, this.ingredient, this.ingredientToConvert, this.boiltime, Optional.ofNullable(this.remainingItem));
         // Pass the id, the recipe, and the recipe advancement into the RecipeOutput.
         output.accept(id, recipe, advancement.build(id.withPrefix("recipes/")));
     }
