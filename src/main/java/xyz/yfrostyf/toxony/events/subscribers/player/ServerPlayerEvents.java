@@ -1,7 +1,6 @@
 package xyz.yfrostyf.toxony.events.subscribers.player;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -13,7 +12,7 @@ import xyz.yfrostyf.toxony.network.SyncIngredientAffinityMapPacket;
 import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
-@EventBusSubscriber(modid = ToxonyMain.MOD_ID, value = Dist.DEDICATED_SERVER)
+@EventBusSubscriber(modid = ToxonyMain.MOD_ID)
 public class ServerPlayerEvents {
 
     @SubscribeEvent

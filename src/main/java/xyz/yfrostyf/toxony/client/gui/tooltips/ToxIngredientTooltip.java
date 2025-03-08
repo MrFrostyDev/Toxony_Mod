@@ -63,7 +63,6 @@ public class ToxIngredientTooltip implements ClientTooltipComponent {
 
         }
 
-        // Max Bar | (ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight)
         // Icon
         guiGraphics.blit(RESOURCE,
                 x+1, y+1,

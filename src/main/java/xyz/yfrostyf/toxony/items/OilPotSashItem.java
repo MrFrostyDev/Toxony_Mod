@@ -21,9 +21,6 @@ public class OilPotSashItem extends Item implements ProjectileItem {
         super(properties);
     }
 
-    /**
-     * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see {@link #onItemUse}.
-     */
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand thisHand) {
         ItemStack thisStack = player.getItemInHand(thisHand);

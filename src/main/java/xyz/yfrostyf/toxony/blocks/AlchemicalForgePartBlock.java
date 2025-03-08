@@ -32,6 +32,7 @@ public class AlchemicalForgePartBlock extends Block {
         Direction horizontalDirection = context.getHorizontalDirection();
 
         if(player == null || player.level().isClientSide()) return this.defaultBlockState();
+        if(hasTooManyNeighbours(pos, level)) return this.defaultBlockState();
 
         // Detect if right of clicked pos has alchemical forge part.
         BlockPos posToRight = pos.relative(horizontalDirection.getClockWise());
@@ -70,6 +71,7 @@ public class AlchemicalForgePartBlock extends Block {
 
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        if(hasTooManyNeighbours(pos, level))return;
         for(BlockPos blockPos : Set.of(pos.north(), pos.east(), pos.south(), pos.west())){
             BlockState selBlockState = level.getBlockState(blockPos);
             if (selBlockState.is(BlockRegistry.ALCHEMICAL_FORGE)) {
@@ -82,6 +84,18 @@ public class AlchemicalForgePartBlock extends Block {
             }
         }
         super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+    }
+
+    private static boolean hasTooManyNeighbours(BlockPos pos, Level level){
+        int i = 0;
+        for(BlockPos blockPos : Set.of(pos.north(), pos.east(), pos.south(), pos.west())) {
+            BlockState selBlockState = level.getBlockState(blockPos);
+            if(selBlockState.is(BlockRegistry.ALCHEMICAL_FORGE_PART) || selBlockState.is(BlockRegistry.ALCHEMICAL_FORGE)){
+                if(i > 1)return true;
+                i++;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -121,9 +121,9 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |------------------------------------Ingredients------------------------------------|
     // |-----------------------------------------------------------------------------------|
-    public static final DeferredHolder<Item, Item> POISON_PASTE = ITEMS.register("poison_paste", () -> new PoisonPasteItem(new Item.Properties().stacksTo(16)));
-    public static final DeferredHolder<Item, Item> TOXIC_PASTE = ITEMS.register("toxic_paste", () -> new PoisonPasteItem(new Item.Properties().stacksTo(16)));
-    public static final DeferredHolder<Item, Item> TOXIC_FORMULA = ITEMS.register("toxic_formula", () -> new PoisonPasteItem(new Item.Properties().stacksTo(16)));
+    public static final DeferredHolder<Item, Item> POISON_PASTE = ITEMS.register("poison_paste", () -> new PoisonPasteItem(new Item.Properties().stacksTo(32)));
+    public static final DeferredHolder<Item, Item> TOXIC_PASTE = ITEMS.register("toxic_paste", () -> new PoisonPasteItem(new Item.Properties().stacksTo(32)));
+    public static final DeferredHolder<Item, Item> TOXIC_FORMULA = ITEMS.register("toxic_formula", () -> new PoisonPasteItem(new Item.Properties().stacksTo(8)));
     public static final DeferredHolder<Item, Item> TOXIN = ITEMS.register("toxin", () -> ToxinItem.builder()
             .properties(new Item.Properties().stacksTo(8))
             .tox(50).tolerance(10).tier(1)

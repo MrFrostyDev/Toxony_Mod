@@ -18,7 +18,7 @@ public class ClientToxData {
     private static ToxData toxData;
 
     public static ToxData newToxData(){
-        toxData = new ToxData(Minecraft.getInstance() != null ? Minecraft.getInstance().player : null);
+        toxData = new ToxData(Minecraft.getInstance().player);
         return toxData;
     }
 

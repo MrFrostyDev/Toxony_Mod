@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.recipes;
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
@@ -101,6 +102,24 @@ public class AlchemicalForgeRecipe implements Recipe<AlchemicalForgeRecipeInput>
             nonnulllist.add(ingredient);
         }
         return nonnulllist;
+    }
+
+    public Ingredient getMainIngredient() {
+        return mainIngredientRecipe;
+    }
+
+    public List<Affinity> getAffinities() {
+        return affinitiesRecipe;
+    }
+
+    public Pair<Ingredient, Ingredient> getAuxIngredients() {
+        if(auxIngredientsRecipe.isEmpty()){
+            return new Pair<>(Ingredient.EMPTY, Ingredient.EMPTY);
+        }
+        if(auxIngredientsRecipe.size() == 1){
+            return new Pair<>(auxIngredientsRecipe.getFirst(), Ingredient.EMPTY);
+        }
+        return new Pair<>(auxIngredientsRecipe.get(0), auxIngredientsRecipe.get(1));
     }
 
     @Override

@@ -1,18 +1,13 @@
 package xyz.yfrostyf.toxony.events.subscribers;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.events.ChangeToxEvent;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.damages.ToxinDamageSource;
-import xyz.yfrostyf.toxony.network.SyncToxPacket;
-
 
 @EventBusSubscriber(modid = ToxonyMain.MOD_ID)
 public class DeathStateEvents {
@@ -24,7 +19,7 @@ public class DeathStateEvents {
     //
     @SubscribeEvent
     public static void onChangeTox(ChangeToxEvent event){
-        if (!event.getToxData().getDeathState()){return;}
+        if (!event.getToxData().getDeathState())return;
 
         ToxData plyToxData = event.getToxData();
 

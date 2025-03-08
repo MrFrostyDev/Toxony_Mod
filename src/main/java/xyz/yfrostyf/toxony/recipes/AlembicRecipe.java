@@ -61,6 +61,14 @@ public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
         return remainingingItem;
     }
 
+    public Ingredient getIngredient(){
+        return recipeIngredient;
+    }
+
+    public Ingredient getIngredientToConvert(){
+        return recipeIngredientToConvert;
+    }
+
     @Override
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> nonnulllist = NonNullList.createWithCapacity(2);

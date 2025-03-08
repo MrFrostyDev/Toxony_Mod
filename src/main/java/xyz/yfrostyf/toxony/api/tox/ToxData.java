@@ -88,8 +88,8 @@ public class ToxData {
 
     public void setToxSynced(float inTox){
         if (inTox > tolerance) {
-            this.tox = inTox;
-            setDeathState(true);
+            this.tox = tolerance;
+            this.setDeathState(true);
         }
         else if (inTox <= 0) {
             this.tox = 0;
@@ -111,9 +111,9 @@ public class ToxData {
 
         if (event.getNewTox() > tolerance) {
             event.setNewTox(tolerance);
-            setDeathState(true);
+            this.setDeathState(true);
         }
-        if (event.getNewTox() <= 0) {
+        else if (event.getNewTox() <= 0) {
             event.setNewTox(0);
             this.resetThreshold();
             this.clearMutagens();

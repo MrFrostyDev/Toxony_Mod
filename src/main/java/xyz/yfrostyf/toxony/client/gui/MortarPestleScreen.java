@@ -20,7 +20,10 @@ import xyz.yfrostyf.toxony.network.ClientStartPestlingPacket;
 
 public class MortarPestleScreen extends AbstractContainerScreen<MortarPestleMenu> {
     private static final ResourceLocation MORTAR_PESTLE_MENU = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "textures/gui/container/mortar_pestle_menu.png");
-    static final ResourceLocation MORTAR_PESTLE_BUTTON = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "textures/gui/container/mortar_pestle_buttons.png");
+    static final ResourceLocation MORTAR_PESTLE_BUTTON_ACTIVE = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "container/mortar_pestle_button_active");
+    static final ResourceLocation MORTAR_PESTLE_BUTTON_INACTIVE = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "container/mortar_pestle_button_inactive");
+    static final ResourceLocation MORTAR_PESTLE_BUTTON_HOVER = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "container/mortar_pestle_button_hover");
+
 
     private final MortarPestleMenu menu;
 
@@ -69,14 +72,8 @@ public class MortarPestleScreen extends AbstractContainerScreen<MortarPestleMenu
 
     @OnlyIn(Dist.CLIENT)
     protected static class MortarPestleConfirmButton extends AbstractButton {
-        static final int BUTTON_TEXTURE_WIDTH = 75;
+        static final int BUTTON_TEXTURE_WIDTH = 25;
         static final int BUTTON_TEXTURE_HEIGHT = 17;
-
-        static final int BUTTON_WIDTH = 25;
-
-        static final int BUTTON_UPOS_INACTIVE = 0;
-        static final int BUTTON_UPOS_ACTIVE = 25;
-        static final int BUTTON_UPOS_HOVER = 50;
 
         private final MortarPestleScreen screen;
 
@@ -96,19 +93,19 @@ public class MortarPestleScreen extends AbstractContainerScreen<MortarPestleMenu
         @Override
         public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
             if (!this.active) {
-                guiGraphics.blit(
-                        MortarPestleScreen.MORTAR_PESTLE_BUTTON, this.getX(), this.getY(),
-                        BUTTON_UPOS_INACTIVE, 0, BUTTON_WIDTH, BUTTON_TEXTURE_HEIGHT, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT);
+                guiGraphics.blitSprite(
+                        MORTAR_PESTLE_BUTTON_INACTIVE, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT,
+                        0, 0, this.getX(), this.getY(), BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT);
             }
             else if (this.isHoveredOrFocused()) {
-                guiGraphics.blit(
-                        MortarPestleScreen.MORTAR_PESTLE_BUTTON, this.getX(), this.getY(),
-                        BUTTON_UPOS_HOVER, 0, BUTTON_WIDTH, BUTTON_TEXTURE_HEIGHT, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT);
+                guiGraphics.blitSprite(
+                        MORTAR_PESTLE_BUTTON_HOVER, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT,
+                        0, 0, this.getX(), this.getY(), BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT);
             }
             else { // For both active/pressed
-                guiGraphics.blit(
-                        MortarPestleScreen.MORTAR_PESTLE_BUTTON, this.getX(), this.getY(),
-                        BUTTON_UPOS_ACTIVE, 0, BUTTON_WIDTH, BUTTON_TEXTURE_HEIGHT, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT);
+                guiGraphics.blitSprite(
+                        MORTAR_PESTLE_BUTTON_ACTIVE, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT,
+                        0, 0, this.getX(), this.getY(), BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT);
             }
         }
 

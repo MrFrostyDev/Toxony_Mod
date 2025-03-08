@@ -2,13 +2,16 @@ package xyz.yfrostyf.toxony.events.subscribers;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.events.ChangeThresholdEvent;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
+import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
 import java.util.*;
@@ -31,6 +34,7 @@ public class ThresholdEvents {
             mobEffects.add(getMutagenFromAffinities(plyToxData.getAffinities()));
         }
         plyToxData.addAndApplyMutagens(mobEffects);
+        PacketDistributor.sendToPlayer((ServerPlayer) plyToxData.getPlayer(), SyncToxDataPacket.create(plyToxData));
     }
 
     //

@@ -4,6 +4,10 @@
   "block.toxony.mortar_pestle": "Mortar and Pestle",
   "block.toxony.copper_crucible": "Copper Crucible",
   "block.toxony.alembic": "Alembic",
+  "block.toxony.alchemical_forge": "Alchemical Forge",
+  "block.toxony.alchemical_forge_part": "Alchemical Forge Part",
+
+  "item.toxony.alembic_base": "Alembic Base",
   "block.toxony.valentines_box": "Valentines Box",
 
   "item.toxony.toxic_paste": "Toxic Paste",

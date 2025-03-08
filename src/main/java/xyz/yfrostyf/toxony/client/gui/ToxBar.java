@@ -49,9 +49,10 @@ public class ToxBar implements LayeredDraw.Layer {
 
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
-        if(Minecraft.getInstance().player == null){return;}
-        if(Minecraft.getInstance().options.hideGui){return;}
-        if(Minecraft.getInstance().player.isSpectator()){return;}
+        if(Minecraft.getInstance().player == null)return;
+        if(Minecraft.getInstance().options.hideGui)return;
+        if(Minecraft.getInstance().player.isSpectator())return;
+        if(ClientToxData.getToxData() == null)return;
 
         float tox = ClientToxData.getToxData().getTox();
         float tolerance = ClientToxData.getToxData().getTolerance();
