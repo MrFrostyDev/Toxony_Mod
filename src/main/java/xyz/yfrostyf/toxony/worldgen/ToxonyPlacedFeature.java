@@ -20,7 +20,7 @@ public class ToxonyPlacedFeature {
     public static final ResourceKey<PlacedFeature> WILD_OCELOT_MINT_PLACED = registerKey("wild_ocelot_mint_placed");
     public static final ResourceKey<PlacedFeature> WILD_NIGHTSHADE_PLACED = registerKey("wild_nightshade_placed");
     public static final ResourceKey<PlacedFeature> WILD_WATER_HEMLOCK_PLACED = registerKey("wild_water_hemlock_placed");
-
+    public static final ResourceKey<PlacedFeature> WILD_COLDSNAP_PLACED = registerKey("wild_coldsnap_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context){
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -44,6 +44,12 @@ public class ToxonyPlacedFeature {
                         BiomeFilter.biome()));
 
         register(context, WILD_WATER_HEMLOCK_PLACED, configuredFeatures.getOrThrow(ToxonyConfiguredFeatures.WILD_WATER_HEMLOCK),
+                List.of(RarityFilter.onAverageOnceEvery(48),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()));
+
+        register(context, WILD_COLDSNAP_PLACED, configuredFeatures.getOrThrow(ToxonyConfiguredFeatures.WILD_COLDSNAP),
                 List.of(RarityFilter.onAverageOnceEvery(48),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,

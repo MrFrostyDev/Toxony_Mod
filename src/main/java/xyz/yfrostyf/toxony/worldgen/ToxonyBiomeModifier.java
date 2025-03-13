@@ -20,7 +20,7 @@ public class ToxonyBiomeModifier {
     public static final ResourceKey<BiomeModifier> ADD_WILD_OCELOT_MINT = registerKey("add_wild_ocelot_mint");
     public static final ResourceKey<BiomeModifier> ADD_WILD_NIGHTSHADE = registerKey("add_wild_nightshade");
     public static final ResourceKey<BiomeModifier> ADD_WILD_WATER_HEMLOCK = registerKey("add_wild_water_hemlock");
-
+    public static final ResourceKey<BiomeModifier> ADD_WILD_COLDSNAP = registerKey("add_wild_coldsnap");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context){
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -47,6 +47,13 @@ public class ToxonyBiomeModifier {
         context.register(ADD_WILD_WATER_HEMLOCK, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.SWAMP), biomes.getOrThrow(Biomes.MANGROVE_SWAMP)),
                 HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_WATER_HEMLOCK_PLACED)),
+                GenerationStep.Decoration.VEGETAL_DECORATION
+        ));
+
+        context.register(ADD_WILD_COLDSNAP, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.TAIGA), biomes.getOrThrow(Biomes.SNOWY_TAIGA),
+                        biomes.getOrThrow(Biomes.SNOWY_PLAINS), biomes.getOrThrow(Biomes.SNOWY_SLOPES)),
+                HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_COLDSNAP_PLACED)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
     }

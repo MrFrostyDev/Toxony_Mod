@@ -26,6 +26,7 @@ public class ToxonyConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_OCELOT_MINT = registerKey("wild_ocelot_mint");
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_NIGHTSHADE = registerKey("wild_nightshade");
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_WATER_HEMLOCK = registerKey("wild_water_hemlock");
+    public static final ResourceKey<ConfiguredFeature<?,?>> WILD_COLDSNAP = registerKey("wild_coldsnap");
 
 
 
@@ -65,6 +66,16 @@ public class ToxonyConfiguredFeatures {
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_WATER_HEMLOCK.get().defaultBlockState()
+                                        .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
+                        ),
+                        List.of(Blocks.GRASS_BLOCK)
+                ));
+
+        register(context, WILD_COLDSNAP, Feature.FLOWER,
+                FeatureUtils.simplePatchConfiguration(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(BlockRegistry.WILD_COLDSNAP.get().defaultBlockState()
                                         .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
                         ),
                         List.of(Blocks.GRASS_BLOCK)
