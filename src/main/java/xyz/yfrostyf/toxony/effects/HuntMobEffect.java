@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.effects;
 
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,34 +22,14 @@ public class HuntMobEffect extends MobEffect {
         super(category, color);
     }
 
-    @EventBusSubscriber
-    public static class HuntEvents {
-
-        @SubscribeEvent
-        public static void onLivingDamage(LivingDamageEvent.Pre event){
-            if(!(event.getSource().getEntity() instanceof LivingEntity attacker)){return;}
-            LivingEntity victim = event.getEntity();
-
-
-            if (attacker.hasEffect(MobEffectRegistry.WOLF_MUTAGEN)){
-                MobEffectInstance attMutagen = attacker.getEffect(MobEffectRegistry.WOLF_MUTAGEN);
-
-                if(attMutagen == null){return;}
-                if(attMutagen.getAmplifier() < 2){return;}
-                if(RANDOM.nextInt(4 ) == 0){
-                    event.getEntity().addEffect(new MobEffectInstance(MobEffectRegistry.HUNT, 200, 0));
-                }
-            }
-
-            if (!victim.hasEffect(MobEffectRegistry.HUNT)){return;}
-            if (attacker.hasEffect(MobEffectRegistry.WOLF_MUTAGEN) || attacker.getType() == EntityType.WOLF){
-                float amp = victim.getEffect(MobEffectRegistry.HUNT).getAmplifier();
-                float dmgMod = attacker.getType() == EntityType.WOLF ? 0.5f+(amp/4) : 0.25f+(amp/4);
-
-                event.setNewDamage(event.getOriginalDamage() + (event.getOriginalDamage()*dmgMod));
-            }
-
-            ToxonyMain.LOGGER.info("[WolfMutagen Attack]: damage: {}",event.getNewDamage());
+    @Override
+    public void onMobHurt(LivingEntity livingEntity, int amplifier, DamageSource damageSource, float amount) {
+        if(!(damageSource.getEntity() instanceof LivingEntity sourceLivingEntity))return;
+        if(sourceLivingEntity.hasEffect(MobEffectRegistry.WOLF_MUTAGEN) || sourceLivingEntity.getType() == EntityType.WOLF){
+            float dmgMod = sourceLivingEntity.getType() == EntityType.WOLF
+                    ? 0.5F + ((float)amplifier/4)
+                    : 0.25F + ((float)amplifier/4);
+            livingEntity.hurt(damageSource, amount + (amount*dmgMod));
         }
     }
 }

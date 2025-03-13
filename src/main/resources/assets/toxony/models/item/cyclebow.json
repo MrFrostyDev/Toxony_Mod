@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "toxony:item/cyclebow_empty"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [-90, 0, -60],
+      "translation": [0.5, 0, -1],
+      "scale": [0.7, 0.7, 0.7]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [-90, 0, 30],
+      "translation": [0.5, 0.1, -1],
+      "scale": [0.7, 0.7, 0.7]
+    },
+    "firstperson_righthand": {
+      "rotation": [-90, -10, -55],
+      "translation": [1.13, 3.2, 1.13],
+      "scale": [0.55, 0.55, 0.55]
+    },
+    "firstperson_lefthand": {
+      "rotation": [-90, -10, 35],
+      "translation": [1.13, 3.2, 1.13],
+      "scale": [0.55, 0.55, 0.55]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "toxony:loaded": 1
+      },
+      "model": "toxony:item/cyclebow_loaded_0"
+    },
+    {
+      "predicate": {
+        "toxony:loaded": 2
+      },
+      "model": "toxony:item/cyclebow_loaded_1"
+    },
+    {
+      "predicate": {
+        "toxony:loaded": 3
+      },
+      "model": "toxony:item/cyclebow_loaded_2"
+    }
+  ]
+}

@@ -63,8 +63,9 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);
 
-        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.ANCHOR_TOX_POT.get()))
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.SMOKE_BOLT.get()))
                 .ingredient(Items.HONEYCOMB)
+                .ingredient(Items.INK_SAC)
                 .ingredient(Items.FERMENTED_SPIDER_EYE)
                 .use(ItemRegistry.EMPTY_TOX_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())

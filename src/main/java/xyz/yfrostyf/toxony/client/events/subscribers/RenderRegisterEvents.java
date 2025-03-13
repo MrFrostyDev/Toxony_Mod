@@ -9,6 +9,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.client.renderers.MortarPestleRenderer;
+import xyz.yfrostyf.toxony.client.renderers.entities.BoltRenderer;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.EntityRegistry;
 
@@ -26,6 +27,7 @@ public class RenderRegisterEvents {
     @SubscribeEvent
     public static void onEntityRendererRegister(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityRegistry.OIL_POT.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.BOLT.get(), BoltRenderer::new);
     }
 
     @SubscribeEvent

@@ -24,16 +24,26 @@
   "item.toxony.copper_scalpel": "Copper Scalpel",
   "item.toxony.netherite_scalpel": "Netherite Scalpel",
   "item.toxony.lethal_dose": "Lethal Dose",
+  "item.toxony.witching_blade": "Witching Blade",
+  "item.toxony.cyclebow": "Cyclebow",
+  "item.toxony.cyclebow.loaded": "Loaded:",
+
+  "item.toxony.bolt": "Bolt",
+  "item.toxony.poison_bolt": "Poison Bolt",
+  "item.toxony.toxin_bolt": "Toxin Bolt",
+  "item.toxony.smoke_bolt": "Smoke Bolt",
+  "item.toxony.regeneration_bolt": "Regeneration Bolt",
+  "item.toxony.witchfire_bolt": "Witchfire Bolt",
+
+  "item.toxony.oil_pot_sash": "Oil Pot Sash",
+  "item.toxony.oil_pot_bandolier": "Oil Pot Bandolier",
+
 
   "item.toxony.empty_oil_pot": "Empty Oil Pot",
   "item.toxony.empty_tox_pot": "Empty Tox Pot",
   "item.toxony.copper_needle": "Copper Needle",
   "item.toxony.glass_vial": "Glass Vial",
   "item.toxony.magnifying_glass": "Magnifying Glass",
-  "item.toxony.witching_blade": "Witching Blade",
-
-  "item.toxony.oil_pot_sash": "Oil Pot Sash",
-  "item.toxony.oil_pot_bandolier": "Oil Pot Bandolier",
 
   "item.toxony.wolf_tooth": "Wolf Tooth",
   "item.toxony.ocelot_mint": "Ocelot Mint",

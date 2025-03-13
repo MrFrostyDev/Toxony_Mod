@@ -55,8 +55,8 @@ public class WildPoisonCropBlock extends BushBlock implements BonemealableBlock 
     private static final float HURT_SPEED_THRESHOLD = 0.003F;
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-    private static final VoxelShape MID_SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
-    private static final VoxelShape FULL_GROWTH_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+    private static final VoxelShape MID_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0);
+    private static final VoxelShape FULL_GROWTH_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 12.0, 15.0);
 
     protected final List<Holder<MobEffect>> contactEffects;
 

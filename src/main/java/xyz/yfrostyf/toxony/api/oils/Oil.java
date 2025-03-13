@@ -78,4 +78,14 @@ public class Oil {
             }
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else {
+            return obj instanceof Oil oil
+                    && this.getDescription() == oil.getDescription();
+        }
+    }
 }

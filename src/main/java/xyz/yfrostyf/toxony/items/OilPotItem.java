@@ -18,15 +18,15 @@ import java.util.function.Supplier;
 
 public class OilPotItem extends Item {
     private static final int USE_DURATION = 64;
-    private final Supplier<ItemOil> itemOil;
+    private final ItemOil itemOil;
 
-    public OilPotItem(Properties properties, Supplier<ItemOil> itemOil) {
+    public OilPotItem(Properties properties, ItemOil itemOil) {
         super(properties.stacksTo(1));
         this.itemOil = itemOil;
     }
 
     public ItemOil getItemOil(){
-        return itemOil.get();
+        return itemOil;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class OilPotItem extends Item {
         if(!(entity instanceof Player player))return stack;
         ItemStack applied = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
 
-        if (!applied.is(getItemOil().oil().getSupportedItems())) return stack;
+        if (!applied.is(getItemOil().getOil().getSupportedItems())) return stack;
         if (getItemOil().isEmpty()) return stack;
 
         if (entity instanceof ServerPlayer svplayer && level instanceof ServerLevel svlevel) {
@@ -69,7 +69,7 @@ public class OilPotItem extends Item {
             otherStack.consume(1, player);
             oilPot.setDamageValue(0);
         }
-        else if(otherStack.is(getItemOil().oil().getSupportedItems()) && !getItemOil().isEmpty()){
+        else if(otherStack.is(getItemOil().getOil().getSupportedItems()) && !getItemOil().isEmpty()){
             return ItemUtils.startUsingInstantly(level, player, hand);
         }
         return InteractionResultHolder.pass(oilPot);

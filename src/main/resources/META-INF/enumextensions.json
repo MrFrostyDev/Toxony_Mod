@@ -2,11 +2,20 @@
   "entries": [
     {
       "enum": "net/minecraft/client/gui/Gui$HeartType",
-      "name": "TOXONY_TOXIN",
+      "name": "TOXONY_HEARTTYPE_TOXIN",
       "constructor": "(Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;)V",
       "parameters": {
         "class": "xyz/yfrostyf/toxony/client/events/subscribers/GuiHeartEvents",
         "field": "TOXIN_HEARTS_ENUM_PROXY"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "TOXONY_ARMPOSE_ONE_HAND_CROSSBOW",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "xyz/yfrostyf/toxony/client/ToxonyArmPoses",
+        "field": "ONE_HAND_CROSSBOW_ENUM_PROXY"
       }
     }
   ]

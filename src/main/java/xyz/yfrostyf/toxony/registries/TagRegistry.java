@@ -49,4 +49,9 @@ public class TagRegistry {
             Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "ingredients/poisonous")
     );
+
+    public static final TagKey<Item> BOLTS = TagKey.create(
+            Registries.ITEM,
+            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "bolts")
+    );
 }

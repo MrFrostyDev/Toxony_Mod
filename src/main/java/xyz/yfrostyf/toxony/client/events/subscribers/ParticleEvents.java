@@ -6,6 +6,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.particles.OilSmokeParticle;
+import xyz.yfrostyf.toxony.particles.SmokeParticle;
 import xyz.yfrostyf.toxony.registries.ParticleRegistry;
 
 @EventBusSubscriber(modid = ToxonyMain.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
@@ -18,5 +19,6 @@ public class ParticleEvents {
         event.registerSpriteSet(ParticleRegistry.OIL_SMOKE.get(), OilSmokeParticle.Provider::new);
         // Other methods include #registerSprite, which is essentially a Supplier<TextureSheetParticle>,
         // and #registerSpecial, which maps to a Supplier<Particle>. See the source code of the event for further info.
+        event.registerSpriteSet(ParticleRegistry.SMOKE.get(), SmokeParticle.Provider::new);
     }
 }

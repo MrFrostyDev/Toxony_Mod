@@ -13,6 +13,10 @@ import java.util.List;
 public class AffinityRegistry {
     public static final DeferredRegister<Affinity> AFFINITIES = DeferredRegister.create(ToxonyRegistries.AFFINITY_REGISTRY, ToxonyMain.MOD_ID);
 
+    public static void register(IEventBus eventBus){
+        AFFINITIES.register(eventBus);
+    }
+
     public static final DeferredHolder<Affinity, Affinity> MOON = AFFINITIES.register("moon", () -> Affinity.create(
             "Moon",
             1,
@@ -25,8 +29,8 @@ public class AffinityRegistry {
             "Sun",
             2,
             () -> List.of(
-                    MobEffectRegistry.TURTLE_MUTAGEN,
-                    MobEffectRegistry.CAT_MUTAGEN
+                    MobEffectRegistry.CAT_MUTAGEN,
+                    MobEffectRegistry.BLAZE_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> OCEAN = AFFINITIES.register("ocean", () -> Affinity.create(
@@ -67,14 +71,15 @@ public class AffinityRegistry {
             "Decay",
             8,
             () -> List.of(
-                    MobEffectRegistry.SPIDER_MUTAGEN
+                    MobEffectRegistry.WITHER_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> NETHER = AFFINITIES.register("nether", () -> Affinity.create(
             "Nether",
             9,
             () -> List.of(
-                    MobEffectRegistry.WOLF_MUTAGEN
+                    MobEffectRegistry.BLAZE_MUTAGEN,
+                    MobEffectRegistry.WITHER_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> END = AFFINITIES.register("end", () -> Affinity.create(
@@ -83,8 +88,4 @@ public class AffinityRegistry {
             () -> List.of()
     ));
 
-
-    public static void register(IEventBus eventBus){
-        AFFINITIES.register(eventBus);
-    }
 }

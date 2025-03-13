@@ -72,4 +72,11 @@ public class DataComponentsRegistry {
                     .networkSynchronized(ByteBufCodecs.holderRegistry(Registries.ITEM))
                     .cacheEncoding()
     );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> LOADED_SHOTS = DATA_COMPONENTS.registerComponentType(
+            "loaded_shots",
+            builder -> builder
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.INT)
+    );
 }

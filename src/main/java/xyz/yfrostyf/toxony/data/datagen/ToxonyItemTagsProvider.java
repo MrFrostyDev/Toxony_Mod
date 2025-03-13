@@ -18,15 +18,21 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
         super(output, lookupProvider, blockTags);
     }
 
-    // Add your tag entries here.
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.tag(ItemTags.WEAPON_ENCHANTABLE)
                 .add(
                         ItemRegistry.COPPER_SCALPEL.get(),
                         ItemRegistry.NETHERITE_SCALPEL.get(),
-                        ItemRegistry.LETHAL_DOSE.get()
+                        ItemRegistry.LETHAL_DOSE.get(),
+                        ItemRegistry.WITCHING_BLADE.get()
                 );
+
+        this.tag(ItemTags.SWORDS)
+                .add(
+                        ItemRegistry.WITCHING_BLADE.get()
+                );
+
 
         this.tag(TagRegistry.SCALPEL_ITEM)
                 .add(
@@ -41,7 +47,6 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         Items.PUFFERFISH,
                         ItemRegistry.BRITTLE_SCUTE.get(),
                         ItemRegistry.WOLF_TOOTH.get()
-
                 );
 
         this.tag(TagRegistry.POISONOUS_PLANTS_ITEM)
@@ -54,8 +59,18 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.SUNSPOT.get(),
                         ItemRegistry.WATER_HEMLOCK.get(),
                         ItemRegistry.MOONLIGHT_HEMLOCK.get(),
-                        ItemRegistry.COLDSNAP_LEAF.get(),
-                        ItemRegistry.WHIRLSNAP_LEAF.get()
+                        ItemRegistry.COLDSNAP.get(),
+                        ItemRegistry.WHIRLSNAP.get()
+                );
+
+        this.tag(TagRegistry.BOLTS)
+                .add(
+                        ItemRegistry.BOLT.get(),
+                        ItemRegistry.POISON_BOLT.get(),
+                        ItemRegistry.TOXIN_BOLT.get(),
+                        ItemRegistry.SMOKE_BOLT.get(),
+                        ItemRegistry.REGENERATION_BOLT.get(),
+                        ItemRegistry.WITCHFIRE_BOLT.get()
                 );
     }
 }

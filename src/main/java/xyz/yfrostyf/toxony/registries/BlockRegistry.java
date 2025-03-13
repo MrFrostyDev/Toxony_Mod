@@ -145,11 +145,11 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> COLDSNAP = createPoisonCrop(
             "coldsnap",
-            () -> ItemRegistry.COLDSNAP_LEAF, List.of(MobEffects.POISON), () -> BlockRegistry.WHIRLSNAP);
+            () -> ItemRegistry.COLDSNAP, List.of(MobEffects.POISON), () -> BlockRegistry.WHIRLSNAP);
 
     public static final DeferredHolder<Block, Block> WHIRLSNAP = createPoisonCrop(
             "whirlsnap",
-            () -> ItemRegistry.WHIRLSNAP_LEAF, List.of(MobEffects.POISON), null);
+            () -> ItemRegistry.WHIRLSNAP, List.of(MobEffects.POISON), null);
 
     // |--------------------------------------------------------------------------------------|
     // |------------------------------------Block Entities------------------------------------|

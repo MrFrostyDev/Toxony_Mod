@@ -54,15 +54,14 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
     );
 
     public static final int MAX_AGE = 5;
-    public static final int MINIMUM_EVOLVE_THRESHOLD = 5;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_5;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-            Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 10.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
+            Block.box(3.0, 0.0, 3.0, 13.0, 2.0, 13.0),
+            Block.box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0),
+            Block.box(3.0, 0.0, 3.0, 13.0, 6.0, 13.0),
+            Block.box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0),
+            Block.box(3.0, 0.0, 3.0, 13.0, 10.0, 13.0),
+            Block.box(3.0, 0.0, 3.0, 13.0, 12.0, 13.0)
     };
 
     protected final Supplier<Holder<Item>> grownItem;

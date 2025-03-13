@@ -40,16 +40,16 @@ public class OilsRegistry {
             List.of(MobEffects.FIRE_RESISTANCE)
     ));
 
-    public static final DeferredHolder<Oil, Oil> ANCHOR_OIL = OILS.register("anchor_oil", () -> new Oil(
-            Component.translatable("oil.toxony.anchor"),
+    public static final DeferredHolder<Oil, Oil> SMOKE_OIL = OILS.register("smoke_oil", () -> new Oil(
+            Component.translatable("oil.toxony.smoke"),
             BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
-            List.of(MobEffects.MOVEMENT_SLOWDOWN)
+            List.of(MobEffects.MOVEMENT_SLOWDOWN, MobEffects.BLINDNESS, MobEffects.WEAKNESS)
     ));
 
     public static final DeferredHolder<Oil, Oil> REGENERATION_OIL = OILS.register("regeneration_oil", () -> new Oil(
             Component.translatable("oil.toxony.regeneration"),
             BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
-            List.of(MobEffects.REGENERATION)
+            List.of(MobEffects.REGENERATION, MobEffects.HEAL)
     ));
 
 

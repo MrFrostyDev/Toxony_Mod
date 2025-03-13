@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-05T19:18:33.3615452	Recipes
+// 1.21.1	2025-03-11T17:21:27.5635004	Recipes
 38ca203e5218eb2059ff7ed15a2361be521a170c data/minecraft/advancement/recipes/misc/clay_oil_pot_campfire.json
 09343e0df9b6163f2ed2faa37573b186cbd91f66 data/minecraft/recipe/clay_oil_pot_campfire.json
 6d6e92e36dbadc2336ed5435c7827969996aab7a data/toxony/advancement/recipes/alchemical_forge/lethal_dose.json
@@ -14,7 +14,6 @@ d48b17078978c0f808fa4fb65dca6cde383ff555 data/toxony/advancement/recipes/misc/cl
 836769f911750553e1835cec82e04dd593afaec8 data/toxony/advancement/recipes/misc/empty_oil_pot.json
 a466609166fcac57b1a83b2ffe3d4af5f4f20625 data/toxony/advancement/recipes/misc/redstone_mixture.json
 9511d190669ae1cd32d5532af85936d3762888c0 data/toxony/advancement/recipes/misc/toxic_formula.json
-39c0e963e26980c5dc1de66d5f0a3ce8779950b3 data/toxony/advancement/recipes/mortar/anchor_tox_pot.json
 1d87cc8b2efb6d18b70b3f2f6ad22ac6d5ad1133 data/toxony/advancement/recipes/mortar/fatigue_oil_pot.json
 53569952258ceef28e5defa4b6c0e478aa484498 data/toxony/advancement/recipes/mortar/fire_resistance_oil_pot.json
 3b17238c3ae089083f955bd63e446802ca998a98 data/toxony/advancement/recipes/mortar/poison_blend.json
@@ -24,6 +23,7 @@ e4f0b632db5f7bbd470f1f28f8c71f05f02585cb data/toxony/advancement/recipes/mortar/
 4848fa043c96d9bbf738eaac1472cb444c5339fa data/toxony/advancement/recipes/mortar/pure_blend.json
 75c8878d74bb87ba4d7ab3cdd10c455665144d1d data/toxony/advancement/recipes/mortar/pure_blend_alt.json
 fb02ceef3b3c6216839a1b356ab2e90610cb59ad data/toxony/advancement/recipes/mortar/regeneration_tox_pot.json
+8042488e3f745acf9d50bb4eda09ca3d7b01e524 data/toxony/advancement/recipes/mortar/smoke_bolt.json
 4417fd06cb7eea6551570c6a56d54ca11f601e21 data/toxony/advancement/recipes/mortar/toxic_blend.json
 ce21bb032933640eb7ed9b98864a4226184b2532 data/toxony/advancement/recipes/mortar/toxin_tox_pot.json
 61fd2346534be554ef90e5c754f3d20b54887b4d data/toxony/advancement/recipes/mortar/witchfire_tox_pot.json
@@ -38,7 +38,6 @@ d44b062df8a329f44625dab4c83cbc08f44cbd40 data/toxony/recipe/alembic/toxin.json
 7f0af7fd7a01e0c912ddde3dcaed2ad9c683b547 data/toxony/recipe/crucible/redstone_solution.json
 67353ea6118a16a0776352383eb03d5fcf56a737 data/toxony/recipe/crucible/toxic_paste.json
 b66dea8ed1a71cc30539fe3bba19629b91c86a8d data/toxony/recipe/empty_oil_pot.json
-d67317c5d98758a9b8f6b6cc7afe779fb3d6cf61 data/toxony/recipe/mortar/anchor_tox_pot.json
 5a2704df0d5cb4b69043cb2c983a8e6fcdc9e4c1 data/toxony/recipe/mortar/fatigue_oil_pot.json
 37b1ea2a3d4b062c2e7b42f0e88cf7b5dda0490a data/toxony/recipe/mortar/fire_resistance_oil_pot.json
 c1401d277bf107d9c6b7eeda80e57f266c61b948 data/toxony/recipe/mortar/poison_blend.json
@@ -48,6 +47,7 @@ c1401d277bf107d9c6b7eeda80e57f266c61b948 data/toxony/recipe/mortar/poison_blend.
 ce5d0df9452229423a975a1d341ca683a4a610b6 data/toxony/recipe/mortar/pure_blend.json
 aafe345250164f2a44a7ba9275d326dad1bce0a4 data/toxony/recipe/mortar/pure_blend_alt.json
 4fe0738b8ff2947fe6be94ebae4960737f632b41 data/toxony/recipe/mortar/regeneration_tox_pot.json
+1e01e4dca995575c7a084d5b18c2613b88e011f4 data/toxony/recipe/mortar/smoke_bolt.json
 51e148f66b097d1d999666f1ce73330368db3c5f data/toxony/recipe/mortar/toxic_blend.json
 850edb9bb38a1c4c74667e7a1cb20e3ea5aa6382 data/toxony/recipe/mortar/toxin_tox_pot.json
 fb1c4add924243fc53fdf50103853fb45b3c3fc3 data/toxony/recipe/mortar/witchfire_tox_pot.json

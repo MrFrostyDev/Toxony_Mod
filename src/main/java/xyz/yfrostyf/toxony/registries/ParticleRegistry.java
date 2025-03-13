@@ -23,4 +23,12 @@ public class ParticleRegistry {
             // most vanilla particles, but true for e.g. explosions, campfire smoke, or squid ink.
             () -> new SimpleParticleType(false)
     );
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SMOKE = PARTICLE_TYPES.register(
+            "smoke",
+            // The supplier. The boolean parameter denotes whether setting the Particles option in the
+            // video settings to Minimal will affect this particle type or not; this is false for
+            // most vanilla particles, but true for e.g. explosions, campfire smoke, or squid ink.
+            () -> new SimpleParticleType(false)
+    );
 }

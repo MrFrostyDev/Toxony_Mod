@@ -50,17 +50,17 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.SUNSPOT.get());
                 output.accept(ItemRegistry.WATER_HEMLOCK.get());
                 output.accept(ItemRegistry.MOONLIGHT_HEMLOCK.get());
-                output.accept(ItemRegistry.COLDSNAP_LEAF.get());
-                output.accept(ItemRegistry.WHIRLSNAP_LEAF.get());
+                output.accept(ItemRegistry.COLDSNAP.get());
+                output.accept(ItemRegistry.WHIRLSNAP.get());
 
-                output.accept(ItemRegistry.OCELOT_MINT_SEED.get());
-                output.accept(ItemRegistry.SNOW_MINT_SEED.get());
-                output.accept(ItemRegistry.NIGHTSHADE_SEED.get());
-                output.accept(ItemRegistry.SUNSPOT_SEED.get());
-                output.accept(ItemRegistry.WATER_HEMLOCK_SEED.get());
-                output.accept(ItemRegistry.MOONLIGHT_HEMLOCK_SEED.get());
-                output.accept(ItemRegistry.COLDSNAP_SEED.get());
-                output.accept(ItemRegistry.WHIRLSNAP_SEED.get());
+                output.accept(ItemRegistry.OCELOT_MINT_SEEDS.get());
+                output.accept(ItemRegistry.SNOW_MINT_SEEDS.get());
+                output.accept(ItemRegistry.NIGHTSHADE_SEEDS.get());
+                output.accept(ItemRegistry.SUNSPOT_SEEDS.get());
+                output.accept(ItemRegistry.WATER_HEMLOCK_SEEDS.get());
+                output.accept(ItemRegistry.MOONLIGHT_HEMLOCK_SEEDS.get());
+                output.accept(ItemRegistry.COLDSNAP_SEEDS.get());
+                output.accept(ItemRegistry.WHIRLSNAP_SEEDS.get());
 
                 output.accept(ItemRegistry.CLAY_OIL_POT.get());
                 output.accept(ItemRegistry.EMPTY_OIL_POT.get());

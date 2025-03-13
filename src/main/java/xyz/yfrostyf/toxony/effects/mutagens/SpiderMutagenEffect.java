@@ -17,20 +17,17 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
-import java.util.Random;
-
 public class SpiderMutagenEffect extends MutagenEffect {
-    private static final AttributeModifier moveeffModifier = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "spider_mutagen_moveeff_modifier"), 1.0f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    private static final AttributeModifier MOVEEFFICIENCY_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "spider_mutagen_moveeff_modifier"), 1.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     private static final float SPIDER_CLIMB_RATE = 0.1f;
 
     public SpiderMutagenEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
-    private static final Random RANDOM = new Random();
 
     @Override
     public void onEffectStarted(LivingEntity entity, int amplifier) {
-        addModifier(entity, Attributes.MOVEMENT_EFFICIENCY, moveeffModifier);
+        addModifier(entity, Attributes.MOVEMENT_EFFICIENCY, MOVEEFFICIENCY_MODIFIER);
     }
 
     @Override
@@ -47,7 +44,7 @@ public class SpiderMutagenEffect extends MutagenEffect {
             Vec3 deltaMovement = entity.getDeltaMovement();
 
             double velX = Math.clamp(deltaMovement.x, -maxVel, maxVel);
-            double velY = 0.15;
+            double velY = SPIDER_CLIMB_RATE;
             double velZ = Math.clamp(deltaMovement.z, -maxVel, maxVel);
             if(entity.isSuppressingSlidingDownLadder()) {
                 velY = 0.0;
@@ -62,20 +59,16 @@ public class SpiderMutagenEffect extends MutagenEffect {
     public static class SpiderMutagenEvents {
 
         @SubscribeEvent
-        public static void onEffectRemove(MobEffectEvent.Remove event){
+        public static void onMutagenRemove(MobEffectEvent.Remove event){
             MobEffectInstance effectInst = event.getEffectInstance();
+            if(effectInst == null || !effectInst.is(MobEffectRegistry.SPIDER_MUTAGEN))return;
 
-            if(effectInst == null){return;}
-            if(!effectInst.is(MobEffectRegistry.SPIDER_MUTAGEN)){return;}
-
-            removeModifier(event.getEntity(), Attributes.MOVEMENT_EFFICIENCY, moveeffModifier);
+            removeModifier(event.getEntity(), Attributes.MOVEMENT_EFFICIENCY, MOVEEFFICIENCY_MODIFIER);
         }
 
         @SubscribeEvent
-        public static void onLivingDamage(LivingDamageEvent.Post event){
-            if (event.getSource().getEntity() == null) {return;}
-            if (!(event.getSource().getEntity() instanceof LivingEntity entity)){return;}
-
+        public static void onDamageMutagenAttacker(LivingDamageEvent.Post event){
+            if (event.getSource().getEntity() == null || !(event.getSource().getEntity() instanceof LivingEntity entity))return;
             MobEffectInstance attackerMutagen = entity.getEffect(MobEffectRegistry.SPIDER_MUTAGEN);
 
             if(attackerMutagen == null){return;}

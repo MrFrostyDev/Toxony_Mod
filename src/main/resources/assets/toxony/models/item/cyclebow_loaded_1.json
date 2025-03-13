@@ -1,0 +1,6 @@
+{
+  "parent": "toxony:item/cyclebow",
+  "textures": {
+    "layer0": "toxony:item/cyclebow_loaded_1"
+  }
+}

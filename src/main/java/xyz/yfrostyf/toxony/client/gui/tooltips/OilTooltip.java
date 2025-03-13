@@ -66,7 +66,7 @@ public class OilTooltip implements ClientTooltipComponent {
         int uses = itemstack.getOrDefault(DataComponentsRegistry.OIL_USES, -1);
         if (itemoil.isEmpty()) return;
 
-        Holder<MobEffect> holder = itemoil.oil().getEffects().getFirst();
+        Holder<MobEffect> holder = itemoil.getOil().getEffects().getFirst();
         MobEffectTextureManager mobEffectTextureManager = Minecraft.getInstance().getMobEffectTextures();
         TextureAtlasSprite textureatlassprite = mobEffectTextureManager.get(holder);
 

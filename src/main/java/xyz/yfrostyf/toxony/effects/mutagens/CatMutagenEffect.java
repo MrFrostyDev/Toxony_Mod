@@ -15,10 +15,10 @@ import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
 public class CatMutagenEffect extends MutagenEffect {
-    private static final AttributeModifier fallModifier = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_fall_modifier"), -0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-    private static final AttributeModifier speedModifier = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_speed_modifier"), 0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-    private static final AttributeModifier jumpModifier = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_jump_modifier"), 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-    private static final AttributeModifier safeFallModifier = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_safefall_add"), 1f, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier FALL_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_fall_modifier"), -0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_speed_modifier"), 0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    private static final AttributeModifier JUMP_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_jump_modifier"), 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    private static final AttributeModifier SAFEFALL_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "cat_mutagen_safefall_add"), 1f, AttributeModifier.Operation.ADD_VALUE);
 
     public CatMutagenEffect(MobEffectCategory category, int color) {
         super(category, color);
@@ -26,12 +26,12 @@ public class CatMutagenEffect extends MutagenEffect {
 
     @Override
     public void onEffectStarted(LivingEntity entity, int amplifier) {
-        addModifier(entity, Attributes.FALL_DAMAGE_MULTIPLIER, fallModifier);
+        addModifier(entity, Attributes.FALL_DAMAGE_MULTIPLIER, FALL_MODIFIER);
 
         if(amplifier > 0){
-            addModifier(entity, Attributes.MOVEMENT_SPEED, speedModifier);
-            addModifier(entity, Attributes.JUMP_STRENGTH, jumpModifier);
-            addModifier(entity, Attributes.SAFE_FALL_DISTANCE, safeFallModifier);
+            addModifier(entity, Attributes.MOVEMENT_SPEED, SPEED_MODIFIER);
+            addModifier(entity, Attributes.JUMP_STRENGTH, JUMP_MODIFIER);
+            addModifier(entity, Attributes.SAFE_FALL_DISTANCE, SAFEFALL_MODIFIER);
         }
         if(amplifier > 1){
             entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, false, false, false));
@@ -42,18 +42,16 @@ public class CatMutagenEffect extends MutagenEffect {
     public static class CatMutagenEvents {
 
         @SubscribeEvent
-        public static void onEffectRemove(MobEffectEvent.Remove event){
+        public static void onMutagenRemove(MobEffectEvent.Remove event){
             MobEffectInstance effectInst = event.getEffectInstance();
+            if(effectInst == null || !effectInst.is(MobEffectRegistry.CAT_MUTAGEN)){return;}
 
-            if(effectInst == null){return;}
-            if(!effectInst.is(MobEffectRegistry.CAT_MUTAGEN)){return;}
-
-            removeModifier(event.getEntity(), Attributes.FALL_DAMAGE_MULTIPLIER, fallModifier);
+            removeModifier(event.getEntity(), Attributes.FALL_DAMAGE_MULTIPLIER, FALL_MODIFIER);
 
             if(effectInst.getAmplifier() >= 1) {
-                removeModifier(event.getEntity(), Attributes.MOVEMENT_SPEED, speedModifier);
-                removeModifier(event.getEntity(), Attributes.JUMP_STRENGTH, jumpModifier);
-                removeModifier(event.getEntity(), Attributes.SAFE_FALL_DISTANCE, safeFallModifier);
+                removeModifier(event.getEntity(), Attributes.MOVEMENT_SPEED, SPEED_MODIFIER);
+                removeModifier(event.getEntity(), Attributes.JUMP_STRENGTH, JUMP_MODIFIER);
+                removeModifier(event.getEntity(), Attributes.SAFE_FALL_DISTANCE, SAFEFALL_MODIFIER);
             }
 
             if(event.getEntity().hasEffect(MobEffects.NIGHT_VISION)){

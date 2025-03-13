@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "toxony:item/handheld_longsword",
   "textures": {
     "layer0": "toxony:item/witching_blade"
   },

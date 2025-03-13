@@ -14,7 +14,7 @@ public class OilSmokeParticle extends TextureSheetParticle {
         this.spriteSet = spriteSet;
 
         this.quadSize = 1.0F;
-        this.setSize(1.7F, 1.7F);
+        this.setSize(1.8F, 1.8F);
         this.lifetime = 7 + this.random.nextInt(4);;
         this.setSpriteFromAge(spriteSet);
 
@@ -39,11 +39,6 @@ public class OilSmokeParticle extends TextureSheetParticle {
     @Override
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
-    }
-
-    @Override
-    public int getLifetime() {
-        return 30;
     }
 
     @OnlyIn(Dist.CLIENT)

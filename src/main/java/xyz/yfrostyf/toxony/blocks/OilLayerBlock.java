@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
@@ -135,7 +137,10 @@ public class OilLayerBlock extends Block {
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity) {
+        if(entity.isOnFire()){
+            level.setBlockAndUpdate(pos, Blocks.FIRE.defaultBlockState());
+        }
+        else if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffectRegistry.FLAMMABLE, 600, 0));
         }
     }

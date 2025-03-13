@@ -133,8 +133,6 @@ public class ThrownOilPot extends ThrowableItemProjectile implements ItemSupplie
         AABB aabb = this.getBoundingBox().inflate(SPLASH_RANGE, 2.0, SPLASH_RANGE);
         List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, aabb);
         if (!list.isEmpty()) {
-            Entity entity = this.getEffectSource();
-
             for (LivingEntity livingentity : list) {
                 if (livingentity.isAffectedByPotions()) {
                     double dist = this.distanceToSqr(livingentity);
@@ -146,8 +144,8 @@ public class ThrownOilPot extends ThrowableItemProjectile implements ItemSupplie
                             distMult = 1.0 - Math.sqrt(dist) / SPLASH_RANGE;
                         }
                         MobEffectInstance mobeffectInstOil = new MobEffectInstance(MobEffectRegistry.FLAMMABLE, 600, 0);
-                        livingentity.addEffect(mobeffectInstOil, entity);
-                        for (Holder<MobEffect> holder : itemOil.oil().getEffects()) {
+                        livingentity.addEffect(mobeffectInstOil, this.getEffectSource());
+                        for (Holder<MobEffect> holder : itemOil.getOil().getEffects()) {
                             MobEffectInstance mobeffectInst = new MobEffectInstance(holder, 400, itemOil.amplifier());
                             if (holder.value().isInstantenous()) {
                                 holder.value().applyInstantenousEffect(this, this.getOwner(), livingentity, mobeffectInst.getAmplifier(), distMult);
@@ -157,7 +155,7 @@ public class ThrownOilPot extends ThrowableItemProjectile implements ItemSupplie
                                         holder, i, mobeffectInst.getAmplifier(), mobeffectInst.isAmbient(), mobeffectInst.isVisible()
                                 );
                                 if (!modifedMobEffectInstance.endsWithin(20)) {
-                                    livingentity.addEffect(modifedMobEffectInstance, entity);
+                                    livingentity.addEffect(modifedMobEffectInstance, this.getEffectSource());
                                 }
                             }
                         }
