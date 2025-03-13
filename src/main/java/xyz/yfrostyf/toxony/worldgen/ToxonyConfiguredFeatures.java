@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 
@@ -27,8 +28,7 @@ public class ToxonyConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_NIGHTSHADE = registerKey("wild_nightshade");
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_WATER_HEMLOCK = registerKey("wild_water_hemlock");
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_COLDSNAP = registerKey("wild_coldsnap");
-
-
+    public static final ResourceKey<ConfiguredFeature<?,?>> WILD_BLOODROOT = registerKey("wild_bloodroot");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
         register(context, PATCH_FALSE_BERRY_BUSH, Feature.RANDOM_PATCH,
@@ -46,7 +46,7 @@ public class ToxonyConfiguredFeatures {
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_OCELOT_MINT.get().defaultBlockState()
-                                        .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
+                                        .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(1)))
                         ),
                         List.of(Blocks.GRASS_BLOCK)
                 ));
@@ -56,7 +56,7 @@ public class ToxonyConfiguredFeatures {
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_NIGHTSHADE.get().defaultBlockState()
-                                        .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
+                                        .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(1)))
                         ),
                         List.of(Blocks.GRASS_BLOCK)
                 ));
@@ -66,7 +66,7 @@ public class ToxonyConfiguredFeatures {
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_WATER_HEMLOCK.get().defaultBlockState()
-                                        .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
+                                        .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(1)))
                         ),
                         List.of(Blocks.GRASS_BLOCK)
                 ));
@@ -76,7 +76,17 @@ public class ToxonyConfiguredFeatures {
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_COLDSNAP.get().defaultBlockState()
-                                        .setValue(FalseBerryBushBlock.AGE, Integer.valueOf(1)))
+                                        .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(1)))
+                        ),
+                        List.of(Blocks.GRASS_BLOCK)
+                ));
+
+        register(context, WILD_BLOODROOT, Feature.FLOWER,
+                FeatureUtils.simplePatchConfiguration(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(BlockRegistry.WILD_BLOODROOT.get().defaultBlockState()
+                                        .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(1)))
                         ),
                         List.of(Blocks.GRASS_BLOCK)
                 ));

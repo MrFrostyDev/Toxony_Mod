@@ -75,5 +75,31 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_toxic_paste", has(ItemRegistry.TOXIC_PASTE.get()))
                 .save(output);
 
+
+        // Tox Seeds
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.OCELOT_MINT_SEEDS.get())
+                .requires(ItemRegistry.OCELOT_MINT.get())
+                .unlockedBy("has_ocelot_mint", has(ItemRegistry.OCELOT_MINT.get()))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.NIGHTSHADE_SEEDS.get())
+                .requires(ItemRegistry.NIGHTSHADE.get())
+                .unlockedBy("has_nightshade", has(ItemRegistry.NIGHTSHADE.get()))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.WATER_HEMLOCK_SEEDS.get())
+                .requires(ItemRegistry.WATER_HEMLOCK.get())
+                .unlockedBy("has_water_hemlock", has(ItemRegistry.WATER_HEMLOCK.get()))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.COLDSNAP_SEEDS.get())
+                .requires(ItemRegistry.COLDSNAP.get())
+                .unlockedBy("has_coldsnap", has(ItemRegistry.COLDSNAP.get()))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.BLOODROOT_FUNGUS.get())
+                .requires(ItemRegistry.BLOODROOT.get())
+                .unlockedBy("has_bloodroot", has(ItemRegistry.BLOODROOT.get()))
+                .save(output);
     }
 }

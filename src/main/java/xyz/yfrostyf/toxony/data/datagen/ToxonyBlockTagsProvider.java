@@ -25,17 +25,20 @@ public class ToxonyBlockTagsProvider extends BlockTagsProvider {
         this.tag(TagRegistry.POISONOUS_PLANTS_BLOCK)
                 .add(
                         BlockRegistry.WILD_OCELOT_MINT.get(),
+                        BlockRegistry.WILD_NIGHTSHADE.get(),
+                        BlockRegistry.WILD_WATER_HEMLOCK.get(),
+                        BlockRegistry.WILD_COLDSNAP.get(),
+                        BlockRegistry.WILD_BLOODROOT.get(),
                         BlockRegistry.OCELOT_MINT.get(),
                         BlockRegistry.SNOW_MINT.get(),
-                        BlockRegistry.WILD_NIGHTSHADE.get(),
                         BlockRegistry.NIGHTSHADE.get(),
                         BlockRegistry.SUNSPOT.get(),
-                        BlockRegistry.WILD_WATER_HEMLOCK.get(),
                         BlockRegistry.WATER_HEMLOCK.get(),
                         BlockRegistry.MOONLIGHT_HEMLOCK.get(),
-                        BlockRegistry.WILD_COLDSNAP.get(),
                         BlockRegistry.COLDSNAP.get(),
-                        BlockRegistry.WHIRLSNAP.get()
+                        BlockRegistry.WHIRLSNAP.get(),
+                        BlockRegistry.BLOODROOT.get(),
+                        BlockRegistry.WARPROOT.get()
                 );
 
         this.tag(TagRegistry.OPEN_FLAME)

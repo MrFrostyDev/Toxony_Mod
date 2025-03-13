@@ -213,6 +213,20 @@ public class ItemRegistry {
             .build()
     );
 
+    public static final DeferredHolder<Item, Item> BLOODROOT = ITEMS.register("bloodroot", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey()))
+            .tox(2).tolerance(1).tier(1)
+            .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
+    public static final DeferredHolder<Item, Item> WARPROOT = ITEMS.register("warproot", () -> ToxGiverItem.builder()
+            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey()))
+            .tox(2).tolerance(1).tier(1)
+            .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
+            .build()
+    );
+
     public static final DeferredHolder<Item, Item> BRITTLE_SCUTE = ITEMS.register("brittle_scute", () -> new Item(
             createAffinitiesProperty(AffinityRegistry.SUN.getKey(), AffinityRegistry.OCEAN.getKey())
     ));
@@ -256,6 +270,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> MOONLIGHT_HEMLOCK_SEEDS = ITEMS.register("moonlight_hemlock_seeds", () -> new ItemNameBlockItem(BlockRegistry.MOONLIGHT_HEMLOCK.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> COLDSNAP_SEEDS = ITEMS.register("coldsnap_seeds", () -> new ItemNameBlockItem(BlockRegistry.COLDSNAP.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> WHIRLSNAP_SEEDS = ITEMS.register("whirlsnap_seeds", () -> new ItemNameBlockItem(BlockRegistry.WHIRLSNAP.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> BLOODROOT_FUNGUS = ITEMS.register("bloodroot_fungus", () -> new ItemNameBlockItem(BlockRegistry.BLOODROOT.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> WARPROOT_FUNGUS = ITEMS.register("warproot_fungus", () -> new ItemNameBlockItem(BlockRegistry.WARPROOT.get(), new Item.Properties()));
 
 
     // |-----------------------------------------------------------------------------------|

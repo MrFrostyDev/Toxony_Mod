@@ -1,16 +1,19 @@
 {
   "values": [
     "toxony:wild_ocelot_mint",
+    "toxony:wild_nightshade",
+    "toxony:wild_water_hemlock",
+    "toxony:wild_coldsnap",
+    "toxony:wild_bloodroot",
     "toxony:ocelot_mint",
     "toxony:snow_mint",
-    "toxony:wild_nightshade",
     "toxony:nightshade",
     "toxony:sunspot",
-    "toxony:wild_water_hemlock",
     "toxony:water_hemlock",
     "toxony:moonlight_hemlock",
-    "toxony:wild_coldsnap",
     "toxony:coldsnap",
-    "toxony:whirlsnap"
+    "toxony:whirlsnap",
+    "toxony:bloodroot",
+    "toxony:warproot"
   ]
 }

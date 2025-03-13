@@ -151,6 +151,27 @@ public class BlockRegistry {
             "whirlsnap",
             () -> ItemRegistry.WHIRLSNAP, List.of(MobEffects.POISON), null);
 
+    public static final DeferredHolder<Block, Block> WILD_BLOODROOT = BLOCKS.register(
+            "wild_bloodroot",
+            () -> new WildPoisonCropBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.CRIMSON_STEM)
+                    .randomTicks()
+                    .noCollission()
+                    .sound(SoundType.CROP)
+                    .pushReaction(PushReaction.DESTROY)
+                    .isRedstoneConductor((state,level,pos) -> false),
+                    List.of(MobEffects.POISON)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> BLOODROOT = createPoisonCrop(
+            "bloodroot",
+            () -> ItemRegistry.BLOODROOT, List.of(MobEffects.POISON), () -> BlockRegistry.WARPROOT);
+
+    public static final DeferredHolder<Block, Block> WARPROOT = createPoisonCrop(
+            "warproot",
+            () -> ItemRegistry.WARPROOT, List.of(MobEffects.POISON), null);
+
     // |--------------------------------------------------------------------------------------|
     // |------------------------------------Block Entities------------------------------------|
     // |--------------------------------------------------------------------------------------|

@@ -1,0 +1,10 @@
+{
+	"credit": "MrFrostyDev",
+	"parent": "toxony:block/template_poison_plant_big",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "toxony:block/bloodroot_stage5",
+		"particle": "toxony:block/bloodroot_stage5"
+	}
+}

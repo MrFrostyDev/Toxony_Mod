@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "toxony:block/wild_bloodroot_stage2"
+    },
+    "age=1": {
+      "model": "toxony:block/wild_bloodroot_stage3"
+    },
+    "age=2": {
+      "model": "toxony:block/wild_bloodroot_stage4"
+    },
+    "age=3": {
+      "model": "toxony:block/wild_bloodroot_stage5"
+    }
+  }
+}
