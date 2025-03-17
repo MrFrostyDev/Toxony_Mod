@@ -15,6 +15,7 @@ import xyz.yfrostyf.toxony.items.BoltItem;
 import xyz.yfrostyf.toxony.items.OilPotItem;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
+import java.util.List;
 import java.util.Optional;
 
 public class OilUtil {
@@ -68,9 +69,9 @@ public class OilUtil {
     public static Optional<Holder.Reference<Item>> getBoltByOilItem(ItemOil itemOil, Level level){
         return level.registryAccess()
                 .lookupOrThrow(Registries.ITEM)
-                .filterElements(item -> item instanceof BoltItem boltItem
-                        && boltItem.components().get(DataComponentsRegistry.OIL.get()) instanceof ItemOil itemOil1
-                        && itemOil.equals(itemOil1)
+                .filterElements(item -> item instanceof BoltItem
+                        && item.components().has(DataComponentsRegistry.OIL.get())
+                        && itemOil.getOil().equals(item.components().get(DataComponentsRegistry.OIL.get()).getOil())
                 ).listElements().findAny();
     }
 

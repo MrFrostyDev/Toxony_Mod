@@ -74,10 +74,11 @@ public record ItemOil(Holder<Oil> oil, int duration, int amplifier, int maxUses,
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
-        } else {
-            return obj instanceof ItemOil oil
-                    && this.oil.equals(oil.oil)
-                    && this.showInTooltip == oil.showInTooltip;
+        }
+        else {
+            return obj instanceof ItemOil compare
+                    && this.oil.equals(compare.oil)
+                    && this.showInTooltip == compare.showInTooltip;
         }
     }
 
