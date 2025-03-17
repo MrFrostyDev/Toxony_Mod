@@ -18,10 +18,7 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.blocks.PoisonCropBlock;
 import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.*;
-import xyz.yfrostyf.toxony.blocks.entities.AlchemicalForgeBlockEntity;
-import xyz.yfrostyf.toxony.blocks.entities.AlembicBlockEntity;
-import xyz.yfrostyf.toxony.blocks.entities.CopperCrucibleBlockEntity;
-import xyz.yfrostyf.toxony.blocks.entities.MortarPestleBlockEntity;
+import xyz.yfrostyf.toxony.blocks.entities.*;
 import xyz.yfrostyf.toxony.blocks.AlchemicalForgeBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
@@ -237,10 +234,7 @@ public class BlockRegistry {
     public static final Supplier<BlockEntityType<CopperCrucibleBlockEntity>> COPPER_CRUCIBLE_ENTITY = BLOCK_ENTITY_TYPES.register(
             "copper_crucible_entity",
             () -> BlockEntityType.Builder.of(
-                    // The supplier to use for constructing the block entity instances.
                     CopperCrucibleBlockEntity::new,
-                    // A vararg of blocks that can have this block entity.
-                    // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
                     COPPER_CRUCIBLE.get()
             ).build(null)
     );
@@ -248,10 +242,7 @@ public class BlockRegistry {
     public static final Supplier<BlockEntityType<AlembicBlockEntity>> ALEMBIC_ENTITY = BLOCK_ENTITY_TYPES.register(
             "alembic_entity",
             () -> BlockEntityType.Builder.of(
-                    // The supplier to use for constructing the block entity instances.
                     AlembicBlockEntity::new,
-                    // A vararg of blocks that can have this block entity.
-                    // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
                     ALEMBIC.get()
             ).build(null)
     );
@@ -259,17 +250,42 @@ public class BlockRegistry {
     public static final Supplier<BlockEntityType<AlchemicalForgeBlockEntity>> ALCHEMICAL_FORGE_ENTITY = BLOCK_ENTITY_TYPES.register(
             "alchemical_forge_entity",
             () -> BlockEntityType.Builder.of(
-                    // The supplier to use for constructing the block entity instances.
                     AlchemicalForgeBlockEntity::new,
-                    // A vararg of blocks that can have this block entity.
-                    // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
                     ALCHEMICAL_FORGE.get()
+            ).build(null)
+    );
+
+    // |-----------------------------------------------------------------------------------|
+    // |-------------------------------------Oil Pot---------------------------------------|
+    // |-----------------------------------------------------------------------------------|
+
+    public static final DeferredHolder<Block, Block> POISON_OIL_POT = createOilPotBlock("poison_oil_pot", () -> ItemRegistry.POISON_OIL_POT);
+    public static final DeferredHolder<Block, Block> FIRE_RESISTANCE_OIL_POT = createOilPotBlock("fire_resistance_oil_pot", () -> ItemRegistry.FIRE_RESISTANCE_OIL_POT);
+    public static final DeferredHolder<Block, Block> FATIGUE_OIL_POT = createOilPotBlock("fatigue_oil_pot", () -> ItemRegistry.FATIGUE_OIL_POT);
+    public static final DeferredHolder<Block, Block> TOXIN_TOX_POT = createOilPotBlock("toxin_tox_pot", () -> ItemRegistry.TOXIN_TOX_POT);
+    public static final DeferredHolder<Block, Block> REGENERATION_TOX_POT = createOilPotBlock("regeneration_tox_pot", () -> ItemRegistry.REGENERATION_TOX_POT);
+    public static final DeferredHolder<Block, Block> SMOKE_TOX_POT = createOilPotBlock("smoke_tox_pot", () -> ItemRegistry.SMOKE_TOX_POT);
+    public static final DeferredHolder<Block, Block> WITCHFIRE_TOX_POT = createOilPotBlock("witchfire_tox_pot", () -> ItemRegistry.WITCHFIRE_TOX_POT);
+
+
+    public static final Supplier<BlockEntityType<OilPotBlockEntity>> OIL_POT_ENTITY = BLOCK_ENTITY_TYPES.register(
+            "oil_pot_entity",
+            () -> BlockEntityType.Builder.of(
+                    OilPotBlockEntity::new,
+                    POISON_OIL_POT.get(),
+                    FIRE_RESISTANCE_OIL_POT.get(),
+                    FATIGUE_OIL_POT.get(),
+                    TOXIN_TOX_POT.get(),
+                    REGENERATION_TOX_POT.get(),
+                    SMOKE_TOX_POT.get(),
+                    WITCHFIRE_TOX_POT.get()
             ).build(null)
     );
 
     // |-----------------------------------------------------------------------------------|
     // |------------------------------------Misc Items-------------------------------------|
     // |-----------------------------------------------------------------------------------|
+
     public static final DeferredHolder<Block, Block> OIL_LAYER = BLOCKS.register(
             "oil_layer",
             () -> new OilLayerBlock(BlockBehaviour.Properties.of()
@@ -294,6 +310,15 @@ public class BlockRegistry {
     // |----------------------------------------------------------------------------------|
     // |------------------------------------Methods---------------------------------------|
     // |----------------------------------------------------------------------------------|
+    private static DeferredHolder<Block, Block> createOilPotBlock(String name, Supplier<Holder<Item>> oilPotItem){
+        return BLOCKS.register(name, () -> new OilPotBlock(BlockBehaviour.Properties.of()
+                .strength(0.6f)
+                .sound(SoundType.DECORATED_POT)
+                .isRedstoneConductor((state,level,pos) -> false),
+                oilPotItem)
+        );
+    }
+
     private static DeferredHolder<Block, Block> createPoisonCrop(String name, Supplier<Holder<Item>> grownItem, List<Holder<MobEffect>> effects, Supplier<Holder<Block>> evolvedBlock){
         return BLOCKS.register(name, () -> new PoisonCropBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.PLANT)

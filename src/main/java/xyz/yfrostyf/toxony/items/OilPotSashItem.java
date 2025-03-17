@@ -5,7 +5,6 @@ import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
@@ -34,7 +33,7 @@ public class OilPotSashItem extends Item implements ProjectileItem {
             player.playSound(SoundEvents.BOTTLE_FILL);
             return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
         }
-        else if(thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.BASE_OIL)){
+        else if(thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.OIL_BASE)){
             thisStack.setDamageValue(0);
             player.playSound(SoundEvents.BOTTLE_FILL);
             otherStack.consume(1, player);

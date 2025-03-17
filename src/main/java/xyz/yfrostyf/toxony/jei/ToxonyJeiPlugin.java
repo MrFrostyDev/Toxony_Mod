@@ -18,6 +18,7 @@ import xyz.yfrostyf.toxony.client.gui.CopperCrucibleScreen;
 import xyz.yfrostyf.toxony.recipes.AlchemicalForgeRecipe;
 import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
 import xyz.yfrostyf.toxony.recipes.CrucibleRecipe;
+import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
 
@@ -36,6 +37,7 @@ public class ToxonyJeiPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
+        registration.addRecipeCategories(new MortarPestleRecipeCatagory(guiHelper));
         registration.addRecipeCategories(new CrucibleRecipeCatagory(guiHelper));
         registration.addRecipeCategories(new AlembicRecipeCatagory(guiHelper));
         registration.addRecipeCategories(new AlchemicalForgeRecipeCatagory(guiHelper));
@@ -45,6 +47,9 @@ public class ToxonyJeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager manager = Minecraft.getInstance().level.getRecipeManager();
 
+        List<RecipeHolder<MortarPestleRecipe>> mortarPestleRecipeHolders = manager.getAllRecipesFor(RecipeRegistry.MORTAR_PESTLE_RECIPE.get());
+        List<MortarPestleRecipe> mortarPestleRecipes = mortarPestleRecipeHolders.stream().map(holder -> holder.value()).toList();
+        registration.addRecipes(MortarPestleRecipeCatagory.MORTAR_PESTLE_RECIPE, mortarPestleRecipes);
 
         List<RecipeHolder<CrucibleRecipe>> crucibleRecipeHolders = manager.getAllRecipesFor(RecipeRegistry.CRUCIBLE_RECIPE.get());
         List<CrucibleRecipe> crucibleRecipes = crucibleRecipeHolders.stream().map(holder -> holder.value()).toList();
@@ -67,6 +72,7 @@ public class ToxonyJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(BlockRegistry.MORTAR_PESTLE.get()), MortarPestleRecipeCatagory.MORTAR_PESTLE_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(BlockRegistry.COPPER_CRUCIBLE.get()), CrucibleRecipeCatagory.CRUCIBLE_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(BlockRegistry.ALEMBIC.get()), AlembicRecipeCatagory.ALEMBIC_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(BlockRegistry.ALCHEMICAL_FORGE_PART.get()), AlchemicalForgeRecipeCatagory.ALCHEMICAL_FORGE_RECIPE);

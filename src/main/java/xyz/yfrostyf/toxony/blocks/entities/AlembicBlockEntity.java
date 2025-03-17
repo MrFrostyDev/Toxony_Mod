@@ -69,7 +69,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
                 default -> 0;
             };
         }
-
+        
         @Override
         public void set(int index, int value) {
             switch (index) {

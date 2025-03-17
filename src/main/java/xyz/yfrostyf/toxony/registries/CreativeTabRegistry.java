@@ -17,7 +17,7 @@ public class CreativeTabRegistry {
             //Set the title of the tab. Don't forget to add a translation!
             .title(Component.translatable("itemGroup." + ToxonyMain.MOD_ID + ".tab"))
             //Set the icon of the tab.
-            .icon(() -> new ItemStack(ItemRegistry.MORTAR_PESTLE.get()))
+            .icon(() -> new ItemStack(ItemRegistry.TOXIN.get()))
             //Add your items to the tab.
             .displayItems((params, output) -> {
                 output.accept(ItemRegistry.GLASS_VIAL.get());
@@ -27,11 +27,24 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.NETHERITE_SCALPEL.get());
                 output.accept(ItemRegistry.LETHAL_DOSE.get());
                 output.accept(ItemRegistry.WITCHING_BLADE.get());
+                output.accept(ItemRegistry.CYCLEBOW.get());
+
+                output.accept(ItemRegistry.BOLT.get());
+                output.accept(ItemRegistry.POISON_BOLT.get());
+                output.accept(ItemRegistry.TOXIN_BOLT.get());
+                output.accept(ItemRegistry.REGENERATION_BOLT.get());
+                output.accept(ItemRegistry.SMOKE_BOLT.get());
+                output.accept(ItemRegistry.WITCHFIRE_BOLT.get());
 
                 output.accept(ItemRegistry.MORTAR_PESTLE.get());
                 output.accept(ItemRegistry.COPPER_CRUCIBLE.get());
                 output.accept(ItemRegistry.ALEMBIC.get());
                 output.accept(ItemRegistry.ALCHEMICAL_FORGE_PART.get());
+
+                output.accept(ItemRegistry.PLAGUE_DOCTOR_HOOD.get());
+                output.accept(ItemRegistry.PLAGUE_DOCTOR_COAT.get());
+                output.accept(ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get());
+                output.accept(ItemRegistry.PLAGUE_DOCTOR_BOOTS.get());
 
                 output.accept(ItemRegistry.REDSTONE_MIXTURE.get());
                 output.accept(ItemRegistry.REDSTONE_SOLUTION.get());
@@ -42,7 +55,6 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.TOXIN.get());
 
                 output.accept(ItemRegistry.WOLF_TOOTH.get());
-                output.accept(ItemRegistry.BRITTLE_SCUTE.get());
 
                 output.accept(ItemRegistry.OCELOT_MINT.get());
                 output.accept(ItemRegistry.SNOW_MINT.get());
@@ -52,6 +64,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.MOONLIGHT_HEMLOCK.get());
                 output.accept(ItemRegistry.COLDSNAP.get());
                 output.accept(ItemRegistry.WHIRLSNAP.get());
+                output.accept(ItemRegistry.BLOODROOT.get());
 
                 output.accept(ItemRegistry.OCELOT_MINT_SEEDS.get());
                 output.accept(ItemRegistry.SNOW_MINT_SEEDS.get());
@@ -61,7 +74,9 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.MOONLIGHT_HEMLOCK_SEEDS.get());
                 output.accept(ItemRegistry.COLDSNAP_SEEDS.get());
                 output.accept(ItemRegistry.WHIRLSNAP_SEEDS.get());
+                output.accept(ItemRegistry.BLOODROOT_FUNGUS.get());
 
+                output.accept(ItemRegistry.OIL_BASE.get());
                 output.accept(ItemRegistry.CLAY_OIL_POT.get());
                 output.accept(ItemRegistry.EMPTY_OIL_POT.get());
                 output.accept(ItemRegistry.EMPTY_TOX_POT.get());
@@ -70,10 +85,12 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.FIRE_RESISTANCE_OIL_POT.get());
                 output.accept(ItemRegistry.TOXIN_TOX_POT.get());
                 output.accept(ItemRegistry.REGENERATION_TOX_POT.get());
+                output.accept(ItemRegistry.SMOKE_TOX_POT.get());
                 output.accept(ItemRegistry.WITCHFIRE_TOX_POT.get());
                 output.accept(ItemRegistry.OIL_POT_SASH.get());
                 output.accept(ItemRegistry.OIL_POT_BANDOLIER.get());
 
+                output.accept(ItemRegistry.TOXIN_CANISTER.get());
                 output.accept(ItemRegistry.ALEMBIC_BASE.get());
                 output.accept(ItemRegistry.VALENTINES_BOX.get());
 

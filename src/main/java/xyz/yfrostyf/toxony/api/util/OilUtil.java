@@ -1,12 +1,21 @@
 package xyz.yfrostyf.toxony.api.util;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
+import xyz.yfrostyf.toxony.blocks.OilPotBlock;
+import xyz.yfrostyf.toxony.items.BoltItem;
+import xyz.yfrostyf.toxony.items.OilPotItem;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
+
+import java.util.Optional;
 
 public class OilUtil {
 
@@ -54,5 +63,23 @@ public class OilUtil {
 
     public static boolean hasOil(ItemStack stack) {
         return !stack.getOrDefault(DataComponentsRegistry.OIL, ItemOil.EMPTY).isEmpty();
+    }
+
+    public static Optional<Holder.Reference<Item>> getBoltByOilItem(ItemOil itemOil, Level level){
+        return level.registryAccess()
+                .lookupOrThrow(Registries.ITEM)
+                .filterElements(item -> item instanceof BoltItem boltItem
+                        && boltItem.components().get(DataComponentsRegistry.OIL.get()) instanceof ItemOil itemOil1
+                        && itemOil.equals(itemOil1)
+                ).listElements().findAny();
+    }
+
+    public static Optional<Holder.Reference<Item>> getOilPotByOilItem(ItemOil itemOil, Level level){
+        return level.registryAccess()
+                .lookupOrThrow(Registries.ITEM)
+                .filterElements(item -> item instanceof OilPotItem oilPotItem
+                        && oilPotItem.components().get(DataComponentsRegistry.OIL.get()) instanceof ItemOil itemOil1
+                        && itemOil.equals(itemOil1)
+                ).listElements().findAny();
     }
 }

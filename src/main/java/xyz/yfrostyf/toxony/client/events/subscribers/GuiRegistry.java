@@ -25,5 +25,6 @@ public class GuiRegistry {
     @SubscribeEvent
     public static void onRegisterGui(RegisterGuiLayersEvent event){
         event.registerBelow(VanillaGuiLayers.PLAYER_HEALTH, ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "tox_bar"), new ToxBar());
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "toxin_deathstate_overlay"), new DeathstateOverlay());
     }
 }

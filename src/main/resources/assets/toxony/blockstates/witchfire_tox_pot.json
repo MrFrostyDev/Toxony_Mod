@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "toxony:block/witchfire_tox_pot"
+      }
+    },
+    {
+      "apply": {
+        "model": "toxony:block/oil_tox_0"
+      },
+      "when": {
+        "oil": 0
+      }
+    },
+    {
+      "apply": {
+        "model": "toxony:block/oil_pot_1"
+      },
+      "when": {
+        "oil": 1
+      }
+    },
+    {
+      "apply": {
+        "model": "toxony:block/oil_pot_2"
+      },
+      "when": {
+        "oil": 2
+      }
+    },
+    {
+      "apply": {
+        "model": "toxony:block/oil_pot_3"
+      },
+      "when": {
+        "oil": 3
+      }
+    }
+  ]
+}

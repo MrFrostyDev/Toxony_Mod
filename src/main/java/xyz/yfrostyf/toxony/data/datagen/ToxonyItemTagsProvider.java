@@ -45,7 +45,6 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                 .add(
                         Items.SPIDER_EYE,
                         Items.PUFFERFISH,
-                        ItemRegistry.BRITTLE_SCUTE.get(),
                         ItemRegistry.WOLF_TOOTH.get()
                 );
 
@@ -60,7 +59,8 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.WATER_HEMLOCK.get(),
                         ItemRegistry.MOONLIGHT_HEMLOCK.get(),
                         ItemRegistry.COLDSNAP.get(),
-                        ItemRegistry.WHIRLSNAP.get()
+                        ItemRegistry.WHIRLSNAP.get(),
+                        ItemRegistry.BLOODROOT.get()
                 );
 
         this.tag(TagRegistry.BOLTS)

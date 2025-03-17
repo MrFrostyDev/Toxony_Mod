@@ -333,7 +333,7 @@ public class ToxData {
             affinityStringsList.add(StringTag.valueOf(
                     ToxonyRegistries.AFFINITY_REGISTRY
                             .holders()
-                            .filter(ref -> Objects.equals(ref.value().getName(), affinity.getName()))
+                            .filter(ref -> ref.value().equals(affinity))
                             .findFirst()
                             .get().getKey()
                             .location()

@@ -38,9 +38,9 @@ public class MortarPestleRenderer implements BlockEntityRenderer<MortarPestleBlo
     }
 
     @Override
-    public void render(MortarPestleBlockEntity block, float partialTick, PoseStack poseStack, MultiBufferSource buf, int packedLight, int packedOverlay) {
+    public void render(MortarPestleBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buf, int packedLight, int packedOverlay) {
         RenderSystem.setShaderTexture(0, PESTLE_TEXTURE);
-        float coEff = block.pestleTick == 0 ? 0 : (block.pestleTick - partialTick) / MortarPestleBlockEntity.DEFAULT_PESTLE_TICK;
+        float coEff = blockEntity.pestleTick == 0 ? 0 : (blockEntity.pestleTick - partialTick) / MortarPestleBlockEntity.DEFAULT_PESTLE_TICK;
         poseStack.pushPose();
         poseStack.translate(0.5, 0.2, 0.5);
         poseStack.mulPose(Axis.YP.rotationDegrees(45 + coEff * 360));

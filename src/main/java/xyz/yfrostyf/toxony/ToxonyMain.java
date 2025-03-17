@@ -37,6 +37,7 @@ public class ToxonyMain {
 
         ItemRegistry.register(modEventBus);
         EntityRegistry.register(modEventBus);
+        ArmorMaterialRegistry.register(modEventBus);
         DataAttachmentRegistry.register(modEventBus);
         DataComponentsRegistry.register(modEventBus);
         BlockRegistry.register(modEventBus);

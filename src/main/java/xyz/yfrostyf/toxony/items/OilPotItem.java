@@ -1,63 +1,81 @@
 package xyz.yfrostyf.toxony.items;
 
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.util.OilUtil;
+import xyz.yfrostyf.toxony.blocks.OilPotBlock;
+import xyz.yfrostyf.toxony.blocks.entities.OilPotBlockEntity;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
-import java.util.function.Supplier;
+import javax.annotation.Nullable;
 
 public class OilPotItem extends Item {
     private static final int USE_DURATION = 64;
     private final ItemOil itemOil;
+    private final Holder<Block> oilPotBlock;
 
-    public OilPotItem(Properties properties, ItemOil itemOil) {
+    public OilPotItem(Properties properties, ItemOil itemOil, Holder<Block> oilPotBlock) {
         super(properties.stacksTo(1));
         this.itemOil = itemOil;
+        this.oilPotBlock = oilPotBlock;
     }
 
     public ItemOil getItemOil(){
         return itemOil;
     }
 
+    public Holder<Block> getOilPotBlock() {
+        return oilPotBlock;
+    }
+
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if(!(entity instanceof Player player))return stack;
         ItemStack applied = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
+        int damage = stack.getDamageValue();
 
         if (!applied.is(getItemOil().getOil().getSupportedItems())) return stack;
         if (getItemOil().isEmpty()) return stack;
 
-        if (entity instanceof ServerPlayer svplayer && level instanceof ServerLevel svlevel) {
-
+        if (damage < stack.getMaxDamage()) {
             OilUtil.updateOil(applied, getItemOil());
             if(stack.isDamageableItem()){
-                stack.hurtAndBreak(1, svlevel, svplayer,
-                        (item) -> ItemUtils.createFilledResult(stack, svplayer, this.resultingItem())
-                );
+                stack.setDamageValue(damage + 1);
             }
-
-            return stack;
         }
-        else {
-            return stack;
-        }
+        return stack;
     }
 
-    /**
-     * The item returned after the oil has been used up and this item breaks.
-     */
-    private ItemStack resultingItem(){
-        return new ItemStack(ItemRegistry.EMPTY_OIL_POT);
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        InteractionResult result = this.place(new BlockPlaceContext(context));
+        if (!result.consumesAction()) {
+            result = this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
+            return result == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : result;
+        }
+        return result;
     }
 
     @Override
@@ -65,7 +83,7 @@ public class OilPotItem extends Item {
         ItemStack oilPot = player.getMainHandItem().is(this) ? player.getMainHandItem() : player.getOffhandItem();
         ItemStack otherStack = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
 
-        if(otherStack.is(ItemRegistry.BASE_OIL)){
+        if(otherStack.is(ItemRegistry.OIL_BASE)){
             otherStack.consume(1, player);
             oilPot.setDamageValue(0);
         }
@@ -73,6 +91,89 @@ public class OilPotItem extends Item {
             return ItemUtils.startUsingInstantly(level, player, hand);
         }
         return InteractionResultHolder.pass(oilPot);
+    }
+
+    public InteractionResult place(BlockPlaceContext context) {
+        if(!context.getPlayer().isCrouching()) return InteractionResult.FAIL;
+
+        Level level = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
+        Player player = context.getPlayer();
+        ItemStack placingStack = context.getItemInHand();
+        BlockState levelBlockState = level.getBlockState(blockpos);
+
+        if(!(placingStack.getItem() instanceof OilPotItem))return InteractionResult.FAIL;
+
+        BlockState newBlockState = this.getOilPotBlock().value().defaultBlockState()
+                .setValue(OilPotBlock.OIL_LEFT, OilPotBlock.getBlockDamage(placingStack.getMaxDamage(), placingStack.getDamageValue()));
+
+        if (!context.getLevel().setBlock(blockpos, newBlockState, OilPotBlock.UPDATE_ALL_IMMEDIATE)) return InteractionResult.FAIL;
+
+        if(level.getBlockEntity(blockpos) instanceof OilPotBlockEntity blockEntity){
+            blockEntity.setMaxDamage(placingStack.getMaxDamage());
+            blockEntity.setDamage(placingStack.getDamageValue());
+        }
+
+        if (levelBlockState.is(newBlockState.getBlock())) {
+            levelBlockState = this.updateBlockStateFromTag(blockpos, level, placingStack, levelBlockState);
+            updateCustomBlockEntityTag(level, player, blockpos, placingStack);
+            updateBlockEntityComponents(level, blockpos, placingStack);
+            levelBlockState.getBlock().setPlacedBy(level, blockpos, levelBlockState, player, placingStack);
+        }
+
+        SoundType soundtype = levelBlockState.getSoundType(level, blockpos, context.getPlayer());
+        level.playSound(
+                player,
+                blockpos,
+                SoundEvents.DECORATED_POT_PLACE,
+                SoundSource.BLOCKS,
+                (soundtype.getVolume() + 1.0F) / 2.0F,
+                soundtype.getPitch() * 0.8F
+        );
+        level.gameEvent(GameEvent.BLOCK_PLACE, blockpos, GameEvent.Context.of(player, levelBlockState));
+        placingStack.consume(1, player);
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    private static void updateBlockEntityComponents(Level level, BlockPos poa, ItemStack stack) {
+        BlockEntity blockentity = level.getBlockEntity(poa);
+        if (blockentity != null) {
+            blockentity.applyComponentsFromItemStack(stack);
+            blockentity.setChanged();
+        }
+    }
+
+    public static boolean updateCustomBlockEntityTag(Level level, @Nullable Player player, BlockPos pos, ItemStack stack) {
+        MinecraftServer minecraftserver = level.getServer();
+        if (minecraftserver == null) {
+            return false;
+        } else {
+            CustomData customdata = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
+            if (!customdata.isEmpty()) {
+                BlockEntity blockentity = level.getBlockEntity(pos);
+                if (blockentity != null) {
+                    if (level.isClientSide || !blockentity.onlyOpCanSetNbt() || player != null && player.canUseGameMasterBlocks()) {
+                        return customdata.loadInto(blockentity, level.registryAccess());
+                    }
+
+                    return false;
+                }
+            }
+            return false;
+        }
+    }
+
+    private BlockState updateBlockStateFromTag(BlockPos pos, Level level, ItemStack stack, BlockState state) {
+        BlockItemStateProperties blockitemstateproperties = stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
+        if (blockitemstateproperties.isEmpty()) {
+            return state;
+        } else {
+            BlockState blockstate = blockitemstateproperties.apply(state);
+            if (blockstate != state) {
+                level.setBlock(pos, blockstate, OilPotBlock.UPDATE_CLIENTS);
+            }
+            return blockstate;
+        }
     }
 
     @Override
@@ -87,6 +188,6 @@ public class OilPotItem extends Item {
 
     @Override
     public SoundEvent getEatingSound() {
-        return SoundEvents.HONEYCOMB_WAX_ON;
+        return SoundEvents.HONEY_BLOCK_PLACE;
     }
 }

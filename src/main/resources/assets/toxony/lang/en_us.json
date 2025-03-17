@@ -7,6 +7,7 @@
   "block.toxony.alchemical_forge": "Alchemical Forge",
   "block.toxony.alchemical_forge_part": "Alchemical Forge Part",
 
+  "item.toxony.toxin_canister": "Toxin Canister",
   "item.toxony.alembic_base": "Alembic Base",
   "block.toxony.valentines_box": "Valentines Box",
 
@@ -38,12 +39,14 @@
   "item.toxony.oil_pot_sash": "Oil Pot Sash",
   "item.toxony.oil_pot_bandolier": "Oil Pot Bandolier",
 
-
-  "item.toxony.empty_oil_pot": "Empty Oil Pot",
-  "item.toxony.empty_tox_pot": "Empty Tox Pot",
   "item.toxony.copper_needle": "Copper Needle",
   "item.toxony.glass_vial": "Glass Vial",
   "item.toxony.magnifying_glass": "Magnifying Glass",
+
+  "item.toxony.plague_doctor_hood": "Plague Doctor Hood",
+  "item.toxony.plague_doctor_coat": "Plague Doctor Coat",
+  "item.toxony.plague_doctor_leggings": "Plague Doctor Leggings",
+  "item.toxony.plague_doctor_boots": "Plague Doctor Boots",
 
   "item.toxony.wolf_tooth": "Wolf Tooth",
   "item.toxony.ocelot_mint": "Ocelot Mint",
@@ -67,12 +70,16 @@
   "item.toxony.copper_crucible": "Copper Crucible",
   "item.toxony.alembic": "Alembic",
 
+  "item.toxony.empty_oil_pot": "Empty Oil Pot",
+  "item.toxony.empty_tox_pot": "Empty Tox Pot",
+  "item.toxony.oil_base": "Oil Base",
+
   "item.toxony.poison_oil_pot": "Poison Oil Pot",
   "item.toxony.fire_resistance_oil_pot": "Fire Resistance Oil Pot",
   "item.toxony.fatigue_oil_pot": "Fatigue Oil Pot",
   "item.toxony.toxin_tox_pot": "Toxin Oil Pot",
   "item.toxony.regeneration_tox_pot": "Regeneration Oil Pot",
-  "item.toxony.anchor_tox_pot": "Anchor Oil Pot",
+  "item.toxony.smoke_tox_pot": "Smoke Oil Pot",
   "item.toxony.witchfire_tox_pot": "Witchfire Oil Pot",
 
   "oil.toxony.poison": "Poison Oil",
@@ -110,6 +117,8 @@
   "message.toxony.valetines_box.warning" : "The box is closed! Crouch to open it!",
 
   "message.toxony.oil.empty": "The oil on this weapon has dried out.",
+  "message.toxony.oilpot.empty": "This oil pot is empty.",
+  "message.toxony.oilpot.already_oiled": "This item is already fully coated.",
 
   "commands.tox.set.success": "Set tox of [%s] to %s",
   "commands.tox.add.success": "Added tox to [%s] by %s",

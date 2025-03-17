@@ -8,6 +8,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -29,6 +30,25 @@ public class ItemRegistry {
     }
 
     // |-----------------------------------------------------------------------------------|
+    // |--------------------------------------Armors---------------------------------------|
+    // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_HOOD = ITEMS.register("plague_doctor_hood", () -> new ArmorItem(
+            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(165)
+    ));
+
+    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_COAT = ITEMS.register("plague_doctor_coat", () -> new ArmorItem(
+            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(240)
+    ));
+
+    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_LEGGINGS = ITEMS.register("plague_doctor_leggings", () -> new ArmorItem(
+            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(225)
+    ));
+
+    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_BOOTS = ITEMS.register("plague_doctor_boots", () -> new ArmorItem(
+            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(195)
+    ));
+
+    // |-----------------------------------------------------------------------------------|
     // |--------------------------------------Tools----------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> GLASS_VIAL = ITEMS.register("glass_vial", () -> new VialItem(new Item.Properties().stacksTo(64)));
@@ -44,11 +64,11 @@ public class ItemRegistry {
             .durability(100).attributes(ScalpelItem.createAttributes(3.0F, -2.0F))
     ));
     public static final DeferredHolder<Item, Item> NETHERITE_SCALPEL = ITEMS.register("netherite_scalpel", () -> new ScalpelItem(new Item.Properties().stacksTo(1)
-            .fireResistant().durability(1450).attributes(ScalpelItem.createAttributes(5.0F, -2.0F))
+            .fireResistant().durability(1350).attributes(ScalpelItem.createAttributes(5.0F, -2.0F))
     ));
 
     public static final DeferredHolder<Item, Item> CYCLEBOW = ITEMS.register("cyclebow", () -> new CycleBow(new Item.Properties()
-            .stacksTo(1).durability(1000), 3));
+            .stacksTo(1).durability(550), 3));
 
     // |-----------------------------------------------------------------------------------|
     // |-----------------------------------Cycle Bolts-------------------------------------|
@@ -76,36 +96,42 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> OIL_POT_SASH = ITEMS.register("oil_pot_sash", () -> new OilPotSashItem(new Item.Properties().durability(16)));
     public static final DeferredHolder<Item, Item> OIL_POT_BANDOLIER = ITEMS.register("oil_pot_bandolier", () -> new OilPotSashItem(new Item.Properties().durability(40)));
 
-
-    public static final DeferredHolder<Item, Item> BASE_OIL = ITEMS.register("base_oil", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> OIL_BASE = ITEMS.register("oil_base", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> CLAY_OIL_POT = ITEMS.register("clay_oil_pot", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> EMPTY_OIL_POT = ITEMS.register("empty_oil_pot", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> EMPTY_TOX_POT = ITEMS.register("empty_tox_pot", () -> new Item(new Item.Properties()));
 
 
     public static final DeferredHolder<Item, Item> POISON_OIL_POT = createOilPot(
-            "poison_oil_pot", 5, OilsRegistry.POISON_OIL, 200, 0, 150);
+            "poison_oil_pot", 5, OilsRegistry.POISON_OIL, BlockRegistry.POISON_OIL_POT,
+            200, 0, 150);
 
     public static final DeferredHolder<Item, Item> FIRE_RESISTANCE_OIL_POT = createOilPot(
-            "fire_resistance_oil_pot", 5, OilsRegistry.FIRE_RESISTANCE_OIL, 200, 0, 150);
+            "fire_resistance_oil_pot", 5, OilsRegistry.FIRE_RESISTANCE_OIL, BlockRegistry.FIRE_RESISTANCE_OIL_POT,
+            200, 0, 150);
 
     public static final DeferredHolder<Item, Item> FATIGUE_OIL_POT = createOilPot(
-            "fatigue_oil_pot", 5, OilsRegistry.FATIGUE_OIL, 300, 0, 150);
+            "fatigue_oil_pot", 5, OilsRegistry.FATIGUE_OIL, BlockRegistry.FATIGUE_OIL_POT,
+            300, 0, 150);
 
 
     // |-------------------------------Tier 2 -------------------------------|
 
     public static final DeferredHolder<Item, Item> TOXIN_TOX_POT = createOilPot(
-            "toxin_tox_pot", 3, OilsRegistry.TOXIN_OIL, 120, 0, 100);
+            "toxin_tox_pot", 3, OilsRegistry.TOXIN_OIL, BlockRegistry.TOXIN_TOX_POT,
+            120, 0, 100);
 
     public static final DeferredHolder<Item, Item> REGENERATION_TOX_POT = createOilPot(
-            "regeneration_tox_pot", 3, OilsRegistry.REGENERATION_OIL, 200, 0, 100);
+            "regeneration_tox_pot", 3, OilsRegistry.REGENERATION_OIL, BlockRegistry.REGENERATION_TOX_POT,
+            200, 0, 100);
 
     public static final DeferredHolder<Item, Item> SMOKE_TOX_POT = createOilPot(
-            "smoke_tox_pot", 3, OilsRegistry.SMOKE_OIL, 300, 1, 100);
+            "smoke_tox_pot",3, OilsRegistry.SMOKE_OIL, BlockRegistry.SMOKE_TOX_POT,
+            300, 1, 100);
 
     public static final DeferredHolder<Item, Item> WITCHFIRE_TOX_POT = createOilPot(
-            "witchfire_tox_pot", 3, OilsRegistry.WITCHFIRE_OIL, 200, 0, 100);
+            "witchfire_tox_pot", 3, OilsRegistry.WITCHFIRE_OIL, BlockRegistry.WITCHFIRE_TOX_POT,
+            200, 0, 100);
 
 
     // |----------------------------------------------------------------------------------|
@@ -227,10 +253,6 @@ public class ItemRegistry {
             .build()
     );
 
-    public static final DeferredHolder<Item, Item> BRITTLE_SCUTE = ITEMS.register("brittle_scute", () -> new Item(
-            createAffinitiesProperty(AffinityRegistry.SUN.getKey(), AffinityRegistry.OCEAN.getKey())
-    ));
-
     public static final DeferredHolder<Item, Item> WOLF_TOOTH = ITEMS.register("wolf_tooth", () -> new Item(
             createAffinitiesProperty(AffinityRegistry.MOON.getKey(), AffinityRegistry.FOREST.getKey())
     ));
@@ -319,8 +341,10 @@ public class ItemRegistry {
         return new Item.Properties().component(DataComponentsRegistry.POSSIBLE_AFFINITIES, list);
     }
 
-    private static DeferredHolder<Item, Item> createOilPot(String name, int durability, Holder<Oil> oil, int duration, int amplifier, int maxUses){
-        return ITEMS.register(name, () -> new OilPotItem(new Item.Properties().durability(durability).stacksTo(1), new ItemOil(oil, duration, amplifier, maxUses, true)));
+    private static DeferredHolder<Item, Item> createOilPot(String name, int durability, Holder<Oil> oil, Holder<Block> oilPotBlock, int duration, int amplifier, int maxUses){
+        return ITEMS.register(name, () -> new OilPotItem(new Item.Properties().durability(durability).stacksTo(1),
+                new ItemOil(oil, duration, amplifier, maxUses, true),
+                oilPotBlock));
     }
 
 }

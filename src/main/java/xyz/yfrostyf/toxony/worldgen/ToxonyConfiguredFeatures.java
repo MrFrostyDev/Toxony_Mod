@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NetherForestVegetationConfig;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import xyz.yfrostyf.toxony.ToxonyMain;
@@ -28,7 +29,7 @@ public class ToxonyConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_NIGHTSHADE = registerKey("wild_nightshade");
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_WATER_HEMLOCK = registerKey("wild_water_hemlock");
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_COLDSNAP = registerKey("wild_coldsnap");
-    public static final ResourceKey<ConfiguredFeature<?,?>> WILD_BLOODROOT = registerKey("wild_bloodroot");
+    public static final ResourceKey<ConfiguredFeature<?,?>> PATCH_WILD_BLOODROOT = registerKey("patch_wild_bloodroot");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
         register(context, PATCH_FALSE_BERRY_BUSH, Feature.RANDOM_PATCH,
@@ -81,14 +82,14 @@ public class ToxonyConfiguredFeatures {
                         List.of(Blocks.GRASS_BLOCK)
                 ));
 
-        register(context, WILD_BLOODROOT, Feature.FLOWER,
+        register(context, PATCH_WILD_BLOODROOT, Feature.RANDOM_PATCH,
                 FeatureUtils.simplePatchConfiguration(
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_BLOODROOT.get().defaultBlockState()
                                         .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(1)))
                         ),
-                        List.of(Blocks.GRASS_BLOCK)
+                        List.of(Blocks.CRIMSON_NYLIUM)
                 ));
     }
 
