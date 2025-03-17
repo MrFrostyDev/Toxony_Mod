@@ -103,7 +103,7 @@ public class OilPotBlock extends Block implements EntityBlock {
         boolean hasNoOil = damage >= maxDamage;
         ItemOil itemOil = oilPotBlock.getOil();
 
-        boolean itemHasFullOil = itemOil != null && stack.getOrDefault(DataComponentsRegistry.OIL_USES, 0) <= 0;
+        boolean itemHasFullOil = itemOil != null && stack.has(DataComponentsRegistry.OIL_USES) && stack.getOrDefault(DataComponentsRegistry.OIL_USES, 0) <= 0;
         boolean canAddOilTool = !itemOil.isEmpty() && stack.is(itemOil.getOil().getSupportedItems()) && !hasNoOil && !itemHasFullOil;
         boolean canAddOilBolt = !itemOil.isEmpty() && stack.is(ItemRegistry.BOLT) && !hasNoOil;
         boolean canAddOilBase = stack.is(ItemRegistry.OIL_BASE) && damage > 0;

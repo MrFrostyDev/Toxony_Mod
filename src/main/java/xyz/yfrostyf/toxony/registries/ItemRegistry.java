@@ -3,11 +3,18 @@ package xyz.yfrostyf.toxony.registries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -32,20 +39,24 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |--------------------------------------Armors---------------------------------------|
     // |-----------------------------------------------------------------------------------|
-    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_HOOD = ITEMS.register("plague_doctor_hood", () -> new ArmorItem(
-            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(165)
+    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_HOOD = ITEMS.register("plague_doctor_hood", () -> new PlagueDoctorArmorItem(
+            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()
+            .stacksTo(1).durability(165)
     ));
 
-    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_COAT = ITEMS.register("plague_doctor_coat", () -> new ArmorItem(
-            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(240)
+    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_COAT = ITEMS.register("plague_doctor_coat", () -> new PlagueDoctorArmorItem(
+            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()
+            .stacksTo(1).durability(240)
     ));
 
-    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_LEGGINGS = ITEMS.register("plague_doctor_leggings", () -> new ArmorItem(
-            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(225)
+    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_LEGGINGS = ITEMS.register("plague_doctor_leggings", () -> new PlagueDoctorArmorItem(
+            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()
+            .stacksTo(1).durability(225)
     ));
 
-    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_BOOTS = ITEMS.register("plague_doctor_boots", () -> new ArmorItem(
-            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(195)
+    public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_BOOTS = ITEMS.register("plague_doctor_boots", () -> new PlagueDoctorArmorItem(
+            ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()
+            .stacksTo(1).durability(195)
     ));
 
     // |-----------------------------------------------------------------------------------|
@@ -346,5 +357,4 @@ public class ItemRegistry {
                 new ItemOil(oil, duration, amplifier, maxUses, true),
                 oilPotBlock));
     }
-
 }

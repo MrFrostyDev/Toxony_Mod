@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "toxony:block/resistance_oil_pot"
+        "model": "toxony:block/fire_resistance_oil_pot"
       }
     },
     {

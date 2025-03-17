@@ -134,6 +134,8 @@
   "toxony.networking.sync_tox.failed": "Failed to sync tox data to player: %s",
   "toxony.networking.sync_affinity_map.failed": "Failed to sync affinity map to player: %s",
 
+  "attribute.toxony.generic.effect_reduction": "Effect Reduction",
+
   "item.toxony.tox_vial": "Tox Vial",
   "item.toxony.tox_vial.effect.awkward": "Vial of Awkward Water",
   "item.toxony.tox_vial.effect.mundane": "Vial of Mundane Water",
