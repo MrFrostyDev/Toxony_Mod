@@ -62,6 +62,7 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |--------------------------------------Tools----------------------------------------|
     // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Item, Item> TOX_GAUGE = ITEMS.register("tox_gauge", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> GLASS_VIAL = ITEMS.register("glass_vial", () -> new VialItem(new Item.Properties().stacksTo(64)));
     public static final DeferredHolder<Item, Item> TOX_VIAL = ITEMS.register("tox_vial", () -> new FullVialItem(new Item.Properties().stacksTo(64)));
 

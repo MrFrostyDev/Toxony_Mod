@@ -77,8 +77,7 @@ public record ItemOil(Holder<Oil> oil, int duration, int amplifier, int maxUses,
         }
         else {
             return obj instanceof ItemOil compare
-                    && this.oil.equals(compare.oil)
-                    && this.showInTooltip == compare.showInTooltip;
+                    && this.oil.equals(compare.oil);
         }
     }
 

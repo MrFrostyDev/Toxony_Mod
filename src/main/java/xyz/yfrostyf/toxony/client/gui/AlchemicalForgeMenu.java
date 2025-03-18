@@ -83,64 +83,75 @@ public class AlchemicalForgeMenu extends AbstractContainerMenu {
         throw new IllegalStateException("The block entity is not correct at AlchemicalForgeBlockEntity#getBLockEntity " + blockAtPos);
     }
 
-    // Total slots 0-39
-    // Container 0-3
-    // Inventory 4-30
-    // Hotbar 31-39
+    // Total slots 0-42
+    // Main 0-2
+    // Solution 3-5
+    // Toxin 6
+    // Inventory 7-33
+    // Hotbar 34-42
     @Override
     public ItemStack quickMoveStack(Player player, int selectedSlotIndex) {
-        // The quick moved slot stack
-        ItemStack selectedStack = ItemStack.EMPTY;
-        // The quick moved slot
         Slot selectedSlot = this.slots.get(selectedSlotIndex);
 
-        // If the slot is in the valid range and the slot is not empty, otherwise skip quickMove.
         if (selectedSlot == null || !selectedSlot.hasItem())return ItemStack.EMPTY;
 
         ItemStack rawStack = selectedSlot.getItem();
-        selectedStack = rawStack.copy();
+        ItemStack selectedStack = rawStack.copy();
 
-        // Check the input slots are selected.
-        if (selectedSlotIndex >= 0 && selectedSlotIndex < 4) {
-            // Try to move the result slot into the player inventory/hotbar
-            if (!this.moveItemStackTo(rawStack, 4, 40, true)) {
-                // If cannot move, no longer quick move
+        if (selectedSlotIndex >= 0 && selectedSlotIndex < 7) {
+            if (!this.moveItemStackTo(rawStack, 7, 43, true)) {
                 return ItemStack.EMPTY;
             }
         }
-        // If slot was selected in player inventory, then move it to either
-        // container, player inventory or hotbar.
-        else if (selectedSlotIndex >= 4 && selectedSlotIndex < 40) {
-            // Check if we can move it into the input slot.
-            if (!this.moveItemStackTo(rawStack, 0, 4, false)) {
-                // Checks if it was selected in inventory
-                if (selectedSlotIndex < 31) {
-                    // Try to move item into hotbar
-                    if (!this.moveItemStackTo(rawStack, 31, 40, false)) {
-                        return ItemStack.EMPTY; // If cannot move, no longer quick move
+        else if(rawStack.is(ItemRegistry.TOXIN)){
+            if (!this.moveItemStackTo(rawStack, 6, 7, true)) {
+                if (selectedSlotIndex < 34) {
+                    if (!this.moveItemStackTo(rawStack, 34, 43, false)) {
+                        return ItemStack.EMPTY;
                     }
                 }
-                // Assume we select a hotbar item, then try to move into player inventory slot
-                else if (!this.moveItemStackTo(rawStack, 4, 31, false)) {
-                    return ItemStack.EMPTY; // If cannot move, no longer quick move
+                else if (!this.moveItemStackTo(rawStack, 7, 34, false)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+        }
+        else if(rawStack.is(ItemRegistry.AFFINITY_SOLUTION)){
+            if (!this.moveItemStackTo(rawStack, 3, 6, true)) {
+                if (selectedSlotIndex < 34) {
+                    if (!this.moveItemStackTo(rawStack, 34, 43, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (!this.moveItemStackTo(rawStack, 7, 34, false)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+        }
+        else {
+            if (!this.moveItemStackTo(rawStack, 0, 3, false)) {
+                if (!this.moveItemStackTo(rawStack, 3, 6, true)) {
+                    if (selectedSlotIndex < 35) {
+                        if (!this.moveItemStackTo(rawStack, 35, 44, false)) {
+                            return ItemStack.EMPTY;
+                        }
+                    }
+                    else if (!this.moveItemStackTo(rawStack, 7, 35, false)) {
+                        return ItemStack.EMPTY;
+                    }
                 }
             }
         }
 
         if (rawStack.isEmpty()) {
-            // If the raw stack has completely moved out of the slot, set the slot to the empty stack
             selectedSlot.set(ItemStack.EMPTY);
         }
         else {
-            // Otherwise, notify the slot that the stack count has changed
             selectedSlot.setChanged();
         }
 
         if (rawStack.getCount() == selectedStack.getCount()) {
-            // If the raw stack was not able to move to another slot, no longer quick move
             return ItemStack.EMPTY;
         }
-        // Execute logic on what to do post move with the remaining stack
         selectedSlot.onTake(player, rawStack);
         return selectedStack;
     }

@@ -11,6 +11,7 @@
   "item.toxony.alembic_base": "Alembic Base",
   "block.toxony.valentines_box": "Valentines Box",
 
+  "item.toxony.tox_gauge": "Tox Gauge",
   "item.toxony.toxic_paste": "Toxic Paste",
   "item.toxony.poison_paste": "Poison Paste",
   "item.toxony.toxin": "Toxin",
@@ -70,6 +71,7 @@
   "item.toxony.copper_crucible": "Copper Crucible",
   "item.toxony.alembic": "Alembic",
 
+  "item.toxony.clay_oil_pot": "Clay Oil Pot",
   "item.toxony.empty_oil_pot": "Empty Oil Pot",
   "item.toxony.empty_tox_pot": "Empty Tox Pot",
   "item.toxony.oil_base": "Oil Base",
@@ -97,6 +99,8 @@
   "effect.toxony.cat_mutagen": "Mutagen",
   "effect.toxony.turtle_mutagen": "Mutagen",
   "effect.toxony.spider_mutagen": "Mutagen",
+  "effect.toxony.blaze_mutagen": "Mutagen",
+  "effect.toxony.wither_mutagen": "Mutagen",
 
   "death.toxony.damage.toxin": "%1$s was overwhelmed by the toxins in their body",
   "death.toxony.damage.needle": "%1$s produced worthwhile results for %2$s's experiment",
@@ -137,9 +141,9 @@
   "attribute.toxony.generic.effect_reduction": "Effect Reduction",
 
   "item.toxony.tox_vial": "Tox Vial",
-  "item.toxony.tox_vial.effect.awkward": "Vial of Awkward Water",
-  "item.toxony.tox_vial.effect.mundane": "Vial of Mundane Water",
-  "item.toxony.tox_vial.effect.thick": "Vial of Thick Water",
+  "item.toxony.tox_vial.effect.awkward": "Awkward Vial",
+  "item.toxony.tox_vial.effect.mundane": "Mundane Vial",
+  "item.toxony.tox_vial.effect.thick": "Thick Vial",
   "item.toxony.tox_vial.effect.empty": "Empty Vial",
   "item.toxony.tox_vial.effect.water": "Vial Of Water",
   "item.toxony.tox_vial.effect.fire_resistance": "Vial of Fire Resistance",
@@ -166,10 +170,10 @@
 
   "item.toxony.tox_needle": "Copper Needle",
   "item.toxony.tox_needle.affinity": "Affinity Solution Needle",
-  "item.toxony.tox_needle.effect.awkward": "Copper Needle of Water",
-  "item.toxony.tox_needle.effect.mundane": "Copper Needle of Water",
-  "item.toxony.tox_needle.effect.thick": "Copper Needle of Water",
-  "item.toxony.tox_needle.effect.empty": "Copper Needle of Water",
+  "item.toxony.tox_needle.effect.awkward": "Awkward Copper Needle",
+  "item.toxony.tox_needle.effect.mundane": "Mundane Copper Needle",
+  "item.toxony.tox_needle.effect.thick": "Thick Copper Needle",
+  "item.toxony.tox_needle.effect.empty": "Empty Copper Needle",
   "item.toxony.tox_needle.effect.water": "Copper Needle of Water",
   "item.toxony.tox_needle.effect.fire_resistance": "Copper Needle of Fire Resistance",
   "item.toxony.tox_needle.effect.harming": "Copper Needle of Harming",

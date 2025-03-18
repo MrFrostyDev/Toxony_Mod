@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.client.ClientToxData;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 public class ToxBar implements LayeredDraw.Layer {
     public static final ResourceLocation RESOURCE = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "textures/gui/tox_bars.png");
@@ -52,6 +53,7 @@ public class ToxBar implements LayeredDraw.Layer {
         if(Minecraft.getInstance().player == null)return;
         if(Minecraft.getInstance().options.hideGui)return;
         if(Minecraft.getInstance().player.isSpectator())return;
+        if(!Minecraft.getInstance().player.isHolding(ItemRegistry.TOX_GAUGE.get()))return;
         if(ClientToxData.getToxData() == null)return;
 
         float tox = ClientToxData.getToxData().getTox();
