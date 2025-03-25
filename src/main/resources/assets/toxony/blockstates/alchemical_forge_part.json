@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "toxony:block/alchemical_forge_part"
+    }
+  }
+}

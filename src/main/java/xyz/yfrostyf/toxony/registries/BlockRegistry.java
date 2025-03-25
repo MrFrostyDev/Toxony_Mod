@@ -194,7 +194,7 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> ALEMBIC = BLOCKS.register(
             "alembic",
             () -> new AlembicBlock(BlockBehaviour.Properties.of()
-                    .strength(0.8f)
+                    .strength(0.8F)
                     .sound(SoundType.COPPER)
                     .isRedstoneConductor((state,level,pos) -> false)
             )
@@ -203,7 +203,7 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> ALCHEMICAL_FORGE = BLOCKS.register(
             "alchemical_forge",
             () -> new AlchemicalForgeBlock(BlockBehaviour.Properties.of()
-                    .strength(4.0f)
+                    .strength(20.0F, 1200.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.NETHERITE_BLOCK)
                     .isRedstoneConductor((state,level,pos) -> false)
@@ -213,7 +213,7 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> ALCHEMICAL_FORGE_PART = BLOCKS.register(
             "alchemical_forge_part",
             () -> new AlchemicalForgePartBlock(BlockBehaviour.Properties.of()
-                    .strength(2.0f)
+                    .strength(10.0F, 1200.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.NETHERITE_BLOCK)
                     .isRedstoneConductor((state,level,pos) -> false)

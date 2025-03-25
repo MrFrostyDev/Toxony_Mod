@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"end": "toxony:block/alchemical_forge_part_top",
+		"side": "toxony:block/alchemical_forge_part_side"
+	}
+}

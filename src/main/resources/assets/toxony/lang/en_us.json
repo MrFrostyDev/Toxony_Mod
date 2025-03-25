@@ -195,5 +195,7 @@
   "item.toxony.tox_needle.effect.water_breathing": "Copper Needle of Water Breathing",
   "item.toxony.tox_needle.effect.weakness": "Copper Needle of Weakness",
   "item.toxony.tox_needle.effect.weaving": "Copper Needle of Weaving",
-  "item.toxony.tox_needle.effect.wind_charged": "Copper Needle of Wind Charging"
+  "item.toxony.tox_needle.effect.wind_charged": "Copper Needle of Wind Charging",
+
+  "journal.toxony.page.introduction.1": "This is a huge paragraph to test if the dialogue I am using is working on my Journal book! Also Hello world!"
 }
