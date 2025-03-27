@@ -129,6 +129,7 @@ public class ThrownOilPot extends ThrowableItemProjectile implements ItemSupplie
             this.discard();
         }
     }
+
     private void applySplash(ItemOil itemOil, @Nullable Entity p_entity) {
         AABB aabb = this.getBoundingBox().inflate(SPLASH_RANGE, 2.0, SPLASH_RANGE);
         List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, aabb);

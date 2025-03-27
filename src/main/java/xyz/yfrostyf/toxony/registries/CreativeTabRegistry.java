@@ -28,9 +28,11 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.LETHAL_DOSE.get());
                 output.accept(ItemRegistry.WITCHING_BLADE.get());
                 output.accept(ItemRegistry.CYCLEBOW.get());
+                output.accept(ItemRegistry.BONE_SAW.get());
 
                 output.accept(ItemRegistry.BOLT.get());
                 output.accept(ItemRegistry.POISON_BOLT.get());
+                output.accept(ItemRegistry.GLOWING_BOLT.get());
                 output.accept(ItemRegistry.TOXIN_BOLT.get());
                 output.accept(ItemRegistry.REGENERATION_BOLT.get());
                 output.accept(ItemRegistry.SMOKE_BOLT.get());
@@ -81,6 +83,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.EMPTY_OIL_POT.get());
                 output.accept(ItemRegistry.EMPTY_TOX_POT.get());
                 output.accept(ItemRegistry.POISON_OIL_POT.get());
+                output.accept(ItemRegistry.GLOWING_OIL_POT.get());
                 output.accept(ItemRegistry.FATIGUE_OIL_POT.get());
                 output.accept(ItemRegistry.FIRE_RESISTANCE_OIL_POT.get());
                 output.accept(ItemRegistry.TOXIN_TOX_POT.get());
@@ -89,6 +92,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.WITCHFIRE_TOX_POT.get());
                 output.accept(ItemRegistry.OIL_POT_SASH.get());
                 output.accept(ItemRegistry.OIL_POT_BANDOLIER.get());
+                output.accept(ItemRegistry.ETERNAL_PLAGUE.get());
 
                 output.accept(ItemRegistry.TOXIN_CANISTER.get());
                 output.accept(ItemRegistry.ALEMBIC_BASE.get());

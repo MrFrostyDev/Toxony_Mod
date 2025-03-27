@@ -40,6 +40,12 @@ public class OilsRegistry {
             List.of(MobEffects.FIRE_RESISTANCE)
     ));
 
+    public static final DeferredHolder<Oil, Oil> GLOWING_OIL = OILS.register("glowing_oil", () -> new Oil(
+            Component.translatable("oil.toxony.glowing"),
+            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            List.of(MobEffects.GLOWING)
+    ));
+
     public static final DeferredHolder<Oil, Oil> SMOKE_OIL = OILS.register("smoke_oil", () -> new Oil(
             Component.translatable("oil.toxony.smoke"),
             BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
@@ -51,7 +57,6 @@ public class OilsRegistry {
             BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
             List.of(MobEffects.REGENERATION, MobEffects.HEAL)
     ));
-
 
     public static final DeferredHolder<Oil, Oil> WITCHFIRE_OIL = OILS.register("witchfire_oil", () -> new Oil(
             Component.translatable("oil.toxony.witchfire"),

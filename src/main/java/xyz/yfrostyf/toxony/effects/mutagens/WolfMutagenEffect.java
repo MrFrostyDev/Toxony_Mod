@@ -62,8 +62,6 @@ public class WolfMutagenEffect extends MutagenEffect {
                 event.getEntity().addEffect(new MobEffectInstance(MobEffectRegistry.HUNT, 120, 0));
                 entity.playSound(SoundEvents.WOLF_GROWL, 6, 1);
             }
-
-            ToxonyMain.LOGGER.debug("[WolfMutagen Attack]: damage: {}",event.getNewDamage());
         }
     }
 

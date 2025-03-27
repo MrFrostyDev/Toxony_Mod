@@ -7,6 +7,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.effects.CrippleMobEffect;
 import xyz.yfrostyf.toxony.effects.FlammableMobEffect;
 import xyz.yfrostyf.toxony.effects.HuntMobEffect;
 import xyz.yfrostyf.toxony.effects.ToxinMobEffect;
@@ -35,6 +36,11 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> FLAMMABLE = MOB_EFFECTS.register(
             "flammable",
             () -> new FlammableMobEffect(MobEffectCategory.HARMFUL)
+    );
+
+    public static final DeferredHolder<MobEffect, MobEffect> CRIPPLE = MOB_EFFECTS.register(
+            "cripple",
+            () -> new CrippleMobEffect(MobEffectCategory.HARMFUL)
     );
 
     // |-----------------------------------------------------------------------------------|

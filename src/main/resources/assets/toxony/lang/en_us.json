@@ -27,11 +27,13 @@
   "item.toxony.netherite_scalpel": "Netherite Scalpel",
   "item.toxony.lethal_dose": "Lethal Dose",
   "item.toxony.witching_blade": "Witching Blade",
+  "item.toxony.bone_saw": "Bone Saw",
   "item.toxony.cyclebow": "Cyclebow",
   "item.toxony.cyclebow.loaded": "Loaded:",
 
   "item.toxony.bolt": "Bolt",
   "item.toxony.poison_bolt": "Poison Bolt",
+  "item.toxony.glowing_bolt": "Glowing Bolt",
   "item.toxony.toxin_bolt": "Toxin Bolt",
   "item.toxony.smoke_bolt": "Smoke Bolt",
   "item.toxony.regeneration_bolt": "Regeneration Bolt",
@@ -77,6 +79,7 @@
   "item.toxony.oil_base": "Oil Base",
 
   "item.toxony.poison_oil_pot": "Poison Oil Pot",
+  "item.toxony.glowing_oil_pot": "Glowing Oil Pot",
   "item.toxony.fire_resistance_oil_pot": "Fire Resistance Oil Pot",
   "item.toxony.fatigue_oil_pot": "Fatigue Oil Pot",
   "item.toxony.toxin_tox_pot": "Toxin Oil Pot",
@@ -85,6 +88,7 @@
   "item.toxony.witchfire_tox_pot": "Witchfire Oil Pot",
 
   "oil.toxony.poison": "Poison Oil",
+  "oil.toxony.glowing": "Glowing Oil",
   "oil.toxony.toxin": "Toxin Oil",
   "oil.toxony.fatigue": "Fatigue Oil",
   "oil.toxony.anchor": "Anchor Oil",
@@ -94,6 +98,7 @@
   "effect.toxony.hunt": "Hunt",
   "effect.toxony.toxin": "Toxin",
   "effect.toxony.flammable": "Flammable",
+  "effect.toxony.cripple": "Cripple",
 
   "effect.toxony.wolf_mutagen": "Mutagen",
   "effect.toxony.cat_mutagen": "Mutagen",

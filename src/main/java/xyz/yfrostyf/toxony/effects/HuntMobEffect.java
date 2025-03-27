@@ -4,11 +4,15 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
@@ -16,7 +20,6 @@ import java.util.Random;
 
 public class HuntMobEffect extends MobEffect {
     private static final int color = 0x6e2f2B;
-    private static final Random RANDOM = new Random();
 
     public HuntMobEffect(MobEffectCategory category) {
         super(category, color);
@@ -24,12 +27,26 @@ public class HuntMobEffect extends MobEffect {
 
     @Override
     public void onMobHurt(LivingEntity livingEntity, int amplifier, DamageSource damageSource, float amount) {
-        if(!(damageSource.getEntity() instanceof LivingEntity sourceLivingEntity))return;
-        if(sourceLivingEntity.hasEffect(MobEffectRegistry.WOLF_MUTAGEN) || sourceLivingEntity.getType() == EntityType.WOLF){
-            float dmgMod = sourceLivingEntity.getType() == EntityType.WOLF
-                    ? 0.5F + ((float)amplifier/4)
-                    : 0.25F + ((float)amplifier/4);
-            livingEntity.hurt(damageSource, amount + (amount*dmgMod));
+
+    }
+
+    @EventBusSubscriber
+    public static class HuntEvents {
+
+        @SubscribeEvent
+        public static void onLivingDamageWithHunt(LivingDamageEvent.Pre event){
+            LivingEntity victim = event.getEntity();
+            MobEffectInstance effectInst = victim.getEffect(MobEffectRegistry.HUNT);
+            if (effectInst == null) return;
+            if(event.getSource().getEntity() instanceof LivingEntity attacker){
+                if(attacker.hasEffect(MobEffectRegistry.WOLF_MUTAGEN) || attacker.getType() == EntityType.WOLF){
+                    float damage = event.getOriginalDamage();
+                    float dmgMod = attacker.getType() == EntityType.WOLF
+                            ? 0.5F + ((float)effectInst.getAmplifier()/4)
+                            : 0.25F + ((float)effectInst.getAmplifier()/4);
+                    event.setNewDamage(damage + (damage*dmgMod));
+                }
+            }
         }
     }
 }

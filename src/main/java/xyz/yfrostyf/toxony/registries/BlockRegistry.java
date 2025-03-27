@@ -260,6 +260,7 @@ public class BlockRegistry {
     // |-----------------------------------------------------------------------------------|
 
     public static final DeferredHolder<Block, Block> POISON_OIL_POT = createOilPotBlock("poison_oil_pot", () -> ItemRegistry.POISON_OIL_POT);
+    public static final DeferredHolder<Block, Block> GLOWING_OIL_POT = createOilPotBlock("glowing_oil_pot", () -> ItemRegistry.GLOWING_OIL_POT);
     public static final DeferredHolder<Block, Block> FIRE_RESISTANCE_OIL_POT = createOilPotBlock("fire_resistance_oil_pot", () -> ItemRegistry.FIRE_RESISTANCE_OIL_POT);
     public static final DeferredHolder<Block, Block> FATIGUE_OIL_POT = createOilPotBlock("fatigue_oil_pot", () -> ItemRegistry.FATIGUE_OIL_POT);
     public static final DeferredHolder<Block, Block> TOXIN_TOX_POT = createOilPotBlock("toxin_tox_pot", () -> ItemRegistry.TOXIN_TOX_POT);
@@ -273,6 +274,7 @@ public class BlockRegistry {
             () -> BlockEntityType.Builder.of(
                     OilPotBlockEntity::new,
                     POISON_OIL_POT.get(),
+                    GLOWING_OIL_POT.get(),
                     FIRE_RESISTANCE_OIL_POT.get(),
                     FATIGUE_OIL_POT.get(),
                     TOXIN_TOX_POT.get(),

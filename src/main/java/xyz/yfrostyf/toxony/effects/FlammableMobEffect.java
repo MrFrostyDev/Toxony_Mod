@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 
 public class FlammableMobEffect extends MobEffect {
     private static final int color = 0x6e2f2B;
-    private static final Random RANDOM = new Random();
 
     public FlammableMobEffect(MobEffectCategory category) {
         super(category, color);

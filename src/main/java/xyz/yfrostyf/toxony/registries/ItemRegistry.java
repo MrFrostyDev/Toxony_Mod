@@ -73,14 +73,18 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> COPPER_NEEDLE = ITEMS.register("copper_needle", () -> new NeedleItem(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> TOX_NEEDLE = ITEMS.register("tox_needle", () -> new ToxNeedleItem(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> COPPER_SCALPEL = ITEMS.register("copper_scalpel", () -> new ScalpelItem(new Item.Properties().stacksTo(1)
-            .durability(100).attributes(ScalpelItem.createAttributes(3.0F, -2.0F))
+            .durability(100).attributes(ScalpelItem.createAttributes(2.0F, -2.0F))
     ));
     public static final DeferredHolder<Item, Item> NETHERITE_SCALPEL = ITEMS.register("netherite_scalpel", () -> new ScalpelItem(new Item.Properties().stacksTo(1)
-            .fireResistant().durability(1350).attributes(ScalpelItem.createAttributes(5.0F, -2.0F))
+            .fireResistant().durability(1350).attributes(ScalpelItem.createAttributes(4.0F, -2.0F))
     ));
 
     public static final DeferredHolder<Item, Item> CYCLEBOW = ITEMS.register("cyclebow", () -> new CycleBow(new Item.Properties()
             .stacksTo(1).durability(550), 3));
+
+    public static final DeferredHolder<Item, Item> BONE_SAW = ITEMS.register("bone_saw", () -> new BoneSawItem(new Item.Properties().stacksTo(1)
+            .durability(300).attributes(BoneSawItem.createAttributes(4.0F, -2.0F))
+    ));
 
     // |-----------------------------------------------------------------------------------|
     // |-----------------------------------Cycle Bolts-------------------------------------|
@@ -89,6 +93,9 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> POISON_BOLT = ITEMS.register("poison_bolt", () -> new BoltItem(new Item.Properties().stacksTo(64),
             () -> ItemOil.createItemOil(OilsRegistry.POISON_OIL, 200, 0)));
+
+    public static final DeferredHolder<Item, Item> GLOWING_BOLT = ITEMS.register("glowing_bolt", () -> new BoltItem(new Item.Properties().stacksTo(64),
+            () -> ItemOil.createItemOil(OilsRegistry.GLOWING_OIL, 1000, 0)));
 
     public static final DeferredHolder<Item, Item> WITCHFIRE_BOLT = ITEMS.register("witchfire_bolt", () -> new BoltItem(new Item.Properties().stacksTo(64),
             () -> ItemOil.createItemOil(OilsRegistry.WITCHFIRE_OIL, 200, 0)));
@@ -107,6 +114,8 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> OIL_POT_SASH = ITEMS.register("oil_pot_sash", () -> new OilPotSashItem(new Item.Properties().durability(16)));
     public static final DeferredHolder<Item, Item> OIL_POT_BANDOLIER = ITEMS.register("oil_pot_bandolier", () -> new OilPotSashItem(new Item.Properties().durability(40)));
+    public static final DeferredHolder<Item, Item> ETERNAL_PLAGUE = ITEMS.register("eternal_plague", () -> new OilPotSashItem(new Item.Properties().durability(64)));
+
 
     public static final DeferredHolder<Item, Item> OIL_BASE = ITEMS.register("oil_base", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> CLAY_OIL_POT = ITEMS.register("clay_oil_pot", () -> new Item(new Item.Properties()));
@@ -117,6 +126,10 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> POISON_OIL_POT = createOilPot(
             "poison_oil_pot", 5, OilsRegistry.POISON_OIL, BlockRegistry.POISON_OIL_POT,
             200, 0, 150);
+
+    public static final DeferredHolder<Item, Item> GLOWING_OIL_POT = createOilPot(
+            "glowing_oil_pot", 5, OilsRegistry.GLOWING_OIL, BlockRegistry.GLOWING_OIL_POT,
+            1000, 0, 150);
 
     public static final DeferredHolder<Item, Item> FIRE_RESISTANCE_OIL_POT = createOilPot(
             "fire_resistance_oil_pot", 5, OilsRegistry.FIRE_RESISTANCE_OIL, BlockRegistry.FIRE_RESISTANCE_OIL_POT,
@@ -313,6 +326,7 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> LOST_JOURNAL = ITEMS.register("lost_journal", () -> new JournalItem(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredHolder<Item, Item> TOXIC_LEATHER = ITEMS.register("toxic_leather", () -> new Item(new Item.Properties().stacksTo(64)));
     public static final DeferredHolder<Item, Item> ALEMBIC_BASE = ITEMS.register("alembic_base", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> TOXIN_CANISTER = ITEMS.register("toxin_canister", () -> new Item(new Item.Properties().stacksTo(64)));
 

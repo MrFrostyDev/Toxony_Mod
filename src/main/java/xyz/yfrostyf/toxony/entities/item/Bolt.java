@@ -6,7 +6,6 @@ import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -24,14 +23,17 @@ import javax.annotation.Nullable;
 public class Bolt extends AbstractArrow {
     public Bolt(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
+        this.setBaseDamage(1.0);
     }
 
     public Bolt(Level level, double x, double y, double z, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(EntityRegistry.BOLT.get(), x, y, z, level, pickupItemStack, firedFromWeapon);
+        this.setBaseDamage(1.0);
     }
 
     public Bolt(Level level, LivingEntity owner, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(EntityRegistry.BOLT.get(), owner, level, pickupItemStack, firedFromWeapon);
+        this.setBaseDamage(1.0);
     }
 
     private ItemOil getOilContents() {

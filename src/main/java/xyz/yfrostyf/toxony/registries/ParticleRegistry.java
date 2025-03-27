@@ -31,4 +31,20 @@ public class ParticleRegistry {
             // most vanilla particles, but true for e.g. explosions, campfire smoke, or squid ink.
             () -> new SimpleParticleType(false)
     );
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BLOOD_DRIP = PARTICLE_TYPES.register(
+            "blood_drip",
+            // The supplier. The boolean parameter denotes whether setting the Particles option in the
+            // video settings to Minimal will affect this particle type or not; this is false for
+            // most vanilla particles, but true for e.g. explosions, campfire smoke, or squid ink.
+            () -> new SimpleParticleType(false)
+    );
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> CUT = PARTICLE_TYPES.register(
+            "cut",
+            // The supplier. The boolean parameter denotes whether setting the Particles option in the
+            // video settings to Minimal will affect this particle type or not; this is false for
+            // most vanilla particles, but true for e.g. explosions, campfire smoke, or squid ink.
+            () -> new SimpleParticleType(false)
+    );
 }
