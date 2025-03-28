@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "toxony:block/lost_journal"
+    },
+    "facing=east": {
+      "model": "toxony:block/lost_journal",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "toxony:block/lost_journal",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "toxony:block/lost_journal",
+      "y": 270
+    }
+  }
+}

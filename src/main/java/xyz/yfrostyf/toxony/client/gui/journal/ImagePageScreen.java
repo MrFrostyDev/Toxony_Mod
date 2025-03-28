@@ -7,6 +7,9 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 public class ImagePageScreen extends PageScreen{
     private final ResourceLocation IMAGE;
 
+    protected static final int IMAGE_WIDTH = 203;
+    protected static final int IMAGE_HEIGHT = 237;
+
     private final int offsetX;
     private final int offsetY;
 
@@ -26,15 +29,12 @@ public class ImagePageScreen extends PageScreen{
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int imageWidth = 188;
-        int imageHeight = 210;
-
-        int backgroundPosX = (this.width - imageWidth) / 2;
-        int backgroundPosY = (this.height - imageHeight) / 2;
+        int backgroundPosX = (this.width - IMAGE_WIDTH) / 2;
+        int backgroundPosY = (this.height - IMAGE_HEIGHT) / 2;
 
         super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blit(IMAGE, backgroundPosX + offsetX, backgroundPosY + offsetY,
-                0, 0, imageWidth, imageHeight);
+                0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 
     @Override

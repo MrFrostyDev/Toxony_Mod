@@ -30,6 +30,22 @@ public class ToxonyAlembicRecipes extends RecipeProvider {
                 .unlockedByItems("has_toxic_formula", ItemRegistry.TOXIC_FORMULA.get())
                 .build(output);
 
+        new AlembicRecipeBuilder(new ItemStack(ItemRegistry.TOXIC_LEATHER.get()))
+                .ingredient(ItemRegistry.TOXIN.get())
+                .ingredientToConvert(Items.LEATHER)
+                .remainingItem(new ItemStack(ItemRegistry.GLASS_VIAL.get()))
+                .boilTime(800)
+                .unlockedByItems("has_toxin", ItemRegistry.TOXIN.get())
+                .build(output);
+
+        new AlembicRecipeBuilder(new ItemStack(ItemRegistry.EMPTY_TOX_POT.get()))
+                .ingredient(ItemRegistry.TOXIN.get())
+                .ingredientToConvert(ItemRegistry.EMPTY_OIL_POT.get())
+                .remainingItem(new ItemStack(ItemRegistry.GLASS_VIAL.get()))
+                .boilTime(800)
+                .unlockedByItems("has_toxin", ItemRegistry.TOXIN.get())
+                .build(output);
+
         new AlembicRecipeBuilder(new ItemStack(ItemRegistry.AFFINITY_SOLUTION.get()))
                 .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .ingredientToConvert(ItemRegistry.REDSTONE_SOLUTION.get())

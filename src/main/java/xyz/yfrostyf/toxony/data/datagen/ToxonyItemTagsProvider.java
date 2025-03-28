@@ -28,6 +28,14 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.WITCHING_BLADE.get()
                 );
 
+        this.tag(ItemTags.DURABILITY_ENCHANTABLE)
+                .add(
+                        ItemRegistry.COPPER_SCALPEL.get(),
+                        ItemRegistry.NETHERITE_SCALPEL.get(),
+                        ItemRegistry.LETHAL_DOSE.get(),
+                        ItemRegistry.WITCHING_BLADE.get()
+                );
+
         this.tag(ItemTags.SWORDS)
                 .add(
                         ItemRegistry.WITCHING_BLADE.get()
@@ -67,6 +75,7 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                 .add(
                         ItemRegistry.BOLT.get(),
                         ItemRegistry.POISON_BOLT.get(),
+                        ItemRegistry.GLOWING_BOLT.get(),
                         ItemRegistry.TOXIN_BOLT.get(),
                         ItemRegistry.SMOKE_BOLT.get(),
                         ItemRegistry.REGENERATION_BOLT.get(),

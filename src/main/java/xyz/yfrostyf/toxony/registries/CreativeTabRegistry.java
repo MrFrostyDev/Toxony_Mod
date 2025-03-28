@@ -17,7 +17,7 @@ public class CreativeTabRegistry {
             //Set the title of the tab. Don't forget to add a translation!
             .title(Component.translatable("itemGroup." + ToxonyMain.MOD_ID + ".tab"))
             //Set the icon of the tab.
-            .icon(() -> new ItemStack(ItemRegistry.TOXIN.get()))
+            .icon(() -> new ItemStack(ItemRegistry.NIGHTSHADE.get()))
             //Add your items to the tab.
             .displayItems((params, output) -> {
                 output.accept(ItemRegistry.GLASS_VIAL.get());

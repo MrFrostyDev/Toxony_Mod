@@ -1,6 +1,5 @@
 package xyz.yfrostyf.toxony.client.gui.journal;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -103,7 +102,7 @@ public abstract class PageScreen extends Screen {
         private final PageScreen screen;
         private final boolean isForward;
 
-        private static final int BUTTON_OFFSETX = 65;
+        private static final int BUTTON_OFFSETX = 75;
         private static final int BUTTON_OFFSETY = -6;
 
         private static final int BUTTON_TEXTURE_WIDTH = 18;
@@ -182,8 +181,8 @@ public abstract class PageScreen extends Screen {
         private int posY1;
 
 
-        private static final int BUTTON_OFFSETX = -45;
-        private static final int BUTTON_OFFSETY = -108;
+        private static final int BUTTON_OFFSETX = -60;
+        private static final int BUTTON_OFFSETY = -120;
         private static final int BUTTON_HOVER_OFFSETY = 20;
 
         private static final int BUTTON_TEXTURE_WIDTH = 25;

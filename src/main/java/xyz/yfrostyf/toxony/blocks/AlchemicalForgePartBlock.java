@@ -14,7 +14,6 @@ import net.minecraft.world.phys.AABB;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 
 import java.util.List;
-import java.util.Set;
 
 public class AlchemicalForgePartBlock extends Block {
     public static final MapCodec<AlchemicalForgePartBlock> CODEC = simpleCodec(AlchemicalForgePartBlock::new);

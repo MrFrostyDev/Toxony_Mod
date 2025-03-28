@@ -16,8 +16,8 @@ public class TextAlembicPageScreen extends TextPageScreen{
     private final ItemStack outputItem;
     private final List<List<ItemStack>> inputItems;
 
-    public TextAlembicPageScreen(String translateID, ChatFormatting[] formatting, ItemStack outputItem, List<List<ItemStack>> inputItems, int indexID, JournalPages journalPages) {
-        super(translateID, formatting, indexID, journalPages);
+    public TextAlembicPageScreen(String translateID, ItemStack outputItem, List<List<ItemStack>> inputItems, int indexID, JournalPages journalPages) {
+        super(translateID, indexID, journalPages);
         this.inputItems = inputItems;
         this.outputItem = outputItem;
     }
@@ -40,7 +40,7 @@ public class TextAlembicPageScreen extends TextPageScreen{
         int halfScreenPosY = this.height / 2;
 
         int posX = halfScreenPosX - 30;
-        int posY = halfScreenPosY + 48;
+        int posY = halfScreenPosY + 48+17;
 
         for (int i = 0; i < 2; i++) {
             if (inputItems.size() > i) {

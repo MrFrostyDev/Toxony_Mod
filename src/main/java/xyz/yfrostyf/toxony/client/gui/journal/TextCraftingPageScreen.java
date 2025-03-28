@@ -16,8 +16,8 @@ public class TextCraftingPageScreen extends TextPageScreen{
     private final ItemStack outputItem;
     private final List<List<ItemStack>> inputItems;
 
-    public TextCraftingPageScreen(String translateID, ChatFormatting[] formatting, ItemStack outputItem, List<List<ItemStack>> inputItems, int indexID, JournalPages journalPages) {
-        super(translateID, formatting, indexID, journalPages);
+    public TextCraftingPageScreen(String translateID, ItemStack outputItem, List<List<ItemStack>> inputItems, int indexID, JournalPages journalPages) {
+        super(translateID, indexID, journalPages);
         this.inputItems = inputItems;
         this.outputItem = outputItem;
     }
@@ -40,7 +40,7 @@ public class TextCraftingPageScreen extends TextPageScreen{
         int halfScreenPosY = this.height / 2;
 
         int posX = halfScreenPosX - 33;
-        int posY = halfScreenPosY + 15;
+        int posY = halfScreenPosY + 15+17;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {

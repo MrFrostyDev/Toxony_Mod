@@ -8,9 +8,11 @@
   "block.toxony.alchemical_forge_part": "Alchemical Forge Part",
 
   "item.toxony.toxin_canister": "Toxin Canister",
+  "item.toxony.toxic_leather": "Toxic Leather",
   "item.toxony.alembic_base": "Alembic Base",
   "block.toxony.valentines_box": "Valentines Box",
 
+  "item.toxony.lost_journal": "Lost Journal",
   "item.toxony.tox_gauge": "Tox Gauge",
   "item.toxony.toxic_paste": "Toxic Paste",
   "item.toxony.poison_paste": "Poison Paste",
@@ -202,5 +204,11 @@
   "item.toxony.tox_needle.effect.weaving": "Copper Needle of Weaving",
   "item.toxony.tox_needle.effect.wind_charged": "Copper Needle of Wind Charging",
 
-  "journal.toxony.page.introduction.1": "This is a huge paragraph to test if the dialogue I am using is working on my Journal book! Also Hello world!"
+  "journal.toxony.page.introduction.0": "THEY WILL NEVER UNDERSTAND!\n\nThe value of my research is wasted on them!\nThey abandoned my ideas, MY WORK!\nAll of it scattered to the winds. That's what they have decided. If this is what I'm condemned to so be it. My research will continue without their petty help! Here I will document my findings within this journal.",
+  "journal.toxony.page.introduction.1": "Everything that I find about the nature of poisons and toxins will be written within and kept. No one has seen its potential like I have. We can make these dangerous phenomena benefit us! The world will see it!\n\n And I will find its secrets, its brilliance, even if I am to be left behind.",
+  "journal.toxony.page.poison_base.0" : "Before things begin, some tools are necessary. As I was kicked from the academy my accessories have been removed from me. Study cannot be made without my physical aids. As such I have to make due with some primitive and crude methods. A mortar and pestle although simple, proves to me a valuable tool and a cheap system to process basic ingredients.",
+  "journal.toxony.page.poison_base.1" : "Basics for a mortar and pestle can be made in a crafting table with the following pattern. Its use will be significant for the first product of in my research.",
+  "journal.toxony.page.poison_base.2" : "In my initial studies I sought a way to process the volatile substance known as \"poison\" to many that secreted from spiders and tainted potatoes. I realized I needed something foundational, malleable. In my hours of toiling and understanding of alchemical reactions, I made a base for future recipes that allowed me to use poison as a mixture of various plants and ingredients.",
+  "journal.toxony.page.poison_base.3" : "Although rather weak, it was to be used for my experimental research. An ingredient that can be refined later but tested now. A proof of concept. The recipe is easy to produce as it will eventually be used consistently in my future recipes.",
+  "journal.toxony.page.poison_base.4" : "All it requires is at least one naturally poisonous plant and one poison ingredient not of herbaceous origin. Then finally some bone meal to put it all together."
 }

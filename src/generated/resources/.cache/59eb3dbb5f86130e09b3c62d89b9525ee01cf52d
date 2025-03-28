@@ -1,10 +1,11 @@
-// 1.21.1	2025-03-13T13:56:56.0616524	Loot Tables
+// 1.21.1	2025-03-27T13:25:09.8675859	Loot Tables
 e85df1c82d819786b6012243d6a42e6d9b7ec822 data/toxony/loot_table/blocks/alchemical_forge.json
 229832c3499a527d956e3f67e3db79abdaf7cffd data/toxony/loot_table/blocks/alchemical_forge_part.json
 b3b06e45f3b27679b3c855cc065baed90d76388e data/toxony/loot_table/blocks/alembic.json
 bde6c4fabcdce0b6ce7c35a31f2a2d15af507a7a data/toxony/loot_table/blocks/bloodroot.json
 c079da35e0c7bf33b770be776946e3e3f378808f data/toxony/loot_table/blocks/coldsnap.json
 865d3aa1d70a235a7c40dabeeac4cfe35eae6ef9 data/toxony/loot_table/blocks/copper_crucible.json
+00beb696aec1c3dc46fee97e40f56b3b9c43fa13 data/toxony/loot_table/blocks/lost_journal.json
 eaf4e73b3db3d7cc4ed6eb6af289696c26ba39d7 data/toxony/loot_table/blocks/mortar_pestle.json
 8d2541c030507ff5d99cd5ce11ceba7c909d9b3e data/toxony/loot_table/blocks/nightshade.json
 b4c3527abe15183dafd0ac1c43f1d0c2b51861d3 data/toxony/loot_table/blocks/ocelot_mint.json

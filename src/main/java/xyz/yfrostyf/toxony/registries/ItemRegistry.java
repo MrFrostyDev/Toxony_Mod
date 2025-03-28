@@ -3,18 +3,11 @@ package xyz.yfrostyf.toxony.registries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -95,7 +88,7 @@ public class ItemRegistry {
             () -> ItemOil.createItemOil(OilsRegistry.POISON_OIL, 200, 0)));
 
     public static final DeferredHolder<Item, Item> GLOWING_BOLT = ITEMS.register("glowing_bolt", () -> new BoltItem(new Item.Properties().stacksTo(64),
-            () -> ItemOil.createItemOil(OilsRegistry.GLOWING_OIL, 1000, 0)));
+            () -> ItemOil.createItemOil(OilsRegistry.GLOWING_OIL, 600, 0)));
 
     public static final DeferredHolder<Item, Item> WITCHFIRE_BOLT = ITEMS.register("witchfire_bolt", () -> new BoltItem(new Item.Properties().stacksTo(64),
             () -> ItemOil.createItemOil(OilsRegistry.WITCHFIRE_OIL, 200, 0)));
@@ -129,7 +122,7 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> GLOWING_OIL_POT = createOilPot(
             "glowing_oil_pot", 5, OilsRegistry.GLOWING_OIL, BlockRegistry.GLOWING_OIL_POT,
-            1000, 0, 150);
+            600, 0, 150);
 
     public static final DeferredHolder<Item, Item> FIRE_RESISTANCE_OIL_POT = createOilPot(
             "fire_resistance_oil_pot", 5, OilsRegistry.FIRE_RESISTANCE_OIL, BlockRegistry.FIRE_RESISTANCE_OIL_POT,

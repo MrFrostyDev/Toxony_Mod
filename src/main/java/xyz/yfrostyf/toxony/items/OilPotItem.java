@@ -69,16 +69,6 @@ public class OilPotItem extends Item {
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
-        InteractionResult result = this.place(new BlockPlaceContext(context));
-        if (!result.consumesAction()) {
-            result = this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
-            return result == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : result;
-        }
-        return result;
-    }
-
-    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack oilPot = player.getMainHandItem().is(this) ? player.getMainHandItem() : player.getOffhandItem();
         ItemStack otherStack = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
@@ -91,6 +81,16 @@ public class OilPotItem extends Item {
             return ItemUtils.startUsingInstantly(level, player, hand);
         }
         return InteractionResultHolder.pass(oilPot);
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        InteractionResult result = this.place(new BlockPlaceContext(context));
+        if (!result.consumesAction()) {
+            result = this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
+            return result == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : result;
+        }
+        return result;
     }
 
     public InteractionResult place(BlockPlaceContext context) {

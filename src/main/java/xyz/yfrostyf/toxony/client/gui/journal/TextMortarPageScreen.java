@@ -16,8 +16,8 @@ public class TextMortarPageScreen extends TextPageScreen{
     private final ItemStack outputItem;
     private final List<List<ItemStack>> inputItems;
 
-    public TextMortarPageScreen(String translateID, ChatFormatting[] formatting, ItemStack outputItem, List<List<ItemStack>> inputItems, int indexID, JournalPages journalPages) {
-        super(translateID, formatting, indexID, journalPages);
+    public TextMortarPageScreen(String translateID, ItemStack outputItem, List<List<ItemStack>> inputItems, int indexID, JournalPages journalPages) {
+        super(translateID, indexID, journalPages);
         this.inputItems = inputItems;
         this.outputItem = outputItem;
     }
@@ -40,7 +40,7 @@ public class TextMortarPageScreen extends TextPageScreen{
         int halfScreenPosY = this.height / 2;
 
         int posX = halfScreenPosX - 33;
-        int posY = halfScreenPosY + 28;
+        int posY = halfScreenPosY + 28+17;
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {

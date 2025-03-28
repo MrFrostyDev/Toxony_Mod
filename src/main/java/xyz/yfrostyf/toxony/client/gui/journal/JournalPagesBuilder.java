@@ -18,8 +18,8 @@ public class JournalPagesBuilder {
 
     public JournalPagesBuilder() {}
 
-    public JournalPagesBuilder IndexPageScreen(String translateId, Map<String, String> indexedPages, ChatFormatting... formatting){
-        pages.add(new IndexPageScreen(translateId, indexedPages, formatting, indexCount, emptyJournal));
+    public JournalPagesBuilder IndexPageScreen(String translateId, Map<String, String> indexedPages){
+        pages.add(new IndexPageScreen(translateId, indexedPages, indexCount, emptyJournal));
         indexCount++;
         return this;
     }
@@ -30,45 +30,45 @@ public class JournalPagesBuilder {
         return this;
     }
 
-    public JournalPagesBuilder TextPageScreen(String translateId, ChatFormatting... formatting){
-        pages.add(new TextPageScreen(translateId, formatting, indexCount, emptyJournal));
+    public JournalPagesBuilder TextPageScreen(String translateId){
+        pages.add(new TextPageScreen(translateId, indexCount, emptyJournal));
         indexCount++;
         return this;
     }
 
     // Because of erasure with generics, the names are used accordingly
-    public JournalPagesBuilder TextCraftingPageScreen(String translateId, Item output, List<List<Item>> inputs, ChatFormatting... formatting){
-        pages.add(new TextCraftingPageScreen(translateId, formatting, output.getDefaultInstance(), ListItemToItemStack(inputs), indexCount, emptyJournal));
+    public JournalPagesBuilder TextCraftingPageScreen(String translateId, Item output, List<List<Item>> inputs){
+        pages.add(new TextCraftingPageScreen(translateId, output.getDefaultInstance(), ListItemToItemStack(inputs), indexCount, emptyJournal));
         indexCount++;
         return this;
     }
 
-    public JournalPagesBuilder TextCraftingPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs, ChatFormatting... formatting){
-        pages.add(new TextCraftingPageScreen(translateId, formatting, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
+    public JournalPagesBuilder TextCraftingPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs){
+        pages.add(new TextCraftingPageScreen(translateId, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
         indexCount++;
         return this;
     }
 
-    public JournalPagesBuilder TextCraftingPageScreenItem(String translateId, Item output, List<Item> inputs, ChatFormatting... formatting){
+    public JournalPagesBuilder TextCraftingPageScreenItem(String translateId, Item output, List<Item> inputs){
         List<List<Item>> newList = new ArrayList<>();
         for(Item item : inputs) newList.add(List.of(item));
-        return TextCraftingPageScreen(translateId, output, newList, formatting);
+        return TextCraftingPageScreen(translateId, output, newList);
     }
 
-    public JournalPagesBuilder TextMortarPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs, ChatFormatting... formatting){
-        pages.add(new TextMortarPageScreen(translateId, formatting, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
+    public JournalPagesBuilder TextMortarPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs){
+        pages.add(new TextMortarPageScreen(translateId, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
         indexCount++;
         return this;
     }
 
-    public JournalPagesBuilder TextCruciblePageScreenIngredient(String translateId, Item output, Ingredient input, ChatFormatting... formatting){
-        pages.add(new TextCruciblePageScreen(translateId, formatting, output.getDefaultInstance(), Arrays.asList(input.getItems()), indexCount, emptyJournal));
+    public JournalPagesBuilder TextCruciblePageScreenIngredient(String translateId, Item output, Ingredient input){
+        pages.add(new TextCruciblePageScreen(translateId, output.getDefaultInstance(), Arrays.asList(input.getItems()), indexCount, emptyJournal));
         indexCount++;
         return this;
     }
 
-    public JournalPagesBuilder TextAlembicPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs, ChatFormatting... formatting){
-        pages.add(new TextAlembicPageScreen(translateId, formatting, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
+    public JournalPagesBuilder TextAlembicPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs){
+        pages.add(new TextAlembicPageScreen(translateId, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
         indexCount++;
         return this;
     }

@@ -65,11 +65,11 @@ public class CrippleMobEffect extends MobEffect {
                 if(source.is(DamageTypes.GENERIC) || source.is(DamageTypes.PLAYER_ATTACK)
                         || source.is(DamageTypes.ARROW) || source.is(DamageTypes.TRIDENT)
                         || source.is(DamageTypes.MOB_ATTACK) || source.is(DamageTypes.MOB_PROJECTILE)){
-                    dmgMod = 0.5F + ((float)effectInst.getAmplifier() / 4);
+                    dmgMod = 0.25F + ((float)effectInst.getAmplifier() / 4);
                     event.setNewDamage(damage + (damage * dmgMod));
                 }
                 else if(source.is(DamageTypes.FALL)) {
-                    dmgMod = 1.0F + ((float)effectInst.getAmplifier() / 2);
+                    dmgMod = 0.5F + ((float)effectInst.getAmplifier() / 2);
                 }
                 event.setNewDamage(damage + (damage * dmgMod));
             }

@@ -22,6 +22,7 @@ import xyz.yfrostyf.toxony.blocks.entities.*;
 import xyz.yfrostyf.toxony.blocks.AlchemicalForgeBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
+import xyz.yfrostyf.toxony.blocks.plants.LostJournalBlock;
 import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
 
 import java.util.List;
@@ -287,6 +288,15 @@ public class BlockRegistry {
     // |-----------------------------------------------------------------------------------|
     // |------------------------------------Misc Items-------------------------------------|
     // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Block, Block> LOST_JOURNAL = BLOCKS.register(
+            "lost_journal",
+            () -> new LostJournalBlock(BlockBehaviour.Properties.of()
+                    .sound(SoundType.WOOL)
+                    .strength(0.2F)
+                    .pushReaction(PushReaction.DESTROY)
+            )
+    );
+
 
     public static final DeferredHolder<Block, Block> OIL_LAYER = BLOCKS.register(
             "oil_layer",

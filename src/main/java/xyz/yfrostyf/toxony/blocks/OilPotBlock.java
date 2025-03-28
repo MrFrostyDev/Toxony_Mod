@@ -46,7 +46,7 @@ public class OilPotBlock extends Block implements EntityBlock {
             ).apply(instance, OilPotBlock::new)
     );
 
-    protected static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
+    protected static final VoxelShape SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
     public static final IntegerProperty OIL_LEFT = IntegerProperty.create("oil", 0, 3);
 
     protected final Supplier<Holder<Item>> oilPotItem;

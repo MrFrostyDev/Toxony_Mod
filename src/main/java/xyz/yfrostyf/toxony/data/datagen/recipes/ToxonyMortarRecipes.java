@@ -29,7 +29,7 @@ public class ToxonyMortarRecipes extends RecipeProvider {
         // Oil Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.POISON_OIL_POT.get()))
                 .ingredient(Items.HONEYCOMB)
-                .ingredient(ItemRegistry.POISON_PASTE.get())
+                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .use(ItemRegistry.EMPTY_OIL_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
                 .build(output);
@@ -41,9 +41,17 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
                 .build(output);
 
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.GLOWING_OIL_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(Items.GLOW_INK_SAC)
+                .use(ItemRegistry.EMPTY_OIL_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
+                .build(output);
+
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.FATIGUE_OIL_POT.get()))
                 .ingredient(Items.HONEYCOMB)
                 .ingredient(Items.FERMENTED_SPIDER_EYE)
+                .ingredient(ItemRegistry.WATER_HEMLOCK.get())
                 .use(ItemRegistry.EMPTY_OIL_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
                 .build(output);
@@ -51,7 +59,7 @@ public class ToxonyMortarRecipes extends RecipeProvider {
         // Oil Tier 2 Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.TOXIN_TOX_POT.get()))
                 .ingredient(Items.HONEYCOMB)
-                .ingredient(ItemRegistry.TOXIN.get())
+                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .use(ItemRegistry.EMPTY_TOX_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);
@@ -59,14 +67,15 @@ public class ToxonyMortarRecipes extends RecipeProvider {
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.REGENERATION_TOX_POT.get()))
                 .ingredient(Items.HONEYCOMB)
                 .ingredient(Items.GHAST_TEAR)
+                .ingredient(ItemRegistry.SUNSPOT.get())
                 .use(ItemRegistry.EMPTY_TOX_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);
 
-        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.SMOKE_BOLT.get()))
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.SMOKE_TOX_POT.get()))
                 .ingredient(Items.HONEYCOMB)
-                .ingredient(Items.INK_SAC)
                 .ingredient(Items.FERMENTED_SPIDER_EYE)
+                .ingredient(ItemRegistry.MOONLIGHT_HEMLOCK.get())
                 .use(ItemRegistry.EMPTY_TOX_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);
@@ -74,8 +83,14 @@ public class ToxonyMortarRecipes extends RecipeProvider {
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.WITCHFIRE_TOX_POT.get()))
                 .ingredient(Items.HONEYCOMB)
                 .ingredient(Items.BLAZE_POWDER)
-                .ingredient(ItemRegistry.TOXIN.get())
+                .ingredient(ItemRegistry.WARPROOT.get())
                 .use(ItemRegistry.EMPTY_TOX_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
+                .build(output);
+
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.OIL_BASE.get(), 2))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(ItemRegistry.TOXIN.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);
 
@@ -110,7 +125,6 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .use(Items.BOWL)
                 .unlockedByItems("has_poisonous_paste", ItemRegistry.POISON_PASTE.get())
-
                 .build(output);
 
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.PURE_BLEND.get()))
@@ -120,6 +134,18 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .use(Items.BOWL)
                 .unlockedByItems("has_poisonous_paste", ItemRegistry.POISON_PASTE.get())
+                .suffix("_alt")
+                .build(output);
+
+        // Misc  Recipes
+        new MortarPestleRecipeBuilder(new ItemStack(Items.GREEN_DYE, 4))
+                .ingredient(ItemRegistry.POISON_PASTE.get())
+                .unlockedByItems("has_poisonous_paste", ItemRegistry.POISON_PASTE.get())
+                .build(output);
+
+        new MortarPestleRecipeBuilder(new ItemStack(Items.GREEN_DYE, 8))
+                .ingredient(ItemRegistry.TOXIC_PASTE.get())
+                .unlockedByItems("has_toxic_paste", ItemRegistry.TOXIC_PASTE.get())
                 .suffix("_alt")
                 .build(output);
     }

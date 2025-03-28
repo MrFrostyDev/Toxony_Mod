@@ -16,8 +16,8 @@ public class TextCruciblePageScreen extends TextPageScreen{
     private final ItemStack outputItem;
     private final List<ItemStack> inputItem;
 
-    public TextCruciblePageScreen(String translateID, ChatFormatting[] formatting, ItemStack outputItem, List<ItemStack> inputItem, int indexID, JournalPages journalPages) {
-        super(translateID, formatting, indexID, journalPages);
+    public TextCruciblePageScreen(String translateID, ItemStack outputItem, List<ItemStack> inputItem, int indexID, JournalPages journalPages) {
+        super(translateID, indexID, journalPages);
         this.inputItem = inputItem;
         this.outputItem = outputItem;
     }
@@ -40,7 +40,7 @@ public class TextCruciblePageScreen extends TextPageScreen{
         int halfScreenPosY = this.height / 2;
 
         int posX = halfScreenPosX - 25;
-        int posY = halfScreenPosY + 45;
+        int posY = halfScreenPosY + 45+17;
 
         if (!inputItem.isEmpty()) {
             final ItemStack stack = inputItem.get((int)(this.minecraft.level.getGameTime() % (20L * inputItem.size()) / 20));

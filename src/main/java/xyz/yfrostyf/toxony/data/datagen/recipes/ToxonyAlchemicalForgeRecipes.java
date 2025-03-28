@@ -29,18 +29,28 @@ public class ToxonyAlchemicalForgeRecipes extends RecipeProvider {
                 .mainIngredient(Items.IRON_SWORD)
                 .auxIngredient(Items.REDSTONE)
                 .auxIngredient(Items.COPPER_INGOT)
-                .affinity(AffinityRegistry.FOREST.get())
+                .affinity(AffinityRegistry.OCEAN.get())
                 .affinity(AffinityRegistry.SUN.get())
-                .affinity(AffinityRegistry.MOON.get())
+                .affinity(AffinityRegistry.FOREST.get())
                 .unlockedByItems("has_alchemical_forge_part", ItemRegistry.ALCHEMICAL_FORGE_PART.get())
                 .build(output);
 
         new AlchemicalForgeRecipeBuilder(new ItemStack(ItemRegistry.LETHAL_DOSE))
                 .mainIngredient(ItemRegistry.NETHERITE_SCALPEL.get())
                 .auxIngredient(Items.REDSTONE)
-                .auxIngredient(Items.COPPER_INGOT)
-                .affinity(AffinityRegistry.OCEAN.get())
+                .auxIngredient(ItemRegistry.TOXIN_CANISTER.get())
+                .affinity(AffinityRegistry.DECAY.get())
+                .affinity(AffinityRegistry.FOREST.get())
                 .affinity(AffinityRegistry.MOON.get())
+                .unlockedByItems("has_alchemical_forge_part", ItemRegistry.ALCHEMICAL_FORGE_PART.get())
+                .build(output);
+
+        new AlchemicalForgeRecipeBuilder(new ItemStack(ItemRegistry.ETERNAL_PLAGUE))
+                .mainIngredient(ItemRegistry.OIL_POT_BANDOLIER.get())
+                .auxIngredient(ItemRegistry.TOXIN_CANISTER.get())
+                .auxIngredient(ItemRegistry.TOXIC_LEATHER.get())
+                .affinity(AffinityRegistry.COLD.get())
+                .affinity(AffinityRegistry.SOUL.get())
                 .affinity(AffinityRegistry.WIND.get())
                 .unlockedByItems("has_alchemical_forge_part", ItemRegistry.ALCHEMICAL_FORGE_PART.get())
                 .build(output);

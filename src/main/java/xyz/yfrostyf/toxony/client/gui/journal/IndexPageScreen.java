@@ -1,6 +1,5 @@
 package xyz.yfrostyf.toxony.client.gui.journal;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,10 +15,10 @@ public class IndexPageScreen extends TextPageScreen {
     protected final Map<String, String> indexedPages;
     protected final Font font;
 
-    protected IndexPageScreen(String translateID, Map<String, String> indexedPages, ChatFormatting[] formatting, int indexID, JournalPages journalPages) {
-        super(translateID, formatting, indexID, journalPages);
+    protected IndexPageScreen(String translateID, Map<String, String> indexedPages, int indexID, JournalPages journalPages) {
+        super(translateID, indexID, journalPages);
         this.indexedPages = indexedPages;
-        this.font = Minecraft.getInstance().font;;
+        this.font = Minecraft.getInstance().font;
     }
 
     @Override
@@ -34,7 +33,7 @@ public class IndexPageScreen extends TextPageScreen {
                 journalPages.updatePage();
             };
 
-            this.addRenderableWidget(new IndexTextButton(this.width/2 - 45, this.height/2 - 20 + i * (font.lineHeight + 1), component, onPress, this.font));
+                this.addRenderableWidget(new IndexTextButton(this.width/2 - 55, this.height/2 - 30 + i * (font.lineHeight + 1), component, onPress, this.font));
             i++;
         }
     }
@@ -48,8 +47,8 @@ public class IndexPageScreen extends TextPageScreen {
         public IndexTextButton(int x, int y, Component message, OnPress onPress, Font font) {
             super(x, y, font.width(message), font.lineHeight, message, onPress, DEFAULT_NARRATION);
             this.font = font;
-            this.message = ComponentUtils.mergeStyles(message.copy(), Style.EMPTY.withBold(true).withColor(11184810));
-            this.underlinedMessage = ComponentUtils.mergeStyles(message.copy(), Style.EMPTY.withBold(true).withUnderlined(true));
+            this.message = ComponentUtils.mergeStyles(message.copy(), Style.EMPTY.withBold(true).withColor(0xcebd81));
+            this.underlinedMessage = ComponentUtils.mergeStyles(message.copy(), Style.EMPTY.withBold(true).withUnderlined(true).withColor(0xcebd81));
         }
 
         @Override
