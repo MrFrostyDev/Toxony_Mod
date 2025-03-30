@@ -35,7 +35,7 @@ public class JournalItem extends ItemNameBlockItem {
         if(context.getPlayer().isCrouching()){
             result = this.place(new BlockPlaceContext(context));
         }
-        if (!result.consumesAction()) {
+        else if (!result.consumesAction()) {
             result = this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
             return result == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : result;
         }

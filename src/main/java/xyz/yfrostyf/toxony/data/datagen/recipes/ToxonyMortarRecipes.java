@@ -29,7 +29,7 @@ public class ToxonyMortarRecipes extends RecipeProvider {
         // Oil Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.POISON_OIL_POT.get()))
                 .ingredient(Items.HONEYCOMB)
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
+                .ingredient(ItemRegistry.POISON_PASTE.get())
                 .use(ItemRegistry.EMPTY_OIL_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
                 .build(output);
@@ -59,7 +59,7 @@ public class ToxonyMortarRecipes extends RecipeProvider {
         // Oil Tier 2 Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.TOXIN_TOX_POT.get()))
                 .ingredient(Items.HONEYCOMB)
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
+                .ingredient(ItemRegistry.TOXIC_PASTE.get())
                 .use(ItemRegistry.EMPTY_TOX_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);

@@ -54,6 +54,10 @@ public class TextCruciblePageScreen extends TextPageScreen{
             }
         }
 
-        guiGraphics.renderItem(outputItem, posX + 47, posY);
+        int outputPosX = posX + 47;
+        guiGraphics.renderItem(outputItem, outputPosX, posY);
+        if (mouseX > outputPosX && mouseX < outputPosX + 16 && mouseY > posY && mouseY < posY + 16) {
+            guiGraphics.renderComponentTooltip(this.minecraft.font, Screen.getTooltipFromItem(this.minecraft, outputItem), mouseX, mouseY);
+        }
     }
 }

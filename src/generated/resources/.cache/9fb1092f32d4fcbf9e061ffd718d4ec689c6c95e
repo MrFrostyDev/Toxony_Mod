@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-28T00:52:03.5902086	Recipes
+// 1.21.1	2025-03-29T15:30:36.5631938	Recipes
 38ca203e5218eb2059ff7ed15a2361be521a170c data/minecraft/advancement/recipes/misc/clay_oil_pot_campfire.json
 3e471c16bc19b347c80ac9a98537ba034385d59d data/minecraft/advancement/recipes/misc/lost_journal_alt.json
 8784c7b753823537a8622d12fc7a6f538154d87b data/minecraft/advancement/recipes/misc/poisonous_potato.json
@@ -39,7 +39,7 @@ e0033101c2f99dfb78a368d711eb5abeb58b0699 data/toxony/advancement/recipes/misc/bl
 3f46dbb8ed7594e8391604fca739466195a42af1 data/toxony/advancement/recipes/misc/lost_journal.json
 5c91b6a5a198bc2717383d8c7383294df5b5b1aa data/toxony/advancement/recipes/misc/nightshade_seeds.json
 4e4ac6c9649b8d790fadfb6a44f4e3778ac88062 data/toxony/advancement/recipes/misc/ocelot_mint_seeds.json
-a466609166fcac57b1a83b2ffe3d4af5f4f20625 data/toxony/advancement/recipes/misc/redstone_mixture.json
+c12d0c438129b919ee672af259d1e9d784f47efe data/toxony/advancement/recipes/misc/redstone_mixture.json
 9511d190669ae1cd32d5532af85936d3762888c0 data/toxony/advancement/recipes/misc/toxic_formula.json
 0c8f25fe9bf714cfa9d54cf944c227f4b60a6838 data/toxony/advancement/recipes/misc/toxin_canister.json
 a7e3dd79d7edd9b433985ef4ad939c8d8cb7e622 data/toxony/advancement/recipes/misc/water_hemlock_seeds.json
@@ -79,14 +79,14 @@ d9a9a1515cd53c9f3c92f659f2537670f3813077 data/toxony/recipe/bloodroot_fungus.jso
 41965d3bb5371dab6f6d89c5f701d98f9e779a5a data/toxony/recipe/bolt.json
 1acabeb23c3cceadbf3c88a2fed1f41731bd7ae7 data/toxony/recipe/clay_oil_pot.json
 339f7cc53c8c81a94d5e8d5645c8a2b4e3af4852 data/toxony/recipe/coldsnap_seeds.json
-d5d24e966b8e874b70b5e79230fa8563f9b9d1a8 data/toxony/recipe/copper_crucible.json
+bd5ca995e875ec6ab66bf0806404c18f3bb39381 data/toxony/recipe/copper_crucible.json
 fbd7c8bfb7832e825292223a5414a711ea8501a1 data/toxony/recipe/copper_needle.json
 1983bb85ed10327c3ae833ba658fb2b20ed8ee02 data/toxony/recipe/copper_scalpel.json
 7f0af7fd7a01e0c912ddde3dcaed2ad9c683b547 data/toxony/recipe/crucible/redstone_solution.json
 67353ea6118a16a0776352383eb03d5fcf56a737 data/toxony/recipe/crucible/toxic_paste.json
 c64f70d4da90e22022514876d1d787db52c0e0f4 data/toxony/recipe/cyclebow.json
 b66dea8ed1a71cc30539fe3bba19629b91c86a8d data/toxony/recipe/empty_oil_pot.json
-523a2e927603968c944b8b27d2bc94f5d7c65105 data/toxony/recipe/glass_vial.json
+5901a42e3882fdf44dfa80bcfec1ba4767dd7202 data/toxony/recipe/glass_vial.json
 031bb0d63ae57ac4f5c0215740c90d4b1d270049 data/toxony/recipe/lost_journal.json
 34af9db12b685b1c4a01b8e832e2ac984c3d50ab data/toxony/recipe/magnifying_glass.json
 825a5b7c3ebe4b632aa8351084ad3638c0f23099 data/toxony/recipe/mortar/fatigue_oil_pot.json
@@ -97,14 +97,14 @@ b66dea8ed1a71cc30539fe3bba19629b91c86a8d data/toxony/recipe/empty_oil_pot.json
 8cf21cbd6bbb57bb44cb70afb25d364b7475d938 data/toxony/recipe/mortar/oil_base.json
 c1401d277bf107d9c6b7eeda80e57f266c61b948 data/toxony/recipe/mortar/poison_blend.json
 38a327dda796c88d28c20716db8f9f0d35f2b2b2 data/toxony/recipe/mortar/poison_blend_alt.json
-7e1f7a0a965083eda91cfbf38b5f23b16d5c1c63 data/toxony/recipe/mortar/poison_oil_pot.json
+53b1f05c451a9834d0147f5399710585f1d2d726 data/toxony/recipe/mortar/poison_oil_pot.json
 3db475a5557bf296bb4689c6fe3c44e6b99e14ad data/toxony/recipe/mortar/poison_paste.json
 ce5d0df9452229423a975a1d341ca683a4a610b6 data/toxony/recipe/mortar/pure_blend.json
 aafe345250164f2a44a7ba9275d326dad1bce0a4 data/toxony/recipe/mortar/pure_blend_alt.json
 57b040d5bb5252eca99d4c427ddc092b2385ac7b data/toxony/recipe/mortar/regeneration_tox_pot.json
 d49307cbedc847ec00853d9e2246fc758c8aba7a data/toxony/recipe/mortar/smoke_tox_pot.json
 51e148f66b097d1d999666f1ce73330368db3c5f data/toxony/recipe/mortar/toxic_blend.json
-a46468b29868ec3d808daff44dcdb737e1b041b6 data/toxony/recipe/mortar/toxin_tox_pot.json
+a05e47fea992d2c13cbbb7c3e57f0b89f3e88205 data/toxony/recipe/mortar/toxin_tox_pot.json
 e4553e9f901868f6efa601df212d690483ad4285 data/toxony/recipe/mortar/witchfire_tox_pot.json
 3be7e1ead92281a6f9ca5005274d2fcddebed6f3 data/toxony/recipe/nightshade_seeds.json
 4d5cdd15ed2f3083e9765d3cfa866d85d9b03791 data/toxony/recipe/ocelot_mint_seeds.json
@@ -114,7 +114,7 @@ b19e0082b85585b2223283aed5a135f4d54ade08 data/toxony/recipe/oil_pot_sash.json
 1b81de74fc33ae094f2e9c52bc132f91bf8d86fe data/toxony/recipe/plague_doctor_coat.json
 b1774c57d6becb383140105ed3f0261d7f22e982 data/toxony/recipe/plague_doctor_hood.json
 529c1221fae164a9613c90cf9d0d16dc855fb81d data/toxony/recipe/plague_doctor_leggings.json
-3e3a5a53b0e818c345d2db772e853c1a2976af46 data/toxony/recipe/redstone_mixture.json
+73c023a8b6d779bd72d08011911f0c6854083497 data/toxony/recipe/redstone_mixture.json
 734c64933e40441724f117bb5c853553fd20c8e4 data/toxony/recipe/toxic_formula.json
 59c0b910e67977e07020f3bf2914357f5aeaf9ff data/toxony/recipe/toxin_canister.json
 aacfc0fb5b0a9d72f344013f2a887a91d4b2c0ec data/toxony/recipe/tox_gauge.json

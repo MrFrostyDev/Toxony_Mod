@@ -92,7 +92,7 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_quartz", has(Items.QUARTZ))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.GLASS_VIAL.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, new ItemStack(ItemRegistry.GLASS_VIAL.get(), 3))
                 .pattern("   ")
                 .pattern("G G")
                 .pattern(" Q ")
@@ -102,8 +102,8 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .save(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.COPPER_CRUCIBLE.get())
+                .pattern(" C ")
                 .pattern("CCC")
-                .pattern("ICI")
                 .pattern("IFI")
                 .define('C', Items.COPPER_INGOT)
                 .define('F', Items.CHARCOAL)
@@ -133,10 +133,9 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .save(output);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.REDSTONE_MIXTURE.get())
-                .requires(ItemRegistry.TOXIC_PASTE.get())
                 .requires(DataComponentIngredient.of(false, PotionContents.createItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER)))
                 .requires(Items.REDSTONE)
-                .unlockedBy("has_toxic_paste", has(ItemRegistry.TOXIC_PASTE.get()))
+                .unlockedBy("has_glass_vial", has(ItemRegistry.GLASS_VIAL.get()))
                 .save(output);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.TOXIC_FORMULA.get())

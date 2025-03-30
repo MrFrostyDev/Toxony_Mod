@@ -1,10 +1,10 @@
 package xyz.yfrostyf.toxony.client.gui.journal;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +30,12 @@ public class JournalPagesBuilder {
         return this;
     }
 
+    public JournalPagesBuilder TextSingleItemTopScreen(String translateId, ItemLike itemLike){
+        pages.add(new TextSingleItemTopScreen(translateId, indexCount, new ItemStack(itemLike), emptyJournal));
+        indexCount++;
+        return this;
+    }
+
     public JournalPagesBuilder TextPageScreen(String translateId){
         pages.add(new TextPageScreen(translateId, indexCount, emptyJournal));
         indexCount++;
@@ -39,6 +45,19 @@ public class JournalPagesBuilder {
     // Because of erasure with generics, the names are used accordingly
     public JournalPagesBuilder TextCraftingPageScreen(String translateId, Item output, List<List<Item>> inputs){
         pages.add(new TextCraftingPageScreen(translateId, output.getDefaultInstance(), ListItemToItemStack(inputs), indexCount, emptyJournal));
+        indexCount++;
+        return this;
+    }
+
+    public JournalPagesBuilder TextCraftingPageScreenStacks(String translateId, Item output, List<List<ItemStack>> inputs){
+        pages.add(new TextCraftingPageScreen(translateId, output.getDefaultInstance(), inputs, indexCount, emptyJournal));
+        indexCount++;
+        return this;
+    }
+
+    // Because of erasure with generics, the names are used accordingly
+    public JournalPagesBuilder TextCraftingPageScreen(String translateId, ItemStack output, List<List<Item>> inputs){
+        pages.add(new TextCraftingPageScreen(translateId, output, ListItemToItemStack(inputs), indexCount, emptyJournal));
         indexCount++;
         return this;
     }
@@ -53,6 +72,16 @@ public class JournalPagesBuilder {
         List<List<Item>> newList = new ArrayList<>();
         for(Item item : inputs) newList.add(List.of(item));
         return TextCraftingPageScreen(translateId, output, newList);
+    }
+
+    public JournalPagesBuilder TextCraftingPageScreenStack(String translateId, Item output, List<ItemStack> inputs){
+        List<List<ItemStack>> newList = new ArrayList<>();
+        for(ItemStack item : inputs) newList.add(List.of(item));
+        return TextCraftingPageScreenStacks(translateId, output, newList);
+    }
+
+    public JournalPagesBuilder TextMortarPageScreen(String translateId, Item output, List<ItemLike> inputs){
+        return TextMortarPageScreenIngredients(translateId, output, inputs.stream().map(Ingredient::of).toList());
     }
 
     public JournalPagesBuilder TextMortarPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs){

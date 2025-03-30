@@ -23,7 +23,8 @@ public class DeathstateOverlay implements LayeredDraw.Layer{
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         if (Minecraft.getInstance().options.hideGui
                 || Minecraft.getInstance().player == null
-                || Minecraft.getInstance().player.isSpectator()) return;
+                || Minecraft.getInstance().player.isSpectator()
+                || ClientToxData.getToxData() == null) return;
 
         var screenWidth = guiGraphics.guiWidth();
         var screenHeight = guiGraphics.guiHeight();

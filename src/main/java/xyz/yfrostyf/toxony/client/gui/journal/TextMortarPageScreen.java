@@ -68,6 +68,11 @@ public class TextMortarPageScreen extends TextPageScreen{
             }
         }
 
-        guiGraphics.renderItem(outputItem, posX + 56, posY + 9);
+        int outputPosX = posX + 55;
+        int outputPosY = posY + 9;
+        guiGraphics.renderItem(outputItem, outputPosX, outputPosY);
+        if (mouseX > outputPosX && mouseX < outputPosX + 16 && mouseY > outputPosY && mouseY < outputPosY + 16) {
+            guiGraphics.renderComponentTooltip(this.minecraft.font, Screen.getTooltipFromItem(this.minecraft, outputItem), mouseX, mouseY);
+        }
     }
 }

@@ -66,6 +66,11 @@ public class TextAlembicPageScreen extends TextPageScreen{
             }
         }
 
-        guiGraphics.renderItem(outputItem, posX + 62, posY - 31);
+        int outputPosX = posX + 62;
+        int outputPosY = posY - 31;
+        guiGraphics.renderItem(outputItem, outputPosX, outputPosY);
+        if (mouseX > outputPosX && mouseX < outputPosX + 16 && mouseY > outputPosY && mouseY < outputPosY + 16) {
+            guiGraphics.renderComponentTooltip(this.minecraft.font, Screen.getTooltipFromItem(this.minecraft, outputItem), mouseX, mouseY);
+        }
     }
 }

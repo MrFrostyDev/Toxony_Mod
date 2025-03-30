@@ -40,7 +40,7 @@ public class TextCraftingPageScreen extends TextPageScreen{
         int halfScreenPosY = this.height / 2;
 
         int posX = halfScreenPosX - 33;
-        int posY = halfScreenPosY + 15+17;
+        int posY = halfScreenPosY + 34;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -68,6 +68,11 @@ public class TextCraftingPageScreen extends TextPageScreen{
             }
         }
 
-        guiGraphics.renderItem(outputItem, posX + 66, posY + 16);
+        int outputPosX = posX + 66;
+        int outputPosY = posY + 16;
+        guiGraphics.renderItem(outputItem, outputPosX, outputPosY);
+        if (mouseX > outputPosX && mouseX < outputPosX + 16 && mouseY > outputPosY && mouseY < outputPosY + 16) {
+            guiGraphics.renderComponentTooltip(this.minecraft.font, Screen.getTooltipFromItem(this.minecraft, outputItem), mouseX, mouseY);
+        }
     }
 }
