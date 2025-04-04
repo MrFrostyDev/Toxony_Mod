@@ -98,7 +98,7 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
                                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
                                         .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PoisonCropBlock.AGE, PoisonCropBlock.MAX_AGE)))
                                 .add(LootItem.lootTableItem(grownCropItem))
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                                 .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
                         )
                 )
