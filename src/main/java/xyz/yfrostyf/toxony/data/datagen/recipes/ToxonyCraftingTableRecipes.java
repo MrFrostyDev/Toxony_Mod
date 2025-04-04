@@ -275,9 +275,19 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_ocelot_mint", has(ItemRegistry.OCELOT_MINT.get()))
                 .save(output);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.SNOW_MINT_SEEDS.get())
+                .requires(ItemRegistry.SNOW_MINT.get())
+                .unlockedBy("has_snow_mint", has(ItemRegistry.SNOW_MINT.get()))
+                .save(output);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.NIGHTSHADE_SEEDS.get())
                 .requires(ItemRegistry.NIGHTSHADE.get())
                 .unlockedBy("has_nightshade", has(ItemRegistry.NIGHTSHADE.get()))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.SUNSPOT_SEEDS.get())
+                .requires(ItemRegistry.SUNSPOT.get())
+                .unlockedBy("has_sunspot", has(ItemRegistry.SUNSPOT.get()))
                 .save(output);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.WATER_HEMLOCK_SEEDS.get())
@@ -285,14 +295,29 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_water_hemlock", has(ItemRegistry.WATER_HEMLOCK.get()))
                 .save(output);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.MOONLIGHT_HEMLOCK_SEEDS.get())
+                .requires(ItemRegistry.MOONLIGHT_HEMLOCK.get())
+                .unlockedBy("has_moonlight_hemlock", has(ItemRegistry.MOONLIGHT_HEMLOCK.get()))
+                .save(output);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.COLDSNAP_SEEDS.get())
                 .requires(ItemRegistry.COLDSNAP.get())
                 .unlockedBy("has_coldsnap", has(ItemRegistry.COLDSNAP.get()))
                 .save(output);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.WHIRLSNAP_SEEDS.get())
+                .requires(ItemRegistry.WHIRLSNAP.get())
+                .unlockedBy("has_whirlsnap", has(ItemRegistry.WHIRLSNAP.get()))
+                .save(output);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.BLOODROOT_FUNGUS.get())
                 .requires(ItemRegistry.BLOODROOT.get())
                 .unlockedBy("has_bloodroot", has(ItemRegistry.BLOODROOT.get()))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.WARPROOT_FUNGUS.get())
+                .requires(ItemRegistry.WARPROOT.get())
+                .unlockedBy("has_warproot", has(ItemRegistry.WARPROOT.get()))
                 .save(output);
     }
 }

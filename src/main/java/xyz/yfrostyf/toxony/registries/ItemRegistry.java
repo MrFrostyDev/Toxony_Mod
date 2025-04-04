@@ -194,7 +194,7 @@ public class ItemRegistry {
     );
 
     public static final DeferredHolder<Item, Item> FALSE_BERRIES = ITEMS.register("false_berries", () -> ToxGiverBlockItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.FOREST.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.FOREST.getKey(), AffinityRegistry.COLD.getKey()))
             .block(BlockRegistry.FALSE_BERRY_BUSH)
             .tox(3).tolerance(1).tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
@@ -222,7 +222,7 @@ public class ItemRegistry {
             .build()
     );
 
-    public static final DeferredHolder<Item, Item> SUNSPOT = ITEMS.register("sunpot", () -> ToxGiverItem.builder()
+    public static final DeferredHolder<Item, Item> SUNSPOT = ITEMS.register("sunspot", () -> ToxGiverItem.builder()
             .properties(createAffinitiesProperty(AffinityRegistry.SUN.getKey()))
             .tox(2).tolerance(1).tier(1)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
@@ -244,28 +244,28 @@ public class ItemRegistry {
     );
 
     public static final DeferredHolder<Item, Item> COLDSNAP = ITEMS.register("coldsnap", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.WIND.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.COLD.getKey(), AffinityRegistry.WIND.getKey()))
             .tox(2).tolerance(1).tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
     );
 
     public static final DeferredHolder<Item, Item> WHIRLSNAP = ITEMS.register("whirlsnap", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.WIND.getKey()))
             .tox(2).tolerance(1).tier(1)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
     );
 
     public static final DeferredHolder<Item, Item> BLOODROOT = ITEMS.register("bloodroot", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.NETHER.getKey()))
             .tox(2).tolerance(1).tier(1)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
     );
 
     public static final DeferredHolder<Item, Item> WARPROOT = ITEMS.register("warproot", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.NETHER.getKey()))
             .tox(2).tolerance(1).tier(1)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()

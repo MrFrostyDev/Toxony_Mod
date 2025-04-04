@@ -127,7 +127,6 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
             }
         }
 
-
         Optional<Holder<Block>> blockHolder = evolvedBlock.get();
         if(blockHolder.isPresent()) {
             if (blockHolder.get().value() instanceof PoisonCropBlock poisonCropBlock) {

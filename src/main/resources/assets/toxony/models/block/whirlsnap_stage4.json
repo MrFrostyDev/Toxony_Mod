@@ -1,0 +1,10 @@
+{
+	"credit": "Sunnyteddy22",
+	"parent": "toxony:block/template_poison_plant",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "toxony:block/whirlsnap_stage4",
+		"particle": "toxony:block/whirlsnap_stage4"
+	}
+}

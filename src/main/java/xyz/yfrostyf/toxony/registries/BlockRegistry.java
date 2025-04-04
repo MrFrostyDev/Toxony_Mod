@@ -22,7 +22,7 @@ import xyz.yfrostyf.toxony.blocks.entities.*;
 import xyz.yfrostyf.toxony.blocks.AlchemicalForgeBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
-import xyz.yfrostyf.toxony.blocks.plants.LostJournalBlock;
+import xyz.yfrostyf.toxony.blocks.LostJournalBlock;
 import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.blocks.plants;
+package xyz.yfrostyf.toxony.blocks;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;

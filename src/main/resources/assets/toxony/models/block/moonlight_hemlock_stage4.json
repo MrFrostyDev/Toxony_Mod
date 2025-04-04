@@ -1,0 +1,10 @@
+{
+	"credit": "Sunnyteddy",
+	"parent": "toxony:block/template_poison_plant_big",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "toxony:block/moonlight_hemlock_stage4",
+		"particle": "toxony:block/moonlight_hemlock_stage4"
+	}
+}

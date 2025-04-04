@@ -22,6 +22,7 @@ public class CreativeTabRegistry {
             .displayItems((params, output) -> {
                 output.accept(ItemRegistry.GLASS_VIAL.get());
                 output.accept(ItemRegistry.COPPER_NEEDLE.get());
+                output.accept(ItemRegistry.MAGNIFYING_GLASS.get());
 
                 output.accept(ItemRegistry.COPPER_SCALPEL.get());
                 output.accept(ItemRegistry.NETHERITE_SCALPEL.get());
@@ -70,6 +71,8 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.COLDSNAP.get());
                 output.accept(ItemRegistry.WHIRLSNAP.get());
                 output.accept(ItemRegistry.BLOODROOT.get());
+                output.accept(ItemRegistry.WARPROOT.get());
+
 
                 output.accept(ItemRegistry.OCELOT_MINT_SEEDS.get());
                 output.accept(ItemRegistry.SNOW_MINT_SEEDS.get());
@@ -80,6 +83,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.COLDSNAP_SEEDS.get());
                 output.accept(ItemRegistry.WHIRLSNAP_SEEDS.get());
                 output.accept(ItemRegistry.BLOODROOT_FUNGUS.get());
+                output.accept(ItemRegistry.WARPROOT_FUNGUS.get());
 
                 output.accept(ItemRegistry.OIL_BASE.get());
                 output.accept(ItemRegistry.CLAY_OIL_POT.get());
