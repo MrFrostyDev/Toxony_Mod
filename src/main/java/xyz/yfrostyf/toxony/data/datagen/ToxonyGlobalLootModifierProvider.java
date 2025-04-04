@@ -31,10 +31,13 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
 
     @Override
     protected void start() {
-        dropUniqueWhilePoisoned("wolf_unique_tox_drop", ItemRegistry.WOLF_TOOTH.get(), 0, 1);
+        dropUniqueWhilePoisoned("wolf_unique_tox_drop", EntityType.WOLF, ItemRegistry.VENOM_TOOTH.get(), 1, 2);
+        dropUniqueWhilePoisoned("slime_unique_tox_drop", EntityType.SLIME, ItemRegistry.ACID_SLIMEBALL.get(), 0, 1);
+        dropUniqueWhilePoisoned("llama_unique_tox_drop", EntityType.LLAMA, ItemRegistry.TOXIC_SPIT.get(), 1, 2);
+        dropUniqueWhilePoisoned("bogged_unique_tox_drop", EntityType.BOGGED, ItemRegistry.BOG_BONE.get(), 1, 2);
     }
 
-    private void dropUniqueWhilePoisoned(String name, Item dropItem, int min, int max){
+    private void dropUniqueWhilePoisoned(String name, EntityType entity, Item dropItem, int min, int max){
         EntityEquipmentPredicate equipmentPredicate = EntityEquipmentPredicate.Builder.equipment().mainhand(
                 ItemPredicate.Builder.item().of(TagRegistry.SCALPEL_ITEM)).build();
 
@@ -42,10 +45,10 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
                 .equipment(equipmentPredicate));
 
         LootItemCondition.Builder poisonedEntityCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
-                .of(EntityType.WOLF).effects(MobEffectsPredicate.Builder.effects().and(MobEffects.POISON)));
+                .of(entity).effects(MobEffectsPredicate.Builder.effects().and(MobEffects.POISON)));
 
         LootItemCondition.Builder toxinedEntityCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
-                .of(EntityType.WOLF).effects(MobEffectsPredicate.Builder.effects().and(MobEffectRegistry.TOXIN)));
+                .of(entity).effects(MobEffectsPredicate.Builder.effects().and(MobEffectRegistry.TOXIN)));
 
         this.add(name,
                 new ToxDropLootModifier(new LootItemCondition[]{

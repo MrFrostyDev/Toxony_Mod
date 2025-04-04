@@ -56,7 +56,10 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.TOXIC_FORMULA.get());
                 output.accept(ItemRegistry.TOXIN.get());
 
-                output.accept(ItemRegistry.WOLF_TOOTH.get());
+                output.accept(ItemRegistry.VENOM_TOOTH.get());
+                output.accept(ItemRegistry.BOG_BONE.get());
+                output.accept(ItemRegistry.ACID_SLIMEBALL.get());
+                output.accept(ItemRegistry.TOXIC_SPIT.get());
 
                 output.accept(ItemRegistry.OCELOT_MINT.get());
                 output.accept(ItemRegistry.SNOW_MINT.get());

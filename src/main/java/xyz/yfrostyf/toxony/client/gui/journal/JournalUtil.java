@@ -26,16 +26,17 @@ public class JournalUtil {
 
     public static Map<String, String> createIndexMap(){
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("Poison Basics", "journal.toxony.page.poison_basics.0");
-        map.put("Oil Basics", "journal.toxony.page.poison_basics.0");
-        map.put("Basic Tools", "journal.toxony.page.basic_tools.0");
-        map.put("Alchemical Warfare", "journal.toxony.page.poison_basics.0");
-        map.put("Refined Process", "journal.toxony.page.alchemical_warfare.0");
-        map.put("Pure Chemistry", "journal.toxony.page.pure_chemistry.0");
+        map.put("Poison Basics", "journal.toxony.page.poison_basics.cover");
+        map.put("Poisonous Flora", "journal.toxony.page.poisonous_flora.cover");
+        map.put("Oil Basics", "journal.toxony.page.oil_basics.cover");
+        map.put("Basic Tools", "journal.toxony.page.basic_tools.cover");
+        map.put("Alchemical Warfare", "journal.toxony.page.alchemical_warfare.0");
+        map.put("Refined Process", "journal.toxony.page.refined_process.cover");
+        map.put("Pure Chemistry", "journal.toxony.page.pure_chemistry.cover");
         map.put("Mutagens", "journal.toxony.page.mutagens.0");
-        map.put("Advanced Oils", "journal.toxony.page.advanced_oils.0");
+        map.put("Advanced Oils", "journal.toxony.page.advanced_oils.cover");
         map.put("Evolving Warfare", "journal.toxony.page.evolving_warfare.0");
-        map.put("Lost Chemistry", "journal.toxony.page.lost_chemistry.0");
+        map.put("Lost Chemistry", "journal.toxony.page.lost_chemistry.cover");
         return map;
     }
 
@@ -58,6 +59,7 @@ public class JournalUtil {
                 .IndexPageScreen("journal.toxony.page.index.0", createIndexMap())
 
                 // |----------------- Poison Basics ----------------- |
+                .ImagePageScreen("journal.toxony.page.poison_basics.cover", "textures/gui/journal/journal_poison_basics_cover.png")
                 .TextPageScreen("journal.toxony.page.poison_basics.0")
                 .TextCraftingPageScreenItem("journal.toxony.page.poison_basics.1", ItemRegistry.MORTAR_PESTLE.get(),
                         List.of(EMPTY, EMPTY, EMPTY,
@@ -73,6 +75,7 @@ public class JournalUtil {
                 .TextPageScreen("journal.toxony.page.poison_basics.5")
 
                 // |----------------- Poisonous Flora ----------------- |
+                .ImagePageScreen("journal.toxony.page.poisonous_flora.cover", "textures/gui/journal/journal_poisonous_flora_cover.png")
                 .TextSingleItemTopScreen("journal.toxony.page.poisonous_flora.0", ItemRegistry.OCELOT_MINT.get())
                 .TextSingleItemTopScreen("journal.toxony.page.poisonous_flora.1", ItemRegistry.NIGHTSHADE.get())
                 .TextSingleItemTopScreen("journal.toxony.page.poisonous_flora.2", ItemRegistry.WATER_HEMLOCK.get())
@@ -87,6 +90,7 @@ public class JournalUtil {
                 .TextPageScreen("journal.toxony.page.poisonous_flora.7")
 
                 // |----------------- Oil Basics ----------------- |
+                .ImagePageScreen("journal.toxony.page.oil_basics.cover", "textures/gui/journal/journal_oil_basics_cover.png")
                 .TextPageScreen("journal.toxony.page.oil_basics.0")
                 .TextCraftingPageScreenItem("journal.toxony.page.oil_basics.1", ItemRegistry.CLAY_OIL_POT.get(),
                         List.of(EMPTY, EMPTY, EMPTY,
@@ -116,6 +120,7 @@ public class JournalUtil {
                 .TextPageScreen("journal.toxony.page.oil_basics.6")
 
                 // |----------------- Basic Tools ----------------- |
+                .ImagePageScreen("journal.toxony.page.basic_tools.cover", "textures/gui/journal/journal_basic_tools_cover.png")
                 .TextPageScreen("journal.toxony.page.basic_tools.0")
                 .TextCraftingPageScreenItem("journal.toxony.page.basic_tools.1", ItemRegistry.TOX_GAUGE.get(),
                         List.of(EMPTY, ItemRegistry.POISON_PASTE.get(), EMPTY,
@@ -152,6 +157,7 @@ public class JournalUtil {
                 )
 
                 // |----------------- Refined Process ----------------- |
+                .ImagePageScreen("journal.toxony.page.refined_process.cover", "textures/gui/journal/journal_refined_process_cover.png")
                 .TextPageScreen("journal.toxony.page.refined_process.0")
                 .TextCraftingPageScreenItem("journal.toxony.page.refined_process.1", ItemRegistry.COPPER_CRUCIBLE.get(),
                         List.of(EMPTY, Items.COPPER_INGOT, EMPTY,
@@ -190,6 +196,7 @@ public class JournalUtil {
                 .TextPageScreen("journal.toxony.page.refined_process.9")
 
                 // |----------------- Pure Chemistry ----------------- |
+                .ImagePageScreen("journal.toxony.page.pure_chemistry.cover", "textures/gui/journal/journal_pure_chemistry_cover.png")
                 .TextPageScreen("journal.toxony.page.pure_chemistry.0")
                 .TextCraftingPageScreenStack("journal.toxony.page.pure_chemistry.1", ItemRegistry.TOXIC_FORMULA.get(),
                         List.of(Items.NETHER_WART.getDefaultInstance(), PotionContents.createItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER), EMPTY.getDefaultInstance(),
@@ -226,6 +233,7 @@ public class JournalUtil {
                 .TextPageScreen("journal.toxony.page.mutagens.9")
 
                 // |----------------- Advanced Oils ----------------- |
+                .ImagePageScreen("journal.toxony.page.advanced_oils.cover", "textures/gui/journal/journal_advanced_oils_cover.png")
                 .TextPageScreen("journal.toxony.page.advanced_oils.0")
                 .TextAlembicPageScreenIngredients("journal.toxony.page.advanced_oils.1", ItemRegistry.EMPTY_TOX_POT.get(),
                         List.of(Ingredient.of(ItemRegistry.TOXIN.get()), Ingredient.of(ItemRegistry.EMPTY_OIL_POT.get()))
@@ -290,6 +298,7 @@ public class JournalUtil {
                 )
 
                 // |----------------- Lost Chemistry ----------------- |
+                .ImagePageScreen("journal.toxony.page.lost_chemistry.cover", "textures/gui/journal/journal_lost_chemistry_cover.png")
                 .TextPageScreen("journal.toxony.page.lost_chemistry.0")
                 .TextCraftingPageScreenItem("journal.toxony.page.lost_chemistry.1", ItemRegistry.ALCHEMICAL_FORGE_PART.get(),
                         List.of(ItemRegistry.TOXIN.get(), Items.NETHERITE_INGOT, ItemRegistry.TOXIN.get(),

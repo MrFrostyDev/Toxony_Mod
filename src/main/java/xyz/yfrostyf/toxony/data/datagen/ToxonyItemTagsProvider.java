@@ -53,7 +53,10 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                 .add(
                         Items.SPIDER_EYE,
                         Items.PUFFERFISH,
-                        ItemRegistry.WOLF_TOOTH.get()
+                        ItemRegistry.VENOM_TOOTH.get(),
+                        ItemRegistry.TOXIC_SPIT.get(),
+                        ItemRegistry.BOG_BONE.get(),
+                        ItemRegistry.ACID_SLIMEBALL.get()
                 );
 
         this.tag(TagRegistry.POISONOUS_PLANTS_ITEM)

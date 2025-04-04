@@ -33,7 +33,7 @@ public class IndexPageScreen extends TextPageScreen {
                 journalPages.updatePage();
             };
 
-                this.addRenderableWidget(new IndexTextButton(this.width/2 - 56, this.height/2 - 30 + i * (font.lineHeight + 1), component, onPress, this.font));
+                this.addRenderableWidget(new IndexTextButton(this.width/2 - 56, this.height/2 - 45 + i * (font.lineHeight + 1), component, onPress, this.font));
             i++;
         }
     }
