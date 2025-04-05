@@ -295,9 +295,9 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
     protected void effectOnContact(LivingEntity livingEntity, BlockState state){
         for(Holder<MobEffect> effect : contactEffects) {
             if (!isMaxAge(state)) {
-                livingEntity.addEffect(new MobEffectInstance(effect, 400, 0));
+                livingEntity.addEffect(new MobEffectInstance(effect, 300, 0));
             } else {
-                livingEntity.addEffect(new MobEffectInstance(effect, 300, 1));
+                livingEntity.addEffect(new MobEffectInstance(effect, 200, 1));
             }
         }
     }

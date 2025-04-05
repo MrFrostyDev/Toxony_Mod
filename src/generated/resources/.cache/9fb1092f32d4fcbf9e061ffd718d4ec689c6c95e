@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-03T23:42:48.4467689	Recipes
+// 1.21.1	2025-04-04T16:22:47.9752174	Recipes
 38ca203e5218eb2059ff7ed15a2361be521a170c data/minecraft/advancement/recipes/misc/clay_oil_pot_campfire.json
 3e471c16bc19b347c80ac9a98537ba034385d59d data/minecraft/advancement/recipes/misc/lost_journal_alt.json
 8784c7b753823537a8622d12fc7a6f538154d87b data/minecraft/advancement/recipes/misc/poisonous_potato.json
@@ -38,6 +38,7 @@ e0033101c2f99dfb78a368d711eb5abeb58b0699 data/toxony/advancement/recipes/misc/bl
 6ae19bb07a5f20af883e398a56eaf1b19b29355f data/toxony/advancement/recipes/misc/glass_vial.json
 3f46dbb8ed7594e8391604fca739466195a42af1 data/toxony/advancement/recipes/misc/lost_journal.json
 bda948e55579f18b9a94e76e89e7910d6bce17dd data/toxony/advancement/recipes/misc/moonlight_hemlock_seeds.json
+ac7417d88aa6835a0dc7c4edbbf440a142dab6fa data/toxony/advancement/recipes/misc/mortar_pestle.json
 5c91b6a5a198bc2717383d8c7383294df5b5b1aa data/toxony/advancement/recipes/misc/nightshade_seeds.json
 4e4ac6c9649b8d790fadfb6a44f4e3778ac88062 data/toxony/advancement/recipes/misc/ocelot_mint_seeds.json
 c12d0c438129b919ee672af259d1e9d784f47efe data/toxony/advancement/recipes/misc/redstone_mixture.json
@@ -89,7 +90,7 @@ fbd7c8bfb7832e825292223a5414a711ea8501a1 data/toxony/recipe/copper_needle.json
 1983bb85ed10327c3ae833ba658fb2b20ed8ee02 data/toxony/recipe/copper_scalpel.json
 7f0af7fd7a01e0c912ddde3dcaed2ad9c683b547 data/toxony/recipe/crucible/redstone_solution.json
 67353ea6118a16a0776352383eb03d5fcf56a737 data/toxony/recipe/crucible/toxic_paste.json
-c64f70d4da90e22022514876d1d787db52c0e0f4 data/toxony/recipe/cyclebow.json
+10febfe77b5d6006a7b851b91238828c6f3a0e0d data/toxony/recipe/cyclebow.json
 b66dea8ed1a71cc30539fe3bba19629b91c86a8d data/toxony/recipe/empty_oil_pot.json
 5901a42e3882fdf44dfa80bcfec1ba4767dd7202 data/toxony/recipe/glass_vial.json
 031bb0d63ae57ac4f5c0215740c90d4b1d270049 data/toxony/recipe/lost_journal.json
@@ -112,6 +113,7 @@ d49307cbedc847ec00853d9e2246fc758c8aba7a data/toxony/recipe/mortar/smoke_tox_pot
 51e148f66b097d1d999666f1ce73330368db3c5f data/toxony/recipe/mortar/toxic_blend.json
 a05e47fea992d2c13cbbb7c3e57f0b89f3e88205 data/toxony/recipe/mortar/toxin_tox_pot.json
 e4553e9f901868f6efa601df212d690483ad4285 data/toxony/recipe/mortar/witchfire_tox_pot.json
+cab8b5350c88e11bc97ad361bb9effd5db9b356f data/toxony/recipe/mortar_pestle.json
 3be7e1ead92281a6f9ca5005274d2fcddebed6f3 data/toxony/recipe/nightshade_seeds.json
 4d5cdd15ed2f3083e9765d3cfa866d85d9b03791 data/toxony/recipe/ocelot_mint_seeds.json
 c80458baf215278506c09bc670833253f0d3d5a3 data/toxony/recipe/oil_pot_bandolier.json

@@ -101,6 +101,15 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_quartz", has(Items.QUARTZ))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.MORTAR_PESTLE.get())
+                .pattern("   ")
+                .pattern("STS")
+                .pattern("SSS")
+                .define('T', Items.STICK)
+                .define('S', Items.STONE)
+                .unlockedBy("has_stone", has(Items.STONE))
+                .save(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.COPPER_CRUCIBLE.get())
                 .pattern(" C ")
                 .pattern("CCC")
@@ -242,7 +251,7 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .pattern("CPC")
                 .pattern("STS")
                 .pattern(" C ")
-                .define('P', ItemRegistry.TOXIC_PASTE.get())
+                .define('P', ItemRegistry.POISON_PASTE.get())
                 .define('C', Items.COPPER_INGOT)
                 .define('T', Items.TRIPWIRE_HOOK)
                 .define('S', Items.STRING)
@@ -267,6 +276,15 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .define('I', Items.NETHERITE_INGOT)
                 .define('L', ItemRegistry.TOXIC_LEATHER.get())
                 .unlockedBy("has_netherite_ingot", has(Items.NETHERITE_INGOT))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.VENOM_CLUB.get())
+                .pattern(" TS")
+                .pattern("TST")
+                .pattern("S  ")
+                .define('T', ItemRegistry.VENOM_TOOTH.get())
+                .define('S', Items.STICK)
+                .unlockedBy("has_venom_tooth", has(ItemRegistry.VENOM_TOOTH.get()))
                 .save(output);
 
         // Tox Seeds

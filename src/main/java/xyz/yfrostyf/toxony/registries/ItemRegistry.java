@@ -76,7 +76,11 @@ public class ItemRegistry {
             .stacksTo(1).durability(550), 3));
 
     public static final DeferredHolder<Item, Item> BONE_SAW = ITEMS.register("bone_saw", () -> new BoneSawItem(new Item.Properties().stacksTo(1)
-            .durability(300).attributes(BoneSawItem.createAttributes(4.0F, -2.0F))
+            .durability(400).attributes(BoneSawItem.createAttributes(4.0F, -2.0F))
+    ));
+
+    public static final DeferredHolder<Item, Item> VENOM_CLUB = ITEMS.register("venom_club", () -> new VenomClubItem(new Item.Properties().stacksTo(1)
+            .durability(300).attributes(VenomClubItem.createAttributes(8.0F, -3.1F))
     ));
 
     // |-----------------------------------------------------------------------------------|
@@ -276,7 +280,11 @@ public class ItemRegistry {
     ));
 
     public static final DeferredHolder<Item, Item> ACID_SLIMEBALL = ITEMS.register("acid_slimeball", () -> new Item(
-            createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.FOREST.getKey())
+            createAffinitiesProperty(AffinityRegistry.SUN.getKey(), AffinityRegistry.FOREST.getKey())
+    ));
+
+    public static final DeferredHolder<Item, Item> POISON_SAC = ITEMS.register("poison_sac", () -> new Item(
+            createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.SUN.getKey())
     ));
 
     public static final DeferredHolder<Item, Item> BOG_BONE = ITEMS.register("bog_bone", () -> new Item(
@@ -312,6 +320,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> COPPER_CRUCIBLE = ITEMS.register("copper_crucible", () -> new BlockItem(BlockRegistry.COPPER_CRUCIBLE.get(), new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> ALEMBIC = ITEMS.register("alembic", () -> new BlockItem(BlockRegistry.ALEMBIC.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> ALCHEMICAL_FORGE_PART = ITEMS.register("alchemical_forge_part", () -> new BlockItem(BlockRegistry.ALCHEMICAL_FORGE_PART.get(), new Item.Properties().stacksTo(2)));
+    public static final DeferredHolder<Item, Item> POISON_FARMLAND = ITEMS.register("poison_farmland", () -> new BlockItem(BlockRegistry.POISON_FARMLAND.get(), new Item.Properties()));
 
 
     public static final DeferredHolder<Item, Item> OCELOT_MINT_SEEDS = ITEMS.register("ocelot_mint_seeds", () -> new ItemNameBlockItem(BlockRegistry.OCELOT_MINT.get(), new Item.Properties()));

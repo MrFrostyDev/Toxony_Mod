@@ -11,6 +11,7 @@
   "item.toxony.toxic_leather": "Toxic Leather",
   "item.toxony.alembic_base": "Alembic Base",
   "block.toxony.valentines_box": "Valentines Box",
+  "block.toxony.poison_farmland": "Poison Farmland",
 
   "item.toxony.lost_journal": "Lost Journal",
   "item.toxony.tox_gauge": "Tox Gauge",
@@ -29,7 +30,10 @@
   "item.toxony.netherite_scalpel": "Netherite Scalpel",
   "item.toxony.lethal_dose": "Lethal Dose",
   "item.toxony.witching_blade": "Witching Blade",
+
   "item.toxony.bone_saw": "Bone Saw",
+  "item.toxony.venom_club": "Venom Club",
+
   "item.toxony.cyclebow": "Cyclebow",
   "item.toxony.cyclebow.loaded": "Loaded:",
 
@@ -57,6 +61,7 @@
   "item.toxony.acid_slimeball": "Acid Slimeball",
   "item.toxony.bog_bone": "Bog Bone",
   "item.toxony.toxic_spit": "Toxic Spit",
+  "item.toxony.poison_sac": "Poison Sac",
   "item.toxony.false_berries": "Sweet Berries",
   "item.toxony.ocelot_mint": "Ocelot Mint",
   "item.toxony.snow_mint": "Snow Mint",
@@ -231,9 +236,16 @@
   "journal.toxony.page.poisonous_flora.2": "Water Hemlock has a cloudy appearance but you would be mistaken to think it had any similarities to real clouds. These deadly plants exists in marshy and frankly smelly swamps. They are easy to spot but don't make the trek any more enjoyable. Now that I ponder on it, the smell probably came from the deceased wildlife surrounding its base.",
   "journal.toxony.page.poisonous_flora.3": "Based on its name, you can discern where it naturally grows. Coldsnap exists in the most frigid taigas. Its vibrant blue is an appealing visual gift, if you wish to quickly befall anyone who receives it. Looking through snowy forests will help you locate these poisonous flowers.",
   "journal.toxony.page.poisonous_flora.4": "How did I come to obtain this specimen??? Its rather concerning how any plant life exists in the Nether but Bloodroot, as the name hints, exists in Crimson Forests. I came across this through a trader. Now that I think back, I don't think I was trading with a person.",
-  "journal.toxony.page.poisonous_flora.5": "Although a little maddening, I've heard of an ancient technique of consuming a blend of these deadly flora to boost ones immune system. They speak of power from these poisonous herbs but I'm not sure how. These plants are rather painful to even touch let alone eat out of the blue. However, their techniques peaked my interest. Why would anyone consume these dangerous plants?",
-  "journal.toxony.page.poisonous_flora.6": "After reviewing my old studies, I managed to obtain some recipe for making specialty blends for consumption. Maybe I'll try some a little each day. Although not a leaf more. This is a rather dangerous game.",
-  "journal.toxony.page.poisonous_flora.7": "In the event I am overcome of excessive toxins in my body, I should have a golden apple or regeneration potion ready. They provide a remedy should I go overboard and consume too many volatile poisons. I hope this will not be needed, otherwise the pain already is unbearable.",
+  "journal.toxony.page.poisonous_flora.5": "Many of the flora can be converted into seeds just by crafting them alone. But in order to plant them, the soil must be as potent as they are. Luckily, my poison paste can convert normal farmland into a much more lethal variant. Just use the poison paste on farmland and voila! I can make a garden just as beautiful as it is deadly.",
+  "journal.toxony.page.poisonous_flora.6": "Many parts of a mob, including ourselves, react differently when toxins are introduced in their bodies. This makes unique ingredients when certain mobs are afflicted. As such, we should extract them. When a mob dies while being afflicted with poison, they can drop special ingredients. However, a sword is too crude to extract them. As such, they must die by a scalpel in order to carefully extract these valuable ingredients. ",
+  "journal.toxony.page.poisonous_flora.7": "These vicious fangs seems to have convenient cracks and crevasses for feeding in violent venoms. Wolves can develop such dangerous fangs when covered in poison. We can then extract these new fangs when killing wolves with a scalpel. ",
+  "journal.toxony.page.poisonous_flora.8": "A strange reaction is formed with spit when poison is introduced into llamas. Some of their saliva take on this green-ish hue. Its still quite delicate so using a scalpel is recommended. Although its still rather gross to hold.",
+  "journal.toxony.page.poisonous_flora.9": "Squid ink sacs make for a convenient container. Poison sits just inside with the ink. It then melds together as it gets to know each other. Eventually it almost doubles the poison the squid has! Miraculous, and very valuable when gently extracted with a scalpel.",
+  "journal.toxony.page.poisonous_flora.10": "I thought the Bogged would have a natural affinity to poisons. So with some careful procedures, and a healthy does of poison, I manage to turn those old bones into some brittle but potent ingredients!",
+  "journal.toxony.page.poisonous_flora.11": "Slimes enjoy absorbing everything they can get their slimy bodies on. For my next trick, I gave them poison. The outcome was, as I expected, a ball of gelatinous poison. This is both the most delightful and most painful jelly I could ever try.",
+  "journal.toxony.page.poisonous_flora.12": "Although a little maddening, I've heard of an ancient technique of consuming a blend of these deadly flora to boost ones immune system. They speak of power from these poisonous herbs but I'm not sure how. These plants are rather painful to even touch let alone eat out of the blue. However, their techniques peaked my interest. Why would anyone consume these dangerous plants?",
+  "journal.toxony.page.poisonous_flora.13": "After reviewing my old studies, I managed to obtain some recipe for making specialty blends for consumption. Maybe I'll try some a little each day. Although not a leaf more. This is a rather dangerous game.",
+  "journal.toxony.page.poisonous_flora.14": "In the event I am overcome of excessive toxins in my body, I should have a golden apple or regeneration potion ready. They provide a remedy should I go overboard and consume too many volatile poisons. I hope this will not be needed, otherwise the pain already is unbearable.",
   "journal.toxony.page.oil_basics.0": "I always envied the creation of lotions and balms. The desire of extravagance can be both irritating and intoxicating. These desires are wasted on cosmetics. My desire however, brings excitement. Many traveling sellswords value good oils. Weapons are expensive, yet improvements are cheap. With untamable mobs that roam the dimensions, applying specialty oils can make the fighting easier.",
   "journal.toxony.page.oil_basics.1": "To create oils, we first need to create a container to hold it. Using clay and some poison paste, I can mold a small pot which can then be fired in a furnace, creating the basic oil pot container for oils.",
   "journal.toxony.page.oil_basics.2": "The basis of my research can now be used on my weapons. Using poison paste, and honeycomb, mixed in a mortar, then collected into an Oil Pot. When striking someone with this oil applied, poison will consume the victim until they are in an inch of their life.",
@@ -291,7 +303,7 @@
   "journal.toxony.page.evolving_warfare.8": "It was time to expand my arsenal. I have realized the potential Netherite has. So much I could do with such a durable material. And I'll start it with this new Oil Pot Bandolier.",
   "journal.toxony.page.lost_chemistry.0": "I found it...\n\nA ancient schematic to a device long lost to time.\n\nOne that fully realizes the power of toxin I have lost for so long.",
   "journal.toxony.page.lost_chemistry.1": "How does it work??\nIn text roughly translates to \"In mendus we pour it the liquor of life, of two side-by-side.\"\nBUT HOW AND WHY??",
-  "journal.toxony.page.lost_chemistry.2": "--"
+  "journal.toxony.page.lost_chemistry.2": "..."
 
 
 }

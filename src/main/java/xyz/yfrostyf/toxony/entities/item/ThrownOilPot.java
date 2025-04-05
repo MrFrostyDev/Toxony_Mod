@@ -118,9 +118,14 @@ public class ThrownOilPot extends ThrowableItemProjectile implements ItemSupplie
             ItemStack itemstack = this.itemStack;
             ItemOil itemOil = itemstack.getOrDefault(DataComponentsRegistry.OIL, ItemOil.EMPTY);
             svlevel.playSound(null, result.getLocation().x, result.getLocation().y, result.getLocation().z, SoundEvents.DECORATED_POT_SHATTER, SoundSource.NEUTRAL);
-            svlevel.sendParticles(ParticleRegistry.OIL_SMOKE.get(),
-                    result.getLocation().x, result.getLocation().y+0.5, result.getLocation().z,
-                    1, 0, 0, 0, 0);
+
+            if(itemOil.getOil() == OilsRegistry.SMOKE_OIL.get()) svlevel.sendParticles(ParticleRegistry.SMOKE.get(),
+                        result.getLocation().x, result.getLocation().y+1.0, result.getLocation().z,
+                        3, 0.7, 0.5, 0.7, this.random.nextInt(4) * 0.1);
+            else svlevel.sendParticles(ParticleRegistry.OIL_SMOKE.get(),
+                        result.getLocation().x, result.getLocation().y+0.5, result.getLocation().z,
+                        1, 0, 0, 0, 0);
+
             if (!itemOil.isEmpty()) {
                 this.applySplash(
                         itemOil, result.getType() == HitResult.Type.ENTITY ? ((EntityHitResult)result).getEntity() : null

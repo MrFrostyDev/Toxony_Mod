@@ -1,0 +1,6 @@
+{
+  "parent": "toxony:item/handheld_longsword",
+  "textures": {
+    "layer0": "toxony:item/venom_club"
+  }
+}

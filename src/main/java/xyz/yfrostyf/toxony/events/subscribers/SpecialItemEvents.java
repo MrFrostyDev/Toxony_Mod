@@ -26,14 +26,14 @@ public class SpecialItemEvents {
     public static void onPlayerAttackBoneSaw(AttackEntityEvent event){
         ItemStack itemInHand = event.getEntity().getMainHandItem();
         Player player = event.getEntity();
-        if(!itemInHand.is(ItemRegistry.BONE_SAW) || !(player.getAttackStrengthScale(0.0F) > 0.9F) || !(RANDOM.nextInt(3) == 0))return;
+        if(!itemInHand.is(ItemRegistry.BONE_SAW) || !(player.getAttackStrengthScale(0.0F) > 0.9F) || !(RANDOM.nextInt(2) == 0))return;
         if(event.getTarget() instanceof LivingEntity targetEntity && !targetEntity.hasEffect(MobEffectRegistry.CRIPPLE)){
             targetEntity.addEffect(new MobEffectInstance(MobEffectRegistry.CRIPPLE, 200, 0));
 
             Entity target = event.getTarget();
             if (player.level() instanceof ServerLevel svlevel) {
                 svlevel.playSound(null,
-                        target.getX(), target.getY(), target.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 0.7F);
+                        target.getX(), target.getY(), target.getZ(), SoundEvents.TRIDENT_HIT, SoundSource.PLAYERS, 1.0F, 0.7F);
                 svlevel.sendParticles(ParticleRegistry.CUT.get(),
                         target.getX(), target.getY() + (target.getBbHeight() / 2), target.getZ(), 1, 0.3, 0.2, 0.3, 0.0);
             }

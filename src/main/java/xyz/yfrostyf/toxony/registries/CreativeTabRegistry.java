@@ -20,16 +20,19 @@ public class CreativeTabRegistry {
             .icon(() -> new ItemStack(ItemRegistry.NIGHTSHADE.get()))
             //Add your items to the tab.
             .displayItems((params, output) -> {
+                output.accept(ItemRegistry.LOST_JOURNAL.get());
                 output.accept(ItemRegistry.GLASS_VIAL.get());
                 output.accept(ItemRegistry.COPPER_NEEDLE.get());
+                output.accept(ItemRegistry.TOX_GAUGE.get());
                 output.accept(ItemRegistry.MAGNIFYING_GLASS.get());
 
                 output.accept(ItemRegistry.COPPER_SCALPEL.get());
                 output.accept(ItemRegistry.NETHERITE_SCALPEL.get());
                 output.accept(ItemRegistry.LETHAL_DOSE.get());
                 output.accept(ItemRegistry.WITCHING_BLADE.get());
-                output.accept(ItemRegistry.CYCLEBOW.get());
                 output.accept(ItemRegistry.BONE_SAW.get());
+                output.accept(ItemRegistry.VENOM_CLUB.get());
+                output.accept(ItemRegistry.CYCLEBOW.get());
 
                 output.accept(ItemRegistry.BOLT.get());
                 output.accept(ItemRegistry.POISON_BOLT.get());

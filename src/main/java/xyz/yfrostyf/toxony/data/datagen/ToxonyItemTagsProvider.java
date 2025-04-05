@@ -55,6 +55,7 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         Items.PUFFERFISH,
                         ItemRegistry.VENOM_TOOTH.get(),
                         ItemRegistry.TOXIC_SPIT.get(),
+                        ItemRegistry.POISON_SAC.get(),
                         ItemRegistry.BOG_BONE.get(),
                         ItemRegistry.ACID_SLIMEBALL.get()
                 );
@@ -71,7 +72,8 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.MOONLIGHT_HEMLOCK.get(),
                         ItemRegistry.COLDSNAP.get(),
                         ItemRegistry.WHIRLSNAP.get(),
-                        ItemRegistry.BLOODROOT.get()
+                        ItemRegistry.BLOODROOT.get(),
+                        ItemRegistry.WARPROOT.get()
                 );
 
         this.tag(TagRegistry.BOLTS)

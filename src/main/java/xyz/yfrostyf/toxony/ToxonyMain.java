@@ -9,8 +9,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 import xyz.yfrostyf.toxony.data.DataInitialize;
@@ -86,11 +84,6 @@ public class ToxonyMain {
         public static void onLivingDamage(LivingDamageEvent.Post event) {
             if(!(event.getSource().getEntity() instanceof Player))return;
             ToxonyMain.LOGGER.debug("[Damage Attack]: {}", event.getNewDamage());
-        }
-
-        @SubscribeEvent
-        public static void onItemPickup(ItemEntityPickupEvent.Pre event) {
-            ToxonyMain.LOGGER.debug("[Item Picked up]: {}", event.getItemEntity().getItem().getComponentsPatch());
         }
     }
 }
