@@ -34,6 +34,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.VENOM_CLUB.get());
                 output.accept(ItemRegistry.CYCLEBOW.get());
 
+                output.accept(ItemRegistry.BOLT_CARTRIDGE.get());
                 output.accept(ItemRegistry.BOLT.get());
                 output.accept(ItemRegistry.POISON_BOLT.get());
                 output.accept(ItemRegistry.GLOWING_BOLT.get());

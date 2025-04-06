@@ -258,6 +258,16 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, new ItemStack(ItemRegistry.BOLT_CARTRIDGE.get(), 2))
+                .pattern("   ")
+                .pattern(" L ")
+                .pattern("SCS")
+                .define('L', Items.LEATHER)
+                .define('C', Items.COPPER_INGOT)
+                .define('S', Items.STRING)
+                .unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
+                .save(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.OIL_POT_SASH.get())
                 .pattern("  L")
                 .pattern(" IP")

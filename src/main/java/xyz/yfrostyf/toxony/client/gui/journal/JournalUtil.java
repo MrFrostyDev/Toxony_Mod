@@ -163,6 +163,13 @@ public class JournalUtil {
                                 EMPTY, Items.IRON_NUGGET, EMPTY,
                                 EMPTY, Items.IRON_NUGGET, EMPTY)
                 )
+                .TextPageScreen("journal.toxony.page.alchemical_warfare.4")
+                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.5", ItemRegistry.BOLT_CARTRIDGE.get(),
+                        List.of(EMPTY, EMPTY, EMPTY,
+                                EMPTY, Items.LEATHER, EMPTY,
+                                Items.STRING, Items.COPPER_INGOT, Items.STRING)
+                )
+                .TextPageScreen("journal.toxony.page.alchemical_warfare.6")
 
                 // |----------------- Refined Process ----------------- |
                 .ImagePageScreen("journal.toxony.page.refined_process.cover", "textures/gui/journal/journal_refined_process_cover.png")

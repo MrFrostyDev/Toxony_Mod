@@ -86,6 +86,8 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |-----------------------------------Cycle Bolts-------------------------------------|
     // |-----------------------------------------------------------------------------------|
+    public static final DeferredHolder<Item, Item> BOLT_CARTRIDGE = ITEMS.register("bolt_cartridge", () -> new BoltCartridgeItem(new Item.Properties().stacksTo(32)));
+
     public static final DeferredHolder<Item, Item> BOLT = ITEMS.register("bolt", () -> new BoltItem(new Item.Properties().stacksTo(64)));
 
     public static final DeferredHolder<Item, Item> POISON_BOLT = ITEMS.register("poison_bolt", () -> new BoltItem(new Item.Properties().stacksTo(64),

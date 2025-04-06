@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-04T16:22:47.9752174	Recipes
+// 1.21.1	2025-04-05T23:43:20.2558882	Recipes
 38ca203e5218eb2059ff7ed15a2361be521a170c data/minecraft/advancement/recipes/misc/clay_oil_pot_campfire.json
 3e471c16bc19b347c80ac9a98537ba034385d59d data/minecraft/advancement/recipes/misc/lost_journal_alt.json
 8784c7b753823537a8622d12fc7a6f538154d87b data/minecraft/advancement/recipes/misc/poisonous_potato.json
@@ -18,6 +18,7 @@ dcf2cf6fcea3e789103154a4f53e62e792497c33 data/toxony/advancement/recipes/alembic
 899aaf991709a0e7fce59f48510996e626f89ad8 data/toxony/advancement/recipes/alembic/toxic_leather.json
 71a84feadd8ca396557033fbd0e28c586f05008c data/toxony/advancement/recipes/alembic/toxin.json
 44b24a52f4f4e118ebad982bf6591172cbdf0bae data/toxony/advancement/recipes/combat/bolt.json
+bfdbc339a3f35d3a8e37b4b4a5d34b45e484ba48 data/toxony/advancement/recipes/combat/bolt_cartridge.json
 3fd4c9a47f0b7686656cd14df047f97d53463e25 data/toxony/advancement/recipes/combat/cyclebow.json
 342dc8272a3ed9a569a00e4c384c400804f39509 data/toxony/advancement/recipes/combat/oil_pot_bandolier.json
 049aa9cb60e87e69917e5496039c10d516f7892e data/toxony/advancement/recipes/combat/oil_pot_sash.json
@@ -25,6 +26,7 @@ ad430732bd732ccaf26be0747e961360e3066e4d data/toxony/advancement/recipes/combat/
 5e0dccbbe63e4340e56df94fbfda6185eb59fb67 data/toxony/advancement/recipes/combat/plague_doctor_coat.json
 fc05eaf30a1003fef7d81170cdeeadb9c9e32d1a data/toxony/advancement/recipes/combat/plague_doctor_hood.json
 cbcdeeb5948ace071c6081e15ab19bed53dcc829 data/toxony/advancement/recipes/combat/plague_doctor_leggings.json
+6ccb2060be3d6e1b8e3974a861ef165d62f34791 data/toxony/advancement/recipes/combat/venom_club.json
 d63607dbde61f32439370861e20bcdd99d0989ba data/toxony/advancement/recipes/crucible/redstone_solution.json
 0fdee9fe7e07ba5cd65159ec353d8ed440c7416d data/toxony/advancement/recipes/crucible/toxic_paste.json
 8c6408ce63fdb6a738f19516f330da9ef54e0cb2 data/toxony/advancement/recipes/misc/alchemical_forge_part.json
@@ -83,6 +85,7 @@ d44b062df8a329f44625dab4c83cbc08f44cbd40 data/toxony/recipe/alembic/toxin.json
 e06bc282137bb6bd587606bba2367f057936bbdb data/toxony/recipe/alembic_base.json
 d9a9a1515cd53c9f3c92f659f2537670f3813077 data/toxony/recipe/bloodroot_fungus.json
 41965d3bb5371dab6f6d89c5f701d98f9e779a5a data/toxony/recipe/bolt.json
+1628f2e7475cdc590ce5e9b9499fbdcf2d289598 data/toxony/recipe/bolt_cartridge.json
 1acabeb23c3cceadbf3c88a2fed1f41731bd7ae7 data/toxony/recipe/clay_oil_pot.json
 339f7cc53c8c81a94d5e8d5645c8a2b4e3af4852 data/toxony/recipe/coldsnap_seeds.json
 bd5ca995e875ec6ab66bf0806404c18f3bb39381 data/toxony/recipe/copper_crucible.json
@@ -128,6 +131,7 @@ ea75b5590c765ffea2b44ff29d7182a9dc85e964 data/toxony/recipe/snow_mint_seeds.json
 734c64933e40441724f117bb5c853553fd20c8e4 data/toxony/recipe/toxic_formula.json
 59c0b910e67977e07020f3bf2914357f5aeaf9ff data/toxony/recipe/toxin_canister.json
 aacfc0fb5b0a9d72f344013f2a887a91d4b2c0ec data/toxony/recipe/tox_gauge.json
+e12947bbb5b90651de710939fe28df3e60761d52 data/toxony/recipe/venom_club.json
 3c89ede55c77e20fd78def7f8ceab2cee1fc1d33 data/toxony/recipe/warproot_fungus.json
 1f0938e8c4aa0106ff3f63f86ac0d8789dbd0032 data/toxony/recipe/water_hemlock_seeds.json
 1925124c86b254e10bb1becefe2fb967f89fc6a9 data/toxony/recipe/whirlsnap_seeds.json

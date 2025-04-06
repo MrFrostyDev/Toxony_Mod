@@ -37,6 +37,8 @@
   "item.toxony.cyclebow": "Cyclebow",
   "item.toxony.cyclebow.loaded": "Loaded:",
 
+  "item.toxony.bolt_cartridge": "Bolt Cartridge",
+  "item.toxony.bolt_cartridge.empty": "Empty Bolt Cartridge",
   "item.toxony.bolt": "Bolt",
   "item.toxony.poison_bolt": "Poison Bolt",
   "item.toxony.glowing_bolt": "Glowing Bolt",
@@ -142,12 +144,14 @@
   "message.toxony.alchemical_forge.active": "The forge is %s done.",
   "message.toxony.tolerance.weak_tier_warning": "This poison is too weak to increase your tolerance.",
 
-  "message.toxony.valetines_box.empty" : "The box is empty. So sorry :c",
-  "message.toxony.valetines_box.warning" : "The box is closed! Crouch to open it!",
+  "message.toxony.bolt_cartridge.fail": "You don't have enough bolts to load this cartridge.",
 
   "message.toxony.oil.empty": "The oil on this weapon has dried out.",
   "message.toxony.oilpot.empty": "This oil pot is empty.",
   "message.toxony.oilpot.already_oiled": "This item is already fully coated.",
+
+  "message.toxony.valetines_box.empty" : "The box is empty. So sorry :c",
+  "message.toxony.valetines_box.warning" : "The box is closed! Crouch to open it!",
 
   "commands.tox.set.success": "Set tox of [%s] to %s",
   "commands.tox.add.success": "Added tox to [%s] by %s",
@@ -261,6 +265,9 @@
   "journal.toxony.page.alchemical_warfare.1": "Because of clever design, I can easily add any oil on the sash simply by holding the sash in one hand and an oil pot in the other. Doing so will fill the sash with the contents of the oil pot. Behold, a chemical bomb! It can be used about 16 times. Not as many as I hoped but it will make due. Also, this has given me another brilliant idea.",
   "journal.toxony.page.alchemical_warfare.2": "This complex device Is similar to its cousin the crossbow. However, through extensive research and engineering, I have managed to compact it down to a single-handed crossbow that can fire two additional shots before needing to be loaded.",
   "journal.toxony.page.alchemical_warfare.3": "However, because of its size, its power has been scaled down. To compensate, I have made special ammunition. A catalyst for oil. Using the bolts inside a placed oil pot, it can be covered in oil, applying its effect to hit targets. Do keep in mind some oils will not apply to the bolts.",
+  "journal.toxony.page.alchemical_warfare.4": "The Cyclebow can store and fire a sequence of bolts. As such, the order they are fired is determined by when they are placed into the Cyclebow. This trait can make it devastating with different combinations of bolts. However, manually adding each bolt can be cumbersome. It also makes for a terribly unorganized inventory. As a result, I have designed an inexpensive and ingenious method of loading them.",
+  "journal.toxony.page.alchemical_warfare.5": "With some inspiration and complex tinkering, I have designed a small container to be able to store a sequence of bolts that retain their order. It can bulk load bolts into the Cyclebow all at once and takes up less space in my inventory than individual stacks of bolts.",
+  "journal.toxony.page.alchemical_warfare.6": "To load bolts into the cartridge, crouch and use it. The cartridge will grab different bolts in my inventory, which is determined just like how arrows are when using a bow. It will try to grab bolts from different stacks. If there isn't enough unique stacks, it will grab the same stacks. We can then load the Cyclebow like we do bolts. If I wish to get the bolts back, I only need to crouch and use the filled cartridge.",
   "journal.toxony.page.refined_process.0": "After some hours of crushing, lighting, refining, I have found a way to produce a more stable and pure substance against my messy predecessor. I've learned poison paste becomes more pure when introduced to heat. However, the concentration of heat necessary to produce this effect cannot be obtained through a furnace.",
   "journal.toxony.page.refined_process.1": "As such I was reminded of another tool used for intense heat treatment for any single material. Although it cannot mass-heat many items as well as a furnace can, it will give us enough heat to refine our poison paste to higher potential!",
   "journal.toxony.page.refined_process.2": "The crucible can now be used to heat a single poison paste and turn it into what I call \"Toxic Paste\". The name isn't particularly compelling but it gets the effect across. This is the beginning of true chemistry!",

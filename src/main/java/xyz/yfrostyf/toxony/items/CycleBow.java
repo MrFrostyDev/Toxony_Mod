@@ -25,19 +25,21 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class CycleBow extends ProjectileWeaponItem{
-    public static final Predicate<ItemStack> SMALL_BOLTS_ONLY = itemstack -> itemstack.is(TagRegistry.BOLTS);
-    public static final Predicate<ItemStack> SMALL_BOLTS_AND_ARROWS = SMALL_BOLTS_ONLY.or(itemstack -> itemstack.is(ItemTags.ARROWS));
-    private static final float ARROW_POWER = 3.15F;
+    public static final Predicate<ItemStack> ARROWS_BOLTS_CARTRIDGES = ((Predicate<ItemStack>)(itemstack -> itemstack.is(TagRegistry.BOLTS))).or(((itemstack -> itemstack.is(ItemTags.ARROWS)))).or(itemstack -> itemstack.is(ItemRegistry.BOLT_CARTRIDGE) && itemstack.has(DataComponents.CHARGED_PROJECTILES));
+
+    private static final float ARROW_POWER = 3.4F;
     private static final float DEFAULT_SINGLE_LOAD = 20.0F;
-    private int maxShots;
+    private final int maxShots;
 
     public CycleBow(Properties properties, int maxShots) {
         super(properties);
@@ -46,33 +48,12 @@ public class CycleBow extends ProjectileWeaponItem{
 
     @Override
     public Predicate<ItemStack> getSupportedHeldProjectiles(ItemStack stack) {
-        return SMALL_BOLTS_AND_ARROWS;
-    }
-
-    @Override
-    public Predicate<ItemStack> getSupportedHeldProjectiles() {
-        return SMALL_BOLTS_AND_ARROWS;
+        return ARROWS_BOLTS_CARTRIDGES;
     }
 
     @Override
     public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return SMALL_BOLTS_AND_ARROWS;
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (isLoaded(itemstack)) {
-            this.performShooting(level, player, hand, itemstack, ARROW_POWER, 1.0F, null);
-            itemstack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
-            player.getCooldowns().addCooldown(this, 10);
-            return InteractionResultHolder.consume(itemstack);
-        } else if (!player.getProjectile(itemstack).isEmpty()) {
-            player.startUsingItem(hand);
-            return InteractionResultHolder.consume(itemstack);
-        } else {
-            return InteractionResultHolder.fail(itemstack);
-        }
+        return ARROWS_BOLTS_CARTRIDGES;
     }
 
     public void performShooting(Level level, LivingEntity shooter,
@@ -82,9 +63,7 @@ public class CycleBow extends ProjectileWeaponItem{
         if (level instanceof ServerLevel serverlevel) {
             if (shooter instanceof Player player && net.neoforged.neoforge.event.EventHooks.onArrowLoose(weapon, shooter.level(), player, 1, true) < 0) return;
 
-            int loadedShots = weapon.get(DataComponentsRegistry.LOADED_SHOTS) - 1;
-            weapon.set(DataComponentsRegistry.LOADED_SHOTS, loadedShots);
-
+            weapon.set(DataComponentsRegistry.LOADED_SHOTS, weapon.getOrDefault(DataComponentsRegistry.LOADED_SHOTS, 0) - 1);
             ChargedProjectiles chargedprojectiles = weapon.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
             if (!chargedprojectiles.isEmpty()) {
                 List<ItemStack> chargedprojectilesStacks = new ArrayList<>(chargedprojectiles.getItems());
@@ -100,11 +79,6 @@ public class CycleBow extends ProjectileWeaponItem{
             }
 
         }
-    }
-
-    @Override
-    public int getDefaultProjectileRange() {
-        return 6;
     }
 
     @Override
@@ -173,28 +147,37 @@ public class CycleBow extends ProjectileWeaponItem{
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
-        if (isLoaded(stack)) {
-            level.playSound(null,
-                    livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(),
-                    SoundEvents.CROSSBOW_LOADING_END, livingEntity.getSoundSource(),
-                    0.5F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
-         }
+    public int getDefaultProjectileRange() {
+        return 6;
     }
 
-    private boolean tryLoadProjectiles(LivingEntity shooter, ItemStack stack) {
-        List<ItemStack> list = new ArrayList<>(this.maxShots);
-        list.addAll(stack.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY).getItems());
+    private boolean tryLoadProjectiles(LivingEntity shooter, ItemStack stack, ItemStack ammo) {
+        List<ItemStack> list = new LinkedList<>(stack.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY).getItems());
         int loadedShots = stack.getOrDefault(DataComponentsRegistry.LOADED_SHOTS, 0);
 
-        if (loadedShots <= this.maxShots && !shooter.getProjectile(stack).isEmpty()) {
-            list.add(useAmmo(stack, shooter.getProjectile(stack), shooter, false));
-            stack.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(list));
-            stack.set(DataComponentsRegistry.LOADED_SHOTS, loadedShots + 1);
-            return true;
-        } else {
-            return false;
+        if (loadedShots <= this.maxShots && !ammo.isEmpty()) {
+            if(ammo.is(ItemRegistry.BOLT_CARTRIDGE)){
+                if(ammo.has(DataComponents.CHARGED_PROJECTILES) && getLoadedShots(stack) == 0){
+                    ItemStack usedAmmo = useAmmo(stack, ammo, shooter, false);
+                    stack.set(DataComponents.CHARGED_PROJECTILES, usedAmmo.get(DataComponents.CHARGED_PROJECTILES));
+                    if(shooter instanceof Player player){
+                        usedAmmo.remove(DataComponents.CHARGED_PROJECTILES);
+                        player.getInventory().add(usedAmmo.copy());
+                    }
+                    stack.set(DataComponentsRegistry.LOADED_SHOTS, 3);
+                    return true;
+                }
+                return false;
+            }
+            else{
+                ItemStack usedAmmo = useAmmo(stack, ammo, shooter, false);
+                list.add(usedAmmo);
+                stack.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(list));
+                stack.set(DataComponentsRegistry.LOADED_SHOTS, loadedShots + 1);
+                return true;
+            }
         }
+        return false;
     }
 
     public static int getLoadedShots(ItemStack crossbowStack) {
@@ -208,23 +191,63 @@ public class CycleBow extends ProjectileWeaponItem{
     }
 
     @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        if (isLoaded(itemstack)) {
+            this.performShooting(level, player, hand, itemstack, ARROW_POWER, 1.0F, null);
+            itemstack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+            player.getCooldowns().addCooldown(this, 10);
+            return InteractionResultHolder.consume(itemstack);
+        } else if (!player.getProjectile(itemstack).isEmpty()) {
+            player.startUsingItem(hand);
+            return InteractionResultHolder.consume(itemstack);
+        } else {
+            return InteractionResultHolder.fail(itemstack);
+        }
+    }
+
+    @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remaining) {
         if (!level.isClientSide && stack.getItem() instanceof CycleBow cycleBow) {
             int tickThreshold = Mth.floor((cycleBow.getUseDuration(stack, livingEntity) - DEFAULT_SINGLE_LOAD) / this.maxShots);
-            if(remaining == this.getUseDuration(stack, livingEntity)){
+            int useDuration = this.getUseDuration(stack, livingEntity);
+            ItemStack ammoStack = livingEntity.getProjectile(stack);
+
+            // Play start noise when remaining is the total duration.
+            if(remaining == useDuration){
                 level.playSound(null,
                         livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(),
                         SoundEvents.CROSSBOW_LOADING_START, livingEntity.getSoundSource(),
                         1.0F, 1.0F);
             }
-            else if(remaining % tickThreshold == 0 && remaining <= this.getUseDuration(stack, livingEntity) - tickThreshold){
-                if (this.tryLoadProjectiles(livingEntity, stack)){
+            // Check if ammo is cartridge for special ammo handling.
+            else if(ammoStack.is(ItemRegistry.BOLT_CARTRIDGE) && getLoadedShots(stack) == 0){
+                if(remaining == DEFAULT_SINGLE_LOAD + 10 && this.tryLoadProjectiles(livingEntity, stack, ammoStack)){
+                    level.playSound(null,
+                            livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(),
+                            SoundEvents.CROSSBOW_LOADING_MIDDLE, livingEntity.getSoundSource(),
+                            1.0F, 0.8F);
+                }
+            }
+            // Else handle ammo as normal.
+            else if(remaining % tickThreshold == 0 && remaining <= useDuration - tickThreshold && getLoadedShots(stack) < maxShots){
+                if (this.tryLoadProjectiles(livingEntity, stack, ammoStack)){
                     level.playSound(null,
                             livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(),
                             SoundEvents.CROSSBOW_LOADING_MIDDLE, livingEntity.getSoundSource(),
                             1.0F, 1.0F);
                 }
             }
+        }
+    }
+
+    @Override
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
+        if (isLoaded(stack)) {
+            level.playSound(null,
+                    livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(),
+                    SoundEvents.CROSSBOW_LOADING_END, livingEntity.getSoundSource(),
+                    0.5F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
         }
     }
 

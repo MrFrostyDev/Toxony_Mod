@@ -7,6 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.items.BoltCartridgeItem;
 import xyz.yfrostyf.toxony.items.CycleBow;
 import xyz.yfrostyf.toxony.items.ToxScalpelItem;
 import xyz.yfrostyf.toxony.items.WitchingBladeItem;
@@ -41,6 +42,13 @@ public class ItemPropertiesEvents {
                     ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "loaded"),
                     (stack, level, player, seed) ->
                             (float)CycleBow.getLoadedShots(stack)
+            );
+
+            ItemProperties.register(
+                    ItemRegistry.BOLT_CARTRIDGE.get(),
+                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "loaded"),
+                    (stack, level, player, seed) ->
+                            BoltCartridgeItem.isLoaded(stack) ? 1.0F : 0.0F
             );
         });
     }
