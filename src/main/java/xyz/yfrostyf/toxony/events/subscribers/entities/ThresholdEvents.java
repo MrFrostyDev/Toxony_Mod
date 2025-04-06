@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.events.subscribers;
+package xyz.yfrostyf.toxony.events.subscribers.entities;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;

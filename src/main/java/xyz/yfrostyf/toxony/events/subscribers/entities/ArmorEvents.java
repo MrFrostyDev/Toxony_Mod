@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.events.subscribers;
+package xyz.yfrostyf.toxony.events.subscribers.entities;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;

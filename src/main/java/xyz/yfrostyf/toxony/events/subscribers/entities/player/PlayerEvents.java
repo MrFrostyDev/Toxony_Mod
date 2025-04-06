@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.events.subscribers.player;
+package xyz.yfrostyf.toxony.events.subscribers.entities.player;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

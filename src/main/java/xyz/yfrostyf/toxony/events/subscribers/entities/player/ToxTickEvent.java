@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.events.subscribers;
+package xyz.yfrostyf.toxony.events.subscribers.entities.player;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;

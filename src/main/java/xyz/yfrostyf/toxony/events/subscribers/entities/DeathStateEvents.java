@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.events.subscribers;
+package xyz.yfrostyf.toxony.events.subscribers.entities;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.damagesource.DamageTypes;
