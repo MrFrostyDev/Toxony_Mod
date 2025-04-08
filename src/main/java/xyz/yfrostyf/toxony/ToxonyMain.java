@@ -1,6 +1,7 @@
 package xyz.yfrostyf.toxony;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -9,6 +10,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 import xyz.yfrostyf.toxony.client.gui.MutagenTransformOverlay;
@@ -44,6 +46,7 @@ public class ToxonyMain {
         MobEffectRegistry.register(modEventBus);
         AffinityRegistry.register(modEventBus);
         OilsRegistry.register(modEventBus);
+        SoundEventRegistry.register(modEventBus);
         MenuRegistry.register(modEventBus);
         RecipeRegistry.register(modEventBus);
         ParticleRegistry.register(modEventBus);
@@ -83,11 +86,8 @@ public class ToxonyMain {
     public class DebugEvents{
         @SubscribeEvent
         public static void onLivingDamage(LivingDamageEvent.Post event) {
-            if(!(event.getSource().getEntity() instanceof Player player))return;
+            if(!(event.getSource().getEntity() instanceof Player))return;
             ToxonyMain.LOGGER.debug("[Damage Attack]: {}", event.getNewDamage());
-            if(player.level().isClientSide()){
-                MutagenTransformOverlay.startAnimation();
-            }
         }
     }
 }

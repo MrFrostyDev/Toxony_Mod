@@ -11,8 +11,10 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.events.ChangeThresholdEvent;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
+import xyz.yfrostyf.toxony.client.gui.MutagenTransformOverlay;
 import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
+import xyz.yfrostyf.toxony.registries.SoundEventRegistry;
 
 import java.util.*;
 
@@ -23,11 +25,19 @@ public class ThresholdEvents {
     //
     @SubscribeEvent
     public static void onReachingNewThreshold(ChangeThresholdEvent event) {
-        if(event.getEntity().level().isClientSide())return;
         if (!event.isAdding())return;
+
+        // Play transform animation for client.
+        if(event.getEntity().level().isClientSide()){
+            MutagenTransformOverlay.startAnimation();
+            event.getEntity().playSound(SoundEventRegistry.MUTAGEN_TRANSFORM.get(), 1.0F, 1.0F);
+            return; // The rest of the code is serverside only!
+        }
 
         ToxData plyToxData = event.getToxData();
         List<Holder<MobEffect>> mobEffects = new ArrayList<>();
+
+
 
         // For-Loop for when the player skips a few thresholds at once. Apply mutagen multiple times!
         for(int i=0; i<event.getNewThreshold()-event.getOldThreshold(); i++) {

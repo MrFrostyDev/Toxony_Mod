@@ -31,5 +31,6 @@ public class DataInitialize {
         generator.addProvider(event.includeServer(), blockTagsProvider);
         generator.addProvider(event.includeServer(), new ToxonyItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter()));
         generator.addProvider(event.includeServer(), new ToxonyRecipeProvider(output, lookupProvider));
+        generator.addProvider(event.includeClient(), new ToxonySoundDefinitionsProvider(output, existingFileHelper));
     }
 }

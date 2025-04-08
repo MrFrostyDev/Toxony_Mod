@@ -14,8 +14,8 @@ import xyz.yfrostyf.toxony.api.client.ClientToxData;
 public class MutagenTransformOverlay implements LayeredDraw.Layer{
     private static final ResourceLocation RESOURCE =
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "textures/gui/overlays/mutagen_transform.png");
-    private static final int[] TEXTURE_ARRAY = {0, 256, 512, 758, 1024, 1280, 1536};
-    private static final int DEFAULT_PLAYTIME = 100;
+    private static final int[] TEXTURE_ARRAY = {0, 256, 512, 758, 1024, 1280, 1536, 1536, 1280, 1024, 758, 512, 256, 0};
+    private static final int DEFAULT_PLAYTIME = 120;
     private static boolean active = false; // Since there is only one type of overlay at any time
     private static int nextTickEnd = 0;
 
@@ -33,18 +33,14 @@ public class MutagenTransformOverlay implements LayeredDraw.Layer{
         var screenWidth = guiGraphics.guiWidth();
         var screenHeight = guiGraphics.guiHeight();
 
+        float progress = (float)(DEFAULT_PLAYTIME - (nextTickEnd - Minecraft.getInstance().player.tickCount)) / DEFAULT_PLAYTIME;
+        int index = Mth.floor((progress % ((float)DEFAULT_PLAYTIME / TEXTURE_ARRAY.length)) * TEXTURE_ARRAY.length);
+
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
-        RenderSystem.blendFuncSeparate(
-                GlStateManager.SourceFactor.ONE,
-                GlStateManager.DestFactor.ONE,
-                GlStateManager.SourceFactor.ONE,
-                GlStateManager.DestFactor.ONE
-        );
-        guiGraphics.setColor( 0.15F, 0.35F, 0.15F, 0.9F);
-        float progress = (float)(DEFAULT_PLAYTIME - (nextTickEnd - Minecraft.getInstance().player.tickCount)) / DEFAULT_PLAYTIME;
-        int index = Mth.floor((progress % ((float)DEFAULT_PLAYTIME / TEXTURE_ARRAY.length)) * 7.0F);
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        guiGraphics.setColor(0.2F, 0.9F, 0.2F, 0.8F);
 
         // Overlay | (ResourceLocation atlasLocation,
         // int x, int y,
