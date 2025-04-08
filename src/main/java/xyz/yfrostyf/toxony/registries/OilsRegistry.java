@@ -46,6 +46,12 @@ public class OilsRegistry {
             List.of(MobEffects.GLOWING)
     ));
 
+    public static final DeferredHolder<Oil, Oil> ACID_OIL = OILS.register("acid_oil", () -> new Oil(
+            Component.translatable("oil.toxony.acid"),
+            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            List.of(MobEffectRegistry.ACID)
+    ));
+
     public static final DeferredHolder<Oil, Oil> SMOKE_OIL = OILS.register("smoke_oil", () -> new Oil(
             Component.translatable("oil.toxony.smoke"),
             BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),

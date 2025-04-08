@@ -138,6 +138,13 @@ public class ItemRegistry {
             "fatigue_oil_pot", 5, OilsRegistry.FATIGUE_OIL, BlockRegistry.FATIGUE_OIL_POT,
             300, 0, 150);
 
+    public static final DeferredHolder<Item, Item> ACID_OIL_POT = createOilPot(
+            "acid_oil_pot", 5, OilsRegistry.ACID_OIL, BlockRegistry.ACID_OIL_POT,
+            400, 0, 150);
+
+    public static final DeferredHolder<Item, Item> MENDING_OIL_POT = ITEMS.register("mending_oil_pot",
+            () -> new MendingOilPotItem(new Item.Properties().durability(5).stacksTo(1), BlockRegistry.MENDING_OIL_POT));
+
 
     // |-------------------------------Tier 2 -------------------------------|
 
@@ -152,6 +159,10 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SMOKE_TOX_POT = createOilPot(
             "smoke_tox_pot",3, OilsRegistry.SMOKE_OIL, BlockRegistry.SMOKE_TOX_POT,
             300, 1, 100);
+
+    public static final DeferredHolder<Item, Item> ACID_TOX_POT = createOilPot(
+            "acid_tox_pot", 3, OilsRegistry.ACID_OIL, BlockRegistry.ACID_TOX_POT,
+            400, 1, 100);
 
     public static final DeferredHolder<Item, Item> WITCHFIRE_TOX_POT = createOilPot(
             "witchfire_tox_pot", 3, OilsRegistry.WITCHFIRE_OIL, BlockRegistry.WITCHFIRE_TOX_POT,

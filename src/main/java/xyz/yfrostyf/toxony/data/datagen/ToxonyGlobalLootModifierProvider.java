@@ -34,6 +34,7 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
         dropUniqueWhilePoisoned("wolf_unique_tox_drop", EntityType.WOLF, ItemRegistry.VENOM_TOOTH.get(), 1, 2);
         dropUniqueWhilePoisoned("slime_unique_tox_drop", EntityType.SLIME, ItemRegistry.ACID_SLIMEBALL.get(), 0, 1);
         dropUniqueWhilePoisoned("llama_unique_tox_drop", EntityType.LLAMA, ItemRegistry.TOXIC_SPIT.get(), 1, 2);
+        dropUniqueWhilePoisoned("trader_llama_unique_tox_drop", EntityType.TRADER_LLAMA, ItemRegistry.TOXIC_SPIT.get(), 1, 2);
         dropUniqueWhilePoisoned("squid_unique_tox_drop", EntityType.SQUID, ItemRegistry.POISON_SAC.get(), 1, 2);
         dropUniqueWhilePoisoned("glow_squid_unique_tox_drop", EntityType.GLOW_SQUID, ItemRegistry.POISON_SAC.get(), 1, 2);
         dropUniqueWhilePoisoned("bogged_unique_tox_drop", EntityType.BOGGED, ItemRegistry.BOG_BONE.get(), 1, 2);

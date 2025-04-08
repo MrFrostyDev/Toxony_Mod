@@ -11,6 +11,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
+import xyz.yfrostyf.toxony.client.gui.MutagenTransformOverlay;
 import xyz.yfrostyf.toxony.data.DataInitialize;
 
 import xyz.yfrostyf.toxony.data.datagen.registries.LootModifierSerializerRegistry;
@@ -82,8 +83,11 @@ public class ToxonyMain {
     public class DebugEvents{
         @SubscribeEvent
         public static void onLivingDamage(LivingDamageEvent.Post event) {
-            if(!(event.getSource().getEntity() instanceof Player))return;
+            if(!(event.getSource().getEntity() instanceof Player player))return;
             ToxonyMain.LOGGER.debug("[Damage Attack]: {}", event.getNewDamage());
+            if(player.level().isClientSide()){
+                MutagenTransformOverlay.startAnimation();
+            }
         }
     }
 }

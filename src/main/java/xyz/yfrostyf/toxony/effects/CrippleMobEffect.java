@@ -57,22 +57,20 @@ public class CrippleMobEffect extends MobEffect {
             LivingEntity victim = event.getEntity();
             MobEffectInstance effectInst = victim.getEffect(MobEffectRegistry.CRIPPLE);
             if (effectInst == null) return;
-            if(victim.hasEffect(MobEffectRegistry.CRIPPLE)){
-                float damage = event.getOriginalDamage();
-                DamageSource source = event.getSource();
-                float dmgMod = 0;
+            float damage = event.getOriginalDamage();
+            DamageSource source = event.getSource();
+            float dmgMod = 0;
 
-                if(source.is(DamageTypes.GENERIC) || source.is(DamageTypes.PLAYER_ATTACK)
-                        || source.is(DamageTypes.ARROW) || source.is(DamageTypes.TRIDENT)
-                        || source.is(DamageTypes.MOB_ATTACK) || source.is(DamageTypes.MOB_PROJECTILE)){
-                    dmgMod = 0.25F + ((float)effectInst.getAmplifier() / 4);
-                    event.setNewDamage(damage + (damage * dmgMod));
-                }
-                else if(source.is(DamageTypes.FALL)) {
-                    dmgMod = 0.5F + ((float)effectInst.getAmplifier() / 2);
-                }
+            if(source.is(DamageTypes.GENERIC) || source.is(DamageTypes.PLAYER_ATTACK)
+                    || source.is(DamageTypes.ARROW) || source.is(DamageTypes.TRIDENT)
+                    || source.is(DamageTypes.MOB_ATTACK) || source.is(DamageTypes.MOB_PROJECTILE)){
+                dmgMod = 0.25F + ((float)effectInst.getAmplifier() / 4);
                 event.setNewDamage(damage + (damage * dmgMod));
             }
+            else if(source.is(DamageTypes.FALL)) {
+                dmgMod = 0.5F + ((float)effectInst.getAmplifier() / 2);
+            }
+            event.setNewDamage(damage + (damage * dmgMod));
         }
     }
 }

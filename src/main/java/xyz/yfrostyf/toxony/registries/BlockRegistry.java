@@ -264,9 +264,12 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> GLOWING_OIL_POT = createOilPotBlock("glowing_oil_pot", () -> ItemRegistry.GLOWING_OIL_POT);
     public static final DeferredHolder<Block, Block> FIRE_RESISTANCE_OIL_POT = createOilPotBlock("fire_resistance_oil_pot", () -> ItemRegistry.FIRE_RESISTANCE_OIL_POT);
     public static final DeferredHolder<Block, Block> FATIGUE_OIL_POT = createOilPotBlock("fatigue_oil_pot", () -> ItemRegistry.FATIGUE_OIL_POT);
+    public static final DeferredHolder<Block, Block> ACID_OIL_POT = createOilPotBlock("acid_oil_pot", () -> ItemRegistry.ACID_OIL_POT);
+    public static final DeferredHolder<Block, Block> MENDING_OIL_POT = BLOCKS.register("mending_oil_pot", () -> new MendingOilPotBlock(BlockBehaviour.Properties.of().strength(0.6f).sound(SoundType.DECORATED_POT).isRedstoneConductor((state,level,pos) -> false), () -> ItemRegistry.MENDING_OIL_POT));
     public static final DeferredHolder<Block, Block> TOXIN_TOX_POT = createOilPotBlock("toxin_tox_pot", () -> ItemRegistry.TOXIN_TOX_POT);
     public static final DeferredHolder<Block, Block> REGENERATION_TOX_POT = createOilPotBlock("regeneration_tox_pot", () -> ItemRegistry.REGENERATION_TOX_POT);
     public static final DeferredHolder<Block, Block> SMOKE_TOX_POT = createOilPotBlock("smoke_tox_pot", () -> ItemRegistry.SMOKE_TOX_POT);
+    public static final DeferredHolder<Block, Block> ACID_TOX_POT = createOilPotBlock("acid_tox_pot", () -> ItemRegistry.ACID_TOX_POT);
     public static final DeferredHolder<Block, Block> WITCHFIRE_TOX_POT = createOilPotBlock("witchfire_tox_pot", () -> ItemRegistry.WITCHFIRE_TOX_POT);
 
 
@@ -278,9 +281,12 @@ public class BlockRegistry {
                     GLOWING_OIL_POT.get(),
                     FIRE_RESISTANCE_OIL_POT.get(),
                     FATIGUE_OIL_POT.get(),
+                    ACID_OIL_POT.get(),
+                    MENDING_OIL_POT.get(),
                     TOXIN_TOX_POT.get(),
                     REGENERATION_TOX_POT.get(),
                     SMOKE_TOX_POT.get(),
+                    ACID_TOX_POT.get(),
                     WITCHFIRE_TOX_POT.get()
             ).build(null)
     );

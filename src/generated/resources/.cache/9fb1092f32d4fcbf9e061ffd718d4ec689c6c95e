@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-05T23:43:20.2558882	Recipes
+// 1.21.1	2025-04-07T23:24:25.987105	Recipes
 38ca203e5218eb2059ff7ed15a2361be521a170c data/minecraft/advancement/recipes/misc/clay_oil_pot_campfire.json
 3e471c16bc19b347c80ac9a98537ba034385d59d data/minecraft/advancement/recipes/misc/lost_journal_alt.json
 8784c7b753823537a8622d12fc7a6f538154d87b data/minecraft/advancement/recipes/misc/poisonous_potato.json
@@ -51,11 +51,14 @@ fd83575abaa262ebfc35eee04f1bc43ba5fcc3be data/toxony/advancement/recipes/misc/sn
 ccded9a6ebb20c8b4496cc92075ccc2ab01be298 data/toxony/advancement/recipes/misc/warproot_fungus.json
 a7e3dd79d7edd9b433985ef4ad939c8d8cb7e622 data/toxony/advancement/recipes/misc/water_hemlock_seeds.json
 68ae921237563a351ddd64af462514a28a2dab9c data/toxony/advancement/recipes/misc/whirlsnap_seeds.json
+ddfe33f73ab75a5d9d022c9b1f49e3868207fcee data/toxony/advancement/recipes/mortar/acid_oil_pot.json
+ade32c3057509c3bc1f688bc362ab290ae103757 data/toxony/advancement/recipes/mortar/acid_tox_pot.json
 1d87cc8b2efb6d18b70b3f2f6ad22ac6d5ad1133 data/toxony/advancement/recipes/mortar/fatigue_oil_pot.json
 53569952258ceef28e5defa4b6c0e478aa484498 data/toxony/advancement/recipes/mortar/fire_resistance_oil_pot.json
 de6b0079c97f4bd2102d2ebd6c9d61e752978e67 data/toxony/advancement/recipes/mortar/glowing_oil_pot.json
 005c72b12fcc36df13def7be6373a2a1b52ab6d6 data/toxony/advancement/recipes/mortar/green_dye.json
 c152fe3a18e09712e45c461e28515d6b9a234b53 data/toxony/advancement/recipes/mortar/green_dye_alt.json
+d7d2551468c688cc0bc6002bfe802b7bb1f0f57f data/toxony/advancement/recipes/mortar/mending_oil_pot.json
 036a982053142c953515784a4ba26e807e4ae995 data/toxony/advancement/recipes/mortar/oil_base.json
 3b17238c3ae089083f955bd63e446802ca998a98 data/toxony/advancement/recipes/mortar/poison_blend.json
 a0428d5b7b42080fe2114a8525accdfb5edda03f data/toxony/advancement/recipes/mortar/poison_blend_alt.json
@@ -99,11 +102,14 @@ b66dea8ed1a71cc30539fe3bba19629b91c86a8d data/toxony/recipe/empty_oil_pot.json
 031bb0d63ae57ac4f5c0215740c90d4b1d270049 data/toxony/recipe/lost_journal.json
 34af9db12b685b1c4a01b8e832e2ac984c3d50ab data/toxony/recipe/magnifying_glass.json
 5a4ad726f0bc22fb8de16a0b1bd52a2ec2fa7ec0 data/toxony/recipe/moonlight_hemlock_seeds.json
+42e74d836ec43b643e4fa65564a8c4b2e37a8ed5 data/toxony/recipe/mortar/acid_oil_pot.json
+3ee2b935d2d3cd3306b6e7dc1850a9a64238caa2 data/toxony/recipe/mortar/acid_tox_pot.json
 825a5b7c3ebe4b632aa8351084ad3638c0f23099 data/toxony/recipe/mortar/fatigue_oil_pot.json
 37b1ea2a3d4b062c2e7b42f0e88cf7b5dda0490a data/toxony/recipe/mortar/fire_resistance_oil_pot.json
 703209c82bc36e7df683f148913056132012cb3b data/toxony/recipe/mortar/glowing_oil_pot.json
 1bca2074566e7b52bda581f52baf78a43867b600 data/toxony/recipe/mortar/green_dye.json
 6f7573a3ddc13529e9eb3676bf8329ae7ab3a675 data/toxony/recipe/mortar/green_dye_alt.json
+0926b870d13224ac5ba8678611add7c0b79e3db5 data/toxony/recipe/mortar/mending_oil_pot.json
 8cf21cbd6bbb57bb44cb70afb25d364b7475d938 data/toxony/recipe/mortar/oil_base.json
 c1401d277bf107d9c6b7eeda80e57f266c61b948 data/toxony/recipe/mortar/poison_blend.json
 38a327dda796c88d28c20716db8f9f0d35f2b2b2 data/toxony/recipe/mortar/poison_blend_alt.json

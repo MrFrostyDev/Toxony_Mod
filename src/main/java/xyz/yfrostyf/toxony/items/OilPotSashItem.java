@@ -2,6 +2,8 @@ package xyz.yfrostyf.toxony.items;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,6 +12,8 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileItem;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import xyz.yfrostyf.toxony.entities.item.ThrownOilPot;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -48,7 +52,9 @@ public class OilPotSashItem extends Item implements ProjectileItem {
             }
 
             player.getCooldowns().addCooldown(thisStack.getItem(), 30);
-            thisStack.setDamageValue(thisStack.getDamageValue() + 1);
+            if(!player.hasInfiniteMaterials()){
+                thisStack.setDamageValue(thisStack.getDamageValue() + 1);
+            }
             player.playSound(SoundEvents.SPLASH_POTION_THROW);
             return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
         }
@@ -61,5 +67,13 @@ public class OilPotSashItem extends Item implements ProjectileItem {
         ThrownOilPot thrownOilPot = new ThrownOilPot(level, stack, pos.x(), pos.y(), pos.z());
         thrownOilPot.setItem(stack);
         return thrownOilPot;
+    }
+
+    @Override
+    public String getDescriptionId(ItemStack stack) {
+        if(stack.has(DataComponentsRegistry.OIL)){
+            return this.getDescriptionId() + ".effect." + stack.get(DataComponentsRegistry.OIL).oil().getKey().location().getPath();
+        }
+        return super.getDescriptionId();
     }
 }

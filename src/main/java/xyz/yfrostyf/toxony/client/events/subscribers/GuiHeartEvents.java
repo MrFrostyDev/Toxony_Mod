@@ -26,7 +26,7 @@ public class GuiHeartEvents {
 
     @SubscribeEvent
     public static void onToxinHeartRender(PlayerHeartTypeEvent event){
-        if(event.getEntity().hasEffect(MobEffectRegistry.TOXIN)){
+        if(event.getEntity().hasEffect(MobEffectRegistry.TOXIN) || event.getEntity().hasEffect(MobEffectRegistry.ACID)){
             event.setType(TOXIN_HEARTS_ENUM_PROXY.getValue());
         }
     }

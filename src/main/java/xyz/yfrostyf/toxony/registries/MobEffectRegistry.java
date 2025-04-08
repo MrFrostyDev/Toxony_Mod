@@ -7,10 +7,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.effects.CrippleMobEffect;
-import xyz.yfrostyf.toxony.effects.FlammableMobEffect;
-import xyz.yfrostyf.toxony.effects.HuntMobEffect;
-import xyz.yfrostyf.toxony.effects.ToxinMobEffect;
+import xyz.yfrostyf.toxony.effects.*;
 import xyz.yfrostyf.toxony.effects.mutagens.*;
 
 public class MobEffectRegistry {
@@ -31,6 +28,11 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> TOXIN = MOB_EFFECTS.register(
             "toxin",
             () -> new ToxinMobEffect(MobEffectCategory.HARMFUL)
+    );
+
+    public static final DeferredHolder<MobEffect, MobEffect> ACID = MOB_EFFECTS.register(
+            "acid",
+            () -> new AcidMobEffect(MobEffectCategory.HARMFUL)
     );
 
     public static final DeferredHolder<MobEffect, MobEffect> FLAMMABLE = MOB_EFFECTS.register(

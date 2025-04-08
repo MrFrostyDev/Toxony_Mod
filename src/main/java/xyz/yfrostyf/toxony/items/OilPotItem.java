@@ -32,9 +32,9 @@ import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import javax.annotation.Nullable;
 
 public class OilPotItem extends Item {
-    private static final int USE_DURATION = 64;
-    private final ItemOil itemOil;
-    private final Holder<Block> oilPotBlock;
+    protected static final int USE_DURATION = 64;
+    protected final ItemOil itemOil;
+    protected final Holder<Block> oilPotBlock;
 
     public OilPotItem(Properties properties, ItemOil itemOil, Holder<Block> oilPotBlock) {
         super(properties.stacksTo(1));

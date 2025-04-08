@@ -65,6 +65,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.BOG_BONE.get());
                 output.accept(ItemRegistry.ACID_SLIMEBALL.get());
                 output.accept(ItemRegistry.TOXIC_SPIT.get());
+                output.accept(ItemRegistry.POISON_SAC.get());
 
                 output.accept(ItemRegistry.OCELOT_MINT.get());
                 output.accept(ItemRegistry.SNOW_MINT.get());
@@ -97,9 +98,12 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.GLOWING_OIL_POT.get());
                 output.accept(ItemRegistry.FATIGUE_OIL_POT.get());
                 output.accept(ItemRegistry.FIRE_RESISTANCE_OIL_POT.get());
+                output.accept(ItemRegistry.ACID_OIL_POT.get());
+                output.accept(ItemRegistry.MENDING_OIL_POT.get());
                 output.accept(ItemRegistry.TOXIN_TOX_POT.get());
                 output.accept(ItemRegistry.REGENERATION_TOX_POT.get());
                 output.accept(ItemRegistry.SMOKE_TOX_POT.get());
+                output.accept(ItemRegistry.ACID_TOX_POT.get());
                 output.accept(ItemRegistry.WITCHFIRE_TOX_POT.get());
                 output.accept(ItemRegistry.OIL_POT_SASH.get());
                 output.accept(ItemRegistry.OIL_POT_BANDOLIER.get());

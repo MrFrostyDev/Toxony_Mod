@@ -7,11 +7,13 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 
-public class OilPotBlockEntity extends BlockEntity {
+public class OilPotBlockEntity extends BlockEntity implements EntityBlock {
     private int maxDamage;
     private int damage;
 
@@ -85,5 +87,10 @@ public class OilPotBlockEntity extends BlockEntity {
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
         super.onDataPacket(connection, packet, registries);
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new OilPotBlockEntity(pos, state);
     }
 }

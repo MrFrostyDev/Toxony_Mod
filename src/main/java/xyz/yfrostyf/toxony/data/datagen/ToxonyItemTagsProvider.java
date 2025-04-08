@@ -33,6 +33,9 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.COPPER_SCALPEL.get(),
                         ItemRegistry.NETHERITE_SCALPEL.get(),
                         ItemRegistry.LETHAL_DOSE.get(),
+                        ItemRegistry.VENOM_CLUB.get(),
+                        ItemRegistry.BONE_SAW.get(),
+                        ItemRegistry.CYCLEBOW.get(),
                         ItemRegistry.WITCHING_BLADE.get()
                 );
 
@@ -41,6 +44,8 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.WITCHING_BLADE.get()
                 );
 
+        this.tag(TagRegistry.OIL_REPAIRABLE)
+                .addTag(ItemTags.DURABILITY_ENCHANTABLE);
 
         this.tag(TagRegistry.SCALPEL_ITEM)
                 .add(

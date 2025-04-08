@@ -193,16 +193,18 @@ public class CycleBow extends ProjectileWeaponItem{
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (isLoaded(itemstack)) {
+        if(player.getProjectile(itemstack).isEmpty() && !player.hasInfiniteMaterials() && !isLoaded(itemstack)){
+            return InteractionResultHolder.fail(itemstack);
+        }
+        else if (isLoaded(itemstack)) {
             this.performShooting(level, player, hand, itemstack, ARROW_POWER, 1.0F, null);
             itemstack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
             player.getCooldowns().addCooldown(this, 10);
             return InteractionResultHolder.consume(itemstack);
-        } else if (!player.getProjectile(itemstack).isEmpty()) {
+        }
+        else {
             player.startUsingItem(hand);
             return InteractionResultHolder.consume(itemstack);
-        } else {
-            return InteractionResultHolder.fail(itemstack);
         }
     }
 

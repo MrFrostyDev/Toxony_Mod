@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "toxony:block/glowing_oil_pot"
+        "model": "toxony:block/acid_oil_pot"
       }
     },
     {

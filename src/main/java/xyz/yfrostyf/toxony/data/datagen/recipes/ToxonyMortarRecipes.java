@@ -27,6 +27,7 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .build(output);
 
         // Oil Recipes
+        // Oils Tier 0 Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.POISON_OIL_POT.get()))
                 .ingredient(Items.HONEYCOMB)
                 .ingredient(ItemRegistry.POISON_PASTE.get())
@@ -56,6 +57,26 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
                 .build(output);
 
+
+        // Oil Tier 1 Recipes
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.ACID_OIL_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(ItemRegistry.TOXIC_PASTE.get())
+                .ingredient(ItemRegistry.ACID_SLIMEBALL.get())
+                .ingredient(ItemRegistry.ACID_SLIMEBALL.get())
+                .use(ItemRegistry.EMPTY_OIL_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_OIL_POT.get())
+                .build(output);
+
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.MENDING_OIL_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(ItemRegistry.TOXIC_PASTE.get())
+                .ingredient(ItemRegistry.TOXIC_SPIT.get())
+                .ingredient(ItemRegistry.OCELOT_MINT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
+                .build(output);
+
+
         // Oil Tier 2 Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.TOXIN_TOX_POT.get()))
                 .ingredient(Items.HONEYCOMB)
@@ -77,6 +98,14 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .ingredient(Items.FERMENTED_SPIDER_EYE)
                 .ingredient(ItemRegistry.MOONLIGHT_HEMLOCK.get())
                 .use(ItemRegistry.EMPTY_TOX_POT.get())
+                .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
+                .build(output);
+
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.ACID_TOX_POT.get()))
+                .ingredient(Items.HONEYCOMB)
+                .ingredient(ItemRegistry.WARPROOT.get())
+                .ingredient(ItemRegistry.ACID_SLIMEBALL.get())
+                .ingredient(ItemRegistry.BOG_BONE.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);
 

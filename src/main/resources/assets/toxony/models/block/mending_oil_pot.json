@@ -1,0 +1,10 @@
+{
+	"credit": "MrFrostyDev, made with Blockbench",
+	"parent": "toxony:block/template_oil_pot",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "toxony:block/oil_pot_grayblue",
+		"particle": "toxony:block/oil_pot_grayblue"
+	}
+}
