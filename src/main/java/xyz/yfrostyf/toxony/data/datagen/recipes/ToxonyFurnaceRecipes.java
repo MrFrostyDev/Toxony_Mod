@@ -3,11 +3,7 @@ package xyz.yfrostyf.toxony.data.datagen.recipes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.concurrent.CompletableFuture;

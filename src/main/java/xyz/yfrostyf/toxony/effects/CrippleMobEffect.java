@@ -57,7 +57,7 @@ public class CrippleMobEffect extends MobEffect {
             LivingEntity victim = event.getEntity();
             MobEffectInstance effectInst = victim.getEffect(MobEffectRegistry.CRIPPLE);
             if (effectInst == null) return;
-            float damage = event.getOriginalDamage();
+            float damage = event.getNewDamage();
             DamageSource source = event.getSource();
             float dmgMod = 0;
 
@@ -65,7 +65,6 @@ public class CrippleMobEffect extends MobEffect {
                     || source.is(DamageTypes.ARROW) || source.is(DamageTypes.TRIDENT)
                     || source.is(DamageTypes.MOB_ATTACK) || source.is(DamageTypes.MOB_PROJECTILE)){
                 dmgMod = 0.25F + ((float)effectInst.getAmplifier() / 4);
-                event.setNewDamage(damage + (damage * dmgMod));
             }
             else if(source.is(DamageTypes.FALL)) {
                 dmgMod = 0.5F + ((float)effectInst.getAmplifier() / 2);

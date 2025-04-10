@@ -1,7 +1,6 @@
 package xyz.yfrostyf.toxony;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -10,10 +9,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
-import xyz.yfrostyf.toxony.client.gui.MutagenTransformOverlay;
 import xyz.yfrostyf.toxony.data.DataInitialize;
 
 import xyz.yfrostyf.toxony.data.datagen.registries.LootModifierSerializerRegistry;

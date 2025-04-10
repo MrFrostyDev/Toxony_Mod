@@ -1,10 +1,8 @@
 package xyz.yfrostyf.toxony.data.datagen.recipes;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -42,6 +40,7 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 // If you want to add conditions to the recipe, those can be set on the output.
                 .save(output);
 
+        // Decoration
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.LOST_JOURNAL.get())
                 .requires(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
                 .requires(Items.BOOK)
@@ -54,7 +53,12 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_book", has(Items.BOOK))
                 .save(output, "lost_journal_alt");
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(Items.PAPER, 2))
+                .requires(ItemRegistry.LOOSE_PAPER.get())
+                .unlockedBy("has_loose_paper", has(ItemRegistry.LOOSE_PAPER.get()))
+                .save(output);
 
+        // Main
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.POISONOUS_POTATO)
                 .requires(ItemRegistry.POISON_PASTE.get())
                 .requires(Items.POTATO)

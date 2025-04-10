@@ -7,15 +7,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
-import xyz.yfrostyf.toxony.blocks.OilPotBlock;
 import xyz.yfrostyf.toxony.items.BoltItem;
 import xyz.yfrostyf.toxony.items.OilPotItem;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
-import java.util.List;
 import java.util.Optional;
 
 public class OilUtil {

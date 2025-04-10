@@ -1,0 +1,10 @@
+{
+	"credit": "MrFrostyDev",
+	"parent": "toxony:block/vial_rack",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "toxony:block/vial_rack5",
+		"particle": "toxony:block/vial_rack5"
+	}
+}

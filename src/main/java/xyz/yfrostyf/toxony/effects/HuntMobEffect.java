@@ -11,8 +11,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
-import java.util.Random;
-
 public class HuntMobEffect extends MobEffect {
     private static final int color = 0x6e2f2B;
 

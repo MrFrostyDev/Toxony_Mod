@@ -6,15 +6,9 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potions;
-import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
-import xyz.yfrostyf.toxony.api.affinity.Affinity;
-import xyz.yfrostyf.toxony.api.util.VialUtil;
 import xyz.yfrostyf.toxony.data.datagen.recipebuilders.AlchemicalForgeRecipeBuilder;
-import xyz.yfrostyf.toxony.data.datagen.recipebuilders.AlembicRecipeBuilder;
 import xyz.yfrostyf.toxony.registries.AffinityRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
-import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.concurrent.CompletableFuture;
 

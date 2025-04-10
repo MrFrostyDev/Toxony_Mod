@@ -1,10 +1,8 @@
 package xyz.yfrostyf.toxony.jei;
 
 import com.mojang.datafixers.util.Pair;
-import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -21,11 +19,9 @@ import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.recipes.AlchemicalForgeRecipe;
-import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.List;
-import java.util.Optional;
 
 // thank you [Iron's Spells and Spellbooks] for the reference
 

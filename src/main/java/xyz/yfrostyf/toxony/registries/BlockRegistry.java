@@ -19,10 +19,7 @@ import xyz.yfrostyf.toxony.api.blocks.PoisonCropBlock;
 import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.*;
 import xyz.yfrostyf.toxony.blocks.entities.*;
-import xyz.yfrostyf.toxony.blocks.AlchemicalForgeBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
-import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
-import xyz.yfrostyf.toxony.blocks.LostJournalBlock;
 import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
 
 import java.util.List;
@@ -289,6 +286,47 @@ public class BlockRegistry {
                     ACID_TOX_POT.get(),
                     WITCHFIRE_TOX_POT.get()
             ).build(null)
+    );
+
+    // |-----------------------------------------------------------------------------------|
+    // |------------------------------------Decoration-------------------------------------|
+    // |-----------------------------------------------------------------------------------|
+
+    public static final DeferredHolder<Block, Block> VIAL_RACK = BLOCKS.register(
+            "vial_rack",
+            () -> new VialRackBlock(BlockBehaviour.Properties.of()
+                    .sound(SoundType.WOOD)
+                    .strength(0.2F)
+                    .pushReaction(PushReaction.DESTROY)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> BELL_JAR = BLOCKS.register(
+            "bell_jar",
+            () -> new BellJarBlock(BlockBehaviour.Properties.of()
+                    .sound(SoundType.GLASS)
+                    .strength(0.4F)
+                    .pushReaction(PushReaction.DESTROY)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> COPPER_SCALE = BLOCKS.register(
+            "copper_scale",
+            () -> new CopperScaleBlock(BlockBehaviour.Properties.of()
+                    .sound(SoundType.COPPER)
+                    .strength(0.6F)
+                    .pushReaction(PushReaction.DESTROY)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> LOOSE_PAPER = BLOCKS.register(
+            "loose_paper",
+            () -> new LoosePaperBlock(BlockBehaviour.Properties.of()
+                    .sound(SoundType.WOOL)
+                    .instabreak()
+                    .noCollission()
+                    .pushReaction(PushReaction.DESTROY)
+            )
     );
 
     // |-----------------------------------------------------------------------------------|

@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.items;
+package xyz.yfrostyf.toxony.items.armor;
 
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -7,7 +7,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.registries.AttributeRegistry;
 
 public class PlagueDoctorArmorItem extends ArmorItem {
@@ -17,13 +19,14 @@ public class PlagueDoctorArmorItem extends ArmorItem {
     }
 
     @Override
-    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
         int defense = this.material.value().getDefense(type);
         float toughness = this.material.value().toughness();
 
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
         EquipmentSlotGroup equipslotgroup = EquipmentSlotGroup.bySlot(type.getSlot());
         ResourceLocation resourcelocation = ResourceLocation.withDefaultNamespace("armor." + type.getName());
+        ResourceLocation resourcelocationtoxony = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID,"armor." + type.getName());
         builder.add(
                 Attributes.ARMOR, new AttributeModifier(resourcelocation, defense, AttributeModifier.Operation.ADD_VALUE), equipslotgroup
         );
@@ -41,9 +44,7 @@ public class PlagueDoctorArmorItem extends ArmorItem {
 
         builder.add(
                 AttributeRegistry.EFFECT_REDUCTION,
-                new AttributeModifier(
-                        AttributeRegistry.EFFECT_REDUCTION.getId(), getEffectDurationValue(equipslotgroup), AttributeModifier.Operation.ADD_VALUE
-                ),
+                new AttributeModifier(resourcelocationtoxony, getEffectDurationValue(equipslotgroup), AttributeModifier.Operation.ADD_VALUE),
                 equipslotgroup
         );
 

@@ -1,0 +1,109 @@
+{
+  "variants": {
+    "facing=north,count=6": {
+      "model": "toxony:block/vial_rack6"
+    },
+    "facing=east,count=6": {
+      "model": "toxony:block/vial_rack6",
+      "y": 90
+    },
+    "facing=south,count=6": {
+      "model": "toxony:block/vial_rack6",
+      "y": 180
+    },
+    "facing=west,count=6": {
+      "model": "toxony:block/vial_rack6",
+      "y": 270
+    },
+    "facing=north,count=5": {
+      "model": "toxony:block/vial_rack5"
+    },
+    "facing=east,count=5": {
+      "model": "toxony:block/vial_rack5",
+      "y": 90
+    },
+    "facing=south,count=5": {
+      "model": "toxony:block/vial_rack5",
+      "y": 180
+    },
+    "facing=west,count=5": {
+      "model": "toxony:block/vial_rack5",
+      "y": 270
+    },
+    "facing=north,count=4": {
+      "model": "toxony:block/vial_rack4"
+    },
+    "facing=east,count=4": {
+      "model": "toxony:block/vial_rack4",
+      "y": 90
+    },
+    "facing=south,count=4": {
+      "model": "toxony:block/vial_rack4",
+      "y": 180
+    },
+    "facing=west,count=4": {
+      "model": "toxony:block/vial_rack4",
+      "y": 270
+    },
+    "facing=north,count=3": {
+      "model": "toxony:block/vial_rack3"
+    },
+    "facing=east,count=3": {
+      "model": "toxony:block/vial_rack3",
+      "y": 90
+    },
+    "facing=south,count=3": {
+      "model": "toxony:block/vial_rack3",
+      "y": 180
+    },
+    "facing=west,count=3": {
+      "model": "toxony:block/vial_rack3",
+      "y": 270
+    },
+    "facing=north,count=2": {
+      "model": "toxony:block/vial_rack2"
+    },
+    "facing=east,count=2": {
+      "model": "toxony:block/vial_rack2",
+      "y": 90
+    },
+    "facing=south,count=2": {
+      "model": "toxony:block/vial_rack2",
+      "y": 180
+    },
+    "facing=west,count=2": {
+      "model": "toxony:block/vial_rack2",
+      "y": 270
+    },
+    "facing=north,count=1": {
+      "model": "toxony:block/vial_rack1"
+    },
+    "facing=east,count=1": {
+      "model": "toxony:block/vial_rack1",
+      "y": 90
+    },
+    "facing=south,count=1": {
+      "model": "toxony:block/vial_rack1",
+      "y": 180
+    },
+    "facing=west,count=1": {
+      "model": "toxony:block/vial_rack1",
+      "y": 270
+    },
+    "facing=north,count=0": {
+      "model": "toxony:block/vial_rack0"
+    },
+    "facing=east,count=0": {
+      "model": "toxony:block/vial_rack0",
+      "y": 90
+    },
+    "facing=south,count=0": {
+      "model": "toxony:block/vial_rack0",
+      "y": 180
+    },
+    "facing=west,count=0": {
+      "model": "toxony:block/vial_rack0",
+      "y": 270
+    }
+  }
+}

@@ -178,7 +178,7 @@ public abstract class PageScreen extends Screen {
         static final ResourceLocation INDEX_BUTTON = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "journal/index_tab_button");
 
         private final PageScreen screen;
-        private int posY1;
+        private float posY1;
 
 
         private static final int BUTTON_OFFSETX = -60;
@@ -211,20 +211,20 @@ public abstract class PageScreen extends Screen {
             int posX = this.getX();
             int posY = this.getY();
 
-            if (this.isHoveredOrFocused()) posY1 -= (int)((BUTTON_HOVER_OFFSETY) * 0.1 * partialTick);
-            else posY1 += (int)((BUTTON_HOVER_OFFSETY) * 0.1 * partialTick);
+            if (this.isHoveredOrFocused()) posY1 -= (BUTTON_HOVER_OFFSETY) * 0.03F;
+            else posY1 += ((BUTTON_HOVER_OFFSETY) * 0.03F);
 
 
             // Hover = 0 / 0 pixels offset
             // Non-hover = 1.0 / 25 pixels offset
-            int buttonHeight = 25 - Mth.floor(((float)BUTTON_HOVER_OFFSETY * Mth.clamp((float)(posY1 - posY) / (float)BUTTON_HOVER_OFFSETY, 0.0F, 1.0F)));
+            int buttonHeight = 25 - Mth.floor(((float)BUTTON_HOVER_OFFSETY * Mth.clamp((posY1 - posY) / (float)BUTTON_HOVER_OFFSETY, 0.0F, 1.0F)));
 
             if(posY1 < posY) posY1 = posY;
             if(posY1 > posY + BUTTON_HOVER_OFFSETY) posY1 = posY + BUTTON_HOVER_OFFSETY;
             guiGraphics.blitSprite(INDEX_BUTTON,
                     BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT,
                     0, 0,
-                    posX, posY1,
+                    posX, Mth.floor(posY1),
                     BUTTON_TEXTURE_WIDTH, buttonHeight);
         }
 

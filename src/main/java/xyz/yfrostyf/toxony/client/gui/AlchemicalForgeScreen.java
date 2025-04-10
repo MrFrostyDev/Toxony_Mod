@@ -14,9 +14,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.blocks.entities.AlchemicalForgeBlockEntity;
 import xyz.yfrostyf.toxony.network.ClientStartAlchemicalForgePacket;
-import xyz.yfrostyf.toxony.network.ClientStartPestlingPacket;
 
 public class AlchemicalForgeScreen extends AbstractContainerScreen<AlchemicalForgeMenu> {
     public static final ResourceLocation ALCHEMICAL_FORGE_MENU = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "textures/gui/container/alchemical_forge_menu.png");

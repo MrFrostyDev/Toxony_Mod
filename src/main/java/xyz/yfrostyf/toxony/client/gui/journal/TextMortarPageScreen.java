@@ -1,6 +1,5 @@
 package xyz.yfrostyf.toxony.client.gui.journal;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;

@@ -36,7 +36,7 @@ public class ArmorMaterialRegistry {
                     }),
                     // Determines the enchantability of the tier. This represents how good the enchantments on this armor will be.
                     // Gold uses 25.
-                    20,
+                    12,
                     // Determines the sound played when equipping this armor.
                     // This is wrapped with a Holder.
                     SoundEvents.ARMOR_EQUIP_GENERIC,
@@ -66,6 +66,29 @@ public class ArmorMaterialRegistry {
                     // Returns the knockback resistance value of the armor. While wearing this armor, the player is
                     // immune to knockback to some degree. If the player has a total knockback resistance value of 1 or greater
                     // from all armor pieces combined, they will not take any knockback at all.
+                    0
+            ));
+
+    public static final Holder<ArmorMaterial> HUNTER_ARMOR_MATERIAL =
+            ARMOR_MATERIALS.register("hunter", () -> new ArmorMaterial(
+                    // Determines the defense value of this armor material, depending on what armor piece it is.
+                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                        map.put(ArmorItem.Type.BOOTS, 2);
+                        map.put(ArmorItem.Type.LEGGINGS, 5);
+                        map.put(ArmorItem.Type.CHESTPLATE, 6);
+                        map.put(ArmorItem.Type.HELMET, 2);
+                        map.put(ArmorItem.Type.BODY, 6);
+                    }),
+                    9,
+                    SoundEvents.ARMOR_EQUIP_GENERIC,
+                    () -> Ingredient.of(Tags.Items.LEATHERS),
+                    List.of(
+                            new ArmorMaterial.Layer(
+                                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "hunter_armor")),
+                            new ArmorMaterial.Layer(
+                                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "hunter_armor"))
+                    ),
+                    0,
                     0
             ));
 

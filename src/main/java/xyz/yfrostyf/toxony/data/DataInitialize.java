@@ -3,13 +3,10 @@ package xyz.yfrostyf.toxony.data;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import xyz.yfrostyf.toxony.data.datagen.*;
-import xyz.yfrostyf.toxony.data.datagen.ToxonyBlockTagsProvider;
 
 
 import java.util.concurrent.CompletableFuture;

@@ -8,6 +8,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.client.models.HunterArmorEntityModel;
 import xyz.yfrostyf.toxony.client.models.PlagueDoctorArmorEntityModel;
 import xyz.yfrostyf.toxony.client.renderers.MortarPestleRenderer;
 import xyz.yfrostyf.toxony.client.renderers.entities.BoltRenderer;
@@ -24,6 +25,7 @@ public class RenderRegisterEvents {
     public static void onRegisterEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
         event.registerLayerDefinition(MORTAR_PESTLE_LAYER, MortarPestleRenderer::newModelLayer);
         event.registerLayerDefinition(PlagueDoctorArmorEntityModel.LAYER_LOCATION, PlagueDoctorArmorEntityModel::createBodyLayer);
+        event.registerLayerDefinition(HunterArmorEntityModel.LAYER_LOCATION, HunterArmorEntityModel::createBodyLayer);
     }
 
     @SubscribeEvent

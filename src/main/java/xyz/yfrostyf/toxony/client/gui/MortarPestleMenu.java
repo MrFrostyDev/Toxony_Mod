@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.blocks.entities.MortarPestleBlockEntity;
 import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;

@@ -28,10 +28,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import xyz.yfrostyf.toxony.blocks.entities.AlembicBlockEntity;
-import xyz.yfrostyf.toxony.blocks.entities.CopperCrucibleBlockEntity;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
-
-import static net.minecraft.world.level.block.BedBlock.PART;
 
 
 public class AlembicBlock extends HorizontalDirectionalBlock implements EntityBlock {

@@ -1,12 +1,8 @@
 package xyz.yfrostyf.toxony.client.events.subscribers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
@@ -45,6 +41,10 @@ public class ClientExtensionsRegisterEvent {
 
     @SubscribeEvent
     public static void onClientExtensionArmourRegister(RegisterClientExtensionsEvent event){
+
+        // |-----------------------------------------------------------------------------------|
+        // |--------------------------------Plague Doctor Armor--------------------------------|
+        // |-----------------------------------------------------------------------------------|
         event.registerItem(new IClientItemExtensions() {
             @Override
             public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
@@ -72,6 +72,38 @@ public class ClientExtensionsRegisterEvent {
                 return ModelUtils.PlagueDoctorArmor.getLegs(livingEntity, itemStack, equipmentSlot, original);
             }
         }, ItemRegistry.PLAGUE_DOCTOR_BOOTS.get());
+
+
+        // |-----------------------------------------------------------------------------------|
+        // |------------------------------------Hunter Armor-----------------------------------|
+        // |-----------------------------------------------------------------------------------|
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.HunterArmor.getHead(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.HUNTER_HAT.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.HunterArmor.getBody(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.HUNTER_COAT.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.HunterArmor.getLegs(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.HUNTER_LEGGINGS.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.HunterArmor.getLegs(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.HUNTER_BOOTS.get());
     }
 }
 

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "toxony:block/loose_paper"
+    },
+    "facing=east": {
+      "model": "toxony:block/loose_paper",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "toxony:block/loose_paper",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "toxony:block/loose_paper",
+      "y": 270
+    }
+  }
+}

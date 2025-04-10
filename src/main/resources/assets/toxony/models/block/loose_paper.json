@@ -1,0 +1,35 @@
+{
+	"credit": "MrFrostyDev, made with Blockbench",
+	"textures": {
+		"0": "toxony:block/loose_paper",
+		"particle": "toxony:block/loose_paper"
+	},
+	"elements": [
+		{
+			"from": [6, 0.1, 1],
+			"to": [12, 0.1, 10],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [6, 0, 10]},
+			"faces": {
+				"north": {"uv": [0, 0, 6, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 9, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 6, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 9, 0], "texture": "#0"},
+				"up": {"uv": [9, 0, 0, 6], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [9, 6, 0, 0], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 0.2, 5],
+			"to": [11, 0.2, 14],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [5, 0, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 6, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 9, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 6, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 9, 0], "texture": "#0"},
+				"up": {"uv": [9, 6, 0, 0], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [9, 0, 0, 6], "rotation": 90, "texture": "#0"}
+			}
+		}
+	]
+}

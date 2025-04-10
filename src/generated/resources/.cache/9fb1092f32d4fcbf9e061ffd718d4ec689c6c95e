@@ -1,11 +1,13 @@
-// 1.21.1	2025-04-07T23:24:25.987105	Recipes
+// 1.21.1	2025-04-08T20:49:18.080523	Recipes
 38ca203e5218eb2059ff7ed15a2361be521a170c data/minecraft/advancement/recipes/misc/clay_oil_pot_campfire.json
 3e471c16bc19b347c80ac9a98537ba034385d59d data/minecraft/advancement/recipes/misc/lost_journal_alt.json
+4b10d1c6fb628f310c1a96b9ed19e114bc71a305 data/minecraft/advancement/recipes/misc/paper.json
 8784c7b753823537a8622d12fc7a6f538154d87b data/minecraft/advancement/recipes/misc/poisonous_potato.json
 1ad7a01d0fb904c1efa0678e64650c3e8413ab70 data/minecraft/advancement/recipes/misc/potion.json
 ba311bd597716c5e0922a396c607881884c6d689 data/minecraft/advancement/recipes/misc/rotten_flesh.json
 09343e0df9b6163f2ed2faa37573b186cbd91f66 data/minecraft/recipe/clay_oil_pot_campfire.json
 31be1898418a6aa33962394e13c6f4a4dbf9b324 data/minecraft/recipe/lost_journal_alt.json
+da3f73c60288f7941a7237b336dc211528fcc278 data/minecraft/recipe/paper.json
 2ab4b5a4a422c663b6bc69343c2b7c8cbc746c67 data/minecraft/recipe/poisonous_potato.json
 719bffd563ad2ce4890521c057673e1b044f9384 data/minecraft/recipe/potion.json
 043ce2440705bea17685b375646a0c9301714acc data/minecraft/recipe/rotten_flesh.json

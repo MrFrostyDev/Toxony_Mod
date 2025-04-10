@@ -18,6 +18,8 @@ import xyz.yfrostyf.toxony.api.items.*;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.oils.Oil;
 import xyz.yfrostyf.toxony.items.*;
+import xyz.yfrostyf.toxony.items.armor.HunterArmorItem;
+import xyz.yfrostyf.toxony.items.armor.PlagueDoctorArmorItem;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +51,26 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> PLAGUE_DOCTOR_BOOTS = ITEMS.register("plague_doctor_boots", () -> new PlagueDoctorArmorItem(
             ArmorMaterialRegistry.PLAGUE_DOCTOR_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()
+            .stacksTo(1).durability(195)
+    ));
+
+    public static final DeferredHolder<Item, Item> HUNTER_HAT = ITEMS.register("hunter_hat", () -> new HunterArmorItem(
+            ArmorMaterialRegistry.HUNTER_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()
+            .stacksTo(1).durability(165)
+    ));
+
+    public static final DeferredHolder<Item, Item> HUNTER_COAT = ITEMS.register("hunter_coat", () -> new HunterArmorItem(
+            ArmorMaterialRegistry.HUNTER_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()
+            .stacksTo(1).durability(240)
+    ));
+
+    public static final DeferredHolder<Item, Item> HUNTER_LEGGINGS = ITEMS.register("hunter_leggings", () -> new HunterArmorItem(
+            ArmorMaterialRegistry.HUNTER_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()
+            .stacksTo(1).durability(225)
+    ));
+
+    public static final DeferredHolder<Item, Item> HUNTER_BOOTS = ITEMS.register("hunter_boots", () -> new HunterArmorItem(
+            ArmorMaterialRegistry.HUNTER_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()
             .stacksTo(1).durability(195)
     ));
 
@@ -122,6 +144,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> EMPTY_TOX_POT = ITEMS.register("empty_tox_pot", () -> new Item(new Item.Properties()));
 
 
+    // |-------------------------------Tier 0 -------------------------------|
+
     public static final DeferredHolder<Item, Item> POISON_OIL_POT = createOilPot(
             "poison_oil_pot", 5, OilsRegistry.POISON_OIL, BlockRegistry.POISON_OIL_POT,
             200, 0, 150);
@@ -137,6 +161,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> FATIGUE_OIL_POT = createOilPot(
             "fatigue_oil_pot", 5, OilsRegistry.FATIGUE_OIL, BlockRegistry.FATIGUE_OIL_POT,
             300, 0, 150);
+
+    // |-------------------------------Tier 1 -------------------------------|
 
     public static final DeferredHolder<Item, Item> ACID_OIL_POT = createOilPot(
             "acid_oil_pot", 5, OilsRegistry.ACID_OIL, BlockRegistry.ACID_OIL_POT,
@@ -335,7 +361,6 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> ALCHEMICAL_FORGE_PART = ITEMS.register("alchemical_forge_part", () -> new BlockItem(BlockRegistry.ALCHEMICAL_FORGE_PART.get(), new Item.Properties().stacksTo(2)));
     public static final DeferredHolder<Item, Item> POISON_FARMLAND = ITEMS.register("poison_farmland", () -> new BlockItem(BlockRegistry.POISON_FARMLAND.get(), new Item.Properties()));
 
-
     public static final DeferredHolder<Item, Item> OCELOT_MINT_SEEDS = ITEMS.register("ocelot_mint_seeds", () -> new ItemNameBlockItem(BlockRegistry.OCELOT_MINT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> SNOW_MINT_SEEDS = ITEMS.register("snow_mint_seeds", () -> new ItemNameBlockItem(BlockRegistry.SNOW_MINT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> NIGHTSHADE_SEEDS = ITEMS.register("nightshade_seeds", () -> new ItemNameBlockItem(BlockRegistry.NIGHTSHADE.get(), new Item.Properties()));
@@ -346,6 +371,13 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> WHIRLSNAP_SEEDS = ITEMS.register("whirlsnap_seeds", () -> new ItemNameBlockItem(BlockRegistry.WHIRLSNAP.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> BLOODROOT_FUNGUS = ITEMS.register("bloodroot_fungus", () -> new ItemNameBlockItem(BlockRegistry.BLOODROOT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> WARPROOT_FUNGUS = ITEMS.register("warproot_fungus", () -> new ItemNameBlockItem(BlockRegistry.WARPROOT.get(), new Item.Properties()));
+
+    // Decoration
+    public static final DeferredHolder<Item, Item> VIAL_RACK = ITEMS.register("vial_rack", () -> new BlockItem(BlockRegistry.VIAL_RACK.get(), new Item.Properties().stacksTo(16)));
+    public static final DeferredHolder<Item, Item> BELL_JAR = ITEMS.register("bell_jar", () -> new BlockItem(BlockRegistry.BELL_JAR.get(), new Item.Properties().stacksTo(16)));
+    public static final DeferredHolder<Item, Item> COPPER_SCALE = ITEMS.register("copper_scale", () -> new BlockItem(BlockRegistry.COPPER_SCALE.get(), new Item.Properties().stacksTo(16)));
+    public static final DeferredHolder<Item, Item> LOOSE_PAPER = ITEMS.register("loose_paper", () -> new BlockItem(BlockRegistry.LOOSE_PAPER.get(), new Item.Properties().stacksTo(64)));
+
 
 
     // |-----------------------------------------------------------------------------------|

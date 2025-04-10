@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "toxony:block/copper_scale"
+    },
+    "facing=east": {
+      "model": "toxony:block/copper_scale",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "toxony:block/copper_scale",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "toxony:block/copper_scale",
+      "y": 270
+    }
+  }
+}

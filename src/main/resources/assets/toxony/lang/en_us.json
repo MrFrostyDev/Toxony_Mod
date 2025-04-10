@@ -1,5 +1,6 @@
 {
   "itemGroup.toxony.tab": "Toxony",
+  "itemGroup.toxony.tab.materials": "Toxony Materials",
 
   "block.toxony.mortar_pestle": "Mortar and Pestle",
   "block.toxony.copper_crucible": "Copper Crucible",
@@ -12,6 +13,11 @@
   "item.toxony.alembic_base": "Alembic Base",
   "block.toxony.valentines_box": "Valentines Box",
   "block.toxony.poison_farmland": "Poison Farmland",
+
+  "block.toxony.vial_rack": "Vial Rack",
+  "block.toxony.bell_jar": "Bell Jar",
+  "block.toxony.copper_scale": "Copper Scale",
+  "block.toxony.loose_paper": "Loose Paper",
 
   "item.toxony.lost_journal": "Lost Journal",
   "item.toxony.tox_gauge": "Tox Gauge",
@@ -55,6 +61,11 @@
   "item.toxony.plague_doctor_coat": "Plague Doctor Coat",
   "item.toxony.plague_doctor_leggings": "Plague Doctor Leggings",
   "item.toxony.plague_doctor_boots": "Plague Doctor Boots",
+
+  "item.toxony.hunter_hat": "Hunter Hood",
+  "item.toxony.hunter_coat": "Hunter Coat",
+  "item.toxony.hunter_leggings": "Hunter Leggings",
+  "item.toxony.hunter_boots": "Hunter Boots",
 
   "item.toxony.venom_tooth": "Venom Tooth",
   "item.toxony.acid_slimeball": "Acid Slimeball",
