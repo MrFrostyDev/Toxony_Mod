@@ -1,0 +1,17 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "result": {
+    "id": "toxony:fire_resistance_oil_pot"
+  },
+  "use": {
+    "id": "toxony:empty_oil_pot"
+  }
+}

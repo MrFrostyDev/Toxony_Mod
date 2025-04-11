@@ -7,10 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.items.BoltCartridgeItem;
-import xyz.yfrostyf.toxony.items.CycleBow;
-import xyz.yfrostyf.toxony.items.ToxScalpelItem;
-import xyz.yfrostyf.toxony.items.WitchingBladeItem;
+import xyz.yfrostyf.toxony.items.*;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 @EventBusSubscriber(modid = ToxonyMain.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -49,6 +46,13 @@ public class ItemPropertiesEvents {
                     ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "loaded"),
                     (stack, level, player, seed) ->
                             BoltCartridgeItem.isLoaded(stack) ? 1.0F : 0.0F
+            );
+
+            ItemProperties.register(
+                    ItemRegistry.FLAIL.get(),
+                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "using"),
+                    (stack, level, player, seed) ->
+                            FlailItem.isUsingFlail(player) ? 1.0F : 0.0F
             );
         });
     }

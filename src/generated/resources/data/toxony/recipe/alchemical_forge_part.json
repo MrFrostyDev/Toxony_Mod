@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:chiseled_polished_blackstone"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "R": {
+      "item": "toxony:toxin_canister"
+    },
+    "T": {
+      "item": "toxony:toxin"
+    }
+  },
+  "pattern": [
+    "TNT",
+    "RCR",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:alchemical_forge_part"
+  }
+}

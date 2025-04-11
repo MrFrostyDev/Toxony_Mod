@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "toxony:water_hemlock"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:water_hemlock_seeds"
+  }
+}

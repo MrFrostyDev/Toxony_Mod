@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "P": {
+      "item": "toxony:toxic_paste"
+    },
+    "V": {
+      "item": "toxony:glass_vial"
+    }
+  },
+  "pattern": [
+    "CPC",
+    "CVC",
+    "CPC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:toxin_canister"
+  }
+}

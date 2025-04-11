@@ -1,0 +1,20 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    {
+      "item": "toxony:water_hemlock"
+    }
+  ],
+  "result": {
+    "id": "toxony:fatigue_oil_pot"
+  },
+  "use": {
+    "id": "toxony:empty_oil_pot"
+  }
+}

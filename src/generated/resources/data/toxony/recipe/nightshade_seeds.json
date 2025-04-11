@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "toxony:nightshade"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:nightshade_seeds"
+  }
+}

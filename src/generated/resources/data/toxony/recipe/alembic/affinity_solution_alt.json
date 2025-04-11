@@ -1,0 +1,13 @@
+{
+  "type": "toxony:alembic",
+  "boiltime": 800,
+  "ingredient": {
+    "tag": "toxony:ingredients/poisonous"
+  },
+  "ingredient_to_convert": {
+    "item": "toxony:redstone_solution"
+  },
+  "result": {
+    "id": "toxony:affinity_solution"
+  }
+}

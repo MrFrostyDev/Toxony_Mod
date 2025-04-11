@@ -1,0 +1,11 @@
+{
+  "type": "toxony:crucible",
+  "cooktime": 600,
+  "ingredient": {
+    "item": "toxony:redstone_mixture"
+  },
+  "result": {
+    "count": 1,
+    "id": "toxony:redstone_solution"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 1000,
+  "experience": 0.5,
+  "ingredient": {
+    "item": "toxony:clay_oil_pot"
+  },
+  "result": {
+    "count": 1,
+    "id": "toxony:empty_oil_pot"
+  }
+}

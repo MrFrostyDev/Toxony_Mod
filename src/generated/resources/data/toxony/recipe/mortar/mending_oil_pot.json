@@ -1,0 +1,20 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "toxony:toxic_paste"
+    },
+    {
+      "item": "toxony:toxic_spit"
+    },
+    {
+      "item": "toxony:ocelot_mint"
+    }
+  ],
+  "result": {
+    "id": "toxony:mending_oil_pot"
+  }
+}

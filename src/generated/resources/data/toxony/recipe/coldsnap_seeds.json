@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "toxony:coldsnap"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:coldsnap_seeds"
+  }
+}

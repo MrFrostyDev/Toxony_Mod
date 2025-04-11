@@ -1,0 +1,12 @@
+{
+  "entries": [
+    "toxony:wolf_unique_tox_drop",
+    "toxony:squid_unique_tox_drop",
+    "toxony:llama_unique_tox_drop",
+    "toxony:slime_unique_tox_drop",
+    "toxony:bogged_unique_tox_drop",
+    "toxony:trader_llama_unique_tox_drop",
+    "toxony:glow_squid_unique_tox_drop"
+  ],
+  "replace": false
+}

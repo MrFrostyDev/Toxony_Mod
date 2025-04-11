@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "T": {
+      "item": "toxony:toxic_leather"
+    },
+    "V": {
+      "item": "toxony:glass_vial"
+    }
+  },
+  "pattern": [
+    "C C",
+    "TTT",
+    "VTV"
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:plague_doctor_coat"
+  }
+}

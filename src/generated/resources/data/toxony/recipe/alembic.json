@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "toxony:alembic_base"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "toxony:toxin_canister"
+    }
+  },
+  "pattern": [
+    "C  ",
+    "CI ",
+    "B T"
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:alembic"
+  }
+}

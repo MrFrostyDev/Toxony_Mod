@@ -1,0 +1,17 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "toxony:poison_paste"
+    },
+    {
+      "tag": "toxony:ingredients/poisonous"
+    }
+  ],
+  "result": {
+    "id": "toxony:poison_blend"
+  },
+  "use": {
+    "id": "minecraft:bowl"
+  }
+}

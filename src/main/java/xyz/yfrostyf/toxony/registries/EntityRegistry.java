@@ -7,10 +7,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.entities.item.Bolt;
-import xyz.yfrostyf.toxony.entities.item.SmokeBolt;
-import xyz.yfrostyf.toxony.entities.item.ThrownOilPot;
-import xyz.yfrostyf.toxony.entities.item.WitchFireBolt;
+import xyz.yfrostyf.toxony.entities.item.*;
 
 public class EntityRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, ToxonyMain.MOD_ID);
@@ -54,5 +51,16 @@ public class EntityRegistry {
                     .clientTrackingRange(4)
                     .updateInterval(10)
                     .build("witchfire_bolt")
+    );
+
+    public static final DeferredHolder<EntityType<?>, EntityType<FlailBall>> FLAIL_BALL = ENTITIES.register(
+            "flail_ball",
+            () -> EntityType.Builder.<FlailBall>of(FlailBall::new, MobCategory.MISC)
+                    .noSave()
+                    .noSummon()
+                    .sized(0.35F, 0.35F)
+                    .clientTrackingRange(4)
+                    .updateInterval(5)
+                    .build("flail_ball")
     );
 }

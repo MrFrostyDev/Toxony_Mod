@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "toxony:poison_paste"
+    },
+    {
+      "tag": "minecraft:meat"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:rotten_flesh"
+  }
+}

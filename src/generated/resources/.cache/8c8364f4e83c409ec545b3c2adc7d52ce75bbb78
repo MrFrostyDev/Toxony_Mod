@@ -1,0 +1,9 @@
+// 1.21.1	2025-04-06T19:57:11.7424482	Tags for minecraft:item mod id vanilla
+3a65b47b329d69e104d9608e13d823859fc10b90 data/minecraft/tags/item/enchantable/durability.json
+e1800aab5d0ef6a3d9d47c8d148947629e544e31 data/minecraft/tags/item/enchantable/weapon.json
+a34246bb2a77c36d83dadb6a58838b37020e5bb5 data/minecraft/tags/item/swords.json
+4f298793e22744c9c02d04d15dcdcabd2eef3d72 data/toxony/tags/item/bolts.json
+05f9288ff13959de8340261c403d4c82858239c4 data/toxony/tags/item/ingredients/poisonous.json
+c0cbb8f2c8d2ac0028efc77cadaf6b0f06906f8f data/toxony/tags/item/oil_repairable.json
+84a688d580e65f44374339728e2404d8503c34f9 data/toxony/tags/item/plants/poisonous.json
+53bbe356bbf17960992f5fd2e883830ce4f90899 data/toxony/tags/item/scalpels.json

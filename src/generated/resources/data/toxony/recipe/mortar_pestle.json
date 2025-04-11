@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "   ",
+    "STS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:mortar_pestle"
+  }
+}

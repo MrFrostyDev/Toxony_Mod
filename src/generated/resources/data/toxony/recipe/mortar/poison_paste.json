@@ -1,0 +1,17 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "tag": "toxony:ingredients/poisonous"
+    },
+    {
+      "tag": "toxony:plants/poisonous"
+    }
+  ],
+  "result": {
+    "id": "toxony:poison_paste"
+  }
+}

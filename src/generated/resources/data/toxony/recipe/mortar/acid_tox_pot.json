@@ -1,0 +1,20 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "toxony:warproot"
+    },
+    {
+      "item": "toxony:acid_slimeball"
+    },
+    {
+      "item": "toxony:bog_bone"
+    }
+  ],
+  "result": {
+    "id": "toxony:acid_tox_pot"
+  }
+}

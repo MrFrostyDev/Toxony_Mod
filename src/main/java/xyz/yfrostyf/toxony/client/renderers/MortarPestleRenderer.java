@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
@@ -14,10 +15,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.blocks.entities.MortarPestleBlockEntity;
-import xyz.yfrostyf.toxony.client.events.subscribers.RenderRegisterEvents;
 
 public class MortarPestleRenderer implements BlockEntityRenderer<MortarPestleBlockEntity> {
     private final ModelPart pestleModel;
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "mortar_pestle_pestle"), "main");
     public static final ResourceLocation PESTLE_TEXTURE = ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "textures/block/mortar_pestle_pestle.png");
 
 
@@ -34,7 +35,7 @@ public class MortarPestleRenderer implements BlockEntityRenderer<MortarPestleBlo
     }
 
     public MortarPestleRenderer(BlockEntityRendererProvider.Context context){
-        this.pestleModel = Minecraft.getInstance().getEntityModels().bakeLayer(RenderRegisterEvents.MORTAR_PESTLE_LAYER).getChild("pestle");
+        this.pestleModel = Minecraft.getInstance().getEntityModels().bakeLayer(LAYER_LOCATION).getChild("pestle");
     }
 
     @Override

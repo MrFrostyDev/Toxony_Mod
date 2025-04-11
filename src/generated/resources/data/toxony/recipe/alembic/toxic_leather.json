@@ -1,0 +1,16 @@
+{
+  "type": "toxony:alembic",
+  "boiltime": 800,
+  "ingredient": {
+    "item": "toxony:toxin"
+  },
+  "ingredient_to_convert": {
+    "item": "minecraft:leather"
+  },
+  "remaining": {
+    "id": "toxony:glass_vial"
+  },
+  "result": {
+    "id": "toxony:toxic_leather"
+  }
+}

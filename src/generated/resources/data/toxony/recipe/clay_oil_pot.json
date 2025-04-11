@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:clay_ball"
+    },
+    "X": {
+      "item": "toxony:poison_paste"
+    }
+  },
+  "pattern": [
+    "   ",
+    "#X#",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:clay_oil_pot"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_clay_pot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:clay_oil_pot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:clay_oil_pot_campfire"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_clay_pot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:clay_oil_pot_campfire"
+    ]
+  }
+}

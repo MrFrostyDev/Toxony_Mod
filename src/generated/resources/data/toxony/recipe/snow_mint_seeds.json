@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "toxony:snow_mint"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:snow_mint_seeds"
+  }
+}

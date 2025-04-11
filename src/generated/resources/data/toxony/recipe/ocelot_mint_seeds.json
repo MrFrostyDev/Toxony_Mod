@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "toxony:ocelot_mint"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:ocelot_mint_seeds"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "toxony:alembic",
+  "boiltime": 800,
+  "ingredient": {
+    "item": "toxony:toxic_formula"
+  },
+  "ingredient_to_convert": {
+    "item": "toxony:glass_vial"
+  },
+  "remaining": {
+    "id": "toxony:glass_vial"
+  },
+  "result": {
+    "id": "toxony:toxin"
+  }
+}

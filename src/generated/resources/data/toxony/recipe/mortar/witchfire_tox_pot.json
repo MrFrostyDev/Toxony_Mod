@@ -1,0 +1,20 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "toxony:warproot"
+    }
+  ],
+  "result": {
+    "id": "toxony:witchfire_tox_pot"
+  },
+  "use": {
+    "id": "toxony:empty_tox_pot"
+  }
+}

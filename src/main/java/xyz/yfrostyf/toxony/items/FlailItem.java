@@ -1,0 +1,125 @@
+package xyz.yfrostyf.toxony.items;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import xyz.yfrostyf.toxony.entities.item.FlailBall;
+
+
+public class FlailItem extends Item {
+    private static final int DEFAULT_USE_DURATION = 80;
+
+    public FlailItem(Properties properties) {
+        super(properties);
+    }
+
+    public static ItemAttributeModifiers createAttributes(float attackDamage, float attackSpeed) {
+        return ItemAttributeModifiers.builder()
+                .add(
+                        Attributes.ATTACK_DAMAGE,
+                        new AttributeModifier(
+                                BASE_ATTACK_DAMAGE_ID, attackDamage, AttributeModifier.Operation.ADD_VALUE
+                        ),
+                        EquipmentSlotGroup.MAINHAND
+                )
+                .add(
+                        Attributes.ATTACK_SPEED,
+                        new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND
+                )
+                .build();
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        if(hand == InteractionHand.MAIN_HAND){
+            player.startUsingItem(hand);
+            player.resetAttackStrengthTicker();
+
+            return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+        }
+        return InteractionResultHolder.pass(itemstack);
+    }
+
+    @Override
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        super.onUseTick(level, livingEntity, stack, remainingUseDuration);
+    }
+
+    @Override
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int chargeRemaining) {
+        if (livingEntity instanceof Player player) {
+            level.playSound(
+                    null,
+                    player.getX(),
+                    player.getY(),
+                    player.getZ(),
+                    SoundEvents.TRIDENT_THROW,
+                    SoundSource.NEUTRAL,
+                    0.8F,
+                    0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F)
+            );
+
+            if (!level.isClientSide()) {
+                int useDuration = this.getUseDuration(stack, player);
+                float newChargeRemaining = Math.max(chargeRemaining, 0);
+                float chargeProgress = (float)(1.0 - newChargeRemaining / useDuration);
+                double playerDamage = player.getAttribute(Attributes.ATTACK_DAMAGE) != null ? player.getAttribute(Attributes.ATTACK_DAMAGE).getValue() : 1;
+                level.addFreshEntity(new FlailBall(player, level, stack, Mth.floor(4 * chargeProgress), (float)playerDamage));
+            }
+
+            player.getCooldowns().addCooldown(this, FlailBall.FLAIL_LIFETIME);
+            player.gameEvent(GameEvent.ITEM_INTERACT_START);
+        }
+    }
+
+    public static boolean isUsingFlail(LivingEntity livingEntity){
+        if(livingEntity instanceof Player player
+                && player.getMainHandItem().getItem() instanceof FlailItem
+                && player.isUsingItem()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getAttackDamageBonus(Entity target, float damage, DamageSource damageSource) {
+        return super.getAttackDamageBonus(target, damage, damageSource);
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+        if(entity.getAttribute(Attributes.ATTACK_SPEED) != null){
+            return Mth.floor((float)20 / entity.getAttribute(Attributes.ATTACK_SPEED).getValue());
+        }
+        return DEFAULT_USE_DURATION;
+
+    }
+
+    @Override
+    public boolean useOnRelease(ItemStack stack) {
+        return stack.is(this);
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.NONE;
+    }
+}

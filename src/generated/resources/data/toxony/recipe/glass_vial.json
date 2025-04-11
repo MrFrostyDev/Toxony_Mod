@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "   ",
+    "G G",
+    " Q "
+  ],
+  "result": {
+    "count": 3,
+    "id": "toxony:glass_vial"
+  }
+}

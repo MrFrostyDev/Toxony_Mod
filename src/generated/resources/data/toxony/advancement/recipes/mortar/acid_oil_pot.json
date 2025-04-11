@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_empty_oil_pot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:empty_oil_pot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "toxony:mortar/acid_oil_pot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_empty_oil_pot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "toxony:mortar/acid_oil_pot"
+    ]
+  }
+}

@@ -105,6 +105,10 @@ public class ItemRegistry {
             .durability(300).attributes(VenomClubItem.createAttributes(8.0F, -3.1F))
     ));
 
+    public static final DeferredHolder<Item, Item> FLAIL = ITEMS.register("flail", () -> new FlailItem(new Item.Properties().stacksTo(1)
+            .durability(250).attributes(FlailItem.createAttributes(14.0F, -3.4F))
+    ));
+
     // |-----------------------------------------------------------------------------------|
     // |-----------------------------------Cycle Bolts-------------------------------------|
     // |-----------------------------------------------------------------------------------|

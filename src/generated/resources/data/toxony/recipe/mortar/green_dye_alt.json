@@ -1,0 +1,11 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "toxony:toxic_paste"
+    }
+  ],
+  "result": {
+    "id": "minecraft:green_dye"
+  }
+}

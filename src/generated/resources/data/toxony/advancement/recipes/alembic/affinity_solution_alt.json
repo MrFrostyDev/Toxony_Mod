@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_redstone_solution": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:redstone_solution"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "toxony:alembic/affinity_solution_alt"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_redstone_solution"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "toxony:alembic/affinity_solution_alt"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "toxony:venom_club"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_venom_tooth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:venom_tooth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_venom_tooth"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "toxony:venom_club"
+    ]
+  }
+}

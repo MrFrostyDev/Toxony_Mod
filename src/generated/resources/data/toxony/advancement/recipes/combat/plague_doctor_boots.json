@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "toxony:plague_doctor_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_toxic_leather": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:toxic_leather"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_toxic_leather"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "toxony:plague_doctor_boots"
+    ]
+  }
+}

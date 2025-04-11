@@ -1,0 +1,11 @@
+{
+  "type": "toxony:crucible",
+  "cooktime": 400,
+  "ingredient": {
+    "item": "toxony:poison_paste"
+  },
+  "result": {
+    "count": 1,
+    "id": "toxony:toxic_paste"
+  }
+}

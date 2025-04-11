@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    " F ",
+    " I ",
+    " I "
+  ],
+  "result": {
+    "count": 9,
+    "id": "toxony:bolt"
+  }
+}

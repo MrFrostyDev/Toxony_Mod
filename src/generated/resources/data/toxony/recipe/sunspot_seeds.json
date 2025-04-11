@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "toxony:sunspot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:sunspot_seeds"
+  }
+}
