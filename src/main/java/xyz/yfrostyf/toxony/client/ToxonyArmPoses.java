@@ -54,8 +54,8 @@ public class ToxonyArmPoses {
             if(entity instanceof Player player){
                 if(FlailItem.isUsingFlail(player)){
                     ModelPart focusHandPart = isRightHanded ? model.rightArm : model.leftArm;
-                    focusHandPart.xRot = focusHandPart.xRot * 0.5F - (float) Math.PI;
-                    focusHandPart.yRot = 0.0F;
+                    focusHandPart.xRot = focusHandPart.xRot * 0.5F - (float) Math.PI * 0.85F;
+                    focusHandPart.yRot = focusHandPart.yRot * 0.5F + (float) Math.PI * 0.10F;
                 }
             }
         }

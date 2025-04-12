@@ -15,7 +15,7 @@
         {
           "type": "minecraft:loot_table",
           "name": "",
-          "value": "toxony:basic_oils",
+          "value": "toxony:chests/basic_oils",
           "weight": 1
         },
         {

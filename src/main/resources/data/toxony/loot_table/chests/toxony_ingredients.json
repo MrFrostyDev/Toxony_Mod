@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "toxony:false_berries",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:ocelot_mint",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:nightshade",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:coldsnap",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:water_hemlock",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:venom_tooth",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:poison_sac",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:bog_bone",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:acid_slime",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:toxic_spit",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "functions": []
+}

@@ -1,0 +1,95 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 5,
+        "max": 7
+      },
+      "bonus_rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+            "value": "toxony:chests/basic_oils",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:copper_scalpel",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:empty_oil_pot",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:honeycomb",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:oil_base",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:loose_paper",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:poison_paste",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:poisonous_potato",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:glass_bottle",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              },
+              "conditions": []
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potato",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 5
+              }
+            }
+          ],
+          "conditions": []
+        }
+      ],
+      "functions": []
+    }
+  ],
+  "functions": []
+}

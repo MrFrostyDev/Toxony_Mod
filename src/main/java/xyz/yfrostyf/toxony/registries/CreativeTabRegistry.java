@@ -36,6 +36,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.WITCHING_BLADE.get());
                 output.accept(ItemRegistry.BONE_SAW.get());
                 output.accept(ItemRegistry.VENOM_CLUB.get());
+                output.accept(ItemRegistry.FLAIL.get());
                 output.accept(ItemRegistry.CYCLEBOW.get());
 
                 output.accept(ItemRegistry.BOLT_CARTRIDGE.get());

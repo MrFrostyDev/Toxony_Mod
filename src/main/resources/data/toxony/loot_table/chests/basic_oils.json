@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "toxony:fatigue_oil_pot",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:fire_resistance_oil_pot",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:glowing_oil_pot",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:poison_oil_pot",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "functions": []
+}

@@ -21,6 +21,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import xyz.yfrostyf.toxony.entities.item.FlailBall;
 
+import java.util.Optional;
+
 
 public class FlailItem extends Item {
     private static final int DEFAULT_USE_DURATION = 80;
@@ -84,7 +86,7 @@ public class FlailItem extends Item {
                 int useDuration = this.getUseDuration(stack, player);
                 float newChargeRemaining = Math.max(chargeRemaining, 0);
                 float chargeProgress = (float)(1.0 - newChargeRemaining / useDuration);
-                double playerDamage = player.getAttribute(Attributes.ATTACK_DAMAGE) != null ? player.getAttribute(Attributes.ATTACK_DAMAGE).getValue() : 1;
+                double playerDamage = player.getAttribute(Attributes.ATTACK_DAMAGE) != null ? player.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * chargeProgress : 1;
                 level.addFreshEntity(new FlailBall(player, level, stack, Mth.floor(4 * chargeProgress), (float)playerDamage));
             }
 
@@ -107,6 +109,15 @@ public class FlailItem extends Item {
 
     @Override
     public float getAttackDamageBonus(Entity target, float damage, DamageSource damageSource) {
+        ItemStack stack = damageSource.getWeaponItem();
+        if(stack != null && stack.is(this)){
+            Optional<ItemAttributeModifiers.Entry> optional = stack.getAttributeModifiers()
+                    .modifiers()
+                    .stream()
+                    .filter(e -> e.modifier().is(BASE_ATTACK_DAMAGE_ID))
+                    .findFirst();
+            return optional.isPresent() ? (float)-optional.get().modifier().amount() : 0.0F;
+        }
         return super.getAttackDamageBonus(target, damage, damageSource);
     }
 
