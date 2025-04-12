@@ -37,6 +37,14 @@ public class ClientExtensionsRegisterEvent {
                 return true;
             }
         }, ItemRegistry.CYCLEBOW.get());
+
+        event.registerItem(new IClientItemExtensions(){
+            @Override
+            public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
+                return ToxonyArmPoses.FLAIL_ENUM_PROXY.getValue();
+            }
+
+        }, ItemRegistry.FLAIL.get());
     }
 
     @SubscribeEvent

@@ -50,9 +50,16 @@ public class ItemPropertiesEvents {
 
             ItemProperties.register(
                     ItemRegistry.FLAIL.get(),
-                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "using"),
+                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "spin"),
                     (stack, level, player, seed) ->
                             FlailItem.isUsingFlail(player) ? 1.0F : 0.0F
+            );
+
+            ItemProperties.register(
+                    ItemRegistry.FLAIL.get(),
+                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "thrown"),
+                    (stack, level, player, seed) ->
+                            FlailItem.isFlailThrown(player) ? 1.0F : 0.0F
             );
         });
     }

@@ -5,12 +5,14 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
 import xyz.yfrostyf.toxony.items.CycleBow;
+import xyz.yfrostyf.toxony.items.FlailItem;
 
 @OnlyIn(Dist.CLIENT)
 public class ToxonyArmPoses {
@@ -18,6 +20,12 @@ public class ToxonyArmPoses {
             HumanoidModel.ArmPose.class,
             false,
             OneHandCrossbowArmPose.INSTANCE
+    );
+
+    public static final EnumProxy<HumanoidModel.ArmPose> FLAIL_ENUM_PROXY = new EnumProxy<>(
+            HumanoidModel.ArmPose.class,
+            false,
+            FlailArmPose.INSTANCE
     );
 
     public static class OneHandCrossbowArmPose implements IArmPoseTransformer{
@@ -32,6 +40,23 @@ public class ToxonyArmPoses {
                 ModelPart focusHandPart = isRightHanded ? model.rightArm : model.leftArm;
                 focusHandPart.yRot = (isRightHanded ? -0.3F : 0.3F) + model.head.yRot;
                 focusHandPart.xRot = (float) (-Math.PI / 2) + model.head.xRot + 0.1F;
+            }
+        }
+    }
+
+    public static class FlailArmPose implements IArmPoseTransformer{
+        public static final IArmPoseTransformer INSTANCE = new FlailArmPose();
+
+        // Based on the trident throwing arm pose
+        @Override
+        public void applyTransform(HumanoidModel<?> model, LivingEntity entity, HumanoidArm arm) {
+            boolean isRightHanded = arm == HumanoidArm.RIGHT;
+            if(entity instanceof Player player){
+                if(FlailItem.isUsingFlail(player)){
+                    ModelPart focusHandPart = isRightHanded ? model.rightArm : model.leftArm;
+                    focusHandPart.xRot = focusHandPart.xRot * 0.5F - (float) Math.PI;
+                    focusHandPart.yRot = 0.0F;
+                }
             }
         }
     }

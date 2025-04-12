@@ -53,13 +53,16 @@ public class FlailItem extends Item {
             player.startUsingItem(hand);
             player.resetAttackStrengthTicker();
 
-            return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+            return InteractionResultHolder.consume(itemstack);
         }
         return InteractionResultHolder.pass(itemstack);
     }
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        if(livingEntity instanceof Player player && player.getOffhandItem().is(this) && player.isUsingItem()){
+            player.getCooldowns().addCooldown(this, FlailBall.FLAIL_LIFETIME);
+        }
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);
     }
 
@@ -90,13 +93,16 @@ public class FlailItem extends Item {
         }
     }
 
+    public static boolean isFlailThrown(LivingEntity livingEntity){
+        return livingEntity instanceof Player player
+                && player.getMainHandItem().getItem() instanceof FlailItem item
+                && player.getCooldowns().isOnCooldown(item);
+    }
+
     public static boolean isUsingFlail(LivingEntity livingEntity){
-        if(livingEntity instanceof Player player
+        return livingEntity instanceof Player player
                 && player.getMainHandItem().getItem() instanceof FlailItem
-                && player.isUsingItem()){
-            return true;
-        }
-        return false;
+                && player.isUsingItem();
     }
 
     @Override
