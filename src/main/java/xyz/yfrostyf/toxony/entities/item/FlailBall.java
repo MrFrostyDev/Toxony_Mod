@@ -1,28 +1,38 @@
 package xyz.yfrostyf.toxony.entities.item;
 
+import net.minecraft.client.particle.ExplodeParticle;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 import xyz.yfrostyf.toxony.damages.FlailDamageSource;
 import xyz.yfrostyf.toxony.items.FlailItem;
 import xyz.yfrostyf.toxony.registries.EntityRegistry;
+import xyz.yfrostyf.toxony.registries.ParticleRegistry;
+
+import java.util.List;
 
 // Based on Minecraft's FishingHook entity.
 
@@ -33,6 +43,8 @@ public class FlailBall extends Projectile {
     private final RandomSource syncronizedRandom = RandomSource.create();
 
     protected float damage;
+    protected float impactPercent;
+    protected boolean isCharged;
     private int life;
     private boolean isFlying;
 
@@ -40,6 +52,8 @@ public class FlailBall extends Projectile {
         super(entityType, level);
         this.noCulling = true;
         this.damage = 0;
+        this.isCharged = false;
+        this.impactPercent = 0;
         this.entityData.set(ID_FOIL, false);
     }
 
@@ -48,10 +62,12 @@ public class FlailBall extends Projectile {
         return super.getDimensions(pose);
     }
 
-    public FlailBall(Player player, Level level, ItemStack stack, int force, float damage) {
+    public FlailBall(Player player, Level level, ItemStack stack, int force, float damage, boolean isCharged, float impactPercent) {
         this(EntityRegistry.FLAIL_BALL.get(), level);
         this.entityData.set(ID_FOIL, stack.hasFoil());
         this.damage = damage;
+        this.isCharged = isCharged;
+        this.impactPercent = impactPercent;
         this.setOwner(player);
         float f = player.getXRot();
         float f1 = player.getYRot();
@@ -173,6 +189,14 @@ public class FlailBall extends Projectile {
                         this.getOwner()
                 ), this.damage);
                 this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 0.8F);
+                if(isCharged){
+                    this.blastHit(this.getOwner(), result.getEntity());
+                    this.playSound(SoundEvents.FIREWORK_ROCKET_BLAST, 1.0F, 0.6F);
+                    ServerLevel svlevel = (ServerLevel)this.level();
+                    svlevel.sendParticles(ParticleTypes.EXPLOSION,
+                            this.getX(), this.getY(), this.getZ(),
+                            1, 0, 0, 0, 0);
+                }
             }
         }
     }
@@ -181,6 +205,46 @@ public class FlailBall extends Projectile {
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         this.setDeltaMovement(this.getDeltaMovement().normalize().scale(result.distanceTo(this)));
+    }
+
+    // Based on Minecraft's Explosion#explode method
+    protected void blastHit(Entity owner, Entity target){
+        float radius = 3.0F;
+        int k1 = Mth.floor(this.getX() - (double)radius - 1.0);
+        int l1 = Mth.floor(this.getX() + (double)radius + 1.0);
+        int i2 = Mth.floor(this.getY() - (double)radius - 1.0);
+        int i1 = Mth.floor(this.getY() + (double)radius + 1.0);
+        int j2 = Mth.floor(this.getZ() - (double)radius - 1.0);
+        int j1 = Mth.floor(this.getZ() + (double)radius + 1.0);
+        List<Entity> list = this.level().getEntities(this, new AABB(k1, i2, j2, l1, i1, j1));
+        Vec3 vec3 = new Vec3(this.getX(), this.getY(), this.getZ());
+
+        for (Entity entity : list) {
+            double d11 = Math.sqrt(entity.distanceToSqr(vec3)) / (double)radius;
+            if (d11 <= 1.0) {
+                double d5 = entity.getX() - this.getX();
+                double d7 = entity.getEyeY() - this.getY();
+                double d9 = entity.getZ() - this.getZ();
+                double d12 = Math.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
+                if (d12 != 0.0) {
+                    d5 /= d12;
+                    d7 /= d12;
+                    d9 /= d12;
+
+                    Holder.Reference<DamageType> damageType = this.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.THROWN);
+                    if(!entity.is(target)){
+                        entity.hurt(new FlailDamageSource(damageType, owner), this.damage * this.impactPercent);
+                    }
+
+                    double d13 = (1.0 - d11) * (double)Explosion.getSeenPercent(vec3, entity);
+                    d5 *= d13;
+                    d7 *= d13;
+                    d9 *= d13;
+                    Vec3 vec31 = new Vec3(d5, d7, d9);
+                    entity.setDeltaMovement(entity.getDeltaMovement().add(vec31));
+                }
+            }
+        }
     }
 
     public boolean isFoil(){

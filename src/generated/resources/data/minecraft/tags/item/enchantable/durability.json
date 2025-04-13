@@ -6,6 +6,15 @@
     "toxony:venom_club",
     "toxony:bone_saw",
     "toxony:cyclebow",
-    "toxony:witching_blade"
+    "toxony:witching_blade",
+    "toxony:flail",
+    "toxony:plague_doctor_hood",
+    "toxony:plague_doctor_coat",
+    "toxony:plague_doctor_leggings",
+    "toxony:plague_doctor_boots",
+    "toxony:hunter_hat",
+    "toxony:hunter_coat",
+    "toxony:hunter_leggings",
+    "toxony:hunter_boots"
   ]
 }

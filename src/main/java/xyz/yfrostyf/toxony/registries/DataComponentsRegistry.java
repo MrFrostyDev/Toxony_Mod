@@ -16,14 +16,18 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
+import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Impact;
 
 import java.util.List;
 
 public class DataComponentsRegistry {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ToxonyMain.MOD_ID);
+    public static final DeferredRegister<DataComponentType<?>> ENCHANTMENT_COMPONENT_TYPES = DeferredRegister.create(BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, ToxonyMain.MOD_ID);
+
 
     public static void register(IEventBus eventBus) {
         DATA_COMPONENTS.register(eventBus);
+        ENCHANTMENT_COMPONENT_TYPES.register(eventBus);
     }
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> ACTIVE = DATA_COMPONENTS.registerComponentType(
@@ -79,4 +83,11 @@ public class DataComponentsRegistry {
                     .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.INT)
     );
+
+    // Enchantments
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Impact>> IMPACT = ENCHANTMENT_COMPONENT_TYPES.register(
+            "impact",
+            () -> DataComponentType.<Impact>builder()
+                    .persistent(Impact.CODEC)
+                    .build());
 }

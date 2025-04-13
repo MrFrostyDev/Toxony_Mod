@@ -1,6 +1,5 @@
 package xyz.yfrostyf.toxony.items;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -8,6 +7,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -17,11 +17,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Impact;
 import xyz.yfrostyf.toxony.entities.item.FlailBall;
+import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class FlailItem extends Item {
@@ -87,12 +92,37 @@ public class FlailItem extends Item {
                 float newChargeRemaining = Math.max(chargeRemaining, 0);
                 float chargeProgress = (float)(1.0 - newChargeRemaining / useDuration);
                 double playerDamage = player.getAttribute(Attributes.ATTACK_DAMAGE) != null ? player.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * chargeProgress : 1;
-                level.addFreshEntity(new FlailBall(player, level, stack, Mth.floor(4 * chargeProgress), (float)playerDamage));
+
+                level.addFreshEntity(new FlailBall(
+                        player,
+                        level,
+                        stack,
+                        Mth.floor(4 * chargeProgress),
+                        (float)playerDamage,
+                        chargeRemaining <= 0,
+                        0.25F + getImpactBasedOnEnchant(stack)
+                ));
             }
 
+            stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
             player.getCooldowns().addCooldown(this, FlailBall.FLAIL_LIFETIME);
             player.gameEvent(GameEvent.ITEM_INTERACT_START);
         }
+    }
+
+    private static float getImpactBasedOnEnchant(ItemStack stack){
+        AtomicInteger atomicValue = new AtomicInteger(0);
+
+        EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantLevel) -> {
+            // Acquire the Impact instance from the enchantment holder (or null if this is a different enchantment)
+            Impact impact = enchantmentHolder.value().effects().get(DataComponentsRegistry.IMPACT.get());
+
+            // If this enchant has an Impact component, use it.
+            if(impact != null){
+                atomicValue.set(enchantLevel);
+            }
+        });
+        return (atomicValue.get()) * 0.25F;
     }
 
     public static boolean isFlailThrown(LivingEntity livingEntity){

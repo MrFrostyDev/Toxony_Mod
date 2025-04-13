@@ -56,20 +56,20 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(Items.PAPER, 2))
                 .requires(ItemRegistry.LOOSE_PAPER.get())
                 .unlockedBy("has_loose_paper", has(ItemRegistry.LOOSE_PAPER.get()))
-                .save(output);
+                .save(output, "paper_loose_paper");
 
         // Main
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.POISONOUS_POTATO)
                 .requires(ItemRegistry.POISON_PASTE.get())
                 .requires(Items.POTATO)
                 .unlockedBy("has_poison_paste", has(ItemRegistry.POISON_PASTE.get()))
-                .save(output);
+                .save(output, "poisonous_potato_paste");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.ROTTEN_FLESH)
                 .requires(ItemRegistry.POISON_PASTE.get())
                 .requires(ItemTags.MEAT)
                 .unlockedBy("has_poison_paste", has(ItemRegistry.POISON_PASTE.get()))
-                .save(output);
+                .save(output, "rotten_flesh_paste");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, PotionContents.createItemStack(Items.POTION, Potions.POISON))
                 .requires(ItemRegistry.POISON_PASTE.get())

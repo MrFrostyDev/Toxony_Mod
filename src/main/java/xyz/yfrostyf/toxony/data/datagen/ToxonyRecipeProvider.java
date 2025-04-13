@@ -22,5 +22,6 @@ public class ToxonyRecipeProvider extends RecipeProvider  {
         ToxonyCrucibleRecipes.get(output);
         ToxonyAlembicRecipes.get(output);
         ToxonyAlchemicalForgeRecipes.get(output);
+        ToxonySmithingTableRecipes.get(output);
     }
 }

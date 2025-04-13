@@ -1,6 +1,7 @@
 package xyz.yfrostyf.toxony.registries;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;

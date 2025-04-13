@@ -55,16 +55,13 @@ public class SpiderMutagenEffect extends MutagenEffect {
         return true;
     }
 
+    @Override
+    public void removeModifiers(LivingEntity entity) {
+        removeModifier(entity, Attributes.MOVEMENT_EFFICIENCY, MOVEEFFICIENCY_MODIFIER);
+    }
+
     @EventBusSubscriber
     public static class SpiderMutagenEvents {
-
-        @SubscribeEvent
-        public static void onMutagenRemove(MobEffectEvent.Remove event){
-            MobEffectInstance effectInst = event.getEffectInstance();
-            if(effectInst == null || !effectInst.is(MobEffectRegistry.SPIDER_MUTAGEN))return;
-
-            removeModifier(event.getEntity(), Attributes.MOVEMENT_EFFICIENCY, MOVEEFFICIENCY_MODIFIER);
-        }
 
         @SubscribeEvent
         public static void onDamageMutagenAttacker(LivingDamageEvent.Post event){

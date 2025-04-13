@@ -59,4 +59,9 @@ public class TagRegistry {
             Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "bolts")
     );
+
+    public static final TagKey<Item> FLAIL_ENCHANTABLE = TagKey.create(
+            Registries.ITEM,
+            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "enchantable/flail")
+    );
 }

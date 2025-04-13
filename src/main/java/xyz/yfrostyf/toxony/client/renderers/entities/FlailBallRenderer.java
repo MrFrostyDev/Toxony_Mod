@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -53,7 +52,7 @@ public class FlailBallRenderer extends EntityRenderer<FlailBall> {
             float f = player.getAttackAnim(partialTicks);
             float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
             Vec3 vec3 = this.getPlayerHandPos(player, f1, partialTicks);
-            Vec3 vec31 = entity.getPosition(partialTicks).add(0.0, 0.25, 0.0);
+            Vec3 vec31 = entity.getPosition(partialTicks).add(0.0, 0.1, 0.0); // Start position of string on item.
             float f2 = (float)(vec3.x - vec31.x);
             float f3 = (float)(vec3.y - vec31.y);
             float f4 = (float)(vec3.z - vec31.z);

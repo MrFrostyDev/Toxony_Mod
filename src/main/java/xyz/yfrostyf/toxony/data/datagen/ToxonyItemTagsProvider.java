@@ -20,6 +20,11 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
+        this.tag(TagRegistry.FLAIL_ENCHANTABLE)
+                .add(
+                        ItemRegistry.FLAIL.get()
+                );
+
         this.tag(ItemTags.WEAPON_ENCHANTABLE)
                 .add(
                         ItemRegistry.COPPER_SCALPEL.get(),
@@ -36,8 +41,54 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.VENOM_CLUB.get(),
                         ItemRegistry.BONE_SAW.get(),
                         ItemRegistry.CYCLEBOW.get(),
-                        ItemRegistry.WITCHING_BLADE.get()
+                        ItemRegistry.WITCHING_BLADE.get(),
+                        ItemRegistry.FLAIL.get(),
+                        ItemRegistry.PLAGUE_DOCTOR_HOOD.get(),
+                        ItemRegistry.PLAGUE_DOCTOR_COAT.get(),
+                        ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get(),
+                        ItemRegistry.PLAGUE_DOCTOR_BOOTS.get(),
+                        ItemRegistry.HUNTER_HAT.get(),
+                        ItemRegistry.HUNTER_COAT.get(),
+                        ItemRegistry.HUNTER_LEGGINGS.get(),
+                        ItemRegistry.HUNTER_BOOTS.get()
                 );
+
+        this.tag(ItemTags.ARMOR_ENCHANTABLE)
+                .add(
+                        ItemRegistry.PLAGUE_DOCTOR_HOOD.get(),
+                        ItemRegistry.PLAGUE_DOCTOR_COAT.get(),
+                        ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get(),
+                        ItemRegistry.PLAGUE_DOCTOR_BOOTS.get(),
+                        ItemRegistry.HUNTER_HAT.get(),
+                        ItemRegistry.HUNTER_COAT.get(),
+                        ItemRegistry.HUNTER_LEGGINGS.get(),
+                        ItemRegistry.HUNTER_BOOTS.get()
+                );
+
+        this.tag(ItemTags.HEAD_ARMOR)
+                .add(
+                        ItemRegistry.PLAGUE_DOCTOR_HOOD.get(),
+                        ItemRegistry.HUNTER_HAT.get()
+                );
+
+        this.tag(ItemTags.CHEST_ARMOR)
+                .add(
+                        ItemRegistry.PLAGUE_DOCTOR_COAT.get(),
+                        ItemRegistry.HUNTER_COAT.get()
+                );
+
+        this.tag(ItemTags.LEG_ARMOR)
+                .add(
+                        ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get(),
+                        ItemRegistry.HUNTER_LEGGINGS.get()
+                );
+
+        this.tag(ItemTags.FOOT_ARMOR)
+                .add(
+                        ItemRegistry.PLAGUE_DOCTOR_BOOTS.get(),
+                        ItemRegistry.HUNTER_BOOTS.get()
+                );
+
 
         this.tag(ItemTags.SWORDS)
                 .add(

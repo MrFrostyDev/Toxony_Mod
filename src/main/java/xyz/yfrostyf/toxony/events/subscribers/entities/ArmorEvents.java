@@ -21,7 +21,7 @@ import java.util.Optional;
 public class ArmorEvents {
 
     @SubscribeEvent
-    public static void onEffectAddedWithAttributeReduction(MobEffectEvent.Added event){
+    public static void onEffectAddedWithEffectReduction(MobEffectEvent.Added event){
         if(event.getEntity() instanceof LivingEntity livingEntity
                 && !event.getEffectInstance().isInfiniteDuration()
                 && !event.getEffectInstance().getEffect().value().isBeneficial()){

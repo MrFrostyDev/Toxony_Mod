@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.neoforged.neoforge.common.EffectCure;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -39,7 +40,7 @@ public class MutagenEffect extends MobEffect {
     //
     protected static void addModifier(LivingEntity entity, Holder<Attribute> attribute, AttributeModifier modifier) {
         AttributeInstance atrInstance = entity.getAttribute(attribute);
-        if (atrInstance == null) {return;}
+        if (atrInstance == null) return;
         atrInstance.addOrReplacePermanentModifier(modifier);
     }
 
@@ -48,7 +49,9 @@ public class MutagenEffect extends MobEffect {
     //
     protected static void removeModifier(LivingEntity entity, Holder<Attribute> attribute, AttributeModifier modifier) {
         AttributeInstance atrInstance = entity.getAttribute(attribute);
-        if (atrInstance == null) {return;}
+        if (atrInstance == null) return;
         atrInstance.removeModifier(modifier);
     }
+
+    public void removeModifiers(LivingEntity livingEntity) {}
 }

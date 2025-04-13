@@ -38,25 +38,15 @@ public class CatMutagenEffect extends MutagenEffect {
         }
     }
 
-    @EventBusSubscriber
-    public static class CatMutagenEvents {
+    @Override
+    public void removeModifiers(LivingEntity entity) {
+        removeModifier(entity, Attributes.FALL_DAMAGE_MULTIPLIER, FALL_MODIFIER);
+        removeModifier(entity, Attributes.MOVEMENT_SPEED, SPEED_MODIFIER);
+        removeModifier(entity, Attributes.JUMP_STRENGTH, JUMP_MODIFIER);
+        removeModifier(entity, Attributes.SAFE_FALL_DISTANCE, SAFEFALL_MODIFIER);
 
-        @SubscribeEvent
-        public static void onMutagenRemove(MobEffectEvent.Remove event){
-            MobEffectInstance effectInst = event.getEffectInstance();
-            if(effectInst == null || !effectInst.is(MobEffectRegistry.CAT_MUTAGEN)){return;}
-
-            removeModifier(event.getEntity(), Attributes.FALL_DAMAGE_MULTIPLIER, FALL_MODIFIER);
-
-            if(effectInst.getAmplifier() >= 1) {
-                removeModifier(event.getEntity(), Attributes.MOVEMENT_SPEED, SPEED_MODIFIER);
-                removeModifier(event.getEntity(), Attributes.JUMP_STRENGTH, JUMP_MODIFIER);
-                removeModifier(event.getEntity(), Attributes.SAFE_FALL_DISTANCE, SAFEFALL_MODIFIER);
-            }
-
-            if(event.getEntity().hasEffect(MobEffects.NIGHT_VISION)){
-                event.getEntity().removeEffect(MobEffects.NIGHT_VISION);
-            }
+        if(entity.hasEffect(MobEffects.NIGHT_VISION)){
+            entity.removeEffect(MobEffects.NIGHT_VISION);
         }
     }
 }

@@ -21,27 +21,17 @@
         },
         {
           "type": "minecraft:item",
-          "name": "toxony:coldsnap",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "toxony:water_hemlock",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "toxony:venom_tooth",
+          "name": "toxony:coldsnap",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "toxony:poison_sac",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "toxony:bog_bone",
+          "name": "toxony:toxic_spit",
           "weight": 1
         },
         {
@@ -51,8 +41,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "toxony:toxic_spit",
+          "name": "toxony:poison_sac",
           "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:venom_tooth"
         }
       ]
     }

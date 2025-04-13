@@ -8,6 +8,8 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
+import xyz.yfrostyf.toxony.api.util.AffinityUtil;
+import xyz.yfrostyf.toxony.network.SyncIngredientAffinityMapPacket;
 import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
@@ -24,5 +26,32 @@ public class PlayerEvents {
         }
 
         plyToxData.applyMutagens();
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer svplayer) {
+            ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
+            PacketDistributor.sendToPlayer(svplayer, SyncToxDataPacket.create(plyToxData));
+            PacketDistributor.sendToPlayer(svplayer, SyncIngredientAffinityMapPacket.create(AffinityUtil.getIngredientAffinityMap(svplayer.level())));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerCloned(PlayerEvent.Clone event) {
+        if (event.getEntity() instanceof ServerPlayer clonePlayer && event.isWasDeath()) {
+            ToxData oldToxData = event.getOriginal().getData(DataAttachmentRegistry.TOX_DATA);
+            clonePlayer.setData(DataAttachmentRegistry.TOX_DATA.get(), oldToxData);
+            PacketDistributor.sendToPlayer(clonePlayer, SyncToxDataPacket.create(oldToxData));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (event.getEntity() instanceof ServerPlayer svplayer) {
+            ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
+            PacketDistributor.sendToPlayer(svplayer, SyncToxDataPacket.create(plyToxData));
+            PacketDistributor.sendToPlayer(svplayer, SyncIngredientAffinityMapPacket.create(AffinityUtil.getIngredientAffinityMap(svplayer.level())));
+        }
     }
 }

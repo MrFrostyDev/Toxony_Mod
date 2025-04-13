@@ -28,7 +28,7 @@ public class AffinityUtil {
 
     public static Map<ResourceLocation, Affinity> getIngredientAffinityMap(Level level) {
         if(level instanceof ServerLevel svlevel){
-            SavedData savedData = svlevel.getDataStorage().get(IngredientAffinityMapData.factory(), "toxony_affinity_map");
+            SavedData savedData = svlevel.getServer().overworld().getDataStorage().get(IngredientAffinityMapData.factory(), "toxony_affinity_map");
             if(savedData instanceof IngredientAffinityMapData affinityMapSavedData){
                 return affinityMapSavedData.getIngredientToAffinityMap();
             }

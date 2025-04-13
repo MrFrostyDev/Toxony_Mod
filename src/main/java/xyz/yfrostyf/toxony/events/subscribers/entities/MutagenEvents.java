@@ -15,11 +15,6 @@ public class MutagenEvents {
     @SubscribeEvent
     public static void onMutagenRemoval(MobEffectEvent.Remove event){
         if(!(event.getEffect().value() instanceof MutagenEffect))return;
-
-        if(event.getEntity() instanceof Player player){
-            ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
-            if(plyToxData.getThreshold() <= 0) return;
-        }
         event.setCanceled(true);
     }
 }

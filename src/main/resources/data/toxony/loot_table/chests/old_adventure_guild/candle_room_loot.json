@@ -46,7 +46,6 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "",
           "value": "toxony:chests/toxony_ingredients",
           "weight": 1
         },

@@ -53,27 +53,20 @@ public class TurtleMutagenEffect extends MutagenEffect {
     }
 
     @Override
+    public void removeModifiers(LivingEntity entity) {
+        removeModifier(entity, net.neoforged.neoforge.common.NeoForgeMod.SWIM_SPEED, SWIM_MODIFIER);
+        removeModifier(entity, Attributes.OXYGEN_BONUS, OXYGEN_MODIFIER);
+        removeModifier(entity, Attributes.KNOCKBACK_RESISTANCE, KNOCKBACK_MODIFIER);
+        entity.removeEffect(MobEffects.NIGHT_VISION);
+    }
+
+    @Override
     public void onMobHurt(LivingEntity livingEntity, int amplifier, DamageSource damageSource, float amount) {
 
     }
 
     @EventBusSubscriber
     public static class TurtleMutagenEvents {
-
-        @SubscribeEvent
-        public static void onMutagenRemove(MobEffectEvent.Remove event){
-            MobEffectInstance effectInst = event.getEffectInstance();
-            if(effectInst == null || !effectInst.is(MobEffectRegistry.TURTLE_MUTAGEN))return;
-
-            if(effectInst.getAmplifier() >= 1) {
-                removeModifier(event.getEntity(), net.neoforged.neoforge.common.NeoForgeMod.SWIM_SPEED, SWIM_MODIFIER);
-                removeModifier(event.getEntity(), Attributes.OXYGEN_BONUS, OXYGEN_MODIFIER);
-            }
-            if(effectInst.getAmplifier() >= 2) {
-                removeModifier(event.getEntity(), Attributes.KNOCKBACK_RESISTANCE, KNOCKBACK_MODIFIER);
-            }
-        }
-
         @SubscribeEvent
         public static void onMutagenDamaged(LivingDamageEvent.Pre event){
             MobEffectInstance victimMutagen = event.getEntity().getEffect(MobEffectRegistry.TURTLE_MUTAGEN);

@@ -53,7 +53,7 @@ public class WildPoisonCropBlock extends BushBlock implements BonemealableBlock 
         this.contactEffects = contactEffects;
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
     }
-
+    
     @Override
     public MapCodec<WildPoisonCropBlock> codec() {
         return CODEC;

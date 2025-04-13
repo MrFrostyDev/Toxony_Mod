@@ -183,7 +183,9 @@
   "death.toxony.damage.acid": "%1$s learned they were not immune to acid",
   "death.toxony.damage.needle": "%1$s produced worthwhile results for %2$s's experiment",
 
-  "message.toxony.needle.fail": "Target now weak enough to inject.",
+  "message.toxony.tox.mutagen_clear": "With no toxin left, you reverted back to normal.",
+
+  "message.toxony.needle.fail": "Target not weak enough to inject.",
   "message.toxony.needle.knowledge.fail": "You gained some insight about %s.",
   "message.toxony.needle.knowledge.success": "You have gained sufficient knowledge for %s.",
 

@@ -34,6 +34,7 @@ public class NeedleItem extends Item {
             Holder<Item> storedHolder = otherStack.get(DataComponentsRegistry.AFFINITY_STORED_ITEM);
             otherStack.consume(1, player);
             thisStack.set(DataComponentsRegistry.AFFINITY_STORED_ITEM, storedHolder);
+            player.getInventory().add(new ItemStack(ItemRegistry.GLASS_VIAL.get()));
             player.playSound(SoundEvents.BREWING_STAND_BREW, 1.0F, 0.8F);
             return InteractionResultHolder.sidedSuccess(
                     ItemUtils.createFilledResult(

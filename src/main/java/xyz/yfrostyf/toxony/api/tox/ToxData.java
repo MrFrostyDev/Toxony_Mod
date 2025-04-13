@@ -1,15 +1,21 @@
 package xyz.yfrostyf.toxony.api.tox;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,6 +30,7 @@ import xyz.yfrostyf.toxony.api.events.ChangeToxEvent;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
 import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
+import xyz.yfrostyf.toxony.registries.ParticleRegistry;
 
 import java.util.*;
 
@@ -226,14 +233,14 @@ public class ToxData {
     public void applyMutagens(){
         List<MobEffectInstance> activeEffects = new ArrayList<>(player.getActiveEffects());
         for(MobEffectInstance effectInstance : activeEffects){
-            if (effectInstance.getEffect().value() instanceof MutagenEffect){
+            if (effectInstance.getEffect().value() instanceof MutagenEffect effect){
+                effect.removeModifiers(player);
                 player.removeEffectNoUpdate(effectInstance.getEffect());
             }
         }
         for(Holder<MobEffect> effect : mutagens){
             ToxUtil.applyMutagenEffect(player, BuiltInRegistries.MOB_EFFECT.wrapAsHolder(effect.value()));
         }
-        ToxonyMain.LOGGER.info("[applyMutagens]: mutagens: {}", mutagens);
     }
 
     public void addAndApplyMutagens(Iterable<Holder<MobEffect>> effects){
@@ -291,7 +298,10 @@ public class ToxData {
 
     public void addKnownIngredients(ItemStack itemstack, int amount){
         ResourceLocation resourceLocation = itemstack.getItemHolder().getKey().location();
-        this.knownIngredients.merge(resourceLocation, amount, Integer::sum);
+        this.knownIngredients.merge(resourceLocation, amount, (oldV, newV) -> {
+            if(oldV <= MINIMUM_KNOW) return oldV + newV;
+            return oldV;
+        });
     }
 
     public Map<ResourceLocation, Integer> getKnownIngredients(){

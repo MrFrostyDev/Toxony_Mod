@@ -182,7 +182,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
             int age = this.getAge(state);
             if (age < this.getMaxAge()) {
                 float f = getGrowthSpeed(state, level, pos);
-                if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos, state, random.nextInt((int)(40.0F / f) + 1) == 0)) {
+                if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos, state, random.nextInt((int)(30.0F / f) + 1) == 0)) {
                     level.setBlock(pos, this.getStateForAge(age + 1), Block.UPDATE_CLIENTS);
                     net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(level, pos, state);
                 }

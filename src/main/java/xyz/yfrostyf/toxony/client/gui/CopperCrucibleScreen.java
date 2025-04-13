@@ -30,7 +30,7 @@ public class CopperCrucibleScreen extends AbstractContainerScreen<CopperCrucible
         final int FIRE_POSX = 81;
         final int FIRE_POSY = 42 + FIRE_HEIGHT;
 
-        final int BAR_WIDTH = 115;
+        final int BAR_WIDTH = 3;
         final int BAR_HEIGHT = 25;
         final int BAR_POSX = 115;
         final int BAR_POSY = 17 + BAR_HEIGHT;
