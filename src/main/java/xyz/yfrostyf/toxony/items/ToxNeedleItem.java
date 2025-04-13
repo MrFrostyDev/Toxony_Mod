@@ -73,6 +73,8 @@ public class ToxNeedleItem extends Item {
         float targetMaxHealth = targetEntity.getMaxHealth();
         ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
 
+        if(targetHealth <= 0 || !targetEntity.isAlive()) return InteractionResult.PASS;
+
         if(stack.has(DataComponentsRegistry.AFFINITY_STORED_ITEM)){
             if (targetHealth > targetMaxHealth * HEALTH_THRESHOLD_PERCENT) {
                 if (player.level().isClientSide()) {
@@ -81,7 +83,7 @@ public class ToxNeedleItem extends Item {
                 return InteractionResult.FAIL;
             }
             handleKnowledgeFromItem(plyToxData, stack);
-            targetEntity.hurt(new NeedleDamageSource(player.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.PLAYER_ATTACK), player), 8.0F);
+            targetEntity.hurt(new NeedleDamageSource(player.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.PLAYER_ATTACK), player), 5.0F);
 
             player.playSound(SoundEvents.BEE_STING, 1.0F, 0.5F);
             player.awardStat(Stats.ITEM_USED.get(this));
