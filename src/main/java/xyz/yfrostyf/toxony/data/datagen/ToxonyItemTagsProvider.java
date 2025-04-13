@@ -33,6 +33,15 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.WITCHING_BLADE.get()
                 );
 
+        this.tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
+                .add(
+                        ItemRegistry.COPPER_SCALPEL.get(),
+                        ItemRegistry.NETHERITE_SCALPEL.get(),
+                        ItemRegistry.LETHAL_DOSE.get(),
+                        ItemRegistry.BONE_SAW.get(),
+                        ItemRegistry.WITCHING_BLADE.get()
+                );
+
         this.tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(
                         ItemRegistry.COPPER_SCALPEL.get(),
@@ -141,6 +150,11 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.SMOKE_BOLT.get(),
                         ItemRegistry.REGENERATION_BOLT.get(),
                         ItemRegistry.WITCHFIRE_BOLT.get()
+                );
+
+        this.tag(ItemTags.OCELOT_FOOD)
+                .add(
+                        ItemRegistry.OCELOT_MINT.get()
                 );
     }
 }

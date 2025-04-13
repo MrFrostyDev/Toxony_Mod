@@ -1,11 +1,13 @@
-// 1.21.1	2025-04-12T11:47:55.1063164	Tags for minecraft:item mod id vanilla
+// 1.21.1	2025-04-13T00:25:09.1079508	Tags for minecraft:item mod id vanilla
 bd24bff6eb8b544cdf04596fc3535cc4dfe0dc15 data/minecraft/tags/item/chest_armor.json
 50aabc4a9f9ff8f7e1ec6e2738897a61137d8a6e data/minecraft/tags/item/enchantable/armor.json
 257bf2e12dc76b050484afaa4a1ccbd13e3c27db data/minecraft/tags/item/enchantable/durability.json
+2f36d44a322297ef6f6f0693b128393e32afde13 data/minecraft/tags/item/enchantable/sharp_weapon.json
 e1800aab5d0ef6a3d9d47c8d148947629e544e31 data/minecraft/tags/item/enchantable/weapon.json
 e62907e22bf25a2706cfd729e439c858a284b018 data/minecraft/tags/item/foot_armor.json
 2804ebdcabd55bb3362c59024a9f1cdc698d9f39 data/minecraft/tags/item/head_armor.json
 5dec023b3b0f2a4c4de79ac275402cc1293a9260 data/minecraft/tags/item/leg_armor.json
+99de758097dc3fe0a2e2a9fb2114b2355fd22afb data/minecraft/tags/item/ocelot_food.json
 a34246bb2a77c36d83dadb6a58838b37020e5bb5 data/minecraft/tags/item/swords.json
 4f298793e22744c9c02d04d15dcdcabd2eef3d72 data/toxony/tags/item/bolts.json
 85db9601c6b79f5ddfa5bdbc012ae6835b7f77c5 data/toxony/tags/item/enchantable/flail.json
