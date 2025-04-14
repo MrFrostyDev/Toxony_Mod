@@ -58,7 +58,7 @@ public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
     }
 
     public ItemStack getRemainingingItem() {
-        return remainingingItem;
+        return remainingingItem.copy();
     }
 
     public Ingredient getIngredient(){

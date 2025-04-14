@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -180,7 +181,7 @@ public class ThrownOilPot extends ThrowableItemProjectile implements ItemSupplie
                         }
 
                         for (Holder<MobEffect> holder : itemOil.getOil().getEffects()) {
-                            MobEffectInstance mobeffectInst = new MobEffectInstance(holder, 400, itemOil.amplifier());
+                            MobEffectInstance mobeffectInst = new MobEffectInstance(holder, Mth.floor(itemOil.duration() * 1.5), itemOil.amplifier());
                             if (holder.value().isInstantenous()) {
                                 holder.value().applyInstantenousEffect(this, this.getOwner(), livingentity, mobeffectInst.getAmplifier(), distMult);
                             } else {

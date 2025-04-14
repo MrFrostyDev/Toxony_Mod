@@ -20,7 +20,8 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.api.oils.ItemOil;
+import xyz.yfrostyf.toxony.api.util.OilUtil;
 import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Impact;
 import xyz.yfrostyf.toxony.entities.item.FlailBall;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -56,7 +57,7 @@ public class FlailItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if(hand == InteractionHand.MAIN_HAND){
+        if(hand == InteractionHand.MAIN_HAND && !(player.getOffhandItem().getItem() instanceof OilPotItem)){
             player.startUsingItem(hand);
             player.resetAttackStrengthTicker();
 
@@ -93,6 +94,12 @@ public class FlailItem extends Item {
                 float chargeProgress = (float)(1.0 - newChargeRemaining / useDuration);
                 double playerDamage = player.getAttribute(Attributes.ATTACK_DAMAGE) != null ? player.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * chargeProgress : 1;
 
+                ItemOil itemOil = null;
+                if(stack.has(DataComponentsRegistry.OIL)){
+                    itemOil = stack.get(DataComponentsRegistry.OIL);
+                    OilUtil.useOil(level, stack, 1);
+                }
+
                 level.addFreshEntity(new FlailBall(
                         player,
                         level,
@@ -100,7 +107,8 @@ public class FlailItem extends Item {
                         Mth.floor(4 * chargeProgress),
                         (float)playerDamage,
                         chargeRemaining <= 0,
-                        0.25F + getImpactBasedOnEnchant(stack)
+                        0.25F + getImpactBasedOnEnchant(stack),
+                        itemOil
                 ));
             }
 

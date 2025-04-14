@@ -18,25 +18,25 @@ public class OilsRegistry {
 
     public static final DeferredHolder<Oil, Oil> POISON_OIL = OILS.register("poison_oil", () -> new Oil(
             Component.translatable("oil.toxony.poison"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            BuiltInRegistries.ITEM.getOrCreateTag(TagRegistry.OIL_APPLICABLE),
             List.of(MobEffects.POISON)
     ));
 
     public static final DeferredHolder<Oil, Oil> TOXIN_OIL = OILS.register("toxin_oil", () -> new Oil(
             Component.translatable("oil.toxony.toxin"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            BuiltInRegistries.ITEM.getOrCreateTag(TagRegistry.OIL_APPLICABLE),
             List.of(MobEffectRegistry.TOXIN)
     ));
 
     public static final DeferredHolder<Oil, Oil> FATIGUE_OIL = OILS.register("fatigue_oil", () -> new Oil(
             Component.translatable("oil.toxony.fatigue"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            BuiltInRegistries.ITEM.getOrCreateTag(TagRegistry.OIL_APPLICABLE),
             List.of(MobEffects.MOVEMENT_SLOWDOWN, MobEffects.DIG_SLOWDOWN, MobEffects.WEAKNESS)
     ));
 
     public static final DeferredHolder<Oil, Oil> FIRE_RESISTANCE_OIL = OILS.register("fire_resistance_oil", () -> new Oil(
             Component.translatable("oil.toxony.fire_resistance"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            BuiltInRegistries.ITEM.getOrCreateTag(TagRegistry.OIL_APPLICABLE),
             List.of(MobEffects.FIRE_RESISTANCE)
     ));
 
@@ -48,25 +48,25 @@ public class OilsRegistry {
 
     public static final DeferredHolder<Oil, Oil> ACID_OIL = OILS.register("acid_oil", () -> new Oil(
             Component.translatable("oil.toxony.acid"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            BuiltInRegistries.ITEM.getOrCreateTag(TagRegistry.OIL_APPLICABLE),
             List.of(MobEffectRegistry.ACID)
     ));
 
     public static final DeferredHolder<Oil, Oil> SMOKE_OIL = OILS.register("smoke_oil", () -> new Oil(
             Component.translatable("oil.toxony.smoke"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            BuiltInRegistries.ITEM.getOrCreateTag(TagRegistry.OIL_APPLICABLE),
             List.of(MobEffects.MOVEMENT_SLOWDOWN, MobEffects.BLINDNESS, MobEffects.WEAKNESS)
     ));
 
     public static final DeferredHolder<Oil, Oil> REGENERATION_OIL = OILS.register("regeneration_oil", () -> new Oil(
             Component.translatable("oil.toxony.regeneration"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            BuiltInRegistries.ITEM.getOrCreateTag(TagRegistry.OIL_APPLICABLE),
             List.of(MobEffects.REGENERATION, MobEffects.HEAL)
     ));
 
     public static final DeferredHolder<Oil, Oil> WITCHFIRE_OIL = OILS.register("witchfire_oil", () -> new Oil(
             Component.translatable("oil.toxony.witchfire"),
-            BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.WEAPON_ENCHANTABLE),
+            BuiltInRegistries.ITEM.getOrCreateTag(TagRegistry.OIL_APPLICABLE),
             List.of(MobEffectRegistry.TOXIN, MobEffectRegistry.FLAMMABLE)
     ));
 

@@ -1,8 +1,9 @@
-// 1.21.1	2025-04-07T23:33:45.9794061	Global Loot Modifiers : toxony
-c27269c3abe2e03ae2b3ee6489af6103021c5445 data/neoforge/loot_modifiers/global_loot_modifiers.json
+// 1.21.1	2025-04-14T09:56:08.6516247	Global Loot Modifiers : toxony
+4813242da0cd45a5e481457a7f1068029140367b data/neoforge/loot_modifiers/global_loot_modifiers.json
 1357d4bba1e5c780ef8d9dfe8805318693604edd data/toxony/loot_modifiers/bogged_unique_tox_drop.json
 bafe4d47e0113f7441477434957e0a2782da79c6 data/toxony/loot_modifiers/glow_squid_unique_tox_drop.json
 7e61788cf2f6a45e129e6ab59ac4c3023a000937 data/toxony/loot_modifiers/llama_unique_tox_drop.json
+da3c9446c54e53b34fbafab10e398129fc5f4ae7 data/toxony/loot_modifiers/polar_bear_unique_tox_drop.json
 9ac76109bdc07b14fd0e834bdf38c3cc9ed9c360 data/toxony/loot_modifiers/slime_unique_tox_drop.json
 4fef6b9b455dd105e5678a7479665ba789108962 data/toxony/loot_modifiers/squid_unique_tox_drop.json
 f03ceaf55553ba890549c893602f08a3122edf54 data/toxony/loot_modifiers/trader_llama_unique_tox_drop.json

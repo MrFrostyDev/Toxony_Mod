@@ -111,6 +111,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.TOXIC_SPIT.get());
                 output.accept(ItemRegistry.POISON_SAC.get());
 
+                output.accept(ItemRegistry.FALSE_BERRIES.get());
                 output.accept(ItemRegistry.OCELOT_MINT.get());
                 output.accept(ItemRegistry.SNOW_MINT.get());
                 output.accept(ItemRegistry.NIGHTSHADE.get());

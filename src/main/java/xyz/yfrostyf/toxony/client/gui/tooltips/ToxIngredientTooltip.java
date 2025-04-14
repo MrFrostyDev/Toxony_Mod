@@ -52,14 +52,16 @@ public class ToxIngredientTooltip implements ClientTooltipComponent {
         ToxData plyToxData = ClientToxData.getToxData();
         int index = 0;
 
-        if(plyToxData.knowsIngredient(itemstack)){
-            if(ClientIngredientAffinityMapData.getData().isPresent()){
-                Map<ResourceLocation, Affinity> map = ClientIngredientAffinityMapData.getData().get().getIngredientToAffinityMap();
-                Affinity affinity = map.get(itemstack.getItemHolder().getKey().location());
-                if(affinity != null){
-                    index = affinity.getIndex();
-                }
+        if(ClientIngredientAffinityMapData.getData().isPresent()){
+            Map<ResourceLocation, Affinity> map = ClientIngredientAffinityMapData.getData().get().getIngredientToAffinityMap();
+            Affinity affinity = map.get(itemstack.getItemHolder().getKey().location());
+            if(affinity != null){
+                index = affinity.getIndex();
             }
+        }
+
+        if(plyToxData.knowsIngredient(itemstack)){
+
 
         }
 

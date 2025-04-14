@@ -249,7 +249,7 @@ public class ItemRegistry {
     );
 
     public static final DeferredHolder<Item, Item> OCELOT_MINT = ITEMS.register("ocelot_mint", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.SUN.getKey(), AffinityRegistry.FOREST.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.FOREST.getKey(), AffinityRegistry.HEAT.getKey()))
             .tox(2).tolerance(1).tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
@@ -263,7 +263,7 @@ public class ItemRegistry {
     );
 
     public static final DeferredHolder<Item, Item> NIGHTSHADE = ITEMS.register("nightshade", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.MOON.getKey(), AffinityRegistry.FOREST.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.COLD.getKey(), AffinityRegistry.FOREST.getKey()))
             .tox(2).tolerance(1).tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
@@ -277,7 +277,7 @@ public class ItemRegistry {
     );
 
     public static final DeferredHolder<Item, Item> WATER_HEMLOCK = ITEMS.register("water_hemlock", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.WIND.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.DECAY.getKey()))
             .tox(2).tolerance(1).tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
@@ -291,7 +291,7 @@ public class ItemRegistry {
     );
 
     public static final DeferredHolder<Item, Item> COLDSNAP = ITEMS.register("coldsnap", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.COLD.getKey(), AffinityRegistry.WIND.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.COLD.getKey(), AffinityRegistry.DECAY.getKey()))
             .tox(2).tolerance(1).tier(0)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
@@ -305,37 +305,37 @@ public class ItemRegistry {
     );
 
     public static final DeferredHolder<Item, Item> BLOODROOT = ITEMS.register("bloodroot", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.NETHER.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.HEAT.getKey()))
             .tox(2).tolerance(1).tier(1)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
     );
 
     public static final DeferredHolder<Item, Item> WARPROOT = ITEMS.register("warproot", () -> ToxGiverItem.builder()
-            .properties(createAffinitiesProperty(AffinityRegistry.NETHER.getKey()))
+            .properties(createAffinitiesProperty(AffinityRegistry.SOUL.getKey()))
             .tox(2).tolerance(1).tier(1)
             .effect(new MobEffectInstance(MobEffects.POISON, 600, 0, false, false, false))
             .build()
     );
 
     public static final DeferredHolder<Item, Item> VENOM_TOOTH = ITEMS.register("venom_tooth", () -> new Item(
-            createAffinitiesProperty(AffinityRegistry.MOON.getKey(), AffinityRegistry.FOREST.getKey())
+            createAffinitiesProperty(AffinityRegistry.FOREST.getKey(), AffinityRegistry.COLD.getKey())
     ));
 
     public static final DeferredHolder<Item, Item> ACID_SLIMEBALL = ITEMS.register("acid_slimeball", () -> new Item(
-            createAffinitiesProperty(AffinityRegistry.SUN.getKey(), AffinityRegistry.FOREST.getKey())
+            createAffinitiesProperty(AffinityRegistry.DECAY.getKey(), AffinityRegistry.HEAT.getKey(), AffinityRegistry.OCEAN.getKey())
     ));
 
     public static final DeferredHolder<Item, Item> POISON_SAC = ITEMS.register("poison_sac", () -> new Item(
-            createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.SUN.getKey())
+            createAffinitiesProperty(AffinityRegistry.OCEAN.getKey())
     ));
 
     public static final DeferredHolder<Item, Item> BOG_BONE = ITEMS.register("bog_bone", () -> new Item(
-            createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.DECAY.getKey())
+            createAffinitiesProperty(AffinityRegistry.DECAY.getKey())
     ));
 
     public static final DeferredHolder<Item, Item> TOXIC_SPIT = ITEMS.register("toxic_spit", () -> new Item(
-            createAffinitiesProperty(AffinityRegistry.OCEAN.getKey(), AffinityRegistry.COLD.getKey())
+            createAffinitiesProperty(AffinityRegistry.OCEAN.getKey())
     ));
 
     // |-----------------------------------------------------------------------------------|

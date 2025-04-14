@@ -33,6 +33,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
+import xyz.yfrostyf.toxony.api.affinity.AffinityBlockPair;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
@@ -49,7 +50,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
                     propertiesCodec(),
                     BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("grown_item").forGetter(PoisonCropBlock::getGrownItem),
                     MobEffect.CODEC.listOf().fieldOf("effects").forGetter(PoisonCropBlock::getContactEffects),
-                    BuiltInRegistries.BLOCK.holderByNameCodec().optionalFieldOf("evolved_block").forGetter(PoisonCropBlock::getEvolvedBlock)
+                    AffinityBlockPair.CODEC.optionalFieldOf("evolved_plant").forGetter(PoisonCropBlock::getEvolvedPlant)
             ).apply(instance, PoisonCropBlock::new)
     );
 
@@ -66,27 +67,27 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
 
     protected final Supplier<Holder<Item>> grownItem;
     protected final List<Holder<MobEffect>> contactEffects;
-    protected final Supplier<Optional<Holder<Block>>> evolvedBlock;
+    protected final Supplier<Optional<AffinityBlockPair>> evolvedPlant;
 
     public PoisonCropBlock(Properties properties,
                            Holder<Item> grownItem,
                            List<Holder<MobEffect>> contactEffects,
-                           Optional<Holder<Block>> evolvedBlock){
+                           Optional<AffinityBlockPair> evolvedPlant){
         super(properties);
         this.grownItem = () -> grownItem;
         this.contactEffects = contactEffects;
-        this.evolvedBlock = () -> evolvedBlock;
+        this.evolvedPlant = () -> evolvedPlant;
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
     }
 
     public PoisonCropBlock(Properties properties,
                            Supplier<Holder<Item>> grownItem,
                            List<Holder<MobEffect>> contactEffects,
-                           Supplier<Optional<Holder<Block>>> evolvedBlock){
+                           Supplier<Optional<AffinityBlockPair>> evolvedPlant){
         super(properties);
         this.grownItem = grownItem;
         this.contactEffects = contactEffects;
-        this.evolvedBlock = evolvedBlock;
+        this.evolvedPlant = evolvedPlant;
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
     }
 
@@ -99,21 +100,16 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
         return contactEffects;
     }
 
-    public Optional<Holder<Block>> getEvolvedBlock() {
-        return evolvedBlock.get();
+    public Optional<AffinityBlockPair> getEvolvedPlant() {
+        return evolvedPlant.get();
     }
 
     public Holder<Item> getGrownItem() {
         return grownItem.get();
     }
 
-    public Affinity getBlockAffinity(Level level){
-        return AffinityUtil.readAffinityFromIngredientMap(new ItemStack(this.getGrownItem()), level);
-    }
-
     protected ItemInteractionResult tryTransformEvolved(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player){
         if(!stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)
-                || !stack.is(TagRegistry.POISONOUS_PLANTS_ITEM)
                 || stack.getItem().equals(this.grownItem.get().value())) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
         ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
@@ -127,10 +123,11 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
             }
         }
 
-        Optional<Holder<Block>> blockHolder = evolvedBlock.get();
-        if(blockHolder.isPresent()) {
-            if (blockHolder.get().value() instanceof PoisonCropBlock poisonCropBlock) {
-                if (poisonCropBlock.getBlockAffinity(level).equals(AffinityUtil.readAffinityFromIngredientMap(stack, level))) {
+        if(this.getEvolvedPlant().isPresent()) {
+            Holder<Affinity> affinityHolder = this.getEvolvedPlant().get().affinity();
+            Holder<Block> blockHolder = this.getEvolvedPlant().get().block();
+            if (blockHolder.value() instanceof PoisonCropBlock poisonCropBlock) {
+                if (affinityHolder.value().equals(AffinityUtil.readAffinityFromIngredientMap(stack, level))) {
                     if(!level.isClientSide()) {
                         stack.consume(1, player);
                         level.setBlock(pos, poisonCropBlock.defaultBlockState(), Block.UPDATE_ALL);
@@ -165,8 +162,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         int age = this.getAge(state);
         ItemStack graftStack = player.getMainHandItem().has(DataComponentsRegistry.POSSIBLE_AFFINITIES) ? player.getMainHandItem() : player.getOffhandItem();
-        if (!graftStack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if(age <= 1){
+        if (graftStack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES) && age <= 1){
             return tryTransformEvolved(stack, state, level, pos, player);
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

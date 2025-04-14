@@ -35,6 +35,11 @@ public class TagRegistry {
     // |-------------------------------------Item Tags--------------------------------------|
     // |------------------------------------------------------------------------------------|
 
+    public static final TagKey<Item> OIL_APPLICABLE = TagKey.create(
+            Registries.ITEM,
+            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "oil_applicable")
+    );
+
     public static final TagKey<Item> OIL_REPAIRABLE = TagKey.create(
             Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "oil_repairable")

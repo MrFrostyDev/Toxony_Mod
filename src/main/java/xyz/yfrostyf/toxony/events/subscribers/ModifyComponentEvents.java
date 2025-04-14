@@ -18,19 +18,31 @@ public class ModifyComponentEvents {
         // Sets the component on melon seeds
         event.modify(Items.POISONOUS_POTATO, builder ->
                 builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
-                        AffinityRegistry.SUN.getKey()
+                        AffinityRegistry.HEAT.getKey(), AffinityRegistry.FOREST.getKey()
                 ))
         );
 
         event.modify(Items.SPIDER_EYE, builder ->
                 builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
-                        AffinityRegistry.MOON.getKey()
+                        AffinityRegistry.COLD.getKey(), AffinityRegistry.FOREST.getKey()
                 ))
         );
 
-        event.modify(Items.INK_SAC, builder ->
+        event.modify(Items.WITHER_ROSE, builder ->
+                builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
+                        AffinityRegistry.DECAY.getKey()
+                ))
+        );
+
+        event.modify(Items.PUFFERFISH, builder ->
                 builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
                         AffinityRegistry.OCEAN.getKey()
+                ))
+        );
+
+        event.modify(Items.ROTTEN_FLESH, builder ->
+                builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
+                        AffinityRegistry.DECAY.getKey()
                 ))
         );
     }

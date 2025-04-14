@@ -47,7 +47,7 @@ import java.util.Optional;
 
 
 public class AlembicBlockEntity extends BlockEntity implements IItemHandler, MenuProvider {
-    public static final int MAX_FUEL = 5000;
+    public static final int MAX_FUEL = 10000;
     public static final int POTION_BOIL_TIME = 400;
     private static final int CONTAINER_SIZE = 3;
 
@@ -120,6 +120,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
         ItemStack output = blockEntity.itemContainer.getStackInSlot(0);
         ItemStack input = blockEntity.itemContainer.getStackInSlot(1);
         ItemStack fuel = blockEntity.itemContainer.getStackInSlot(2);
+        ItemStack returnStack = blockEntity.getReturnStack();
         ItemStack result = blockEntity.getResultItem();
 
         // Set fuel when blaze powder is placed and fuel is empty
@@ -138,7 +139,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
                 }
                 else{
                     blockEntity.itemContainer.setStackInSlot(0, result);
-                    blockEntity.itemContainer.setStackInSlot(1, blockEntity.returnStack);
+                    blockEntity.itemContainer.setStackInSlot(1, returnStack);
                     blockEntity.resetAlembic();
                 }
             }
@@ -152,14 +153,15 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
             Optional<RecipeHolder<AlembicRecipe>> optionalRecipe = blockEntity.findRecipe();
             ItemStack resultPotion = AlembicBlockEntity.findPotionAmplify(input);
             if(optionalRecipe.isPresent()){
-                ItemStack newResultItem = optionalRecipe.get().value().assemble(
+                AlembicRecipe recipeFound = optionalRecipe.get().value();
+                ItemStack newResultItem = recipeFound.assemble(
                         new PairCombineRecipeInput(input, output),
                         level.registryAccess());
 
                 newResultItem = handleNeedleStoredItem(input, newResultItem);
                 blockEntity.setResultItem(newResultItem);
-                blockEntity.returnStack = optionalRecipe.get().value().getRemainingingItem();
-                blockEntity.boilTotalTime = optionalRecipe.get().value().getBoilTime();
+                blockEntity.returnStack = recipeFound.getRemainingingItem();
+                blockEntity.boilTotalTime = recipeFound.getBoilTime();
             }
             else if(!resultPotion.isEmpty()){
                 blockEntity.setResultItem(resultPotion);
@@ -235,6 +237,10 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
         return resultItem.copy();
     }
 
+    public ItemStack getReturnStack(){
+        return returnStack.copy();
+    }
+
     public ItemStackHandler getItemContainer(){
         return itemContainer;
     }
@@ -260,7 +266,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
         for(int i=0;i<CONTAINER_SIZE;i++){
             list.add(i, itemContainer.getStackInSlot(i).copy()); // store output item
         }
-        list.add(this.returnStack); // store remaining item in sent list
+        list.add(returnStack); // store remaining item in sent list
         list.add(resultItem); // store result item in sent list.
 
         ContainerHelper.saveAllItems(tag, list, registries);

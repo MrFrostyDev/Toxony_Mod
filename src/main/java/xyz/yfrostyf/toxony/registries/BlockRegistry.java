@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.registries;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
@@ -14,7 +15,10 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
+import xyz.yfrostyf.toxony.api.affinity.AffinityBlockPair;
 import xyz.yfrostyf.toxony.api.blocks.PoisonCropBlock;
 import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.*;
@@ -75,13 +79,13 @@ public class BlockRegistry {
             )
     );
 
-    public static final DeferredHolder<Block, Block> OCELOT_MINT = createPoisonCrop(
-            "ocelot_mint",
-            () -> ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), () -> BlockRegistry.SNOW_MINT);
-
     public static final DeferredHolder<Block, Block> SNOW_MINT = createPoisonCrop(
             "snow_mint",
-            () -> ItemRegistry.SNOW_MINT, List.of(MobEffects.POISON), null);
+            () -> ItemRegistry.SNOW_MINT, List.of(MobEffects.POISON));
+
+    public static final DeferredHolder<Block, Block> OCELOT_MINT = createPoisonCrop(
+            "ocelot_mint",
+            () -> ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), AffinityRegistry.COLD, BlockRegistry.SNOW_MINT);
 
     public static final DeferredHolder<Block, Block> WILD_NIGHTSHADE = BLOCKS.register(
             "wild_nightshade",
@@ -96,13 +100,13 @@ public class BlockRegistry {
             )
     );
 
-    public static final DeferredHolder<Block, Block> NIGHTSHADE = createPoisonCrop(
-            "nightshade",
-            () -> ItemRegistry.NIGHTSHADE, List.of(MobEffects.POISON), () -> BlockRegistry.SUNSPOT);
-
     public static final DeferredHolder<Block, Block> SUNSPOT = createPoisonCrop(
             "sunspot",
-            () -> ItemRegistry.SUNSPOT, List.of(MobEffects.POISON), null);
+            () -> ItemRegistry.SUNSPOT, List.of(MobEffects.POISON));
+
+    public static final DeferredHolder<Block, Block> NIGHTSHADE = createPoisonCrop(
+            "nightshade",
+            () -> ItemRegistry.NIGHTSHADE, List.of(MobEffects.POISON), AffinityRegistry.HEAT, BlockRegistry.SUNSPOT);
 
     public static final DeferredHolder<Block, Block> WILD_WATER_HEMLOCK = BLOCKS.register(
             "wild_water_hemlock",
@@ -117,13 +121,13 @@ public class BlockRegistry {
             )
     );
 
-    public static final DeferredHolder<Block, Block> WATER_HEMLOCK = createPoisonCrop(
-            "water_hemlock",
-            () -> ItemRegistry.WATER_HEMLOCK, List.of(MobEffects.POISON), () -> BlockRegistry.MOONLIGHT_HEMLOCK);
-
     public static final DeferredHolder<Block, Block> MOONLIGHT_HEMLOCK = createPoisonCrop(
             "moonlight_hemlock",
-            () -> ItemRegistry.MOONLIGHT_HEMLOCK, List.of(MobEffects.POISON), null);
+            () -> ItemRegistry.MOONLIGHT_HEMLOCK, List.of(MobEffects.POISON));
+
+    public static final DeferredHolder<Block, Block> WATER_HEMLOCK = createPoisonCrop(
+            "water_hemlock",
+            () -> ItemRegistry.WATER_HEMLOCK, List.of(MobEffects.POISON), AffinityRegistry.FOREST, BlockRegistry.MOONLIGHT_HEMLOCK);
 
     public static final DeferredHolder<Block, Block> WILD_COLDSNAP = BLOCKS.register(
             "wild_coldsnap",
@@ -138,13 +142,13 @@ public class BlockRegistry {
             )
     );
 
-    public static final DeferredHolder<Block, Block> COLDSNAP = createPoisonCrop(
-            "coldsnap",
-            () -> ItemRegistry.COLDSNAP, List.of(MobEffects.POISON), () -> BlockRegistry.WHIRLSNAP);
-
     public static final DeferredHolder<Block, Block> WHIRLSNAP = createPoisonCrop(
             "whirlsnap",
-            () -> ItemRegistry.WHIRLSNAP, List.of(MobEffects.POISON), null);
+            () -> ItemRegistry.WHIRLSNAP, List.of(MobEffects.POISON));
+
+    public static final DeferredHolder<Block, Block> COLDSNAP = createPoisonCrop(
+            "coldsnap",
+            () -> ItemRegistry.COLDSNAP, List.of(MobEffects.POISON), AffinityRegistry.OCEAN, BlockRegistry.WHIRLSNAP);
 
     public static final DeferredHolder<Block, Block> WILD_BLOODROOT = BLOCKS.register(
             "wild_bloodroot",
@@ -159,13 +163,14 @@ public class BlockRegistry {
             )
     );
 
-    public static final DeferredHolder<Block, Block> BLOODROOT = createPoisonCrop(
-            "bloodroot",
-            () -> ItemRegistry.BLOODROOT, List.of(MobEffects.POISON), () -> BlockRegistry.WARPROOT);
 
     public static final DeferredHolder<Block, Block> WARPROOT = createPoisonCrop(
             "warproot",
-            () -> ItemRegistry.WARPROOT, List.of(MobEffects.POISON), null);
+            () -> ItemRegistry.WARPROOT, List.of(MobEffects.POISON));
+
+    public static final DeferredHolder<Block, Block> BLOODROOT = createPoisonCrop(
+            "bloodroot",
+            () -> ItemRegistry.BLOODROOT, List.of(MobEffects.POISON), AffinityRegistry.COLD, BlockRegistry.WARPROOT);
 
     // |--------------------------------------------------------------------------------------|
     // |------------------------------------Block Entities------------------------------------|
@@ -375,7 +380,7 @@ public class BlockRegistry {
         );
     }
 
-    private static DeferredHolder<Block, Block> createPoisonCrop(String name, Supplier<Holder<Item>> grownItem, List<Holder<MobEffect>> effects, Supplier<Holder<Block>> evolvedBlock){
+    private static DeferredHolder<Block, Block> createPoisonCrop(String name, Supplier<Holder<Item>> grownItem, List<Holder<MobEffect>> effects){
         return BLOCKS.register(name, () -> new PoisonCropBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.PLANT)
                 .randomTicks()
@@ -385,7 +390,21 @@ public class BlockRegistry {
                 .isRedstoneConductor((state,level,pos) -> false),
                 grownItem,
                 effects,
-                () -> Optional.ofNullable(evolvedBlock.get())
+                Optional::empty
+        ));
+    }
+
+    private static DeferredHolder<Block, Block> createPoisonCrop(String name, Supplier<Holder<Item>> grownItem, List<Holder<MobEffect>> effects, Holder<Affinity> affinity, Holder<Block> evolvedBlock){
+        return BLOCKS.register(name, () -> new PoisonCropBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.PLANT)
+                .randomTicks()
+                .noCollission()
+                .sound(SoundType.CROP)
+                .pushReaction(PushReaction.DESTROY)
+                .isRedstoneConductor((state,level,pos) -> false),
+                grownItem,
+                effects,
+                () -> Optional.of(AffinityBlockPair.of(affinity, evolvedBlock))
         ));
     }
 }

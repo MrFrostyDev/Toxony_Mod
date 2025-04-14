@@ -105,7 +105,15 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                 );
 
         this.tag(TagRegistry.OIL_REPAIRABLE)
-                .addTag(ItemTags.DURABILITY_ENCHANTABLE);
+                .addTag(
+                        ItemTags.DURABILITY_ENCHANTABLE
+                );
+
+        this.tag(TagRegistry.OIL_APPLICABLE)
+                .addTags(
+                        TagRegistry.FLAIL_ENCHANTABLE,
+                        ItemTags.WEAPON_ENCHANTABLE
+                );
 
         this.tag(TagRegistry.SCALPEL_ITEM)
                 .add(
@@ -128,6 +136,7 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
         this.tag(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .add(
                         Items.POISONOUS_POTATO,
+                        Items.WITHER_ROSE,
                         ItemRegistry.FALSE_BERRIES.get(),
                         ItemRegistry.OCELOT_MINT.get(),
                         ItemRegistry.SNOW_MINT.get(),

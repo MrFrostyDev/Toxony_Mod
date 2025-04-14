@@ -16,6 +16,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.PrimedTnt;
@@ -27,10 +29,11 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.*;
+import org.jetbrains.annotations.Nullable;
+import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.damages.FlailDamageSource;
 import xyz.yfrostyf.toxony.items.FlailItem;
 import xyz.yfrostyf.toxony.registries.EntityRegistry;
-import xyz.yfrostyf.toxony.registries.ParticleRegistry;
 
 import java.util.List;
 
@@ -45,6 +48,7 @@ public class FlailBall extends Projectile {
     protected float damage;
     protected float impactPercent;
     protected boolean isCharged;
+    @Nullable protected ItemOil oil;
     private int life;
     private boolean isFlying;
 
@@ -54,6 +58,7 @@ public class FlailBall extends Projectile {
         this.damage = 0;
         this.isCharged = false;
         this.impactPercent = 0;
+        this.oil = null;
         this.entityData.set(ID_FOIL, false);
     }
 
@@ -62,12 +67,13 @@ public class FlailBall extends Projectile {
         return super.getDimensions(pose);
     }
 
-    public FlailBall(Player player, Level level, ItemStack stack, int force, float damage, boolean isCharged, float impactPercent) {
+    public FlailBall(Player player, Level level, ItemStack stack, int force, float damage, boolean isCharged, float impactPercent, ItemOil oil) {
         this(EntityRegistry.FLAIL_BALL.get(), level);
         this.entityData.set(ID_FOIL, stack.hasFoil());
         this.damage = damage;
         this.isCharged = isCharged;
         this.impactPercent = impactPercent;
+        this.oil = oil;
         this.setOwner(player);
         float f = player.getXRot();
         float f1 = player.getYRot();
@@ -196,6 +202,26 @@ public class FlailBall extends Projectile {
                     svlevel.sendParticles(ParticleTypes.EXPLOSION,
                             this.getX(), this.getY(), this.getZ(),
                             1, 0, 0, 0, 0);
+                }
+            }
+        }
+        if(result.getEntity() instanceof LivingEntity livingEntity){
+            this.applyOilEffects(this.oil, livingEntity);
+        }
+    }
+
+    private void applyOilEffects(@Nullable ItemOil itemOil, LivingEntity target){
+        if(itemOil == null) return;
+        for (Holder<MobEffect> holder : itemOil.getOil().getEffects()) {
+            MobEffectInstance mobeffectInst = new MobEffectInstance(holder, itemOil.duration(), itemOil.amplifier());
+            if (holder.value().isInstantenous()) {
+                holder.value().applyInstantenousEffect(this, this.getOwner(), target, mobeffectInst.getAmplifier(), target.getHealth());
+            } else {
+                MobEffectInstance modifedMobEffectInstance = new MobEffectInstance(
+                        holder, mobeffectInst.getDuration(), mobeffectInst.getAmplifier(), mobeffectInst.isAmbient(), mobeffectInst.isVisible()
+                );
+                if (!modifedMobEffectInstance.endsWithin(20)) {
+                    target.addEffect(modifedMobEffectInstance, this.getEffectSource());
                 }
             }
         }

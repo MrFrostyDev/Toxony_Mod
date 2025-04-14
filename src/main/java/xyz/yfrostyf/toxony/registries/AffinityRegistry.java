@@ -87,5 +87,12 @@ public class AffinityRegistry {
             10,
             () -> List.of()
     ));
+    public static final DeferredHolder<Affinity, Affinity> HEAT = AFFINITIES.register("heat", () -> Affinity.create(
+            "Heat",
+            11,
+            () -> List.of(
+                    MobEffectRegistry.BLAZE_MUTAGEN
+            )
+    ));
 
 }
