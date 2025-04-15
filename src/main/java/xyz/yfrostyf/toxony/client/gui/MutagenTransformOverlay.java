@@ -35,6 +35,7 @@ public class MutagenTransformOverlay implements LayeredDraw.Layer{
 
         float progress = (float)(DEFAULT_PLAYTIME - (nextTickEnd - Minecraft.getInstance().player.tickCount)) / DEFAULT_PLAYTIME;
         int index = Mth.floor((progress % ((float)DEFAULT_PLAYTIME / TEXTURE_ARRAY.length)) * TEXTURE_ARRAY.length);
+        if(index >= TEXTURE_ARRAY.length || index < 0) return;
 
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
