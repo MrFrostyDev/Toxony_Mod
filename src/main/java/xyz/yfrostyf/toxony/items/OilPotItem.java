@@ -77,7 +77,9 @@ public class OilPotItem extends Item {
             otherStack.consume(1, player);
             oilPot.setDamageValue(0);
         }
-        else if(otherStack.is(getItemOil().getOil().getSupportedItems()) && !getItemOil().isEmpty()){
+        else if(otherStack.is(getItemOil().getOil().getSupportedItems())
+                && !getItemOil().isEmpty()
+                && this.getDamage(oilPot) < this.getMaxDamage(oilPot)){
             return ItemUtils.startUsingInstantly(level, player, hand);
         }
         return InteractionResultHolder.pass(oilPot);
