@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.client.gui.journal;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -10,6 +11,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.registries.AffinityRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.*;
@@ -34,6 +36,7 @@ public class JournalUtil {
         map.put("Refined Process", "journal.toxony.page.refined_process.cover");
         map.put("Pure Chemistry", "journal.toxony.page.pure_chemistry.cover");
         map.put("Mutagens", "journal.toxony.page.mutagens.cover");
+        map.put("Evolved Flora", "journal.toxony.page.evolved_flora.cover");
         map.put("Advanced Oils", "journal.toxony.page.advanced_oils.cover");
         map.put("Evolving Warfare", "journal.toxony.page.evolving_warfare.cover");
         map.put("Lost Chemistry", "journal.toxony.page.lost_chemistry.cover");
@@ -258,6 +261,21 @@ public class JournalUtil {
                 .TextPageScreen("journal.toxony.page.mutagens.7")
                 .TextPageScreen("journal.toxony.page.mutagens.8")
                 .TextPageScreen("journal.toxony.page.mutagens.9")
+
+                // |----------------- Evolved Flora ----------------- |
+                .ImagePageScreen("journal.toxony.page.evolved_flora.cover", "textures/gui/journal/journal_evolved_flora_cover.png")
+                .TextPageScreen("journal.toxony.page.evolved_flora.0")
+                .TextPageScreen("journal.toxony.page.evolved_flora.1")
+                .TextPageScreen("journal.toxony.page.evolved_flora.2")
+                .GraftingPageScreen("journal.toxony.page.evolved_flora.3",
+                        Map.of(
+                                new Pair<>(new ItemStack(ItemRegistry.OCELOT_MINT), new ItemStack(ItemRegistry.SNOW_MINT)), AffinityRegistry.DECAY.get(),
+                                new Pair<>(new ItemStack(ItemRegistry.NIGHTSHADE), new ItemStack(ItemRegistry.SUNSPOT)), AffinityRegistry.HEAT.get(),
+                                new Pair<>(new ItemStack(ItemRegistry.WATER_HEMLOCK), new ItemStack(ItemRegistry.MOONLIGHT_HEMLOCK)), AffinityRegistry.FOREST.get(),
+                                new Pair<>(new ItemStack(ItemRegistry.COLDSNAP), new ItemStack(ItemRegistry.WHIRLSNAP)), AffinityRegistry.OCEAN.get(),
+                                new Pair<>(new ItemStack(ItemRegistry.BLOODROOT), new ItemStack(ItemRegistry.WARPROOT)), AffinityRegistry.COLD.get()
+                        )
+                )
 
                 // |----------------- Advanced Oils ----------------- |
                 .ImagePageScreen("journal.toxony.page.advanced_oils.cover", "textures/gui/journal/journal_advanced_oils_cover.png")

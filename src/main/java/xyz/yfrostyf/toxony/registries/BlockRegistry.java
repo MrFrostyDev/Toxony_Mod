@@ -85,7 +85,7 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> OCELOT_MINT = createPoisonCrop(
             "ocelot_mint",
-            () -> ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), AffinityRegistry.COLD, BlockRegistry.SNOW_MINT);
+            () -> ItemRegistry.OCELOT_MINT, List.of(MobEffects.POISON), AffinityRegistry.DECAY, BlockRegistry.SNOW_MINT);
 
     public static final DeferredHolder<Block, Block> WILD_NIGHTSHADE = BLOCKS.register(
             "wild_nightshade",

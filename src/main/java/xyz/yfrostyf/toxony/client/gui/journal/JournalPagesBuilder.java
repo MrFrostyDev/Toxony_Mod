@@ -1,10 +1,12 @@
 package xyz.yfrostyf.toxony.client.gui.journal;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -98,6 +100,12 @@ public class JournalPagesBuilder {
 
     public JournalPagesBuilder TextAlembicPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs){
         pages.add(new TextAlembicPageScreen(translateId, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
+        indexCount++;
+        return this;
+    }
+
+    public JournalPagesBuilder GraftingPageScreen(String translateId, Map<Pair<ItemStack, ItemStack>, Affinity> inputs){
+        pages.add(new GraftingPageScreen(translateId, inputs, indexCount, emptyJournal));
         indexCount++;
         return this;
     }
