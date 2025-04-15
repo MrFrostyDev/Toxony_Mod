@@ -60,12 +60,12 @@ public class ThresholdEvents {
                     continue;
                 }
                 affinityToValueMap.put(mutagen, affinity.getValue());
-                ToxonyMain.LOGGER.info("[getMutagenFromAffinities called]: affinityToValueMap: {}", affinityToValueMap);
+                ToxonyMain.LOGGER.debug("[getMutagenFromAffinities called]: affinityToValueMap: {}", affinityToValueMap);
             }
         }
         Pair<Holder<MobEffect>, Integer> largest = null;
         for(Map.Entry<Holder<MobEffect>, Integer> entry : affinityToValueMap.entrySet()){
-            ToxonyMain.LOGGER.info("[getMutagenFromAffinities called]: mob effect pair entry: {}", entry);
+            ToxonyMain.LOGGER.debug("[getMutagenFromAffinities called]: mob effect pair entry: {}", entry);
             if(largest == null){
                 largest = new Pair<>(entry.getKey(), entry.getValue());
             }
@@ -74,7 +74,7 @@ public class ThresholdEvents {
             }
         }
         if(largest == null) return MobEffectRegistry.WOLF_MUTAGEN;
-        ToxonyMain.LOGGER.info("[getMutagenFromAffinities called]: largest pair found: {}", largest);
+        ToxonyMain.LOGGER.debug("[getMutagenFromAffinities called]: largest pair found: {}", largest);
         return largest.getFirst();
     }
 }
