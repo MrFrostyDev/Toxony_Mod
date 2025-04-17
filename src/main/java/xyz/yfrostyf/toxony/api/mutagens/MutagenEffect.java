@@ -14,7 +14,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.neoforged.neoforge.common.EffectCure;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
