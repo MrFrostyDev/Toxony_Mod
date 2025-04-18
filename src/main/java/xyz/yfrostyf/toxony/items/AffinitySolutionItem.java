@@ -4,8 +4,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
-public class AffinitySolution extends Item {
-    public AffinitySolution(Properties properties) {
+public class AffinitySolutionItem extends Item {
+    public AffinitySolutionItem(Properties properties) {
         super(properties);
     }
 

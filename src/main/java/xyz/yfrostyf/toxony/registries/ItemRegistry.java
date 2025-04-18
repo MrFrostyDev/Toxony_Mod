@@ -83,8 +83,8 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> REDSTONE_MIXTURE = ITEMS.register("redstone_mixture", () -> new Item(new Item.Properties().stacksTo(8)));
     public static final DeferredHolder<Item, Item> REDSTONE_SOLUTION = ITEMS.register("redstone_solution", () -> new Item(new Item.Properties().stacksTo(8)));
-    public static final DeferredHolder<Item, Item> AFFINITY_SOLUTION = ITEMS.register("affinity_solution", () -> new AffinitySolution(new Item.Properties().stacksTo(8)));
-    public static final DeferredHolder<Item, Item> MAGNIFYING_GLASS = ITEMS.register("magnifying_glass", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredHolder<Item, Item> AFFINITY_SOLUTION = ITEMS.register("affinity_solution", () -> new AffinitySolutionItem(new Item.Properties().stacksTo(8)));
+    public static final DeferredHolder<Item, Item> MAGNIFYING_GLASS = ITEMS.register("magnifying_glass", () -> new MagnifyingGlassItem(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> COPPER_NEEDLE = ITEMS.register("copper_needle", () -> new NeedleItem(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> TOX_NEEDLE = ITEMS.register("tox_needle", () -> new ToxNeedleItem(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> COPPER_SCALPEL = ITEMS.register("copper_scalpel", () -> new ScalpelItem(new Item.Properties().stacksTo(1)
@@ -94,7 +94,7 @@ public class ItemRegistry {
             .fireResistant().durability(1350).attributes(ScalpelItem.createAttributes(4.0F, -2.0F))
     ));
 
-    public static final DeferredHolder<Item, Item> CYCLEBOW = ITEMS.register("cyclebow", () -> new CycleBow(new Item.Properties()
+    public static final DeferredHolder<Item, Item> CYCLEBOW = ITEMS.register("cyclebow", () -> new CycleBowItem(new Item.Properties()
             .stacksTo(1).durability(550), 3));
 
     public static final DeferredHolder<Item, Item> BONE_SAW = ITEMS.register("bone_saw", () -> new BoneSawItem(new Item.Properties().stacksTo(1)

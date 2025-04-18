@@ -11,7 +11,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
-import xyz.yfrostyf.toxony.items.CycleBow;
+import xyz.yfrostyf.toxony.items.CycleBowItem;
 import xyz.yfrostyf.toxony.items.FlailItem;
 
 @OnlyIn(Dist.CLIENT)
@@ -36,7 +36,7 @@ public class ToxonyArmPoses {
         public void applyTransform(HumanoidModel<?> model, LivingEntity entity, HumanoidArm arm) {
             boolean isRightHanded = arm == HumanoidArm.RIGHT;
             ItemStack stack = entity.getItemInHand(isRightHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
-            if(CycleBow.isLoaded(stack)){
+            if(CycleBowItem.isLoaded(stack)){
                 ModelPart focusHandPart = isRightHanded ? model.rightArm : model.leftArm;
                 focusHandPart.yRot = (isRightHanded ? -0.3F : 0.3F) + model.head.yRot;
                 focusHandPart.xRot = (float) (-Math.PI / 2) + model.head.xRot + 0.1F;

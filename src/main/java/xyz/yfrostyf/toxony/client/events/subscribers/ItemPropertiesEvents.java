@@ -38,7 +38,7 @@ public class ItemPropertiesEvents {
                     ItemRegistry.CYCLEBOW.get(),
                     ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "loaded"),
                     (stack, level, player, seed) ->
-                            (float)CycleBow.getLoadedShots(stack)
+                            (float) CycleBowItem.getLoadedShots(stack)
             );
 
             ItemProperties.register(

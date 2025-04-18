@@ -34,14 +34,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class CycleBow extends ProjectileWeaponItem{
+public class CycleBowItem extends ProjectileWeaponItem{
     public static final Predicate<ItemStack> ARROWS_BOLTS_CARTRIDGES = ((Predicate<ItemStack>)(itemstack -> itemstack.is(TagRegistry.BOLTS))).or(((itemstack -> itemstack.is(ItemTags.ARROWS)))).or(itemstack -> itemstack.is(ItemRegistry.BOLT_CARTRIDGE) && itemstack.has(DataComponents.CHARGED_PROJECTILES));
 
     private static final float ARROW_POWER = 3.4F;
     private static final float DEFAULT_SINGLE_LOAD = 20.0F;
     private final int maxShots;
 
-    public CycleBow(Properties properties, int maxShots) {
+    public CycleBowItem(Properties properties, int maxShots) {
         super(properties);
         this.maxShots = maxShots;
     }
@@ -210,8 +210,8 @@ public class CycleBow extends ProjectileWeaponItem{
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remaining) {
-        if (!level.isClientSide && stack.getItem() instanceof CycleBow cycleBow) {
-            int tickThreshold = Mth.floor((cycleBow.getUseDuration(stack, livingEntity) - DEFAULT_SINGLE_LOAD) / this.maxShots);
+        if (!level.isClientSide && stack.getItem() instanceof CycleBowItem cycleBowItem) {
+            int tickThreshold = Mth.floor((cycleBowItem.getUseDuration(stack, livingEntity) - DEFAULT_SINGLE_LOAD) / this.maxShots);
             int useDuration = this.getUseDuration(stack, livingEntity);
             ItemStack ammoStack = livingEntity.getProjectile(stack);
 
