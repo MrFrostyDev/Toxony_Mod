@@ -1,9 +1,13 @@
 package xyz.yfrostyf.toxony.events.subscribers.entities.player;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.ToxonyMain;
@@ -52,6 +56,21 @@ public class PlayerEvents {
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
             PacketDistributor.sendToPlayer(svplayer, SyncToxDataPacket.create(plyToxData));
             PacketDistributor.sendToPlayer(svplayer, SyncIngredientAffinityMapPacket.create(AffinityUtil.getIngredientAffinityMap(svplayer.level())));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerUsePotion(LivingEntityUseItemEvent.Finish event) {
+        if (event.getEntity() instanceof Player player) {
+            PotionContents contents = event.getItem().getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+            if(contents.potion().isPresent()){
+                if(contents.potion().get() != Potions.WATER
+                        && contents.potion().get() != Potions.AWKWARD
+                        && contents.potion().get() != Potions.MUNDANE){
+                    ToxData toxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
+                    toxData.addTox(5);
+                }
+            }
         }
     }
 }
