@@ -2,6 +2,11 @@ package xyz.yfrostyf.toxony.client.gui.journal;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -9,9 +14,17 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
+import org.apache.http.config.Registry;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.data.datagen.enchantments.ToxonyEnchantments;
+import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Refill;
 import xyz.yfrostyf.toxony.registries.AffinityRegistry;
+import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.*;
@@ -32,8 +45,8 @@ public class JournalUtil {
         map.put("Poisonous Flora", "journal.toxony.page.poisonous_flora.cover");
         map.put("Oil Basics", "journal.toxony.page.oil_basics.cover");
         map.put("Basic Tools", "journal.toxony.page.basic_tools.cover");
-        map.put("Alchemical Warfare", "journal.toxony.page.alchemical_warfare.cover");
         map.put("Refined Process", "journal.toxony.page.refined_process.cover");
+        map.put("Alchemical Warfare", "journal.toxony.page.alchemical_warfare.cover");
         map.put("Pure Chemistry", "journal.toxony.page.pure_chemistry.cover");
         map.put("Mutagens", "journal.toxony.page.mutagens.cover");
         map.put("Evolved Flora", "journal.toxony.page.evolved_flora.cover");
@@ -148,32 +161,6 @@ public class JournalUtil {
                                 EMPTY, Items.STICK, EMPTY)
                 )
 
-                // |----------------- Alchemical Warfare ----------------- |
-                .ImagePageScreen("journal.toxony.page.alchemical_warfare.cover", "textures/gui/journal/journal_alchemical_warfare_cover.png")
-                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.0", ItemRegistry.OIL_POT_SASH.get(),
-                        List.of(EMPTY, EMPTY, Items.LEATHER,
-                                EMPTY, Items.IRON_INGOT, ItemRegistry.EMPTY_OIL_POT.get(),
-                                Items.LEATHER, ItemRegistry.EMPTY_OIL_POT.get(), EMPTY)
-                )
-                .TextPageScreen("journal.toxony.page.alchemical_warfare.1")
-                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.2", ItemRegistry.CYCLEBOW.get(),
-                        List.of(Items.COPPER_INGOT, ItemRegistry.POISON_PASTE.get(), Items.COPPER_INGOT,
-                                Items.STRING, Items.TRIPWIRE_HOOK, Items.STRING,
-                                EMPTY, Items.COPPER_INGOT, EMPTY)
-                )
-                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.3", ItemRegistry.BOLT.get(),
-                        List.of(EMPTY, Items.FLINT, EMPTY,
-                                EMPTY, Items.IRON_NUGGET, EMPTY,
-                                EMPTY, Items.IRON_NUGGET, EMPTY)
-                )
-                .TextPageScreen("journal.toxony.page.alchemical_warfare.4")
-                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.5", ItemRegistry.BOLT_CARTRIDGE.get(),
-                        List.of(EMPTY, EMPTY, EMPTY,
-                                EMPTY, Items.LEATHER, EMPTY,
-                                Items.STRING, Items.COPPER_INGOT, Items.STRING)
-                )
-                .TextPageScreen("journal.toxony.page.alchemical_warfare.6")
-
                 // |----------------- Refined Process ----------------- |
                 .ImagePageScreen("journal.toxony.page.refined_process.cover", "textures/gui/journal/journal_refined_process_cover.png")
                 .TextPageScreen("journal.toxony.page.refined_process.0")
@@ -201,39 +188,73 @@ public class JournalUtil {
                                 recipe_toxic_blend.getIngredients().get(2), Ingredient.EMPTY
                         )
                 )
-                .TextPageScreen("journal.toxony.page.refined_process.7")
-                .TextCraftingPageScreenItem("journal.toxony.page.refined_process.8", ItemRegistry.GLASS_VIAL.get(),
+
+                // |----------------- Alchemical Warfare ----------------- |
+                .ImagePageScreen("journal.toxony.page.alchemical_warfare.cover", "textures/gui/journal/journal_alchemical_warfare_cover.png")
+                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.0", ItemRegistry.OIL_POT_SASH.get(),
+                        List.of(EMPTY, EMPTY, Items.LEATHER,
+                                EMPTY, Items.IRON_INGOT, ItemRegistry.EMPTY_OIL_POT.get(),
+                                Items.LEATHER, ItemRegistry.EMPTY_OIL_POT.get(), EMPTY)
+                )
+                .TextPageScreen("journal.toxony.page.alchemical_warfare.1")
+                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.2", ItemRegistry.CYCLEBOW.get(),
+                        List.of(Items.COPPER_INGOT, ItemRegistry.POISON_PASTE.get(), Items.COPPER_INGOT,
+                                Items.STRING, Items.TRIPWIRE_HOOK, Items.STRING,
+                                EMPTY, Items.COPPER_INGOT, EMPTY)
+                )
+                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.3", ItemRegistry.BOLT.get(),
+                        List.of(EMPTY, Items.FLINT, EMPTY,
+                                EMPTY, Items.IRON_NUGGET, EMPTY,
+                                EMPTY, Items.IRON_NUGGET, EMPTY)
+                )
+                .TextPageScreen("journal.toxony.page.alchemical_warfare.4")
+                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.5", ItemRegistry.BOLT_CARTRIDGE.get(),
                         List.of(EMPTY, EMPTY, EMPTY,
-                                Items.GLASS, EMPTY, Items.GLASS,
-                                EMPTY, Items.QUARTZ, EMPTY)
+                                EMPTY, Items.LEATHER, EMPTY,
+                                Items.STRING, Items.COPPER_INGOT, Items.STRING)
                 )
-                .TextCraftingPageScreenItem("journal.toxony.page.refined_process.9", ItemRegistry.TOXIN_CANISTER.get(),
-                        List.of(Items.COPPER_INGOT, ItemRegistry.TOXIC_PASTE.get(), Items.COPPER_INGOT,
-                                Items.COPPER_INGOT, ItemRegistry.GLASS_VIAL.get(), Items.COPPER_INGOT,
-                                Items.COPPER_INGOT, ItemRegistry.TOXIC_PASTE.get(), Items.COPPER_INGOT)
+                .TextPageScreen("journal.toxony.page.alchemical_warfare.6")
+                .TextPageScreen("journal.toxony.page.alchemical_warfare.7")
+                .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.8", ItemRegistry.POTION_FLASK.get(),
+                        List.of(EMPTY, ItemRegistry.TOXIC_PASTE.get(), EMPTY,
+                                Items.LEATHER, Items.GLASS_BOTTLE, Items.LEATHER,
+                                EMPTY, Items.LEATHER, EMPTY)
                 )
-                .TextCraftingPageScreenItem("journal.toxony.page.refined_process.10", ItemRegistry.ALEMBIC.get(),
-                        List.of(Items.COPPER_INGOT, EMPTY, EMPTY,
-                                Items.COPPER_INGOT, Items.IRON_INGOT, EMPTY,
-                                ItemRegistry.ALEMBIC_BASE.get(), EMPTY, Items.COPPER_INGOT)
-                )
-                .TextCraftingPageScreenItem("journal.toxony.page.refined_process.11", ItemRegistry.ALEMBIC_BASE.get(),
-                        List.of(EMPTY, Items.IRON_INGOT, EMPTY,
-                                Items.COPPER_INGOT, ItemRegistry.TOXIN_CANISTER.get(), Items.COPPER_INGOT,
-                                Items.COPPER_INGOT, Items.COPPER_INGOT, Items.COPPER_INGOT)
-                )
-                .TextPageScreen("journal.toxony.page.refined_process.12")
+                .TextPageScreen("journal.toxony.page.alchemical_warfare.9")
+                .TextSingleItemTopScreen("journal.toxony.page.alchemical_warfare.10", createEnchantedItemStack(Items.ENCHANTED_BOOK, ToxonyEnchantments.REFILL))
 
                 // |----------------- Pure Chemistry ----------------- |
                 .ImagePageScreen("journal.toxony.page.pure_chemistry.cover", "textures/gui/journal/journal_pure_chemistry_cover.png")
                 .TextPageScreen("journal.toxony.page.pure_chemistry.0")
-                .TextCraftingPageScreenStack("journal.toxony.page.pure_chemistry.1", ItemRegistry.TOXIC_FORMULA.get(),
+                .TextCraftingPageScreenItem("journal.toxony.page.pure_chemistry.1", ItemRegistry.GLASS_VIAL.get(),
+                        List.of(EMPTY, EMPTY, EMPTY,
+                                Items.GLASS, EMPTY, Items.GLASS,
+                                EMPTY, Items.QUARTZ, EMPTY)
+                )
+                .TextCraftingPageScreenItem("journal.toxony.page.pure_chemistry.2", ItemRegistry.TOXIN_CANISTER.get(),
+                        List.of(Items.COPPER_INGOT, ItemRegistry.TOXIC_PASTE.get(), Items.COPPER_INGOT,
+                                Items.COPPER_INGOT, ItemRegistry.GLASS_VIAL.get(), Items.COPPER_INGOT,
+                                Items.COPPER_INGOT, ItemRegistry.TOXIC_PASTE.get(), Items.COPPER_INGOT)
+                )
+                .TextCraftingPageScreenItem("journal.toxony.page.pure_chemistry.3", ItemRegistry.ALEMBIC.get(),
+                        List.of(Items.COPPER_INGOT, EMPTY, EMPTY,
+                                Items.COPPER_INGOT, Items.IRON_INGOT, EMPTY,
+                                ItemRegistry.ALEMBIC_BASE.get(), EMPTY, Items.COPPER_INGOT)
+                )
+                .TextCraftingPageScreenItem("journal.toxony.page.pure_chemistry.4", ItemRegistry.ALEMBIC_BASE.get(),
+                        List.of(EMPTY, Items.IRON_INGOT, EMPTY,
+                                Items.COPPER_INGOT, ItemRegistry.TOXIN_CANISTER.get(), Items.COPPER_INGOT,
+                                Items.COPPER_INGOT, Items.COPPER_INGOT, Items.COPPER_INGOT)
+                )
+                .TextPageScreen("journal.toxony.page.pure_chemistry.5")
+                .TextPageScreen("journal.toxony.page.pure_chemistry.6")
+                .TextCraftingPageScreenStack("journal.toxony.page.pure_chemistry.7", ItemRegistry.TOXIC_FORMULA.get(),
                         List.of(Items.NETHER_WART.getDefaultInstance(), PotionContents.createItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER), EMPTY.getDefaultInstance(),
                                 new ItemStack(ItemRegistry.TOXIC_PASTE.get()), EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(),
                                 EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance())
                 )
-                .TextPageScreen("journal.toxony.page.pure_chemistry.2")
-                .TextAlembicPageScreenIngredients("journal.toxony.page.pure_chemistry.3", ItemRegistry.TOXIN.get(),
+                .TextPageScreen("journal.toxony.page.pure_chemistry.8")
+                .TextAlembicPageScreenIngredients("journal.toxony.page.pure_chemistry.9", ItemRegistry.TOXIN.get(),
                         List.of(recipe_toxin.getIngredients().get(0), recipe_toxin.getIngredients().get(1))
                 )
 
@@ -285,7 +306,7 @@ public class JournalUtil {
                 )
                 .TextMortarPageScreenIngredients("journal.toxony.page.advanced_oils.2", ItemRegistry.TOXIN_TOX_POT.get(),
                         List.of(recipe_toxin_tox_pot.getIngredients().get(0), recipe_toxin_tox_pot.getIngredients().get(1),
-                                Ingredient.EMPTY, Ingredient.EMPTY
+                                recipe_toxin_tox_pot.getIngredients().get(2), Ingredient.EMPTY
                         )
                 )
                 .TextMortarPageScreenIngredients("journal.toxony.page.advanced_oils.3", ItemRegistry.SMOKE_TOX_POT.get(),
@@ -309,7 +330,7 @@ public class JournalUtil {
                         )
                 )
                 .TextMortarPageScreenIngredients("journal.toxony.page.advanced_oils.7", ItemRegistry.OIL_BASE.get(),
-                        List.of(Ingredient.of(Items.HONEYCOMB), Ingredient.of(ItemRegistry.TOXIN.get()),
+                        List.of(Ingredient.of(Items.HONEYCOMB), Ingredient.of(ItemRegistry.TOXIC_PASTE.get()),
                                 Ingredient.EMPTY, Ingredient.EMPTY
                         )
                 )
@@ -347,6 +368,11 @@ public class JournalUtil {
                                 EMPTY, Items.NETHERITE_INGOT, ItemRegistry.EMPTY_TOX_POT.get(),
                                 ItemRegistry.TOXIC_LEATHER.get(), ItemRegistry.EMPTY_TOX_POT.get(), EMPTY)
                 )
+                .TextCraftingPageScreenItem("journal.toxony.page.evolving_warfare.9", ItemRegistry.TOXIN_FLASK.get(),
+                        List.of(Items.QUARTZ, Items.NETHERITE_INGOT, Items.QUARTZ,
+                                ItemRegistry.TOXIC_LEATHER.get(), Items.GLASS_BOTTLE, ItemRegistry.TOXIC_LEATHER.get(),
+                                EMPTY, ItemRegistry.TOXIC_LEATHER.get(), EMPTY)
+                )
 
                 // |----------------- Lost Chemistry ----------------- |
                 .ImagePageScreen("journal.toxony.page.lost_chemistry.cover", "textures/gui/journal/journal_lost_chemistry_cover.png")
@@ -360,12 +386,25 @@ public class JournalUtil {
 
     }
 
-    public static RecipeHolder<?> getRecipe(RecipeManager manager, String location){
+    private static RecipeHolder<?> getRecipe(RecipeManager manager, String location){
         Optional<RecipeHolder<?>> optional = Optional.empty();
         if(level != null){
             optional = manager.byKey(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, location));
         }
         return optional.orElseThrow();
+    }
+
+    private static ItemStack createEnchantedItemStack(Item itemStack, ResourceKey<Enchantment> key){
+        if(Minecraft.getInstance().getConnection() == null) return ItemStack.EMPTY;
+        Holder.Reference<Enchantment> holder = Minecraft.getInstance().getConnection()
+                .registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(key);
+
+        ItemStack stack = new ItemStack(itemStack);
+        ItemEnchantments.Mutable enchantmentMutable = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+        enchantmentMutable.set(holder, 1);
+
+        EnchantmentHelper.setEnchantments(stack, enchantmentMutable.toImmutable());
+        return stack;
     }
 
 }

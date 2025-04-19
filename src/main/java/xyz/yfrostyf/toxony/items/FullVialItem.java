@@ -79,10 +79,12 @@ public class FullVialItem extends PotionItem {
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
+    /*
     @Override
     public boolean isFoil(ItemStack stack) {
         if(stack.has(DataComponents.POTION_CONTENTS) && !stack.get(DataComponents.POTION_CONTENTS).is(Potions.WATER)
                 || stack.has(DataComponentsRegistry.AFFINITY_STORED_ITEM)) return true;
         return super.isFoil(stack);
     }
+    */
 }

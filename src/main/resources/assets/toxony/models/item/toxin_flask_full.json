@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "toxony:item/potion_flask_full_overlay",
+    "layer1": "toxony:item/toxin_flask_full"
+  }
+}

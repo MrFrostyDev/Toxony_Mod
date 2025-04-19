@@ -72,7 +72,20 @@ public class ItemPropertiesEvents {
                             return player.getUseItem() == stack && FlailItem.isFlailThrown(player) ? 1.0F : 0.0F;
                         }
                     }
+            );
 
+            ItemProperties.register(
+                    ItemRegistry.POTION_FLASK.get(),
+                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "uses"),
+                    (stack, level, player, seed) ->
+                            PotionFlaskItem.isFull(stack)
+            );
+
+            ItemProperties.register(
+                    ItemRegistry.TOXIN_FLASK.get(),
+                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "uses"),
+                    (stack, level, player, seed) ->
+                            PotionFlaskItem.isFull(stack)
             );
         });
     }

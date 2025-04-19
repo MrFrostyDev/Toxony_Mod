@@ -272,6 +272,27 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BREWING, ItemRegistry.POTION_FLASK.get())
+                .pattern(" T ")
+                .pattern("LGL")
+                .pattern(" L ")
+                .define('T', ItemRegistry.TOXIC_PASTE.get())
+                .define('G', Items.GLASS_BOTTLE)
+                .define('L', Items.LEATHER)
+                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BREWING, ItemRegistry.TOXIN_FLASK.get())
+                .pattern("QNQ")
+                .pattern("LGL")
+                .pattern(" L ")
+                .define('N', Items.NETHERITE_INGOT)
+                .define('Q', Items.QUARTZ)
+                .define('G', Items.GLASS_BOTTLE)
+                .define('L', ItemRegistry.TOXIC_LEATHER.get())
+                .unlockedBy("has_toxic_leather", has(ItemRegistry.TOXIC_LEATHER.get()))
+                .save(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.OIL_POT_SASH.get())
                 .pattern("  L")
                 .pattern(" IP")

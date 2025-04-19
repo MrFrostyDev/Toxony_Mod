@@ -16,10 +16,14 @@ public class ItemColorRegisterEvents {
     @SubscribeEvent
     public static void onItemColorRegister(RegisterColorHandlersEvent.Item event){
         event.register((stack, tintIndex) -> tintIndex > 0
+                        || stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY) == PotionContents.EMPTY
+                        || stack.getDamageValue() >= stack.getMaxDamage() && stack.isDamageableItem()
                         ? -1
-                        : FastColor.ARGB32.opaque(stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor()),
+                        : FastColor.ARGB32.opaque(stack.get(DataComponents.POTION_CONTENTS).getColor()),
                 ItemRegistry.TOX_NEEDLE.get(),
-                ItemRegistry.TOX_VIAL.get()
+                ItemRegistry.TOX_VIAL.get(),
+                ItemRegistry.POTION_FLASK.get(),
+                ItemRegistry.TOXIN_FLASK.get()
         );
     }
 }

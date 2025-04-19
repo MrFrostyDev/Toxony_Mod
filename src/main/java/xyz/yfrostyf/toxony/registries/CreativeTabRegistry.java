@@ -30,6 +30,9 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.REDSTONE_MIXTURE.get());
                 output.accept(ItemRegistry.REDSTONE_SOLUTION.get());
 
+                output.accept(ItemRegistry.POTION_FLASK.get());
+                output.accept(ItemRegistry.TOXIN_FLASK.get());
+
                 output.accept(ItemRegistry.COPPER_SCALPEL.get());
                 output.accept(ItemRegistry.NETHERITE_SCALPEL.get());
                 output.accept(ItemRegistry.LETHAL_DOSE.get());

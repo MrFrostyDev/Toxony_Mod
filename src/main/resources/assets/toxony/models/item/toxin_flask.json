@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "toxony:item/toxin_flask"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "toxony:uses": 0.5
+      },
+      "model": "toxony:item/toxin_flask_partial"
+    },
+    {
+      "predicate": {
+        "toxony:uses": 1.0
+      },
+      "model": "toxony:item/toxin_flask_full"
+    }
+  ]
+}

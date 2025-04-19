@@ -39,9 +39,7 @@ public class VialItem extends Item {
             }
 
             if (level.getFluidState(blockpos).is(FluidTags.WATER)) {
-                level.playSound(
-                        player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F
-                );
+                level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
                 level.gameEvent(player, GameEvent.FLUID_PICKUP, blockpos);
                 return InteractionResultHolder.sidedSuccess(
                         ItemUtils.createFilledResult(itemstack, player, VialUtil.createPotionItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER)), level.isClientSide()

@@ -21,9 +21,9 @@ public class OilPotSashItem extends Item implements ProjectileItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand thisHand) {
-        ItemStack thisStack = player.getItemInHand(thisHand);
-        InteractionHand otherHand = thisHand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        InteractionHand otherHand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+        ItemStack thisStack = player.getItemInHand(hand);
         ItemStack otherStack = player.getItemInHand(otherHand);
 
         if(otherStack.getItem() instanceof OilPotItem oilPotItem && !otherStack.is(this)){

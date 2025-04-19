@@ -17,6 +17,7 @@ import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
 import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Impact;
+import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Refill;
 
 import java.util.List;
 
@@ -88,6 +89,12 @@ public class DataComponentsRegistry {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Impact>> IMPACT = ENCHANTMENT_COMPONENT_TYPES.register(
             "impact",
             () -> DataComponentType.<Impact>builder()
-                    .persistent(Impact.CODEC)
+                    .persistent(Codec.unit(new Impact()))
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Refill>> REFILL = ENCHANTMENT_COMPONENT_TYPES.register(
+            "refill",
+            () -> DataComponentType.<Refill>builder()
+                    .persistent(Refill.CODEC)
                     .build());
 }

@@ -123,10 +123,7 @@ public class FlailItem extends Item {
 
         EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantLevel) -> {
             // Acquire the Impact instance from the enchantment holder (or null if this is a different enchantment)
-            Impact impact = enchantmentHolder.value().effects().get(DataComponentsRegistry.IMPACT.get());
-
-            // If this enchant has an Impact component, use it.
-            if(impact != null){
+            if(enchantmentHolder.value().effects().has(DataComponentsRegistry.IMPACT.get())){
                 atomicValue.set(enchantLevel);
             }
         });

@@ -70,8 +70,8 @@ public class OilPotItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack oilPot = player.getMainHandItem().is(this) ? player.getMainHandItem() : player.getOffhandItem();
         ItemStack otherStack = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
+        ItemStack oilPot = player.getItemInHand(hand);
 
         if(otherStack.is(ItemRegistry.OIL_BASE)){
             otherStack.consume(1, player);

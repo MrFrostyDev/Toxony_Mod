@@ -22,12 +22,11 @@ public class NeedleItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand thisHand) {
-        InteractionHand otherHand = thisHand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
-        ItemStack otherStack = player.getItemInHand(otherHand);
-        ItemStack thisStack = player.getItemInHand(thisHand);
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack otherStack = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
+        ItemStack thisStack = player.getItemInHand(hand);
 
-        if(otherStack.is(this)) return InteractionResultHolder.pass(player.getItemInHand(thisHand));
+        if(otherStack.is(this)) return InteractionResultHolder.pass(player.getItemInHand(hand));
 
         // Add affinity solution if its in the other hand
         if(otherStack.is(ItemRegistry.AFFINITY_SOLUTION) && otherStack.has(DataComponentsRegistry.AFFINITY_STORED_ITEM)){

@@ -81,6 +81,15 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> GLASS_VIAL = ITEMS.register("glass_vial", () -> new VialItem(new Item.Properties().stacksTo(64)));
     public static final DeferredHolder<Item, Item> TOX_VIAL = ITEMS.register("tox_vial", () -> new FullVialItem(new Item.Properties().stacksTo(64)));
 
+    public static final DeferredHolder<Item, Item> POTION_FLASK = ITEMS.register("potion_flask", () -> new PotionFlaskItem(
+            new Item.Properties().stacksTo(1).durability(3),
+            2.0F
+    ));
+    public static final DeferredHolder<Item, Item> TOXIN_FLASK = ITEMS.register("toxin_flask", () -> new PotionFlaskItem(
+            new Item.Properties().stacksTo(1).durability(5),
+            3.0F
+    ));
+
     public static final DeferredHolder<Item, Item> REDSTONE_MIXTURE = ITEMS.register("redstone_mixture", () -> new Item(new Item.Properties().stacksTo(8)));
     public static final DeferredHolder<Item, Item> REDSTONE_SOLUTION = ITEMS.register("redstone_solution", () -> new Item(new Item.Properties().stacksTo(8)));
     public static final DeferredHolder<Item, Item> AFFINITY_SOLUTION = ITEMS.register("affinity_solution", () -> new AffinitySolutionItem(new Item.Properties().stacksTo(8)));

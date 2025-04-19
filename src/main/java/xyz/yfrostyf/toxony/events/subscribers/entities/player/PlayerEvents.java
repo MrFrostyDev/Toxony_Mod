@@ -13,6 +13,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
+import xyz.yfrostyf.toxony.items.PotionFlaskItem;
 import xyz.yfrostyf.toxony.network.SyncIngredientAffinityMapPacket;
 import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
@@ -67,8 +68,14 @@ public class PlayerEvents {
                 if(contents.potion().get() != Potions.WATER
                         && contents.potion().get() != Potions.AWKWARD
                         && contents.potion().get() != Potions.MUNDANE){
-                    ToxData toxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
-                    toxData.addTox(5);
+                    if(event.getItem().getItem() instanceof PotionFlaskItem){
+                        ToxData toxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
+                        toxData.addTox(15);
+                    }
+                    else{
+                        ToxData toxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
+                        toxData.addTox(5);
+                    }
                 }
             }
         }

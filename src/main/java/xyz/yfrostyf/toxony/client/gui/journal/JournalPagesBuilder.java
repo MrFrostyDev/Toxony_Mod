@@ -38,6 +38,12 @@ public class JournalPagesBuilder {
         return this;
     }
 
+    public JournalPagesBuilder TextSingleItemTopScreen(String translateId, ItemStack itemLike){
+        pages.add(new TextSingleItemTopScreen(translateId, indexCount, itemLike, emptyJournal));
+        indexCount++;
+        return this;
+    }
+
     public JournalPagesBuilder TextPageScreen(String translateId){
         pages.add(new TextPageScreen(translateId, indexCount, emptyJournal));
         indexCount++;
