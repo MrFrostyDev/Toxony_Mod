@@ -3,8 +3,6 @@ package xyz.yfrostyf.toxony.client.gui.journal;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -16,27 +14,28 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
-import org.apache.http.config.Registry;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.data.datagen.enchantments.ToxonyEnchantments;
-import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Refill;
 import xyz.yfrostyf.toxony.registries.AffinityRegistry;
-import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.*;
 
 public class JournalUtil {
+    public static String lastPageID = "journal.toxony.page.cover";
     private static final Item EMPTY = Items.AIR;
     private static final Level level = Minecraft.getInstance().level;
     private static final RecipeManager manager = level != null ? level.getRecipeManager() : null;
 
-    public static void startPage(String translateID){
-        JournalPages pages = JournalUtil.createPages().build(translateID);
+    public static void startPage(){
+        JournalPages pages = JournalUtil.createPages().build(lastPageID);
         pages.updatePage();
+    }
+
+    public static void setLastPageID(String id){
+     lastPageID = id;
     }
 
     public static Map<String, String> createIndexMap(){

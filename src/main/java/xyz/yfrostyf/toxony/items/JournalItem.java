@@ -22,7 +22,7 @@ public class JournalItem extends ItemNameBlockItem {
         ItemStack usedStack = player.getItemInHand(usedHand);
         if(!player.isCrouching()){
             if(level.isClientSide()){
-                JournalUtil.startPage("journal.toxony.page.cover");
+                JournalUtil.startPage();
                 return InteractionResultHolder.consume(usedStack);
             }
         }

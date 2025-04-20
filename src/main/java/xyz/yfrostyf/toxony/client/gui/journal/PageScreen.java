@@ -91,8 +91,16 @@ public abstract class PageScreen extends Screen {
     }
 
     protected void closeScreen() {
+        JournalUtil.setLastPageID(this.translateID);
         this.minecraft.setScreen(null);
     }
+
+    @Override
+    public void onClose() {
+        JournalUtil.setLastPageID(this.translateID);
+        super.onClose();
+    }
+
 
     @OnlyIn(Dist.CLIENT)
     protected static class PageSwitchButton extends AbstractButton {

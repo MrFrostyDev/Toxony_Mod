@@ -35,7 +35,7 @@ public class LostJournalBlock extends HorizontalDirectionalBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(level.isClientSide()){
-            JournalUtil.startPage("journal.toxony.page.cover");
+            JournalUtil.startPage();
             return InteractionResult.SUCCESS;
         }
 
