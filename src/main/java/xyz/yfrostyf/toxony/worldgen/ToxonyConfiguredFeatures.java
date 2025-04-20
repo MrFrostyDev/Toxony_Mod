@@ -68,7 +68,7 @@ public class ToxonyConfiguredFeatures {
                                 BlockStateProvider.simple(BlockRegistry.WILD_WATER_HEMLOCK.get().defaultBlockState()
                                         .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(WildPoisonCropBlock.MAX_AGE)))
                         ),
-                        List.of(Blocks.GRASS_BLOCK)
+                        List.of(Blocks.GRASS_BLOCK, Blocks.MUD)
                 ));
 
         register(context, WILD_COLDSNAP, Feature.FLOWER,

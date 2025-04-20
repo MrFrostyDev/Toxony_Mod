@@ -28,7 +28,10 @@
               },
               {
                 "type": "minecraft:matching_blocks",
-                "blocks": "minecraft:grass_block",
+                "blocks": [
+                  "minecraft:grass_block",
+                  "minecraft:mud"
+                ],
                 "offset": [
                   0,
                   -1,
