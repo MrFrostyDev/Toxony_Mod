@@ -200,6 +200,7 @@
   "death.toxony.damage.toxin": "%1$s was overwhelmed by the toxins in their body",
   "death.toxony.damage.acid": "%1$s learned they were not immune to acid",
   "death.toxony.damage.needle": "%1$s produced worthwhile results for %2$s's experiment",
+  "death.toxony.damage.flail": "%1$s took a large flail in the face by %2$s",
 
   "message.toxony.tox.mutagen_clear": "With no toxin left, you reverted back to normal.",
 

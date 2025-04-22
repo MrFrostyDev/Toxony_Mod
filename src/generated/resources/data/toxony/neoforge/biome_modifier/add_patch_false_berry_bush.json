@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "minecraft:taiga",
+  "biomes": "#c:is_taiga",
   "features": "toxony:false_berry_bush_placed",
   "step": "vegetal_decoration"
 }

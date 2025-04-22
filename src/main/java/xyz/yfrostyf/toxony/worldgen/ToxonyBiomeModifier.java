@@ -1,12 +1,18 @@
 package xyz.yfrostyf.toxony.worldgen;
 
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.internal.NeoForgeBiomeTagsProvider;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -24,36 +30,35 @@ public class ToxonyBiomeModifier {
     public static final ResourceKey<BiomeModifier> ADD_PATCH_WILD_BLOODROOT = registerKey("add_patch_wild_bloodroot");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context){
-        var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
-        var biomes = context.lookup(Registries.BIOME);
+        HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 
         context.register(ADD_PATCH_FALSE_BERRY_BUSH, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.TAIGA)),
+                biomes.getOrThrow(Tags.Biomes.IS_TAIGA),
                 HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.PATCH_FALSE_BERRY_BUSH_PLACED)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
 
         context.register(ADD_WILD_OCELOT_MINT, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.JUNGLE), biomes.getOrThrow(Biomes.SPARSE_JUNGLE)),
+                biomes.getOrThrow(Tags.Biomes.IS_JUNGLE),
                 HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_OCELOT_MINT_PLACED)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
 
         context.register(ADD_WILD_NIGHTSHADE, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.DARK_FOREST)),
+                biomes.getOrThrow(BiomeTags.HAS_WOODLAND_MANSION),
                 HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_NIGHTSHADE_PLACED)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
 
         context.register(ADD_WILD_WATER_HEMLOCK, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.SWAMP), biomes.getOrThrow(Biomes.MANGROVE_SWAMP)),
+                biomes.getOrThrow(Tags.Biomes.IS_SWAMP),
                 HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_WATER_HEMLOCK_PLACED)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
 
         context.register(ADD_WILD_COLDSNAP, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.TAIGA), biomes.getOrThrow(Biomes.SNOWY_TAIGA),
-                        biomes.getOrThrow(Biomes.SNOWY_PLAINS), biomes.getOrThrow(Biomes.SNOWY_SLOPES)),
+                biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.WILD_COLDSNAP_PLACED)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));

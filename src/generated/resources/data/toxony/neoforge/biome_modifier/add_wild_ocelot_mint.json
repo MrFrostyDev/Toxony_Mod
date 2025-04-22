@@ -1,9 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": [
-    "minecraft:jungle",
-    "minecraft:sparse_jungle"
-  ],
+  "biomes": "#c:is_jungle",
   "features": "toxony:wild_ocelot_mint_placed",
   "step": "vegetal_decoration"
 }
