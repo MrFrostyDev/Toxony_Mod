@@ -87,7 +87,7 @@ public class MortarPestleRecipe implements Recipe<RecipeWrapper> {
 
     public static class Serializer implements RecipeSerializer<MortarPestleRecipe>{
         public static final MapCodec<MortarPestleRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-                ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
+                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
                 ItemStack.STRICT_SINGLE_ITEM_CODEC.optionalFieldOf("use").forGetter(r -> r.useItem),
                 Ingredient.LIST_CODEC_NONEMPTY.fieldOf("ingredients").xmap(ingredients -> {
                     NonNullList<Ingredient> nonNullList = NonNullList.create();

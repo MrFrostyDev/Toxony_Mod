@@ -73,6 +73,7 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .ingredient(ItemRegistry.TOXIC_PASTE.get())
                 .ingredient(ItemRegistry.TOXIC_SPIT.get())
                 .ingredient(ItemRegistry.OCELOT_MINT.get())
+                .use(ItemRegistry.EMPTY_OIL_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);
 
@@ -107,6 +108,7 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .ingredient(ItemRegistry.WARPROOT.get())
                 .ingredient(ItemRegistry.ACID_SLIMEBALL.get())
                 .ingredient(ItemRegistry.BOG_BONE.get())
+                .use(ItemRegistry.EMPTY_TOX_POT.get())
                 .unlockedByItems("has_empty_oil_pot", ItemRegistry.EMPTY_TOX_POT.get())
                 .build(output);
 

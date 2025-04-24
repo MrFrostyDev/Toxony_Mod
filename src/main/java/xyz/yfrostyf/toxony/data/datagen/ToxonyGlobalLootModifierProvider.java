@@ -38,7 +38,7 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
         dropUniqueWhilePoisoned("trader_llama_unique_tox_drop", EntityType.TRADER_LLAMA, ItemRegistry.TOXIC_SPIT.get(), 1, 2);
         dropUniqueWhilePoisoned("squid_unique_tox_drop", EntityType.SQUID, ItemRegistry.POISON_SAC.get(), 1, 2);
         dropUniqueWhilePoisoned("glow_squid_unique_tox_drop", EntityType.GLOW_SQUID, ItemRegistry.POISON_SAC.get(), 1, 2);
-        dropUniqueWhilePoisoned("bogged_unique_tox_drop", EntityType.BOGGED, ItemRegistry.BOG_BONE.get(), 1, 2);
+        dropUniqueWhileScalpel("bogged_unique_tox_drop", EntityType.BOGGED, ItemRegistry.BOG_BONE.get(), 1, 2);
     }
 
     private void dropUniqueWhilePoisoned(String name, EntityType entity, Item dropItem, int min, int max){
@@ -57,6 +57,22 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
         this.add(name,
                 new ToxDropLootModifier(new LootItemCondition[]{
                         AnyOfCondition.anyOf(poisonedEntityCondition, toxinedEntityCondition).build(),
+                        attackerHasScalpelPredicate.build()
+                },
+                        dropItem, min, max
+                )
+        );
+    }
+
+    private void dropUniqueWhileScalpel(String name, EntityType entity, Item dropItem, int min, int max){
+        EntityEquipmentPredicate equipmentPredicate = EntityEquipmentPredicate.Builder.equipment().mainhand(
+                ItemPredicate.Builder.item().of(TagRegistry.SCALPEL_ITEM)).build();
+
+        LootItemCondition.Builder attackerHasScalpelPredicate = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER, EntityPredicate.Builder.entity()
+                .equipment(equipmentPredicate));
+
+        this.add(name,
+                new ToxDropLootModifier(new LootItemCondition[]{
                         attackerHasScalpelPredicate.build()
                 },
                         dropItem, min, max

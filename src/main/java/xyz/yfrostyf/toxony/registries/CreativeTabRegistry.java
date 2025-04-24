@@ -107,6 +107,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.TOXIC_PASTE.get());
                 output.accept(ItemRegistry.TOXIC_FORMULA.get());
                 output.accept(ItemRegistry.TOXIN.get());
+                output.accept(ItemRegistry.TOXIC_LEATHER.get());
 
                 output.accept(ItemRegistry.VENOM_TOOTH.get());
                 output.accept(ItemRegistry.BOG_BONE.get());

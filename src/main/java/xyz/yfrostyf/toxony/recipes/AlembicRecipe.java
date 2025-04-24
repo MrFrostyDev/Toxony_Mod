@@ -93,7 +93,7 @@ public class AlembicRecipe implements Recipe<PairCombineRecipeInput> {
 
     public static class Serializer implements RecipeSerializer<AlembicRecipe>{
         public static final MapCodec<AlembicRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-                ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
+                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(r -> r.outputItem),
                 Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(r -> r.recipeIngredient),
                 Ingredient.CODEC_NONEMPTY.fieldOf("ingredient_to_convert").forGetter(r -> r.recipeIngredientToConvert),
                 Codec.INT.fieldOf("boiltime").orElse(200).forGetter(r -> r.boilTime),

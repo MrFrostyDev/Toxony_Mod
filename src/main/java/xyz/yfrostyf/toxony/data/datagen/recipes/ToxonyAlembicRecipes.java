@@ -27,7 +27,7 @@ public class ToxonyAlembicRecipes extends RecipeProvider {
                 .unlockedByItems("has_toxic_formula", ItemRegistry.TOXIC_FORMULA.get())
                 .build(output);
 
-        new AlembicRecipeBuilder(new ItemStack(ItemRegistry.TOXIC_LEATHER.get()))
+        new AlembicRecipeBuilder(new ItemStack(ItemRegistry.TOXIC_LEATHER.get(), 2))
                 .ingredient(ItemRegistry.TOXIN.get())
                 .ingredientToConvert(Items.LEATHER)
                 .remainingItem(new ItemStack(ItemRegistry.GLASS_VIAL.get()))

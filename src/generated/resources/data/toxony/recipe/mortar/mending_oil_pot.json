@@ -15,6 +15,10 @@
     }
   ],
   "result": {
+    "count": 1,
     "id": "toxony:mending_oil_pot"
+  },
+  "use": {
+    "id": "toxony:empty_oil_pot"
   }
 }
