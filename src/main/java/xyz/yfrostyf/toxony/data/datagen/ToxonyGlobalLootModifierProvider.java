@@ -68,11 +68,15 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
         EntityEquipmentPredicate equipmentPredicate = EntityEquipmentPredicate.Builder.equipment().mainhand(
                 ItemPredicate.Builder.item().of(TagRegistry.SCALPEL_ITEM)).build();
 
+        LootItemCondition.Builder entityCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
+                .of(entity));
+
         LootItemCondition.Builder attackerHasScalpelPredicate = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER, EntityPredicate.Builder.entity()
                 .equipment(equipmentPredicate));
 
         this.add(name,
                 new ToxDropLootModifier(new LootItemCondition[]{
+                        AnyOfCondition.anyOf(entityCondition).build(),
                         attackerHasScalpelPredicate.build()
                 },
                         dropItem, min, max
