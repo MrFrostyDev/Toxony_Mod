@@ -26,6 +26,7 @@ public class MendingOilPotItem extends OilPotItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack oilPot = player.getMainHandItem().is(this) ? player.getMainHandItem() : player.getOffhandItem();
         ItemStack otherStack = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
+        if(otherStack.is(this)) return InteractionResultHolder.pass(oilPot);
 
         if(otherStack.is(ItemRegistry.OIL_BASE)){
             otherStack.consume(1, player);

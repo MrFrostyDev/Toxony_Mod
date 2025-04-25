@@ -26,20 +26,24 @@ public class OilPotSashItem extends Item implements ProjectileItem {
         ItemStack thisStack = player.getItemInHand(hand);
         ItemStack otherStack = player.getItemInHand(otherHand);
 
-        if(otherStack.getItem() instanceof OilPotItem oilPotItem && !otherStack.is(this)){
+        if (otherStack.is(this)) return InteractionResultHolder.pass(thisStack);
+        boolean canRefillOil = thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.OIL_BASE);
+        boolean canThrow = thisStack.has(DataComponentsRegistry.OIL) && thisStack.getDamageValue() < thisStack.getMaxDamage();
+
+        if(otherStack.getItem() instanceof OilPotItem oilPotItem && !oilPotItem.getItemOil().isEmpty()){
             thisStack.set(DataComponentsRegistry.OIL, oilPotItem.getItemOil());
             thisStack.setDamageValue(0);
             otherStack.consume(1, player);
             player.playSound(SoundEvents.BOTTLE_FILL);
             return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
         }
-        else if(thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.OIL_BASE)){
+        else if(canRefillOil){
             thisStack.setDamageValue(0);
             player.playSound(SoundEvents.BOTTLE_FILL);
             otherStack.consume(1, player);
             return InteractionResultHolder.sidedSuccess(thisStack, level.isClientSide());
         }
-        else if(thisStack.has(DataComponentsRegistry.OIL) && thisStack.getDamageValue() < thisStack.getMaxDamage()){
+        else if(canThrow){
             if (!level.isClientSide) {
                 ThrownOilPot thrownOilPot = new ThrownOilPot(level, player, thisStack);
                 thrownOilPot.setItem(thisStack);

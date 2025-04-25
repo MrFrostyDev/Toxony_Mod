@@ -59,7 +59,8 @@ public class OilUtil {
     }
 
     public static boolean hasOil(ItemStack stack) {
-        return !stack.getOrDefault(DataComponentsRegistry.OIL, ItemOil.EMPTY).isEmpty();
+        return !stack.getOrDefault(DataComponentsRegistry.OIL, ItemOil.EMPTY).isEmpty()
+                || stack.getOrDefault(DataComponentsRegistry.OIL_USES, -1) == -1;
     }
 
     public static Optional<Holder.Reference<Item>> getBoltByOilItem(ItemOil itemOil, Level level){
