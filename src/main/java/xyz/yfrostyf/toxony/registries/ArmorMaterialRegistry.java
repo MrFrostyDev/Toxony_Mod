@@ -41,7 +41,7 @@ public class ArmorMaterialRegistry {
                     // This is wrapped with a Holder.
                     SoundEvents.ARMOR_EQUIP_GENERIC,
                     // Determines the repair item for this armor.
-                    () -> Ingredient.of(Tags.Items.INGOTS_COPPER),
+                    () -> Ingredient.of(ItemRegistry.TOXIC_LEATHER.get()),
                     // Determines the texture locations of the armor to apply when rendering
                     // This can also be specified by overriding 'IItemExtension#getArmorTexture' on your item if the armor texture needs to be more dynamic
                     List.of(

@@ -1,8 +1,6 @@
 {
   "values": [
-    "toxony:copper_scalpel",
-    "toxony:netherite_scalpel",
-    "toxony:lethal_dose",
-    "toxony:witching_blade"
+    "#toxony:enchantable/flail",
+    "toxony:venom_club"
   ]
 }

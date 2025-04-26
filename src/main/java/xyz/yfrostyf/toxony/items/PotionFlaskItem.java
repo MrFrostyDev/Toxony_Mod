@@ -9,7 +9,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -132,6 +131,11 @@ public class PotionFlaskItem extends Item {
         if (!hasActualPotion(stack) || stack.getDamageValue() >= stack.getMaxDamage()) return 0.0F;
         if (stack.isDamaged()) return 0.5F;
         return 1.0F;
+    }
+
+    @Override
+    public int getEnchantmentValue(ItemStack stack) {
+        return 14;
     }
 
     /**

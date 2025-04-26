@@ -4,11 +4,16 @@ import net.minecraft.advancements.critereon.EntityEquipmentPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MobEffectsPredicate;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -76,7 +81,7 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
 
         this.add(name,
                 new ToxDropLootModifier(new LootItemCondition[]{
-                        AnyOfCondition.anyOf(entityCondition).build(),
+                        entityCondition.build(),
                         attackerHasScalpelPredicate.build()
                 },
                         dropItem, min, max

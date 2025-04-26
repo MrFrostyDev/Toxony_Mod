@@ -269,6 +269,16 @@ public class CycleBowItem extends ProjectileWeaponItem{
     }
 
     @Override
+    public int getEnchantmentValue(ItemStack stack) {
+        return 18;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return repair.is(Items.COPPER_INGOT);
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         ChargedProjectiles chargedprojectiles = stack.get(DataComponents.CHARGED_PROJECTILES);
         if (chargedprojectiles != null && isLoaded(stack)) {

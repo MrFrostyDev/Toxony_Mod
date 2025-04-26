@@ -18,6 +18,7 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
         super(output, lookupProvider, blockTags);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.tag(TagRegistry.FLAIL_ENCHANTABLE)
@@ -26,52 +27,29 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                 );
 
         this.tag(ItemTags.WEAPON_ENCHANTABLE)
-                .add(
-                        ItemRegistry.COPPER_SCALPEL.get(),
-                        ItemRegistry.NETHERITE_SCALPEL.get(),
-                        ItemRegistry.LETHAL_DOSE.get(),
-                        ItemRegistry.WITCHING_BLADE.get()
+                .addTags(
+                        TagRegistry.FLAIL_ENCHANTABLE
+                ).add(
+                        ItemRegistry.VENOM_CLUB.get()
                 );
 
         this.tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
+                .addTags(
+                        TagRegistry.SCALPEL_ITEM
+                )
                 .add(
-                        ItemRegistry.COPPER_SCALPEL.get(),
-                        ItemRegistry.NETHERITE_SCALPEL.get(),
-                        ItemRegistry.LETHAL_DOSE.get(),
-                        ItemRegistry.BONE_SAW.get(),
-                        ItemRegistry.WITCHING_BLADE.get()
+                        ItemRegistry.BONE_SAW.get()
                 );
 
         this.tag(ItemTags.DURABILITY_ENCHANTABLE)
+                .addTag(
+                        TagRegistry.SCALPEL_ITEM
+                )
                 .add(
-                        ItemRegistry.COPPER_SCALPEL.get(),
-                        ItemRegistry.NETHERITE_SCALPEL.get(),
-                        ItemRegistry.LETHAL_DOSE.get(),
                         ItemRegistry.VENOM_CLUB.get(),
                         ItemRegistry.BONE_SAW.get(),
                         ItemRegistry.CYCLEBOW.get(),
-                        ItemRegistry.WITCHING_BLADE.get(),
-                        ItemRegistry.FLAIL.get(),
-                        ItemRegistry.PLAGUE_DOCTOR_HOOD.get(),
-                        ItemRegistry.PLAGUE_DOCTOR_COAT.get(),
-                        ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get(),
-                        ItemRegistry.PLAGUE_DOCTOR_BOOTS.get(),
-                        ItemRegistry.HUNTER_HAT.get(),
-                        ItemRegistry.HUNTER_COAT.get(),
-                        ItemRegistry.HUNTER_LEGGINGS.get(),
-                        ItemRegistry.HUNTER_BOOTS.get()
-                );
-
-        this.tag(ItemTags.ARMOR_ENCHANTABLE)
-                .add(
-                        ItemRegistry.PLAGUE_DOCTOR_HOOD.get(),
-                        ItemRegistry.PLAGUE_DOCTOR_COAT.get(),
-                        ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get(),
-                        ItemRegistry.PLAGUE_DOCTOR_BOOTS.get(),
-                        ItemRegistry.HUNTER_HAT.get(),
-                        ItemRegistry.HUNTER_COAT.get(),
-                        ItemRegistry.HUNTER_LEGGINGS.get(),
-                        ItemRegistry.HUNTER_BOOTS.get()
+                        ItemRegistry.FLAIL.get()
                 );
 
         this.tag(ItemTags.HEAD_ARMOR)
@@ -100,6 +78,9 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
 
 
         this.tag(ItemTags.SWORDS)
+                .addTag(
+                        TagRegistry.SCALPEL_ITEM
+                )
                 .add(
                         ItemRegistry.WITCHING_BLADE.get()
                 );

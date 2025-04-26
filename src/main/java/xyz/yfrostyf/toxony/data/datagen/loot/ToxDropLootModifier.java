@@ -5,9 +5,12 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
@@ -43,9 +46,23 @@ public class ToxDropLootModifier extends LootModifier {
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        ItemStack stack = new ItemStack(dropItem, RANDOM.nextInt((max+1)-min) + min);
+        int newMin = this.min + Math.max(getAttackerLootingLevel(context) - 1, 0);
+        int newMax = this.max + getAttackerLootingLevel(context);
+
+        ItemStack stack = new ItemStack(dropItem, RANDOM.nextInt((newMax+1)-newMin) + newMin);
         generatedLoot.add(stack);
         return generatedLoot;
+    }
+
+    private static int getAttackerLootingLevel(LootContext context){
+        if(!context.hasParam(LootContextParams.ATTACKING_ENTITY)
+                || !(context.getParam(LootContextParams.ATTACKING_ENTITY) instanceof Player player)) return 0;
+
+        return player.getMainHandItem()
+                .getEnchantmentLevel(context.getLevel()
+                        .registryAccess()
+                        .holderOrThrow(Enchantments.LOOTING)
+                );
     }
 
     @Override
