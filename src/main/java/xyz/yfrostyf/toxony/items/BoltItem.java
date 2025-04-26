@@ -32,13 +32,18 @@ public class BoltItem extends Item implements ProjectileItem {
         ItemOil itemoil = ammo.getOrDefault(DataComponentsRegistry.OIL, ItemOil.EMPTY);
 
         Bolt bolt = new Bolt(level, shooter, ammo.copyWithCount(1), weapon);
-        if(itemoil.getOil().equals(OilsRegistry.WITCHFIRE_OIL.get())){
-            bolt = new WitchFireBolt(level, shooter, ammo.copyWithCount(1), weapon);
+        if(itemoil.isEmpty()){
+            return bolt;
         }
-        if(itemoil.getOil().equals(OilsRegistry.SMOKE_OIL.get())){
-            bolt = new SmokeBolt(level, shooter, ammo.copyWithCount(1), weapon);
+        else if(itemoil.getOil().equals(OilsRegistry.WITCHFIRE_OIL.get())){
+            return new WitchFireBolt(level, shooter, ammo.copyWithCount(1), weapon);
+         }
+        else if(itemoil.getOil().equals(OilsRegistry.SMOKE_OIL.get())){
+            return new SmokeBolt(level, shooter, ammo.copyWithCount(1), weapon);
         }
-        return bolt;
+        else{
+            return bolt;
+        }
     }
 
     public Projectile asProjectile(Level level, Position pos, ItemStack ammo, Direction direction) {

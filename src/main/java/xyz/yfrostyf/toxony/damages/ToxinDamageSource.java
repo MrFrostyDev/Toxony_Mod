@@ -16,7 +16,7 @@ public class ToxinDamageSource extends DamageSource {
     }
 
     @Override
-    public @NotNull Component getLocalizedDeathMessage(LivingEntity livingEntity){
-        return Component.translatable("death.toxony.damage.toxin", livingEntity.getDisplayName());
+    public @NotNull Component getLocalizedDeathMessage(LivingEntity victim){
+        return Component.translatable("death.toxony.damage.toxin", victim.getDisplayName());
     }
 }

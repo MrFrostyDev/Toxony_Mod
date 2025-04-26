@@ -16,7 +16,7 @@ public class FlailDamageSource extends DamageSource {
     }
 
     @Override
-    public @NotNull Component getLocalizedDeathMessage(LivingEntity livingEntity){
-        return Component.translatable("death.toxony.damage.flail", livingEntity.getDisplayName());
+    public @NotNull Component getLocalizedDeathMessage(LivingEntity victim){
+        return Component.translatable("death.toxony.damage.flail", victim.getDisplayName(), this.getEntity() != null ? this.getEntity().getDisplayName() : Component.literal("Unknown"));
     }
 }

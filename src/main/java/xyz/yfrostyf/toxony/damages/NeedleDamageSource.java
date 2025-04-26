@@ -16,7 +16,7 @@ public class NeedleDamageSource extends DamageSource {
     }
 
     @Override
-    public @NotNull Component getLocalizedDeathMessage(LivingEntity livingEntity){
-        return Component.translatable("death.toxony.damage.needle", livingEntity.getDisplayName());
+    public @NotNull Component getLocalizedDeathMessage(LivingEntity victim){
+        return Component.translatable("death.toxony.damage.needle", victim.getDisplayName(), this.getEntity() != null ? this.getEntity().getDisplayName() : Component.literal("Unknown"));
     }
 }

@@ -16,7 +16,7 @@ public class AcidDamageSource extends DamageSource {
     }
 
     @Override
-    public @NotNull Component getLocalizedDeathMessage(LivingEntity livingEntity){
-        return Component.translatable("death.toxony.damage.acid", livingEntity.getDisplayName());
+    public @NotNull Component getLocalizedDeathMessage(LivingEntity victim){
+        return Component.translatable("death.toxony.damage.acid", victim.getDisplayName());
     }
 }
