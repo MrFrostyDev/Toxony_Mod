@@ -89,6 +89,15 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_silver_scrap", has(ItemRegistry.SILVER_SCRAP.get()))
                 .save(output);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, new ItemStack(ItemRegistry.IRON_ROUND, 6))
+                .requires(Items.IRON_NUGGET)
+                .requires(Items.IRON_NUGGET)
+                .requires(Items.IRON_NUGGET)
+                .requires(Items.PAPER)
+                .requires(Items.GUNPOWDER)
+                .unlockedBy("has_flintlock", has(ItemRegistry.FLINTLOCK.get()))
+                .save(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, new ItemStack(ItemRegistry.SILVER_STEEL_UPGRADE_SMITHING_TEMPLATE.get(), 2))
                 .pattern("CTC")
                 .pattern("DID")
