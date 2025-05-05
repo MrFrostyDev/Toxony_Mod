@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.items;
+package xyz.yfrostyf.toxony.items.weapons;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 import xyz.yfrostyf.toxony.entities.item.ThrownOilPot;
+import xyz.yfrostyf.toxony.items.OilPotItem;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
@@ -22,12 +23,11 @@ public class OilPotSashItem extends Item implements ProjectileItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        InteractionHand otherHand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack thisStack = player.getItemInHand(hand);
-        ItemStack otherStack = player.getItemInHand(otherHand);
+        ItemStack otherStack = hand == InteractionHand.MAIN_HAND ? player.getOffhandItem() : player.getMainHandItem();
 
         if (otherStack.is(this)) return InteractionResultHolder.pass(thisStack);
-        boolean canRefillOil = thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.OIL_BASE);
+        boolean canRefillOil = thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.OIL_BASE) && thisStack.getDamageValue() > 0;
         boolean canThrow = thisStack.has(DataComponentsRegistry.OIL) && thisStack.getDamageValue() < thisStack.getMaxDamage();
 
         if(otherStack.getItem() instanceof OilPotItem oilPotItem && !oilPotItem.getItemOil().isEmpty()){

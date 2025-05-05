@@ -10,7 +10,14 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-            "value": "toxony:chests/basic_oils",
+          "name": "",
+          "value": "toxony:chests/basic_oils",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "",
+          "value": "toxony:chests/toxony_ingredients",
           "weight": 1
         },
         {

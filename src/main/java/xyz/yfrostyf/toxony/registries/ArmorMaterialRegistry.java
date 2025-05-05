@@ -69,6 +69,29 @@ public class ArmorMaterialRegistry {
                     0
             ));
 
+    public static final Holder<ArmorMaterial> PLAGUEBRINGER_ARMOR_MATERIAL =
+            ARMOR_MATERIALS.register("plaguebringer", () -> new ArmorMaterial(
+                    // Determines the defense value of this armor material, depending on what armor piece it is.
+                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                        map.put(ArmorItem.Type.BOOTS, 3);
+                        map.put(ArmorItem.Type.LEGGINGS, 6);
+                        map.put(ArmorItem.Type.CHESTPLATE, 7);
+                        map.put(ArmorItem.Type.HELMET, 2);
+                        map.put(ArmorItem.Type.BODY, 7);
+                    }),
+                    15,
+                    SoundEvents.ARMOR_EQUIP_GENERIC,
+                    () -> Ingredient.of(ItemRegistry.TOXIC_LEATHER.get()),
+                    List.of(
+                            new ArmorMaterial.Layer(
+                                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "plaguebringer_armor")),
+                            new ArmorMaterial.Layer(
+                                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "plaguebringer_armor"))
+                    ),
+                    1,
+                    0
+            ));
+
     public static final Holder<ArmorMaterial> HUNTER_ARMOR_MATERIAL =
             ARMOR_MATERIALS.register("hunter", () -> new ArmorMaterial(
                     // Determines the defense value of this armor material, depending on what armor piece it is.
@@ -89,6 +112,29 @@ public class ArmorMaterialRegistry {
                                     ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "hunter_armor"))
                     ),
                     0,
+                    0
+            ));
+
+    public static final Holder<ArmorMaterial> PROFESSIONAL_HUNTER_ARMOR_MATERIAL =
+            ARMOR_MATERIALS.register("professional_hunter", () -> new ArmorMaterial(
+                    // Determines the defense value of this armor material, depending on what armor piece it is.
+                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                        map.put(ArmorItem.Type.BOOTS, 3);
+                        map.put(ArmorItem.Type.LEGGINGS, 6);
+                        map.put(ArmorItem.Type.CHESTPLATE, 8);
+                        map.put(ArmorItem.Type.HELMET, 3);
+                        map.put(ArmorItem.Type.BODY, 8);
+                    }),
+                    15,
+                    SoundEvents.ARMOR_EQUIP_GENERIC,
+                    () -> Ingredient.of(Tags.Items.LEATHERS),
+                    List.of(
+                            new ArmorMaterial.Layer(
+                                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "professional_hunter_armor")),
+                            new ArmorMaterial.Layer(
+                                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "professional_hunter_armor"))
+                    ),
+                    2,
                     0
             ));
 

@@ -23,8 +23,8 @@ public class NeedleItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack otherStack = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
         ItemStack thisStack = player.getItemInHand(hand);
+        ItemStack otherStack = hand == InteractionHand.MAIN_HAND ? player.getOffhandItem() : player.getMainHandItem();
 
         if(otherStack.is(this)) return InteractionResultHolder.pass(player.getItemInHand(hand));
 

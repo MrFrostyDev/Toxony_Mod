@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.items;
+package xyz.yfrostyf.toxony.items.weapons;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,8 +24,8 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.util.OilUtil;
 import xyz.yfrostyf.toxony.entities.item.FlailBall;
+import xyz.yfrostyf.toxony.items.OilPotItem;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
-import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;

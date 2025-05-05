@@ -59,9 +59,20 @@ public class EntityRegistry {
             () -> EntityType.Builder.<FlailBall>of(FlailBall::new, MobCategory.MISC)
                     .noSave()
                     .noSummon()
-                    .sized(0.35F, 0.35F)
+                    .sized(0.25F, 0.25F)
                     .clientTrackingRange(4)
-                    .updateInterval(5)
+                    .updateInterval(3)
                     .build("flail_ball")
+    );
+
+    public static final DeferredHolder<EntityType<?>, EntityType<FlintlockBall>> FLINTLOCK_BALL = ENTITIES.register(
+            "flintlock_ball",
+            () -> EntityType.Builder.<FlintlockBall>of(FlintlockBall::new, MobCategory.MISC)
+                    .noSave()
+                    .noSummon()
+                    .sized(0.2F, 0.2F)
+                    .clientTrackingRange(5)
+                    .updateInterval(2)
+                    .build("flintlock_ball")
     );
 }

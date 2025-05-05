@@ -25,6 +25,8 @@ public class ClientExtensionsRegisterEvent {
 
     @SubscribeEvent
     public static void onClientExtensionItemRegister(RegisterClientExtensionsEvent event){
+
+        // Cyclebow
         event.registerItem(new IClientItemExtensions(){
             @Override
             public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
@@ -38,6 +40,20 @@ public class ClientExtensionsRegisterEvent {
             }
         }, ItemRegistry.CYCLEBOW.get());
 
+        // Flintlock
+        event.registerItem(new IClientItemExtensions(){
+            @Override
+            public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
+                return ToxonyArmPoses.ONE_HAND_PISTOL_ENUM_PROXY.getValue();
+            }
+            @Override
+            public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
+                AnimationUtils.handlePistolAnimation(poseStack, player, arm, itemInHand, partialTick, equipProcess, swingProcess);
+                return true;
+            }
+        }, ItemRegistry.FLINTLOCK.get());
+
+        // Flail
         event.registerItem(new IClientItemExtensions(){
             @Override
             public HumanoidModel.@Nullable ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
@@ -81,6 +97,37 @@ public class ClientExtensionsRegisterEvent {
             }
         }, ItemRegistry.PLAGUE_DOCTOR_BOOTS.get());
 
+        // |-----------------------------------------------------------------------------------|
+        // |--------------------------------Plaguebringer Armor--------------------------------|
+        // |-----------------------------------------------------------------------------------|
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.PlaguebringerArmor.getHead(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.PLAGUEBRINGER_MASK.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.PlaguebringerArmor.getBody(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.PLAGUEBRINGER_COAT.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.PlaguebringerArmor.getLegs(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.PLAGUEBRINGER_LEGGINGS.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.PlaguebringerArmor.getLegs(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.PLAGUEBRINGER_BOOTS.get());
+
 
         // |-----------------------------------------------------------------------------------|
         // |------------------------------------Hunter Armor-----------------------------------|
@@ -112,6 +159,37 @@ public class ClientExtensionsRegisterEvent {
                 return ModelUtils.HunterArmor.getLegs(livingEntity, itemStack, equipmentSlot, original);
             }
         }, ItemRegistry.HUNTER_BOOTS.get());
+
+        // |-----------------------------------------------------------------------------------|
+        // |----------------------------Professional Hunter Armor------------------------------|
+        // |-----------------------------------------------------------------------------------|
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.ProfessionalHunterArmor.getHead(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.PROFESSIONAL_HUNTER_HAT.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.ProfessionalHunterArmor.getBody(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.PROFESSIONAL_HUNTER_COAT.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.ProfessionalHunterArmor.getLegs(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.PROFESSIONAL_HUNTER_LEGGINGS.get());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ModelUtils.ProfessionalHunterArmor.getLegs(livingEntity, itemStack, equipmentSlot, original);
+            }
+        }, ItemRegistry.PROFESSIONAL_HUNTER_BOOTS.get());
     }
 }
 

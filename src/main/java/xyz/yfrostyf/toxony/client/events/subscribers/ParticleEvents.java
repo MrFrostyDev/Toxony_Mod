@@ -5,10 +5,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.particles.BloodDripParticle;
-import xyz.yfrostyf.toxony.particles.CutParticle;
-import xyz.yfrostyf.toxony.particles.OilSmokeParticle;
-import xyz.yfrostyf.toxony.particles.SmokeParticle;
+import xyz.yfrostyf.toxony.particles.*;
 import xyz.yfrostyf.toxony.registries.ParticleRegistry;
 
 @EventBusSubscriber(modid = ToxonyMain.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
@@ -24,5 +21,6 @@ public class ParticleEvents {
         event.registerSpriteSet(ParticleRegistry.SMOKE.get(), SmokeParticle.Provider::new);
         event.registerSpriteSet(ParticleRegistry.CUT.get(), CutParticle.Provider::new);
         event.registerSpriteSet(ParticleRegistry.BLOOD_DRIP.get(), BloodDripParticle.Provider::new);
+        event.registerSpriteSet(ParticleRegistry.FLINTLOCK_BLAST_LARGE.get(), FlintlockBlastLargeParticle.Provider::new);
     }
 }

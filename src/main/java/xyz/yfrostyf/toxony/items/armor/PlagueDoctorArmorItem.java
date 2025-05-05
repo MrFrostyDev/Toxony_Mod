@@ -44,14 +44,14 @@ public class PlagueDoctorArmorItem extends ArmorItem {
 
         builder.add(
                 AttributeRegistry.EFFECT_REDUCTION,
-                new AttributeModifier(resourcelocationtoxony, getEffectDurationValue(equipslotgroup), AttributeModifier.Operation.ADD_VALUE),
+                new AttributeModifier(resourcelocationtoxony, this.getEffectDurationValue(equipslotgroup), AttributeModifier.Operation.ADD_VALUE),
                 equipslotgroup
         );
 
         return builder.build();
     }
 
-    private static double getEffectDurationValue(EquipmentSlotGroup equipSlot){
+    protected double getEffectDurationValue(EquipmentSlotGroup equipSlot){
         return switch (equipSlot) {
             case EquipmentSlotGroup.HEAD -> 3;
             case EquipmentSlotGroup.CHEST -> 2;

@@ -11,8 +11,10 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
-import xyz.yfrostyf.toxony.items.CycleBowItem;
-import xyz.yfrostyf.toxony.items.FlailItem;
+import xyz.yfrostyf.toxony.items.weapons.CycleBowItem;
+import xyz.yfrostyf.toxony.items.weapons.FlailItem;
+import xyz.yfrostyf.toxony.items.weapons.FlintlockItem;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 @OnlyIn(Dist.CLIENT)
 public class ToxonyArmPoses {
@@ -20,6 +22,12 @@ public class ToxonyArmPoses {
             HumanoidModel.ArmPose.class,
             false,
             OneHandCrossbowArmPose.INSTANCE
+    );
+
+    public static final EnumProxy<HumanoidModel.ArmPose> ONE_HAND_PISTOL_ENUM_PROXY = new EnumProxy<>(
+            HumanoidModel.ArmPose.class,
+            false,
+            OneHandedPistolArmPose.INSTANCE
     );
 
     public static final EnumProxy<HumanoidModel.ArmPose> FLAIL_ENUM_PROXY = new EnumProxy<>(
@@ -40,6 +48,35 @@ public class ToxonyArmPoses {
                 ModelPart focusHandPart = isRightHanded ? model.rightArm : model.leftArm;
                 focusHandPart.yRot = (isRightHanded ? -0.3F : 0.3F) + model.head.yRot;
                 focusHandPart.xRot = (float) (-Math.PI / 2) + model.head.xRot + 0.1F;
+            }
+        }
+    }
+
+    public static class OneHandedPistolArmPose implements IArmPoseTransformer{
+        public static final IArmPoseTransformer INSTANCE = new OneHandedPistolArmPose();
+
+        @Override
+        public void applyTransform(HumanoidModel<?> model, LivingEntity entity, HumanoidArm arm) {
+            boolean isRightHanded = arm == HumanoidArm.RIGHT;
+
+            ModelPart usingHandPart = isRightHanded ? model.rightArm : model.leftArm;
+            ModelPart otherHandPart = isRightHanded ? model.leftArm : model.rightArm;
+            if(entity.isUsingItem()){
+                usingHandPart.yRot = (isRightHanded ? -0.1F : 0.1F) + model.head.yRot;
+                usingHandPart.xRot = (float) (-Math.PI) + (float)(Math.PI / 3) + model.head.xRot + 0.1F;
+                if(FlintlockItem.isDuelWielding(entity)){
+                    otherHandPart.yRot = (isRightHanded ? 0.1F : -0.1F) + model.head.yRot;
+                    otherHandPart.xRot = (float) (-Math.PI / 2) + model.head.xRot + 0.1F;
+                }
+                usingHandPart.z = usingHandPart.z + 2;
+            }
+            else{
+                usingHandPart.yRot = (isRightHanded ? -0.1F : 0.1F) + model.head.yRot;
+                usingHandPart.xRot = (float) (-Math.PI / 2) + model.head.xRot + 0.1F;
+                if(FlintlockItem.isDuelWielding(entity)){
+                    otherHandPart.yRot = (isRightHanded ? 0.1F : -0.1F) + model.head.yRot;
+                    otherHandPart.xRot = (float) (-Math.PI / 2) + model.head.xRot + 0.1F;
+                }
             }
         }
     }

@@ -5,12 +5,16 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
@@ -28,6 +32,8 @@ public class ToxonyConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_NIGHTSHADE = registerKey("wild_nightshade");
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_WATER_HEMLOCK = registerKey("wild_water_hemlock");
     public static final ResourceKey<ConfiguredFeature<?,?>> WILD_COLDSNAP = registerKey("wild_coldsnap");
+    public static final ResourceKey<ConfiguredFeature<?,?>> ORE_ANCIENT_SILVER_SMALL = registerKey("ore_ancient_silver_small");
+
     public static final ResourceKey<ConfiguredFeature<?,?>> PATCH_WILD_BLOODROOT = registerKey("patch_wild_bloodroot");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
@@ -90,6 +96,10 @@ public class ToxonyConfiguredFeatures {
                         ),
                         List.of(Blocks.CRIMSON_NYLIUM)
                 ));
+
+        RuleTest deepslateReplaceable = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
+        List<OreConfiguration.TargetBlockState> overworldAncientSilver = List.of(OreConfiguration.target(deepslateReplaceable, BlockRegistry.ANCIENT_SILVER.get().defaultBlockState()));
+        register(context, ORE_ANCIENT_SILVER_SMALL, Feature.SCATTERED_ORE, new OreConfiguration(overworldAncientSilver, 2, 1.0F));
     }
 
     public static ResourceKey<ConfiguredFeature<?,?>> registerKey(String name){

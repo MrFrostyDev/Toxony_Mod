@@ -1,8 +1,11 @@
 package xyz.yfrostyf.toxony.registries;
 
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -20,6 +23,9 @@ import xyz.yfrostyf.toxony.api.oils.Oil;
 import xyz.yfrostyf.toxony.items.*;
 import xyz.yfrostyf.toxony.items.armor.HunterArmorItem;
 import xyz.yfrostyf.toxony.items.armor.PlagueDoctorArmorItem;
+import xyz.yfrostyf.toxony.items.armor.PlaguebringerArmorItem;
+import xyz.yfrostyf.toxony.items.armor.ProfessionalHunterArmorItem;
+import xyz.yfrostyf.toxony.items.weapons.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +60,27 @@ public class ItemRegistry {
             .stacksTo(1).durability(195)
     ));
 
+    public static final DeferredHolder<Item, Item> PLAGUEBRINGER_MASK = ITEMS.register("plaguebringer_mask", () -> new PlaguebringerArmorItem(
+            ArmorMaterialRegistry.PLAGUEBRINGER_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()
+            .stacksTo(1).durability(407)
+    ));
+
+    public static final DeferredHolder<Item, Item> PLAGUEBRINGER_COAT = ITEMS.register("plaguebringer_coat", () -> new PlaguebringerArmorItem(
+            ArmorMaterialRegistry.PLAGUEBRINGER_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()
+            .stacksTo(1).durability(592)
+    ));
+
+    public static final DeferredHolder<Item, Item> PLAGUEBRINGER_LEGGINGS = ITEMS.register("plaguebringer_leggings", () -> new PlaguebringerArmorItem(
+            ArmorMaterialRegistry.PLAGUEBRINGER_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()
+            .stacksTo(1).durability(555)
+    ));
+
+    public static final DeferredHolder<Item, Item> PLAGUEBRINGER_BOOTS = ITEMS.register("plaguebringer_boots", () -> new PlaguebringerArmorItem(
+            ArmorMaterialRegistry.PLAGUEBRINGER_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()
+            .stacksTo(1).durability(481)
+    ));
+
+
     public static final DeferredHolder<Item, Item> HUNTER_HAT = ITEMS.register("hunter_hat", () -> new HunterArmorItem(
             ArmorMaterialRegistry.HUNTER_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()
             .stacksTo(1).durability(165)
@@ -72,6 +99,26 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> HUNTER_BOOTS = ITEMS.register("hunter_boots", () -> new HunterArmorItem(
             ArmorMaterialRegistry.HUNTER_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()
             .stacksTo(1).durability(195)
+    ));
+
+    public static final DeferredHolder<Item, Item> PROFESSIONAL_HUNTER_HAT = ITEMS.register("professional_hunter_hat", () -> new ProfessionalHunterArmorItem(
+            ArmorMaterialRegistry.PROFESSIONAL_HUNTER_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()
+            .stacksTo(1).durability(407).fireResistant()
+    ));
+
+    public static final DeferredHolder<Item, Item> PROFESSIONAL_HUNTER_COAT = ITEMS.register("professional_hunter_coat", () -> new ProfessionalHunterArmorItem(
+            ArmorMaterialRegistry.PROFESSIONAL_HUNTER_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()
+            .stacksTo(1).durability(592).fireResistant()
+    ));
+
+    public static final DeferredHolder<Item, Item> PROFESSIONAL_HUNTER_LEGGINGS = ITEMS.register("professional_hunter_leggings", () -> new ProfessionalHunterArmorItem(
+            ArmorMaterialRegistry.PROFESSIONAL_HUNTER_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()
+            .stacksTo(1).durability(555).fireResistant()
+    ));
+
+    public static final DeferredHolder<Item, Item> PROFESSIONAL_HUNTER_BOOTS = ITEMS.register("professional_hunter_boots", () -> new ProfessionalHunterArmorItem(
+            ArmorMaterialRegistry.PROFESSIONAL_HUNTER_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()
+            .stacksTo(1).durability(481).fireResistant()
     ));
 
     // |-----------------------------------------------------------------------------------|
@@ -105,6 +152,11 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> CYCLEBOW = ITEMS.register("cyclebow", () -> new CycleBowItem(new Item.Properties()
             .stacksTo(1).durability(550), 3));
+
+    public static final DeferredHolder<Item, Item> FLINTLOCK = ITEMS.register("flintlock", () -> new FlintlockItem(new Item.Properties()
+            .stacksTo(1).durability(500).fireResistant()));
+
+    public static final DeferredHolder<Item, Item> IRON_ROUND = ITEMS.register("iron_round", () -> new FlintlockRoundItem(new Item.Properties().stacksTo(64), 8));
 
     public static final DeferredHolder<Item, Item> BONE_SAW = ITEMS.register("bone_saw", () -> new BoneSawItem(new Item.Properties().stacksTo(1)
             .durability(400).attributes(BoneSawItem.createAttributes(4.0F, -2.0F))
@@ -391,17 +443,41 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> COPPER_SCALE = ITEMS.register("copper_scale", () -> new BlockItem(BlockRegistry.COPPER_SCALE.get(), new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> LOOSE_PAPER = ITEMS.register("loose_paper", () -> new BlockItem(BlockRegistry.LOOSE_PAPER.get(), new Item.Properties().stacksTo(64)));
 
-
+    // Material
+    public static final DeferredHolder<Item, Item> ANCIENT_SILVER = ITEMS.register("ancient_silver", () -> new BlockItem(BlockRegistry.ANCIENT_SILVER.get(), new Item.Properties().stacksTo(64).fireResistant()));
 
     // |-----------------------------------------------------------------------------------|
     // |------------------------------------Misc Items-------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> LOST_JOURNAL = ITEMS.register("lost_journal", () -> new JournalItem(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredHolder<Item, Item> FLINTLOCK_COMPONENTS = ITEMS.register("flintlock_components", () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final DeferredHolder<Item, Item> SILVER_SCRAP = ITEMS.register("silver_scrap", () -> new Item(new Item.Properties().stacksTo(64).fireResistant()));
+    public static final DeferredHolder<Item, Item> SILVER_STEEL_BLEND = ITEMS.register("silver_steel_blend", () -> new Item(new Item.Properties().stacksTo(64).fireResistant()));
+    public static final DeferredHolder<Item, Item> SILVER_STEEL_INGOT = ITEMS.register("silver_steel_ingot", () -> new Item(new Item.Properties().stacksTo(64).fireResistant()));
+    public static final DeferredHolder<Item, Item> SILVER_STEEL_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("silver_steel_upgrade_smithing_template",
+            () -> new SmithingTemplateItem(
+                    Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "silver_steel_upgrade.applies_to"))),
+                    Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "silver_steel_upgrade.ingredients"))),
+                    Component.translatable(Util.makeDescriptionId("upgrade", ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "silver_steel_upgrade"))),
+                    Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "silver_steel_upgrade.base_slot_description"))),
+                    Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "silver_steel_upgrade.additions_slot_description"))),
+                    List.of(
+                            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "item/empty_slot_fishing_rod"),
+                            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "item/empty_slot_flintlock_components"),
+                            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet"),
+                            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate"),
+                            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings"),
+                            ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots")
+                    ),
+                    List.of(ResourceLocation.withDefaultNamespace("item/empty_slot_ingot"))
+            )
+    );
+
+
     public static final DeferredHolder<Item, Item> TOXIC_LEATHER = ITEMS.register("toxic_leather", () -> new Item(new Item.Properties().stacksTo(64)));
     public static final DeferredHolder<Item, Item> ALEMBIC_BASE = ITEMS.register("alembic_base", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> TOXIN_CANISTER = ITEMS.register("toxin_canister", () -> new Item(new Item.Properties().stacksTo(64)));
-
 
     public static final DeferredHolder<Item, Item> VALENTINES_BOX = ITEMS.register("valentines_box", () -> new BlockItem(BlockRegistry.VALENTINES_BOX.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> MINT_CHOCOLATE = ITEMS.register("mint_chocolate", () -> new Item(new Item.Properties().food(new FoodProperties(

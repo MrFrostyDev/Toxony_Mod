@@ -48,5 +48,45 @@ public class ToxonyAlchemicalForgeRecipes extends RecipeProvider {
                 .affinity(AffinityRegistry.WIND.get())
                 .unlockedByItems("has_alchemical_forge_part", ItemRegistry.ALCHEMICAL_FORGE_PART.get())
                 .build(output);
+
+        new AlchemicalForgeRecipeBuilder(new ItemStack(ItemRegistry.PLAGUEBRINGER_MASK))
+                .mainIngredient(ItemRegistry.PLAGUE_DOCTOR_HOOD.get())
+                .auxIngredient(Items.NETHERITE_SCRAP)
+                .auxIngredient(Items.NETHERITE_SCRAP)
+                .affinity(AffinityRegistry.DECAY.get())
+                .affinity(AffinityRegistry.SOUL.get())
+                .affinity(AffinityRegistry.SUN.get())
+                .unlockedByItems("has_alchemical_forge_part", ItemRegistry.ALCHEMICAL_FORGE_PART.get())
+                .build(output);
+
+        new AlchemicalForgeRecipeBuilder(new ItemStack(ItemRegistry.PLAGUEBRINGER_COAT))
+                .mainIngredient(ItemRegistry.PLAGUE_DOCTOR_COAT.get())
+                .auxIngredient(Items.NETHERITE_SCRAP)
+                .auxIngredient(Items.NETHERITE_SCRAP)
+                .affinity(AffinityRegistry.DECAY.get())
+                .affinity(AffinityRegistry.SOUL.get())
+                .affinity(AffinityRegistry.SUN.get())
+                .unlockedByItems("has_alchemical_forge_part", ItemRegistry.ALCHEMICAL_FORGE_PART.get())
+                .build(output);
+
+        new AlchemicalForgeRecipeBuilder(new ItemStack(ItemRegistry.PLAGUEBRINGER_LEGGINGS))
+                .mainIngredient(ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get())
+                .auxIngredient(Items.NETHERITE_SCRAP)
+                .auxIngredient(Items.NETHERITE_SCRAP)
+                .affinity(AffinityRegistry.DECAY.get())
+                .affinity(AffinityRegistry.WIND.get())
+                .affinity(AffinityRegistry.MOON.get())
+                .unlockedByItems("has_alchemical_forge_part", ItemRegistry.ALCHEMICAL_FORGE_PART.get())
+                .build(output);
+
+        new AlchemicalForgeRecipeBuilder(new ItemStack(ItemRegistry.PLAGUEBRINGER_BOOTS))
+                .mainIngredient(ItemRegistry.PLAGUE_DOCTOR_BOOTS.get())
+                .auxIngredient(Items.NETHERITE_SCRAP)
+                .auxIngredient(Items.NETHERITE_SCRAP)
+                .affinity(AffinityRegistry.DECAY.get())
+                .affinity(AffinityRegistry.WIND.get())
+                .affinity(AffinityRegistry.MOON.get())
+                .unlockedByItems("has_alchemical_forge_part", ItemRegistry.ALCHEMICAL_FORGE_PART.get())
+                .build(output);
     }
 }

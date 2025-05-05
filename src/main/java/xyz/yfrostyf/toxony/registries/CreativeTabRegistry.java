@@ -40,6 +40,8 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.BONE_SAW.get());
                 output.accept(ItemRegistry.VENOM_CLUB.get());
                 output.accept(ItemRegistry.FLAIL.get());
+                output.accept(ItemRegistry.FLINTLOCK.get());
+                output.accept(ItemRegistry.IRON_ROUND.get());
                 output.accept(ItemRegistry.CYCLEBOW.get());
 
                 output.accept(ItemRegistry.BOLT_CARTRIDGE.get());
@@ -61,10 +63,20 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get());
                 output.accept(ItemRegistry.PLAGUE_DOCTOR_BOOTS.get());
 
+                output.accept(ItemRegistry.PLAGUEBRINGER_MASK.get());
+                output.accept(ItemRegistry.PLAGUEBRINGER_COAT.get());
+                output.accept(ItemRegistry.PLAGUEBRINGER_LEGGINGS.get());
+                output.accept(ItemRegistry.PLAGUEBRINGER_BOOTS.get());
+
                 output.accept(ItemRegistry.HUNTER_HAT.get());
                 output.accept(ItemRegistry.HUNTER_COAT.get());
                 output.accept(ItemRegistry.HUNTER_LEGGINGS.get());
                 output.accept(ItemRegistry.HUNTER_BOOTS.get());
+
+                output.accept(ItemRegistry.PROFESSIONAL_HUNTER_HAT.get());
+                output.accept(ItemRegistry.PROFESSIONAL_HUNTER_COAT.get());
+                output.accept(ItemRegistry.PROFESSIONAL_HUNTER_LEGGINGS.get());
+                output.accept(ItemRegistry.PROFESSIONAL_HUNTER_BOOTS.get());
 
                 output.accept(ItemRegistry.OIL_BASE.get());
                 output.accept(ItemRegistry.CLAY_OIL_POT.get());
@@ -138,6 +150,12 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.BLOODROOT_FUNGUS.get());
                 output.accept(ItemRegistry.WARPROOT_FUNGUS.get());
 
+                output.accept(ItemRegistry.ANCIENT_SILVER.get());
+                output.accept(ItemRegistry.SILVER_SCRAP.get());
+                output.accept(ItemRegistry.SILVER_STEEL_BLEND.get());
+                output.accept(ItemRegistry.SILVER_STEEL_INGOT.get());
+                output.accept(ItemRegistry.SILVER_STEEL_UPGRADE_SMITHING_TEMPLATE.get());
+                output.accept(ItemRegistry.FLINTLOCK_COMPONENTS.get());
             })
             .build()
     );

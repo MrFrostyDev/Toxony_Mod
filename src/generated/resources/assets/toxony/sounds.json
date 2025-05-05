@@ -1,4 +1,38 @@
 {
+  "flintlock_click": {
+    "sounds": [
+      {
+        "attenuation_distance": 6,
+        "name": "toxony:flintlock_click",
+        "volume": 0.8,
+        "weight": 2
+      },
+      "toxony:flintlock_click"
+    ],
+    "subtitle": "sound.toxony.flintlock_click"
+  },
+  "flintlock_load": {
+    "sounds": [
+      {
+        "attenuation_distance": 6,
+        "name": "toxony:flintlock_load",
+        "volume": 0.8,
+        "weight": 2
+      },
+      "toxony:flintlock_load"
+    ],
+    "subtitle": "sound.toxony.flintlock_load"
+  },
+  "flintlock_shoot": {
+    "sounds": [
+      {
+        "name": "toxony:flintlock_shoot",
+        "weight": 2
+      },
+      "toxony:flintlock_shoot"
+    ],
+    "subtitle": "sound.toxony.flintlock_shoot"
+  },
   "mutagen_transform": {
     "sounds": [
       {

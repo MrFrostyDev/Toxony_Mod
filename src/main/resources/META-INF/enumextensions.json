@@ -20,6 +20,15 @@
     },
     {
       "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "TOXONY_ARMPOSE_ONE_HAND_PISTOL",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "xyz/yfrostyf/toxony/client/ToxonyArmPoses",
+        "field": "ONE_HAND_PISTOL_ENUM_PROXY"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
       "name": "TOXONY_ARMPOSE_FLAIL",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {

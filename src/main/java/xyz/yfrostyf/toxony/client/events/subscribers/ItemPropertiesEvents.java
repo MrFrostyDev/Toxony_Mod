@@ -8,6 +8,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.items.*;
+import xyz.yfrostyf.toxony.items.weapons.CycleBowItem;
+import xyz.yfrostyf.toxony.items.weapons.FlailItem;
+import xyz.yfrostyf.toxony.items.weapons.FlintlockItem;
+import xyz.yfrostyf.toxony.items.weapons.WitchingBladeItem;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 @EventBusSubscriber(modid = ToxonyMain.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -39,6 +43,13 @@ public class ItemPropertiesEvents {
                     ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "loaded"),
                     (stack, level, player, seed) ->
                             (float) CycleBowItem.getLoadedShots(stack)
+            );
+
+            ItemProperties.register(
+                    ItemRegistry.FLINTLOCK.get(),
+                    ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "loaded"),
+                    (stack, level, player, seed) ->
+                            FlintlockItem.isLoaded(stack) ? 1.0F : 0.0F
             );
 
             ItemProperties.register(

@@ -1,9 +1,7 @@
 package xyz.yfrostyf.toxony.entities.item;
 
-import net.minecraft.client.particle.ExplodeParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -13,14 +11,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -32,7 +27,7 @@ import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.damages.FlailDamageSource;
-import xyz.yfrostyf.toxony.items.FlailItem;
+import xyz.yfrostyf.toxony.items.weapons.FlailItem;
 import xyz.yfrostyf.toxony.registries.EntityRegistry;
 
 import java.util.List;

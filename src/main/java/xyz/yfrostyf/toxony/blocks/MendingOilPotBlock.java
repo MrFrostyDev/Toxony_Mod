@@ -67,17 +67,18 @@ public class MendingOilPotBlock extends OilPotBlock {
             return ItemInteractionResult.SUCCESS;
         }
         else if(canAddOilBase){
-            BlockState newBlockState = state.setValue(MendingOilPotBlock.OIL_LEFT, 3);
-
-            level.setBlock(pos, newBlockState, MendingOilPotBlock.UPDATE_ALL_IMMEDIATE);
             blockEntity.setDamage(0);
-
             stack.consume(1, player);
+
+            BlockState newBlockState = state.setValue(MendingOilPotBlock.OIL_LEFT, 3);
+            level.setBlock(pos, newBlockState, MendingOilPotBlock.UPDATE_ALL_IMMEDIATE);
 
             level.playSound(player, pos,
                     SoundEvents.HONEY_BLOCK_PLACE, SoundSource.BLOCKS,
                     1.0F, 0.8F
             );
+
+            return ItemInteractionResult.SUCCESS;
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

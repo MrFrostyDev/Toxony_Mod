@@ -1,0 +1,7 @@
+{
+	"parent": "toxony:item/flintlock_in_hand_template",
+	"textures": {
+		"0": "toxony:item/flintlock_0",
+		"particle": "toxony:item/flintlock_0"
+	}
+}

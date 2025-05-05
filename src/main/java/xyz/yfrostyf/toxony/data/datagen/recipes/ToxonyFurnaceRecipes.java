@@ -3,6 +3,8 @@ package xyz.yfrostyf.toxony.data.datagen.recipes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
@@ -43,5 +45,25 @@ public class ToxonyFurnaceRecipes extends RecipeProvider {
                 )
                 .unlockedBy("has_clay_pot", has(ItemRegistry.CLAY_OIL_POT.get()))
                 .save(output, "clay_oil_pot_campfire");
+
+        SimpleCookingRecipeBuilder.blasting(
+                        Ingredient.of(ItemRegistry.ANCIENT_SILVER.get()),
+                        RecipeCategory.MISC,
+                        new ItemStack(ItemRegistry.SILVER_SCRAP.get(), 2),
+                        2.0F,
+                        200
+                )
+                .unlockedBy("has_ancient_silver", has(ItemRegistry.ANCIENT_SILVER.get()))
+                .save(output);
+
+        SimpleCookingRecipeBuilder.blasting(
+                        Ingredient.of(ItemRegistry.SILVER_STEEL_BLEND.get()),
+                        RecipeCategory.MISC,
+                        ItemRegistry.SILVER_STEEL_INGOT.get(),
+                        2.0F,
+                        300
+                )
+                .unlockedBy("has_silver_steel_blend", has(ItemRegistry.SILVER_STEEL_BLEND.get()))
+                .save(output);
     }
 }

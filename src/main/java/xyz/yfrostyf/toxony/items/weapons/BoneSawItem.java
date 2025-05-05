@@ -1,10 +1,8 @@
-package xyz.yfrostyf.toxony.items;
+package xyz.yfrostyf.toxony.items.weapons;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,13 +17,12 @@ import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.List;
 
-public class VenomClubItem extends Item {
+public class BoneSawItem extends Item {
 
-    public VenomClubItem(Properties properties) {
+    public BoneSawItem(Properties properties) {
         super(properties.component(DataComponents.TOOL, createToolProperties()));
     }
 
@@ -66,16 +63,15 @@ public class VenomClubItem extends Item {
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-        target.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
     }
 
     @Override
     public int getEnchantmentValue(ItemStack stack) {
-        return 15;
+        return 14;
     }
 
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-        return repair.is(ItemRegistry.VENOM_TOOTH);
+        return repair.is(Items.IRON_INGOT);
     }
 }

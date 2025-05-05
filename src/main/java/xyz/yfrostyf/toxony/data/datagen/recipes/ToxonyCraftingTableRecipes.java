@@ -77,6 +77,30 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_poison_paste", has(ItemRegistry.POISON_PASTE.get()))
                 .save(output);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.SILVER_STEEL_BLEND.get())
+                .requires(ItemRegistry.SILVER_SCRAP.get())
+                .requires(ItemRegistry.SILVER_SCRAP.get())
+                .requires(ItemRegistry.SILVER_SCRAP.get())
+                .requires(ItemRegistry.SILVER_SCRAP.get())
+                .requires(Items.IRON_INGOT)
+                .requires(Items.IRON_INGOT)
+                .requires(Items.COAL)
+                .requires(Items.COAL)
+                .unlockedBy("has_silver_scrap", has(ItemRegistry.SILVER_SCRAP.get()))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, new ItemStack(ItemRegistry.SILVER_STEEL_UPGRADE_SMITHING_TEMPLATE.get(), 2))
+                .pattern("CTC")
+                .pattern("DID")
+                .pattern("DDD")
+                .define('T', ItemRegistry.SILVER_STEEL_UPGRADE_SMITHING_TEMPLATE.get())
+                .define('C', Items.COAL)
+                .define('D', Items.DIAMOND)
+                .define('I', Items.IRON_BLOCK)
+                .unlockedBy("has_silver_steel_upgrade_template", has(ItemRegistry.SILVER_STEEL_UPGRADE_SMITHING_TEMPLATE.get()))
+                .save(output);
+
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, new ItemStack(ItemRegistry.BOLT.get(), 9))
                 .pattern(" F ")
                 .pattern(" I ")

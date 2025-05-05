@@ -57,6 +57,21 @@
         },
         {
           "type": "minecraft:item",
+          "name": "toxony:silver_scrap",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:silver_steel_upgrade_smithing_template",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:flintlock_components",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:shield",
           "weight": 1
         },
@@ -87,6 +102,7 @@
         },
         {
           "type": "minecraft:loot_table",
+          "name": "",
           "value": "toxony:chests/basic_oils",
           "weight": 1
         }

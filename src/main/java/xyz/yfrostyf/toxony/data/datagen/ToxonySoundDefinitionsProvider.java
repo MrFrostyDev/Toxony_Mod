@@ -45,5 +45,50 @@ public class ToxonySoundDefinitionsProvider extends SoundDefinitionsProvider {
                 // Enables replacing.
                 .replace(false)
         );
+
+        add(SoundEventRegistry.FLINTLOCK_SHOOT, SoundDefinition.definition()
+                .with(
+                        sound(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "flintlock_shoot"))
+                                .volume(1.0f)
+                                .pitch(1.0f)
+                                .weight(2)
+                                .attenuationDistance(16)
+                                .stream(false)
+                                .preload(false),
+                        sound("toxony:flintlock_shoot")
+                )
+                .subtitle("sound.toxony.flintlock_shoot")
+                .replace(false)
+        );
+
+        add(SoundEventRegistry.FLINTLOCK_CLICK, SoundDefinition.definition()
+                .with(
+                        sound(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "flintlock_click"))
+                                .volume(0.8f)
+                                .pitch(1.0f)
+                                .weight(2)
+                                .attenuationDistance(6)
+                                .stream(false)
+                                .preload(false),
+                        sound("toxony:flintlock_click")
+                )
+                .subtitle("sound.toxony.flintlock_click")
+                .replace(false)
+        );
+
+        add(SoundEventRegistry.FLINTLOCK_LOAD, SoundDefinition.definition()
+                .with(
+                        sound(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "flintlock_load"))
+                                .volume(0.8f)
+                                .pitch(1.0f)
+                                .weight(2)
+                                .attenuationDistance(6)
+                                .stream(false)
+                                .preload(false),
+                        sound("toxony:flintlock_load")
+                )
+                .subtitle("sound.toxony.flintlock_load")
+                .replace(false)
+        );
     }
 }

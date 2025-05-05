@@ -45,24 +45,29 @@
       "bonus_rolls": 1,
       "entries": [
         {
-          "type": "minecraft:loot_table",
-          "value": "toxony:chests/toxony_ingredients",
+          "type": "minecraft:item",
+          "name": "toxony:silver_scrap",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "toxony:flintlock_components",
           "weight": 1
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:nether_wart",
-          "weight": 1
+          "weight": 5
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:ghast_tear",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:redstone",
-          "weight": 2,
+          "weight": 5,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -76,18 +81,24 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:book",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "",
+          "value": "toxony:chests/basic_oils",
           "weight": 2
         },
         {
           "type": "minecraft:loot_table",
           "name": "",
-          "value": "toxony:basic_oils",
-          "weight": 1
+          "value": "toxony:chests/toxony_ingredients",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:emerald",
-          "weight": 1,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",

@@ -6,6 +6,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
 
@@ -49,31 +50,40 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.VENOM_CLUB.get(),
                         ItemRegistry.BONE_SAW.get(),
                         ItemRegistry.CYCLEBOW.get(),
+                        ItemRegistry.FLINTLOCK.get(),
                         ItemRegistry.FLAIL.get()
                 );
 
         this.tag(ItemTags.HEAD_ARMOR)
                 .add(
                         ItemRegistry.PLAGUE_DOCTOR_HOOD.get(),
-                        ItemRegistry.HUNTER_HAT.get()
+                        ItemRegistry.PLAGUEBRINGER_MASK.get(),
+                        ItemRegistry.HUNTER_HAT.get(),
+                        ItemRegistry.PROFESSIONAL_HUNTER_HAT.get()
                 );
 
         this.tag(ItemTags.CHEST_ARMOR)
                 .add(
                         ItemRegistry.PLAGUE_DOCTOR_COAT.get(),
-                        ItemRegistry.HUNTER_COAT.get()
+                        ItemRegistry.PLAGUEBRINGER_COAT.get(),
+                        ItemRegistry.HUNTER_COAT.get(),
+                        ItemRegistry.PROFESSIONAL_HUNTER_COAT.get()
                 );
 
         this.tag(ItemTags.LEG_ARMOR)
                 .add(
                         ItemRegistry.PLAGUE_DOCTOR_LEGGINGS.get(),
-                        ItemRegistry.HUNTER_LEGGINGS.get()
+                        ItemRegistry.PLAGUEBRINGER_LEGGINGS.get(),
+                        ItemRegistry.HUNTER_LEGGINGS.get(),
+                        ItemRegistry.PROFESSIONAL_HUNTER_LEGGINGS.get()
                 );
 
         this.tag(ItemTags.FOOT_ARMOR)
                 .add(
                         ItemRegistry.PLAGUE_DOCTOR_BOOTS.get(),
-                        ItemRegistry.HUNTER_BOOTS.get()
+                        ItemRegistry.PLAGUEBRINGER_BOOTS.get(),
+                        ItemRegistry.HUNTER_BOOTS.get(),
+                        ItemRegistry.PROFESSIONAL_HUNTER_BOOTS.get()
                 );
 
 
@@ -140,6 +150,11 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.SMOKE_BOLT.get(),
                         ItemRegistry.REGENERATION_BOLT.get(),
                         ItemRegistry.WITCHFIRE_BOLT.get()
+                );
+
+        this.tag(TagRegistry.ROUNDS)
+                .add(
+                        ItemRegistry.IRON_ROUND.get()
                 );
 
         this.tag(ItemTags.OCELOT_FOOD)

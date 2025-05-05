@@ -8,7 +8,7 @@
   "block.toxony.alchemical_forge": "Alchemical Forge",
   "block.toxony.alchemical_forge_part": "Alchemical Forge Part",
 
-  "block.toxony.false_berries": "Sweet Berries",
+  "block.toxony.false_berries_bush": "Sweet Berries",
   "block.toxony.ocelot_mint": "Ocelot Mint",
   "block.toxony.snow_mint": "Snow Mint",
   "block.toxony.nightshade": "Nightshade",
@@ -26,14 +26,43 @@
   "block.toxony.wild_coldsnap": "Wild Coldsnap",
   "block.toxony.wild_bloodroot": "Wild Bloodroot",
 
-  "item.toxony.alembic_base": "Alembic Base",
-  "block.toxony.valentines_box": "Valentines Box",
-  "block.toxony.poison_farmland": "Poison Farmland",
+  "block.toxony.poison_oil_pot": "Poison Oil Pot",
+  "block.toxony.glowing_oil_pot": "Glowing Oil Pot",
+  "block.toxony.fire_resistance_oil_pot": "Fire Resistance Oil Pot",
+  "block.toxony.fatigue_oil_pot": "Fatigue Oil Pot",
+  "block.toxony.acid_oil_pot": "Acid Oil Pot",
+  "block.toxony.mending_oil_pot": "Mending Oil Pot",
+  "block.toxony.toxin_tox_pot": "Toxin Oil Pot",
+  "block.toxony.acid_tox_pot": "Acid Tox Pot",
+  "block.toxony.regeneration_tox_pot": "Regeneration Oil Pot",
+  "block.toxony.smoke_tox_pot": "Smoke Oil Pot",
+  "block.toxony.witchfire_tox_pot": "Witchfire Oil Pot",
+
+  "block.toxony.ancient_silver": "Ancient Silver",
 
   "block.toxony.vial_rack": "Vial Rack",
   "block.toxony.bell_jar": "Bell Jar",
   "block.toxony.copper_scale": "Copper Scale",
   "block.toxony.loose_paper": "Loose Paper",
+
+  "block.toxony.lost_journal": "Lost Journal",
+  "item.toxony.alembic_base": "Alembic Base",
+  "block.toxony.valentines_box": "Valentines Box",
+  "block.toxony.poison_farmland": "Poison Farmland",
+  "block.toxony.oil_layer": "Oil",
+
+  "item.toxony.silver_scrap": "Silver Scrap",
+  "item.toxony.silver_steel_blend": "Silver Steel Blend",
+  "item.toxony.silver_steel_ingot": "Silver Steel Ingot",
+  "item.toxony.flintlock_components": "Flintlock Components",
+
+  "item.toxony.silver_steel_upgrade_smithing_template": "Smithing Template",
+  "item.toxony.silver_steel_upgrade.additions_slot_description": "Add Silver Steel Ingot",
+  "item.toxony.silver_steel_upgrade.applies_to": "Various Equipment",
+  "item.toxony.silver_steel_upgrade.base_slot_description": "Add fishing rod, armor, or components",
+  "item.toxony.silver_steel_upgrade.ingredients": "Silver Steel Ingot",
+  "upgrade.toxony.silver_steel_upgrade": "Silver Steel Upgrade",
+
 
   "item.toxony.lost_journal": "Lost Journal",
   "item.toxony.tox_gauge": "Toxicity Gauge",
@@ -58,6 +87,8 @@
   "item.toxony.bone_saw": "Bone Saw",
   "item.toxony.venom_club": "Venom Club",
   "item.toxony.flail": "Flail",
+  "item.toxony.flintlock": "Flintlock",
+  "item.toxony.iron_round": "Iron Round",
 
   "item.toxony.cyclebow": "Cyclebow",
   "item.toxony.cyclebow.loaded": "Loaded:",
@@ -81,10 +112,20 @@
   "item.toxony.plague_doctor_leggings": "Plague Doctor Leggings",
   "item.toxony.plague_doctor_boots": "Plague Doctor Boots",
 
+  "item.toxony.plaguebringer_mask": "Plaguebringer Mask",
+  "item.toxony.plaguebringer_coat": "Plaguebringer Coat",
+  "item.toxony.plaguebringer_leggings": "Plaguebringer Leggings",
+  "item.toxony.plaguebringer_boots": "Plaguebringer Boots",
+
   "item.toxony.hunter_hat": "Hunter Hood",
   "item.toxony.hunter_coat": "Hunter Coat",
   "item.toxony.hunter_leggings": "Hunter Leggings",
   "item.toxony.hunter_boots": "Hunter Boots",
+
+  "item.toxony.professional_hunter_hat": "Professional Hunter Hood",
+  "item.toxony.professional_hunter_coat": "Professional Hunter Coat",
+  "item.toxony.professional_hunter_leggings": "Professional Hunter Leggings",
+  "item.toxony.professional_hunter_boots": "Professional Hunter Boots",
 
   "item.toxony.venom_tooth": "Venom Tooth",
   "item.toxony.acid_slimeball": "Acid Slimeball",

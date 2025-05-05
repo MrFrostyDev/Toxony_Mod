@@ -11,6 +11,8 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import xyz.yfrostyf.toxony.client.models.HunterArmorEntityModel;
 import xyz.yfrostyf.toxony.client.models.PlagueDoctorArmorEntityModel;
+import xyz.yfrostyf.toxony.client.models.PlaguebringerArmorEntityModel;
+import xyz.yfrostyf.toxony.client.models.ProfessionalHunterArmorEntityModel;
 
 import java.util.Collections;
 import java.util.Map;
@@ -76,14 +78,13 @@ public class ModelUtils {
         }
     }
 
-
-    public class HunterArmor {
+    public class PlaguebringerArmor {
         public static HumanoidModel<?> getHead(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
             HumanoidModel model = new HumanoidModel(
                     new ModelPart(Collections.emptyList(), Map.of(
                             "left_leg", EMPTY,
                             "right_leg", EMPTY,
-                            "head", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).Head,
+                            "head", new PlaguebringerArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).Head,
                             "hat", EMPTY,
                             "body", EMPTY,
                             "right_arm", EMPTY,
@@ -103,9 +104,9 @@ public class ModelUtils {
                             "right_leg", EMPTY,
                             "head", EMPTY,
                             "hat", EMPTY,
-                            "body", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).Body,
-                            "right_arm", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).RightArm,
-                            "left_arm", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).LeftArm
+                            "body", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).Body,
+                            "right_arm", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).RightArm,
+                            "left_arm", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).LeftArm
                     ))
             );
             model.crouching = livingEntity.isShiftKeyDown();
@@ -117,8 +118,121 @@ public class ModelUtils {
         public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
             HumanoidModel model = new HumanoidModel(
                     new ModelPart(Collections.emptyList(), Map.of(
-                            "left_leg", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).LeftLeg,
-                            "right_leg", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).RightLeg,
+                            "left_leg", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).LeftLeg,
+                            "right_leg", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).RightLeg,
+                            "head", EMPTY,
+                            "hat", EMPTY,
+                            "body", EMPTY,
+                            "right_arm", EMPTY,
+                            "left_arm", EMPTY
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+    }
+
+
+    public class ProfessionalHunterArmor {
+        public static HumanoidModel<?> getHead(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", EMPTY,
+                            "right_leg", EMPTY,
+                            "head", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).Head,
+                            "hat", EMPTY,
+                            "body", EMPTY,
+                            "right_arm", EMPTY,
+                            "left_arm", EMPTY
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+
+        public static HumanoidModel<?> getBody(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", EMPTY,
+                            "right_leg", EMPTY,
+                            "head", EMPTY,
+                            "hat", EMPTY,
+                            "body", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).Body,
+                            "right_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightArm,
+                            "left_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftArm
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+
+        public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftLeg,
+                            "right_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightLeg,
+                            "head", EMPTY,
+                            "hat", EMPTY,
+                            "body", EMPTY,
+                            "right_arm", EMPTY,
+                            "left_arm", EMPTY
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+    }
+
+    public class HunterArmor {
+        public static HumanoidModel<?> getHead(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", EMPTY,
+                            "right_leg", EMPTY,
+                            "head", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).Head,
+                            "hat", EMPTY,
+                            "body", EMPTY,
+                            "right_arm", EMPTY,
+                            "left_arm", EMPTY
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+
+        public static HumanoidModel<?> getBody(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", EMPTY,
+                            "right_leg", EMPTY,
+                            "head", EMPTY,
+                            "hat", EMPTY,
+                            "body", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).Body,
+                            "right_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightArm,
+                            "left_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftArm
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+
+        public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", new ProfessionalHunterArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftLeg,
+                            "right_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightLeg,
                             "head", EMPTY,
                             "hat", EMPTY,
                             "body", EMPTY,

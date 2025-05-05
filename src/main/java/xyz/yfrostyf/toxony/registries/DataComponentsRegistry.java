@@ -16,6 +16,7 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
+import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Acidshot;
 import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Impact;
 import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Refill;
 
@@ -96,5 +97,11 @@ public class DataComponentsRegistry {
             "refill",
             () -> DataComponentType.<Refill>builder()
                     .persistent(Refill.CODEC)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Acidshot>> ACIDSHOT = ENCHANTMENT_COMPONENT_TYPES.register(
+            "acidshot",
+            () -> DataComponentType.<Acidshot>builder()
+                    .persistent(Acidshot.CODEC)
                     .build());
 }

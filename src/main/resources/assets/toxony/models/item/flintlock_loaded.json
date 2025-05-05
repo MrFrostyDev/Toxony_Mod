@@ -1,0 +1,21 @@
+{
+	"loader": "neoforge:separate_transforms",
+	"gui_light": "front",
+	"base": {
+		"parent": "toxony:item/flintlock_inventory"
+	},
+	"perspectives": {
+		"thirdperson_righthand": {
+			"parent": "toxony:item/flintlock_in_hand_loaded"
+		},
+		"thirdperson_lefthand": {
+			"parent": "toxony:item/flintlock_in_hand_loaded"
+		},
+		"firstperson_righthand": {
+			"parent": "toxony:item/flintlock_in_hand_loaded"
+		},
+		"firstperson_lefthand": {
+			"parent": "toxony:item/flintlock_in_hand_loaded"
+		}
+	}
+}

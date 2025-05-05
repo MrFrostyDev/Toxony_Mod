@@ -1,7 +1,8 @@
-// 1.21.1	2025-04-09T14:13:05.9637135	Loot Tables
+// 1.21.1	2025-05-04T16:02:56.7312449	Loot Tables
 e85df1c82d819786b6012243d6a42e6d9b7ec822 data/toxony/loot_table/blocks/alchemical_forge.json
 229832c3499a527d956e3f67e3db79abdaf7cffd data/toxony/loot_table/blocks/alchemical_forge_part.json
 b3b06e45f3b27679b3c855cc065baed90d76388e data/toxony/loot_table/blocks/alembic.json
+543b9da3d4d32642cebc2125270bb9821beddc42 data/toxony/loot_table/blocks/ancient_silver.json
 ebf728082b3492e9c69996d0d051dabb69e57242 data/toxony/loot_table/blocks/bell_jar.json
 281bd3425c4d575efa41d81fa7d48fe4a521901d data/toxony/loot_table/blocks/bloodroot.json
 64d443d7814bda75e8ac4a91ada870e05d173605 data/toxony/loot_table/blocks/coldsnap.json

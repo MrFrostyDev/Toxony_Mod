@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
-import xyz.yfrostyf.toxony.items.WitchingBladeItem;
+import xyz.yfrostyf.toxony.items.weapons.WitchingBladeItem;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;

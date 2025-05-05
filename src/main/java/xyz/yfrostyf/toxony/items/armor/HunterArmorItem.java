@@ -61,14 +61,4 @@ public class HunterArmorItem extends ArmorItem {
             default -> 0;
         };
     }
-
-    @Override
-    public int getEnchantmentValue(ItemStack stack) {
-        return 15;
-    }
-
-    @Override
-    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-        return repair.is(Items.LEATHER);
-    }
 }

@@ -21,12 +21,14 @@ public class DataInitialize {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         ToxonyBlockTagsProvider blockTagsProvider =  new ToxonyBlockTagsProvider(output, lookupProvider, existingFileHelper);
+        ToxonyDatapackProvider datapackProvider =  new ToxonyDatapackProvider(output, lookupProvider);
 
-        generator.addProvider(event.includeServer(), new ToxonyDatapackProvider(output, lookupProvider));
+        generator.addProvider(event.includeServer(), datapackProvider);
         generator.addProvider(event.includeServer(), new ToxonyLootTableProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ToxonyGlobalLootModifierProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), blockTagsProvider);
         generator.addProvider(event.includeServer(), new ToxonyItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter()));
+        generator.addProvider(event.includeServer(), new ToxonyEnchantmentTagsProvider(output, datapackProvider.getRegistryProvider(), existingFileHelper));
         generator.addProvider(event.includeServer(), new ToxonyRecipeProvider(output, lookupProvider));
         generator.addProvider(event.includeClient(), new ToxonySoundDefinitionsProvider(output, existingFileHelper));
     }

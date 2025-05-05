@@ -26,25 +26,21 @@ public class ParticleRegistry {
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SMOKE = PARTICLE_TYPES.register(
             "smoke",
-            // The supplier. The boolean parameter denotes whether setting the Particles option in the
-            // video settings to Minimal will affect this particle type or not; this is false for
-            // most vanilla particles, but true for e.g. explosions, campfire smoke, or squid ink.
             () -> new SimpleParticleType(false)
     );
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BLOOD_DRIP = PARTICLE_TYPES.register(
             "blood_drip",
-            // The supplier. The boolean parameter denotes whether setting the Particles option in the
-            // video settings to Minimal will affect this particle type or not; this is false for
-            // most vanilla particles, but true for e.g. explosions, campfire smoke, or squid ink.
             () -> new SimpleParticleType(false)
     );
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> CUT = PARTICLE_TYPES.register(
             "cut",
-            // The supplier. The boolean parameter denotes whether setting the Particles option in the
-            // video settings to Minimal will affect this particle type or not; this is false for
-            // most vanilla particles, but true for e.g. explosions, campfire smoke, or squid ink.
+            () -> new SimpleParticleType(false)
+    );
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FLINTLOCK_BLAST_LARGE = PARTICLE_TYPES.register(
+            "flintlock_blast_large",
             () -> new SimpleParticleType(false)
     );
 }

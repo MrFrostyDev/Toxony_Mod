@@ -23,4 +23,25 @@ public class SoundEventRegistry {
                     "mutagen_transform"
             ))
     );
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> FLINTLOCK_SHOOT = SOUND_EVENTS.register(
+            "flintlock_shoot",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID,
+                    "flintlock_shoot"
+            ))
+    );
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> FLINTLOCK_CLICK = SOUND_EVENTS.register(
+            "flintlock_click",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID,
+                    "flintlock_click"
+            ))
+    );
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> FLINTLOCK_LOAD = SOUND_EVENTS.register(
+            "flintlock_load",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID,
+                    "flintlock_load"
+            ))
+    );
 }

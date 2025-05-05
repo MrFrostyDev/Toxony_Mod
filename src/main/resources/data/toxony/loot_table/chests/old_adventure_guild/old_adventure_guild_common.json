@@ -94,7 +94,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "toxony:basic_oils"
+          "value": "toxony:chests/basic_oils"
         },
         {
           "type": "minecraft:item",

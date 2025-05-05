@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.enchantment.Enchantment;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Acidshot;
 import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Impact;
 import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Refill;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -23,7 +24,7 @@ import java.util.Optional;
 public class ToxonyEnchantments {
     public static final ResourceKey<Enchantment> IMPACT =  ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "impact"));
     public static final ResourceKey<Enchantment> REFILL =  ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "refill"));
-
+    public static final ResourceKey<Enchantment> ACIDSHOT =  ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "acidshot"));
 
     public static void bootstrap(BootstrapContext<Enchantment> context){
         context.register(
@@ -39,15 +40,15 @@ public class ToxonyEnchantments {
                                 // An Optional<HolderSet> of items that the enchantment considers "primary".
                                 Optional.empty(),
                                 // The weight of the enchantment.
-                                30,
+                                2,
                                 // The maximum level this enchantment can be.
                                 3,
                                 // The minimum cost of the enchantment. The first parameter is base cost, the second is cost per level.
-                                new Enchantment.Cost(3, 1),
+                                new Enchantment.Cost(5, 9),
                                 // The maximum cost of the enchantment. As above.
-                                new Enchantment.Cost(4, 2),
+                                new Enchantment.Cost(20, 9),
                                 // The anvil cost of the enchantment.
-                                3,
+                                4,
                                 // A list of EquipmentSlotGroups that this enchantment has effects in.
                                 List.of(EquipmentSlotGroup.MAINHAND)
                         ),
@@ -67,16 +68,37 @@ public class ToxonyEnchantments {
                         new Enchantment.EnchantmentDefinition(
                                 HolderSet.direct(ItemRegistry.POTION_FLASK, ItemRegistry.TOXIN_FLASK),
                                 Optional.empty(),
-                                30,
                                 2,
-                                new Enchantment.Cost(3, 1),
-                                new Enchantment.Cost(4, 2),
-                                3,
+                                2,
+                                new Enchantment.Cost(10, 12),
+                                new Enchantment.Cost(30, 12),
+                                5,
                                 List.of(EquipmentSlotGroup.ANY)
                         ),
                         HolderSet.empty(),
                         DataComponentMap.builder()
                                 .set(DataComponentsRegistry.REFILL, new Refill(0.5F))
+                                .build()
+                )
+        );
+
+        context.register(
+                ACIDSHOT,
+                new Enchantment(
+                        Component.literal("Acidshot"),
+                        new Enchantment.EnchantmentDefinition(
+                                HolderSet.direct(ItemRegistry.FLINTLOCK),
+                                Optional.empty(),
+                                2,
+                                2,
+                                new Enchantment.Cost(10, 12),
+                                new Enchantment.Cost(30, 12),
+                                5,
+                                List.of(EquipmentSlotGroup.MAINHAND, EquipmentSlotGroup.OFFHAND)
+                        ),
+                        HolderSet.empty(),
+                        DataComponentMap.builder()
+                                .set(DataComponentsRegistry.ACIDSHOT, new Acidshot(1.0F))
                                 .build()
                 )
         );

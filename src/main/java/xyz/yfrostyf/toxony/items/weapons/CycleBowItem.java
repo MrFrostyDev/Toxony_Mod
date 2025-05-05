@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.items;
+package xyz.yfrostyf.toxony.items.weapons;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import xyz.yfrostyf.toxony.items.BoltItem;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
@@ -61,8 +62,6 @@ public class CycleBowItem extends ProjectileWeaponItem{
                                 float velocity, float inaccuracy,
                                 @Nullable LivingEntity target) {
         if (level instanceof ServerLevel serverlevel) {
-            if (shooter instanceof Player player && net.neoforged.neoforge.event.EventHooks.onArrowLoose(weapon, shooter.level(), player, 1, true) < 0) return;
-
             weapon.set(DataComponentsRegistry.LOADED_SHOTS, weapon.getOrDefault(DataComponentsRegistry.LOADED_SHOTS, 0) - 1);
             ChargedProjectiles chargedprojectiles = weapon.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
             if (!chargedprojectiles.isEmpty()) {
@@ -107,34 +106,14 @@ public class CycleBowItem extends ProjectileWeaponItem{
                                    float inaccuracy, float angle,
                                    @Nullable LivingEntity target) {
         Vector3f vector3f;
-        if (target != null) {
-            double d0 = target.getX() - shooter.getX();
-            double d1 = target.getZ() - shooter.getZ();
-            double d2 = Math.sqrt(d0 * d0 + d1 * d1);
-            double d3 = target.getY(0.3333333333333333) - projectile.getY() + d2 * 0.2F;
-            vector3f = getProjectileShotVector(shooter, new Vec3(d0, d3, d1), angle);
-        } else {
-            Vec3 vec3 = shooter.getUpVector(1.0F);
-            Quaternionf quaternionf = new Quaternionf().setAngleAxis((angle * (float) (Math.PI / 180.0)), vec3.x, vec3.y, vec3.z);
-            Vec3 vec31 = shooter.getViewVector(1.0F);
-            vector3f = vec31.toVector3f().rotate(quaternionf);
-        }
+        Vec3 vec3 = shooter.getUpVector(1.0F);
+        Quaternionf quaternionf = new Quaternionf().setAngleAxis((angle * (float) (Math.PI / 180.0)), vec3.x, vec3.y, vec3.z);
+        Vec3 vec31 = shooter.getViewVector(1.0F);
+        vector3f = vec31.toVector3f().rotate(quaternionf);
 
         projectile.shoot(vector3f.x(), vector3f.y(), vector3f.z(), velocity, inaccuracy);
         float f = getShotPitch(shooter.getRandom(), index);
         shooter.level().playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.CROSSBOW_SHOOT, shooter.getSoundSource(), 1.0F, f);
-    }
-
-    private static Vector3f getProjectileShotVector(LivingEntity shooter, Vec3 distance, float angle) {
-        Vector3f vector3f = distance.toVector3f().normalize();
-        Vector3f vector3f1 = new Vector3f(vector3f).cross(new Vector3f(0.0F, 1.0F, 0.0F));
-        if ((double)vector3f1.lengthSquared() <= 1.0E-7) {
-            Vec3 vec3 = shooter.getUpVector(1.0F);
-            vector3f1 = new Vector3f(vector3f).cross(vec3.toVector3f());
-        }
-
-        Vector3f vector3f2 = new Vector3f(vector3f).rotateAxis((float) (Math.PI / 2), vector3f1.x, vector3f1.y, vector3f1.z);
-        return new Vector3f(vector3f).rotateAxis(angle * (float) (Math.PI / 180.0), vector3f2.x, vector3f2.y, vector3f2.z);
     }
 
     private static float getShotPitch(RandomSource random, int index) {

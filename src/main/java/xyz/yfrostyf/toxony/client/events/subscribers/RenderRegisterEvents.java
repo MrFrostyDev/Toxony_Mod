@@ -6,9 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.client.models.FlailBallEntityModel;
-import xyz.yfrostyf.toxony.client.models.HunterArmorEntityModel;
-import xyz.yfrostyf.toxony.client.models.PlagueDoctorArmorEntityModel;
+import xyz.yfrostyf.toxony.client.models.*;
 import xyz.yfrostyf.toxony.client.renderers.MortarPestleRenderer;
 import xyz.yfrostyf.toxony.client.renderers.entities.BoltRenderer;
 import xyz.yfrostyf.toxony.client.renderers.entities.FlailBallRenderer;
@@ -22,7 +20,9 @@ public class RenderRegisterEvents {
     public static void onRegisterEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
         event.registerLayerDefinition(MortarPestleRenderer.LAYER_LOCATION, MortarPestleRenderer::newModelLayer);
         event.registerLayerDefinition(PlagueDoctorArmorEntityModel.LAYER_LOCATION, PlagueDoctorArmorEntityModel::createBodyLayer);
+        event.registerLayerDefinition(PlaguebringerArmorEntityModel.LAYER_LOCATION, PlaguebringerArmorEntityModel::createBodyLayer);
         event.registerLayerDefinition(HunterArmorEntityModel.LAYER_LOCATION, HunterArmorEntityModel::createBodyLayer);
+        event.registerLayerDefinition(ProfessionalHunterArmorEntityModel.LAYER_LOCATION, ProfessionalHunterArmorEntityModel::createBodyLayer);
         event.registerLayerDefinition(FlailBallEntityModel.LAYER_LOCATION, FlailBallEntityModel::createBodyLayer);
     }
 
@@ -31,6 +31,7 @@ public class RenderRegisterEvents {
         event.registerEntityRenderer(EntityRegistry.OIL_POT.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(EntityRegistry.BOLT.get(), BoltRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FLAIL_BALL.get(), FlailBallRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.FLINTLOCK_BALL.get(), context -> new ThrownItemRenderer<>(context, 0.4F, true));
     }
 
     @SubscribeEvent

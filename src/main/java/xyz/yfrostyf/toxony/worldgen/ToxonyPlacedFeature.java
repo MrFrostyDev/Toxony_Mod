@@ -3,12 +3,21 @@ package xyz.yfrostyf.toxony.worldgen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.registries.BlockRegistry;
 
 import java.util.List;
 
@@ -22,6 +31,7 @@ public class ToxonyPlacedFeature {
     public static final ResourceKey<PlacedFeature> WILD_WATER_HEMLOCK_PLACED = registerKey("wild_water_hemlock_placed");
     public static final ResourceKey<PlacedFeature> WILD_COLDSNAP_PLACED = registerKey("wild_coldsnap_placed");
     public static final ResourceKey<PlacedFeature> PATCH_WILD_BLOODROOT_PLACED = registerKey("wild_bloodroot_placed");
+    public static final ResourceKey<PlacedFeature> ORE_ANCIENT_SILVER_SMALL = registerKey("ore_ancient_silver_small");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context){
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -61,6 +71,15 @@ public class ToxonyPlacedFeature {
                         InSquarePlacement.spread(),
                         PlacementUtils.FULL_RANGE,
                         BiomeFilter.biome()));
+
+       register(context, ORE_ANCIENT_SILVER_SMALL, configuredFeatures.getOrThrow(ToxonyConfiguredFeatures.ORE_ANCIENT_SILVER_SMALL),
+               List.of(RarityFilter.onAverageOnceEvery(2),
+                       InSquarePlacement.spread(),
+                       HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(-32)),
+                       BiomeFilter.biome()
+               )
+       );
+
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name){

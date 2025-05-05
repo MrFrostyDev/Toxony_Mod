@@ -28,6 +28,7 @@ public class ToxonyBiomeModifier {
     public static final ResourceKey<BiomeModifier> ADD_WILD_WATER_HEMLOCK = registerKey("add_wild_water_hemlock");
     public static final ResourceKey<BiomeModifier> ADD_WILD_COLDSNAP = registerKey("add_wild_coldsnap");
     public static final ResourceKey<BiomeModifier> ADD_PATCH_WILD_BLOODROOT = registerKey("add_patch_wild_bloodroot");
+    public static final ResourceKey<BiomeModifier> ADD_ORE_ANCIENT_SILVER_SMALL = registerKey("add_ore_ancient_silver_small");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context){
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -67,6 +68,12 @@ public class ToxonyBiomeModifier {
                 HolderSet.direct(biomes.getOrThrow(Biomes.CRIMSON_FOREST)),
                 HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.PATCH_WILD_BLOODROOT_PLACED)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
+        ));
+
+        context.register(ADD_ORE_ANCIENT_SILVER_SMALL, new BiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(Tags.Biomes.IS_OVERWORLD),
+                HolderSet.direct(placedFeatures.getOrThrow(ToxonyPlacedFeature.ORE_ANCIENT_SILVER_SMALL)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
         ));
     }
 

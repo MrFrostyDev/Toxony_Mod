@@ -1,0 +1,20 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "toxony:item/flintlock"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "toxony:loaded": 0
+            },
+            "model": "toxony:item/flintlock_unloaded"
+        },
+        {
+            "predicate": {
+                "toxony:loaded": 1
+            },
+            "model": "toxony:item/flintlock_loaded"
+        }
+    ]
+}

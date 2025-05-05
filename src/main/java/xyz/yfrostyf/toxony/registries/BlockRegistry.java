@@ -346,6 +346,16 @@ public class BlockRegistry {
             )
     );
 
+    public static final DeferredHolder<Block, Block> ANCIENT_SILVER = BLOCKS.register(
+            "ancient_silver",
+            () -> new Block(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                            .requiresCorrectToolForDrops()
+                            .strength(20.0F, 9.0F)
+                            .sound(SoundType.ANCIENT_DEBRIS)
+            )
+    );
 
     public static final DeferredHolder<Block, Block> OIL_LAYER = BLOCKS.register(
             "oil_layer",

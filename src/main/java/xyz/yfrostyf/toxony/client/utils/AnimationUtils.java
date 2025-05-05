@@ -6,6 +6,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
+import xyz.yfrostyf.toxony.items.weapons.FlintlockItem;
 
 public class AnimationUtils {
 
@@ -62,5 +63,37 @@ public class AnimationUtils {
         poseStack.mulPose(Axis.ZP.rotationDegrees((float)i * f1 * -20.0F));
         poseStack.mulPose(Axis.XP.rotationDegrees(f1 * -80.0F));
         poseStack.mulPose(Axis.YP.rotationDegrees((float)i * -45.0F));
+    }
+
+    // rotX = Vertical Rotation
+    // rotY = Horizontal Rotation
+    // rotZ = Roll Rotation
+    public static void handlePistolAnimation(PoseStack poseStack, LocalPlayer player,
+                                            HumanoidArm arm, ItemStack itemInHand,
+                                            float partialTick, float equipProcess,
+                                            float swingProcess){
+        boolean isHumanoidArmRight = arm == HumanoidArm.RIGHT;
+        int isRightArmFactor = isHumanoidArmRight ? 1 : -1;
+        float remaining = (float)itemInHand.getUseDuration(player) - ((float)player.getUseItemRemainingTicks() - partialTick + 1.0F);
+        float progress = remaining / itemInHand.getUseDuration(player);
+
+        if (player.isUsingItem() && ItemStack.matches(player.getUseItem(), itemInHand) && !FlintlockItem.isLoaded(itemInHand) && progress < 1.0F) {
+            applyItemArmTransform(poseStack, arm, equipProcess);
+            if(progress < 0.7){
+                poseStack.mulPose(Axis.XP.rotationDegrees(20.0F));
+            }
+            else{
+                poseStack.mulPose(Axis.XP.rotationDegrees(progress * 30.0F));
+            }
+            poseStack.translate(0, progress * 0.05, progress * 0.05);
+        }
+        else {
+            float f = -0.4F * Mth.sin(Mth.sqrt(swingProcess) * (float) Math.PI);
+            float f1 = 0.2F * Mth.sin(Mth.sqrt(swingProcess) * (float) (Math.PI * 2));
+            float f2 = -0.2F * Mth.sin(swingProcess * (float) Math.PI);
+            poseStack.translate((float)isRightArmFactor * f, f1, f2);
+            applyItemArmTransform(poseStack, arm, swingProcess);
+            applyItemArmAttackTransform(poseStack, arm, swingProcess);
+        }
     }
 }

@@ -36,9 +36,9 @@ public class ToxNeedleItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        ItemStack otherStack = player.getMainHandItem().is(this) ? player.getOffhandItem() : player.getMainHandItem();
-        ItemStack thisStack = player.getItemInHand(usedHand);
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack thisStack = player.getItemInHand(hand);
+        ItemStack otherStack = hand == InteractionHand.MAIN_HAND ? player.getOffhandItem() : player.getMainHandItem();
 
         if (thisStack.has(DataComponentsRegistry.AFFINITY_STORED_ITEM) || thisStack.has(DataComponents.POTION_CONTENTS)) {
             // Remove contents of needle when crouched
@@ -64,7 +64,7 @@ public class ToxNeedleItem extends Item {
             }
         }
 
-        return InteractionResultHolder.pass(player.getItemInHand(usedHand));
+        return InteractionResultHolder.pass(thisStack);
     }
 
     @Override
