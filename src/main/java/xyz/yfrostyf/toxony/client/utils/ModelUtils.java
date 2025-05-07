@@ -134,6 +134,61 @@ public class ModelUtils {
         }
     }
 
+    public class HunterArmor {
+        public static HumanoidModel<?> getHead(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", EMPTY,
+                            "right_leg", EMPTY,
+                            "head", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).Head,
+                            "hat", EMPTY,
+                            "body", EMPTY,
+                            "right_arm", EMPTY,
+                            "left_arm", EMPTY
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+
+        public static HumanoidModel<?> getBody(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", EMPTY,
+                            "right_leg", EMPTY,
+                            "head", EMPTY,
+                            "hat", EMPTY,
+                            "body", new HunterArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).Body,
+                            "right_arm", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).RightArm,
+                            "left_arm", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).LeftArm
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+
+        public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
+            HumanoidModel model = new HumanoidModel(
+                    new ModelPart(Collections.emptyList(), Map.of(
+                            "left_leg", new HunterArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).LeftLeg,
+                            "right_leg", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).RightLeg,
+                            "head", EMPTY,
+                            "hat", EMPTY,
+                            "body", EMPTY,
+                            "right_arm", EMPTY,
+                            "left_arm", EMPTY
+                    ))
+            );
+            model.crouching = livingEntity.isShiftKeyDown();
+            model.riding = original.riding;
+            model.young = livingEntity.isBaby();
+            return model;
+        }
+    }
 
     public class ProfessionalHunterArmor {
         public static HumanoidModel<?> getHead(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
@@ -176,62 +231,6 @@ public class ModelUtils {
             HumanoidModel model = new HumanoidModel(
                     new ModelPart(Collections.emptyList(), Map.of(
                             "left_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftLeg,
-                            "right_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightLeg,
-                            "head", EMPTY,
-                            "hat", EMPTY,
-                            "body", EMPTY,
-                            "right_arm", EMPTY,
-                            "left_arm", EMPTY
-                    ))
-            );
-            model.crouching = livingEntity.isShiftKeyDown();
-            model.riding = original.riding;
-            model.young = livingEntity.isBaby();
-            return model;
-        }
-    }
-
-    public class HunterArmor {
-        public static HumanoidModel<?> getHead(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
-            HumanoidModel model = new HumanoidModel(
-                    new ModelPart(Collections.emptyList(), Map.of(
-                            "left_leg", EMPTY,
-                            "right_leg", EMPTY,
-                            "head", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).Head,
-                            "hat", EMPTY,
-                            "body", EMPTY,
-                            "right_arm", EMPTY,
-                            "left_arm", EMPTY
-                    ))
-            );
-            model.crouching = livingEntity.isShiftKeyDown();
-            model.riding = original.riding;
-            model.young = livingEntity.isBaby();
-            return model;
-        }
-
-        public static HumanoidModel<?> getBody(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
-            HumanoidModel model = new HumanoidModel(
-                    new ModelPart(Collections.emptyList(), Map.of(
-                            "left_leg", EMPTY,
-                            "right_leg", EMPTY,
-                            "head", EMPTY,
-                            "hat", EMPTY,
-                            "body", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).Body,
-                            "right_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightArm,
-                            "left_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftArm
-                    ))
-            );
-            model.crouching = livingEntity.isShiftKeyDown();
-            model.riding = original.riding;
-            model.young = livingEntity.isBaby();
-            return model;
-        }
-
-        public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
-            HumanoidModel model = new HumanoidModel(
-                    new ModelPart(Collections.emptyList(), Map.of(
-                            "left_leg", new ProfessionalHunterArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftLeg,
                             "right_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightLeg,
                             "head", EMPTY,
                             "hat", EMPTY,

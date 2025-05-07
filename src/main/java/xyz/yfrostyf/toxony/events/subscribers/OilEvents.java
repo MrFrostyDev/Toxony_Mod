@@ -1,6 +1,5 @@
 package xyz.yfrostyf.toxony.events.subscribers;
 
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
