@@ -6,6 +6,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.fml.ModList;
+import top.theillusivec4.curios.api.CuriosApi;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.client.ClientToxData;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
@@ -50,10 +53,12 @@ public class ToxBar implements LayeredDraw.Layer {
 
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
-        if(Minecraft.getInstance().player == null)return;
+        Player player = Minecraft.getInstance().player;
+
+        if(player == null)return;
         if(Minecraft.getInstance().options.hideGui)return;
-        if(Minecraft.getInstance().player.isSpectator())return;
-        if(!Minecraft.getInstance().player.isHolding(ItemRegistry.TOX_GAUGE.get()))return;
+        if(player.isSpectator())return;
+        if(!isToxGaugeOnPlayer(player))return;
         if(ClientToxData.getToxData() == null)return;
 
         float tox = ClientToxData.getToxData().getTox();
@@ -119,5 +124,16 @@ public class ToxBar implements LayeredDraw.Layer {
                 SKULL_WIDTH, SKULL_HEIGHT,
                 TEXTURE_WIDTH, TEXTURE_HEIGHT);
 
+    }
+
+    private static boolean isToxGaugeOnPlayer(Player player){
+        boolean isHolding = player.isHolding(ItemRegistry.TOX_GAUGE.get());
+        boolean isInCurios = false;
+
+        if(ModList.get().isLoaded("curios") && CuriosApi.getCuriosInventory(Minecraft.getInstance().player).isPresent()){
+            isInCurios = CuriosApi.getCuriosInventory(Minecraft.getInstance().player).get().isEquipped(ItemRegistry.TOX_GAUGE.get());
+        }
+
+        return isHolding || isInCurios;
     }
 }

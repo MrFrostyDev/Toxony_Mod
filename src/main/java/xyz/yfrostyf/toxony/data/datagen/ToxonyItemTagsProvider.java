@@ -6,14 +6,12 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.Tags;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ToxonyItemTagsProvider extends ItemTagsProvider {
-
 
     public ToxonyItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags) {
         super(output, lookupProvider, blockTags);
@@ -155,6 +153,11 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
         this.tag(TagRegistry.ROUNDS)
                 .add(
                         ItemRegistry.IRON_ROUND.get()
+                );
+
+        this.tag(TagRegistry.CAN_REFILL_OIL)
+                .add(
+                        ItemRegistry.OIL_BASE.get()
                 );
 
         this.tag(ItemTags.OCELOT_FOOD)

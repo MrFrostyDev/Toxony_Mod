@@ -34,6 +34,7 @@ import xyz.yfrostyf.toxony.blocks.entities.OilPotBlockEntity;
 import xyz.yfrostyf.toxony.items.OilPotItem;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
+import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -106,10 +107,10 @@ public class OilPotBlock extends Block implements EntityBlock {
         boolean itemHasFullOil = itemOil != null && stack.has(DataComponentsRegistry.OIL_USES) && stack.getOrDefault(DataComponentsRegistry.OIL_USES, 0) <= 0;
         boolean canAddOilTool = !itemOil.isEmpty() && stack.is(itemOil.getOil().getSupportedItems()) && !hasNoOil && !itemHasFullOil;
         boolean canAddOilBolt = !itemOil.isEmpty() && stack.is(ItemRegistry.BOLT) && !hasNoOil;
-        boolean canAddOilBase = stack.is(ItemRegistry.OIL_BASE) && damage > 0;
+        boolean canAddOilBase = stack.is(TagRegistry.CAN_REFILL_OIL) && damage > 0;
 
         if(level.isClientSide()){
-            if(hasNoOil && !stack.is(ItemRegistry.OIL_BASE)){
+            if(hasNoOil && !stack.is(TagRegistry.CAN_REFILL_OIL)){
                 Minecraft.getInstance().gui.setOverlayMessage(
                         Component.translatable("message.toxony.oilpot.empty").withStyle(ChatFormatting.WHITE),
                         false

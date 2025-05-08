@@ -3,6 +3,7 @@ package xyz.yfrostyf.toxony.registries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import xyz.yfrostyf.toxony.ToxonyMain;
@@ -45,6 +46,12 @@ public class TagRegistry {
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "oil_repairable")
     );
 
+    public static final TagKey<Item> CAN_REFILL_OIL = TagKey.create(
+            Registries.ITEM,
+            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "oil_refiller")
+    );
+
+
     public static final TagKey<Item> SCALPEL_ITEM = TagKey.create(
             Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "scalpels")
@@ -73,5 +80,14 @@ public class TagRegistry {
     public static final TagKey<Item> FLAIL_ENCHANTABLE = TagKey.create(
             Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "enchantable/flail")
+    );
+
+    // |------------------------------------------------------------------------------------|
+    // |------------------------------------Entity Tags-------------------------------------|
+    // |------------------------------------------------------------------------------------|
+
+    public static final TagKey<EntityType<?>> SILVER_VULNERABLE = TagKey.create(
+            Registries.ENTITY_TYPE,
+            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "silver_vulnerable")
     );
 }

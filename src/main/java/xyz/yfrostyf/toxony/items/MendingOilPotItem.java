@@ -29,7 +29,7 @@ public class MendingOilPotItem extends OilPotItem {
 
         if(otherStack.is(this)) return InteractionResultHolder.pass(oilPot);
 
-        if(otherStack.is(ItemRegistry.OIL_BASE)){
+        if(otherStack.is(TagRegistry.CAN_REFILL_OIL)){
             otherStack.consume(1, player);
             oilPot.setDamageValue(0);
         }

@@ -26,5 +26,6 @@ public class OilEvents {
             itemoil.getOil().applyOil(itemoil, event.getEntity(), targetEntity, level);
             OilUtil.useOil(level, itemInHand, 1);
         }
+
     }
 }

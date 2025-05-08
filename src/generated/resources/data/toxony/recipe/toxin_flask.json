@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass_bottle"
+    },
+    "L": {
+      "item": "toxony:toxic_leather"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "QNQ",
+    "LGL",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:toxin_flask"
+  }
+}

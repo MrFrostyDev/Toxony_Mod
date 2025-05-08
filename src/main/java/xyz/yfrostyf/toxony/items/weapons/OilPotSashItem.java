@@ -15,6 +15,7 @@ import xyz.yfrostyf.toxony.entities.item.ThrownOilPot;
 import xyz.yfrostyf.toxony.items.OilPotItem;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
+import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 public class OilPotSashItem extends Item implements ProjectileItem {
     public OilPotSashItem(Properties properties) {
@@ -27,7 +28,7 @@ public class OilPotSashItem extends Item implements ProjectileItem {
         ItemStack otherStack = hand == InteractionHand.MAIN_HAND ? player.getOffhandItem() : player.getMainHandItem();
 
         if (otherStack.is(this)) return InteractionResultHolder.pass(thisStack);
-        boolean canRefillOil = thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(ItemRegistry.OIL_BASE) && thisStack.getDamageValue() > 0;
+        boolean canRefillOil = thisStack.has(DataComponentsRegistry.OIL) && otherStack.is(TagRegistry.CAN_REFILL_OIL) && thisStack.getDamageValue() > 0;
         boolean canThrow = thisStack.has(DataComponentsRegistry.OIL) && thisStack.getDamageValue() < thisStack.getMaxDamage();
 
         if(otherStack.getItem() instanceof OilPotItem oilPotItem && !oilPotItem.getItemOil().isEmpty()){

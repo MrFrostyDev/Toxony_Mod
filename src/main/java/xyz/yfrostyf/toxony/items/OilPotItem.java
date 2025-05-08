@@ -28,6 +28,7 @@ import xyz.yfrostyf.toxony.api.util.OilUtil;
 import xyz.yfrostyf.toxony.blocks.OilPotBlock;
 import xyz.yfrostyf.toxony.blocks.entities.OilPotBlockEntity;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
+import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import javax.annotation.Nullable;
 
@@ -73,7 +74,7 @@ public class OilPotItem extends Item {
         ItemStack oilPot = player.getItemInHand(hand);
         ItemStack otherStack = hand == InteractionHand.MAIN_HAND ? player.getOffhandItem() : player.getMainHandItem();
 
-        if(otherStack.is(ItemRegistry.OIL_BASE) && oilPot.getDamageValue() > 0){
+        if(otherStack.is(TagRegistry.CAN_REFILL_OIL) && oilPot.getDamageValue() > 0){
             otherStack.consume(1, player);
             oilPot.setDamageValue(0);
         }

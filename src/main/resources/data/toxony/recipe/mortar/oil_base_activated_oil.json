@@ -1,0 +1,21 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "type": "neoforge:components",
+      "components": {
+        "vampirism:oil_contents": {
+          "oil": "vampirism:vampire_blood"
+        }
+      },
+      "items": "vampirism:oil_bottle"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "toxony:oil_base"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 2.0,
+  "ingredient": {
+    "item": "toxony:silver_steel_blend"
+  },
+  "result": {
+    "count": 1,
+    "id": "toxony:silver_steel_ingot"
+  }
+}

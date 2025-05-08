@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass_bottle"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "T": {
+      "item": "toxony:toxic_paste"
+    }
+  },
+  "pattern": [
+    " T ",
+    "LGL",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:potion_flask"
+  }
+}

@@ -26,11 +26,15 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
+import xyz.yfrostyf.toxony.api.util.CompatibilityUtil;
 import xyz.yfrostyf.toxony.damages.FlailDamageSource;
 import xyz.yfrostyf.toxony.items.weapons.FlailItem;
 import xyz.yfrostyf.toxony.registries.EntityRegistry;
 
 import java.util.List;
+
+import static xyz.yfrostyf.toxony.api.util.CompatibilityUtil.VAMPIRE;
+import static xyz.yfrostyf.toxony.api.util.CompatibilityUtil.WEREWOLF;
 
 // Based on Minecraft's FishingHook entity.
 
@@ -182,16 +186,17 @@ public class FlailBall extends Projectile {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
+        Entity entity = result.getEntity();
         this.setDeltaMovement(Vec3.ZERO);
         if (!this.level().isClientSide) {
-            if(result.getEntity() != this.getOwner()){
-                result.getEntity().hurt(new FlailDamageSource(
+            if(entity != this.getOwner()){
+                entity.hurt(new FlailDamageSource(
                         registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.GENERIC),
                         this.getOwner()
-                ), this.damage);
+                ), CompatibilityUtil.modifyDamageFromSilver(entity, this.damage));
                 this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 0.8F);
                 if(isCharged){
-                    this.blastHit(this.getOwner(), result.getEntity());
+                    this.blastHit(this.getOwner(), entity);
                     this.playSound(SoundEvents.FIREWORK_ROCKET_BLAST, 1.0F, 0.6F);
                     ServerLevel svlevel = (ServerLevel)this.level();
                     svlevel.sendParticles(ParticleTypes.EXPLOSION,
@@ -200,7 +205,7 @@ public class FlailBall extends Projectile {
                 }
             }
         }
-        if(result.getEntity() instanceof LivingEntity livingEntity){
+        if(entity instanceof LivingEntity livingEntity){
             this.applyOilEffects(this.oil, livingEntity);
         }
     }

@@ -41,10 +41,10 @@ public class MendingOilPotBlock extends OilPotBlock {
         boolean hasNoOil = damage >= maxDamage;
 
         boolean isItemDamageable = stack.isDamaged() && stack.is(TagRegistry.OIL_REPAIRABLE);
-        boolean canAddOilBase = stack.is(ItemRegistry.OIL_BASE) && damage > 0;
+        boolean canAddOilBase = stack.is(TagRegistry.CAN_REFILL_OIL) && damage > 0;
 
         if(level.isClientSide()){
-            if(hasNoOil && !stack.is(ItemRegistry.OIL_BASE)){
+            if(hasNoOil && !stack.is(TagRegistry.CAN_REFILL_OIL)){
                 Minecraft.getInstance().gui.setOverlayMessage(
                         Component.translatable("message.toxony.oilpot.empty").withStyle(ChatFormatting.WHITE),
                         false

@@ -18,9 +18,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import xyz.yfrostyf.toxony.api.util.CompatibilityUtil;
 import xyz.yfrostyf.toxony.registries.EntityRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
+
+import static xyz.yfrostyf.toxony.api.util.CompatibilityUtil.VAMPIRE;
+import static xyz.yfrostyf.toxony.api.util.CompatibilityUtil.WEREWOLF;
 
 public class FlintlockBall extends Projectile implements ItemSupplier {
     public static final int BALL_LIFETIME = 80;
@@ -138,7 +142,7 @@ public class FlintlockBall extends Projectile implements ItemSupplier {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        entity.hurt(this.damageSources().mobProjectile(this, this.getOwner() instanceof LivingEntity livingEntity ? livingEntity : null ), damage);
+        entity.hurt(this.damageSources().mobProjectile(this, this.getOwner() instanceof LivingEntity livingEntity ? livingEntity : null ), CompatibilityUtil.modifyDamageFromSilver(entity, this.damage));
         if(acidLevel > 0 && entity instanceof LivingEntity livingEntity){
             livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.ACID, acidLevel * 80, 0));
         }
