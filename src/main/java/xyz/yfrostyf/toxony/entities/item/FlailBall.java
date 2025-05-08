@@ -246,6 +246,7 @@ public class FlailBall extends Projectile {
         Vec3 vec3 = new Vec3(this.getX(), this.getY(), this.getZ());
 
         for (Entity entity : list) {
+            if(!(entity instanceof LivingEntity))return;
             double d11 = Math.sqrt(entity.distanceToSqr(vec3)) / (double)radius;
             if (d11 <= 1.0) {
                 double d5 = entity.getX() - this.getX();
