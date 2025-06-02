@@ -36,7 +36,6 @@ import xyz.yfrostyf.toxony.client.gui.block.CopperCrucibleMenu;
 import xyz.yfrostyf.toxony.recipes.CrucibleRecipe;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
-import xyz.yfrostyf.toxony.registries.SoundEventRegistry;
 
 import java.util.Optional;
 
@@ -152,7 +151,7 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
                 if (blockEntity.cookingProgress < blockEntity.cookingTotalTime) {
                     blockEntity.cookingProgress = Mth.clamp(blockEntity.cookingProgress + 1, 0, blockEntity.cookingTotalTime);
                 } else {
-                    blockEntity.insertItem(0, blockEntity.getResultItem(), false);
+                    blockEntity.itemContainer.setStackInSlot(0, blockEntity.getResultItem());
                     blockEntity.resetCrucible();
                 }
             }

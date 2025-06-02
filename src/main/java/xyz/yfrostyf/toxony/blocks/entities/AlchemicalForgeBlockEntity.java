@@ -177,7 +177,7 @@ public class AlchemicalForgeBlockEntity extends BlockEntity implements IItemHand
                     }
                 }
 
-                blockEntity.insertItem(0, newResultItem, false);
+                blockEntity.itemContainer.setStackInSlot(0, newResultItem);
                 blockEntity.resetAlchemicalForge();
             }
             level.sendBlockUpdated(pos, blockEntity.getBlockState(), blockEntity.getBlockState(), Block.UPDATE_CLIENTS);
