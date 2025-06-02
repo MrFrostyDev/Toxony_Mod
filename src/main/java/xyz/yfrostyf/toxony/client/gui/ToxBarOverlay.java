@@ -119,7 +119,7 @@ public class ToxBarOverlay implements LayeredDraw.Layer {
 
         // Skull
         guiGraphics.blit(RESOURCE,
-                Math.min(Math.max(posX+toxBarWidth-4, posX-2), posX+BAR_WIDTH-1), posY-6,
+                Math.clamp(posX + toxBarWidth - 4, posX - 2, posX + BAR_WIDTH - 6), posY - 6,
                 SKULL_UOFFSET, deathState ? SKULL_RED_VOFFSET : SKULL_WHITE_VOFFSET,
                 SKULL_WIDTH, SKULL_HEIGHT,
                 TEXTURE_WIDTH, TEXTURE_HEIGHT);
