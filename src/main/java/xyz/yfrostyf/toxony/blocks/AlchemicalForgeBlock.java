@@ -41,7 +41,7 @@ public class AlchemicalForgeBlock extends HorizontalDirectionalBlock implements 
         if(!(level.getBlockEntity(pos) instanceof AlchemicalForgeBlockEntity blockEntity))return InteractionResult.FAIL;
 
         // Client/Server Side actions
-        player.playSound(SoundEvents.SMITHING_TABLE_USE);
+        player.playSound(SoundEvents.SMITHING_TABLE_USE, 1.0F, 0.8F);
 
         if(state.getValue(LIT)){
             if(state.getValue(PART) == ChestType.RIGHT){

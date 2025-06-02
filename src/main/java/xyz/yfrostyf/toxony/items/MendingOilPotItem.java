@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
-import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 public class MendingOilPotItem extends OilPotItem {

@@ -20,7 +20,7 @@ public class OilUtil {
         if(!OilUtil.hasOil(stack) || level == null) return;
 
         int curOilUses = stack.getOrDefault(DataComponentsRegistry.OIL_USES, 0);
-        int maxOilUses = stack.get(DataComponentsRegistry.OIL).maxUses();
+        int maxOilUses = stack.get(DataComponentsRegistry.OIL).getMaxUses();
 
         if(stack.set(DataComponentsRegistry.OIL_USES, curOilUses+amount) >= maxOilUses){
             if(!level.isClientSide()){

@@ -1,28 +1,28 @@
 package xyz.yfrostyf.toxony.api.tox;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.NeoForge;
-import xyz.yfrostyf.toxony.ToxonyMain;
+import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.events.ChangeThresholdEvent;
 import xyz.yfrostyf.toxony.api.events.ChangeToleranceEvent;
@@ -30,13 +30,37 @@ import xyz.yfrostyf.toxony.api.events.ChangeToxEvent;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
 import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
-import xyz.yfrostyf.toxony.registries.ParticleRegistry;
 
 import java.util.*;
 
 public class ToxData {
     // Heavily based on Irons-Spells-n-Spellbooks MagicData class
     // Thank you very much for the reference!
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, ToxData> STREAM_CODEC = new StreamCodec<>(){
+        @Override
+        public ToxData decode(RegistryFriendlyByteBuf buf) {
+            Float t1 = ByteBufCodecs.FLOAT.decode(buf);
+            Float t2 = ByteBufCodecs.FLOAT.decode(buf);
+            int t3 = ByteBufCodecs.INT.decode(buf);
+            Map<Affinity, Integer> t4 = ByteBufCodecs.map(HashMap::new, Affinity.STREAM_CODEC, ByteBufCodecs.INT).decode(buf);
+            List<Holder<MobEffect>> t5 = MobEffect.STREAM_CODEC.apply(ByteBufCodecs.list()).decode(buf);
+            Map<ResourceLocation, Integer> t6 = ByteBufCodecs.map(HashMap::new, ResourceLocation.STREAM_CODEC, ByteBufCodecs.INT).decode(buf);
+            boolean t7 =  ByteBufCodecs.BOOL.decode(buf);
+            return new ToxData(t1, t2, t3, t4, t5, t6, t7);
+        }
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buf, ToxData toxData) {
+            ByteBufCodecs.FLOAT.encode(buf, toxData.getTox());
+            ByteBufCodecs.FLOAT.encode(buf, toxData.getTolerance());
+            ByteBufCodecs.INT.encode(buf, toxData.getThreshold());
+            ByteBufCodecs.map(HashMap::new, Affinity.STREAM_CODEC, ByteBufCodecs.INT).encode(buf, (HashMap<Affinity, Integer>)toxData.getAffinities());
+            MobEffect.STREAM_CODEC.apply(ByteBufCodecs.list()).encode(buf, toxData.getMutagens());
+            ByteBufCodecs.map(HashMap::new, ResourceLocation.STREAM_CODEC, ByteBufCodecs.INT).encode(buf, (HashMap<ResourceLocation, Integer>)toxData.getKnownIngredients());
+            ByteBufCodecs.BOOL.encode(buf, toxData.getDeathState());
+        }
+    };
 
     public static final int MAX_TOLERANCE = 999;
     public static final int MAX_MUTAGENS = 3; // Be aware of the max tolerance as if that changes, this must as well.
@@ -45,8 +69,7 @@ public class ToxData {
     public static final int MINIMUM_KNOW = 20;
     public static final int THRESHOLD_MULTIPLIER = 100;
 
-    private Player player;
-
+    private @Nullable Player player;
     // Synced Data
     private float tox = 0;
     private float tolerance = DEFAULT_TOLERANCE;
@@ -63,8 +86,28 @@ public class ToxData {
         this.player = player;
     }
 
+    private ToxData(float tox,
+                   float tolerance,
+                   int threshold,
+                   Map<Affinity, Integer> affinities,
+                   List<Holder<MobEffect>> mutagens,
+                   Map<ResourceLocation, Integer> knownIngredients,
+                   boolean deathState) {
+        this.tox = tox;
+        this.tolerance = tolerance;
+        this.threshold = threshold;
+        this.affinities = affinities;
+        this.mutagens = mutagens;
+        this.knownIngredients = knownIngredients;
+        this.deathState = deathState;
+    }
+
     public Player getPlayer(){
         return this.player;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 
     /**
@@ -110,6 +153,8 @@ public class ToxData {
         while(this.tox > thresholdTolGoal){
             this.setThresholdSynced(this.threshold + 1);
         }
+
+
     }
 
     public void setTox(float inTox){
@@ -227,6 +272,7 @@ public class ToxData {
 
     public void setMutagens(List<Holder<MobEffect>> mutagens) {
         this.mutagens = mutagens;
+        this.applyMutagens();
     }
 
     // Remove active mutagens and add new mutagens from this data
@@ -286,6 +332,10 @@ public class ToxData {
         this.setAffinity(affinity, affinities.get(affinity) + value);
     }
 
+    public void clearAffinities(){
+        affinities.clear();
+    }
+
     public boolean haveAffinity(Affinity affinity){
         return affinities.containsKey(affinity);
     }
@@ -317,6 +367,10 @@ public class ToxData {
         return knownIngredients.containsKey(itemstack.getItemHolder().getKey().location());
     }
 
+    public void clearKnownIngredients(){
+        knownIngredients.clear();
+    }
+
     /**
      * Check if the player knows the random affinity chosen for this item stack.
      */
@@ -329,6 +383,7 @@ public class ToxData {
         if(!this.hasKnownIngredient(new ItemStack(holder)))return false;
         return (knownIngredients.get(holder.getKey().location()) >= MINIMUM_KNOW);
     }
+
 
     // Utility function to save and load NBT data. This is used for the PlayerToxSerializer.
     public void saveNBTData(CompoundTag compound, HolderLookup.Provider provider) {
@@ -418,13 +473,11 @@ public class ToxData {
 
     @Override
     public String toString() {
-        String strply = "Player: " + player.toString() + ",\n";
-        String message = strply + "tox: "+tox+"\n"
+        return "tox: "+tox +"\n"
                 + "tolerance: "+tolerance+"\n"
                 + "threshold: "+threshold+"\n"
                 + "affinities: "+affinities+"\n"
                 + "knownIngredients: "+knownIngredients+"\n"
                 + "deathstate: "+deathState+"\n";
-        return message;
     }
 }

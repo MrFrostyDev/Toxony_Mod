@@ -5,6 +5,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.network.SyncToxPacket;
@@ -25,7 +26,7 @@ public class ToxTickEvent {
             ToxData plyToxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
 
             if ((plyToxData.getTox() > 0) && !plyToxData.getDeathState()){
-                plyToxData.addTox(-1);
+                plyToxData.addTox(-ToxonyConfig.TOXIN_DRAIN.get().floatValue());
                 PacketDistributor.sendToPlayer(svplayer, SyncToxPacket.create(plyToxData.getTox()));
             }
         });

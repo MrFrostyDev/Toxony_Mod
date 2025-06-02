@@ -7,9 +7,11 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
 import xyz.yfrostyf.toxony.registries.OilsRegistry;
 
@@ -51,6 +53,10 @@ public record ItemOil(Holder<Oil> oil, int duration, int amplifier, int maxUses,
 
     public static ItemOil createItemOil(Holder<Oil> oil, int duration, int amplifier){
         return new ItemOil(oil, duration, amplifier, -1, false);
+    }
+
+    public int getMaxUses() {
+        return Mth.floor(maxUses * ToxonyConfig.OIL_DURABILITY_MULT.get());
     }
 
     public Oil getOil() {

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "ingredients=0": {
+      "model": "toxony:block/redstone_mortar_0"
+    },
+    "ingredients=1": {
+      "model": "toxony:block/redstone_mortar_1"
+    },
+    "ingredients=2": {
+      "model": "toxony:block/redstone_mortar_2"
+    },
+    "ingredients=3": {
+      "model": "toxony:block/redstone_mortar_3"
+    },
+    "ingredients=4": {
+      "model": "toxony:block/redstone_mortar_4"
+    },
+    "ingredients=5": {
+      "model": "toxony:block/redstone_mortar_5"
+    }
+  }
+}

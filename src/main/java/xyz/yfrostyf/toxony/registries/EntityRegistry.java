@@ -1,13 +1,13 @@
 package xyz.yfrostyf.toxony.registries;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.entities.GuidedSpiritEntity;
 import xyz.yfrostyf.toxony.entities.item.*;
 
 public class EntityRegistry {
@@ -17,6 +17,23 @@ public class EntityRegistry {
         ENTITIES.register(eventBus);
     }
 
+
+    // |----------------------------------------------------------------------------------|
+    // |-------------------------------------Entities-------------------------------------|
+    // |----------------------------------------------------------------------------------|
+    public static final DeferredHolder<EntityType<?>, EntityType<GuidedSpiritEntity>> GUIDED_SPIRIT = ENTITIES.register(
+            "guided_spirit",
+            () -> EntityType.Builder.<GuidedSpiritEntity>of(GuidedSpiritEntity::new, MobCategory.CREATURE)
+                    .fireImmune()
+                    .sized(0.3F, 0.4F)
+                    .eyeHeight(0.5F)
+                    .clientTrackingRange(8)
+                    .build("guided_spirit")
+    );
+
+    // |----------------------------------------------------------------------------------|
+    // |--------------------------------------Items---------------------------------------|
+    // |----------------------------------------------------------------------------------|
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownOilPot>> OIL_POT = ENTITIES.register(
             "oil_pot",
             () -> EntityType.Builder.<ThrownOilPot>of(ThrownOilPot::new, MobCategory.MISC)

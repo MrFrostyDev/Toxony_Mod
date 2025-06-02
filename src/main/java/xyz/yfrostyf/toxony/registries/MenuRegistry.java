@@ -6,10 +6,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.client.gui.AlchemicalForgeMenu;
-import xyz.yfrostyf.toxony.client.gui.AlembicMenu;
-import xyz.yfrostyf.toxony.client.gui.CopperCrucibleMenu;
-import xyz.yfrostyf.toxony.client.gui.MortarPestleMenu;
+import xyz.yfrostyf.toxony.client.gui.block.*;
+
 import java.util.function.Supplier;
 
 public class MenuRegistry {
@@ -23,6 +21,12 @@ public class MenuRegistry {
             "mortar_pestle_menu",
             () -> IMenuTypeExtension.create(MortarPestleMenu::new)
     );
+
+    public static final Supplier<MenuType<RedstoneMortarMenu>> REDSTONE_MORTAR_MENU = MENUS.register(
+            "redstone_mortar_menu",
+            () -> IMenuTypeExtension.create(RedstoneMortarMenu::new)
+    );
+
 
     public static final Supplier<MenuType<CopperCrucibleMenu>> COPPER_CRUCIBLE_MENU = MENUS.register(
             "copper_crucible_menu",

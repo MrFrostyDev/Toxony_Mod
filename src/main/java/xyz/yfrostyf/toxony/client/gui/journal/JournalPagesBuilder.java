@@ -50,6 +50,12 @@ public class JournalPagesBuilder {
         return this;
     }
 
+    public JournalPagesBuilder TextImagePageScreen(String translateId, String translateImageID){
+        pages.add(new TextImagePageScreen(translateId, translateImageID, indexCount, emptyJournal));
+        indexCount++;
+        return this;
+    }
+
     // Because of erasure with generics, the names are used accordingly
     public JournalPagesBuilder TextCraftingPageScreen(String translateId, Item output, List<List<Item>> inputs){
         pages.add(new TextCraftingPageScreen(translateId, output.getDefaultInstance(), ListItemToItemStack(inputs), indexCount, emptyJournal));

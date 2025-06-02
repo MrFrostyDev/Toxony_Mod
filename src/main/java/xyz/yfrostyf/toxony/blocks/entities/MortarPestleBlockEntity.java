@@ -32,7 +32,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.blocks.MortarPestleBlock;
-import xyz.yfrostyf.toxony.client.gui.MortarPestleMenu;
+import xyz.yfrostyf.toxony.client.gui.block.MortarPestleMenu;
 import xyz.yfrostyf.toxony.items.BlendItem;
 import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -82,7 +82,7 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     };
 
@@ -257,8 +257,10 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
         NonNullList<ItemStack> list = NonNullList.withSize(CONTAINER_SIZE+1, ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, list, registries);
 
-        for(int i=0; i<CONTAINER_SIZE;i++){
-            this.insertItem(i, list.get(i), false);
+        int i = 0;
+        while(i<CONTAINER_SIZE){
+            this.itemContainer.setStackInSlot(i, list.get(i));
+            i++;
         }
         this.setResultItem(list.getLast()); // also receive result item in sent list.
     }
@@ -319,8 +321,7 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         ItemStack itemStack = stack.copy();
-        itemContainer.setStackInSlot(slot, itemStack);
-        return itemStack;
+        return this.itemContainer.insertItem(slot, itemStack, simulate);
     }
 
     @Override

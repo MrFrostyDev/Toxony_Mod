@@ -4,10 +4,9 @@ import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 import xyz.yfrostyf.toxony.data.DataInitialize;
-
 import xyz.yfrostyf.toxony.data.datagen.registries.LootModifierSerializerRegistry;
 import xyz.yfrostyf.toxony.registries.*;
 
@@ -27,7 +26,6 @@ public class ToxonyMain {
         modEventBus.addListener(this::commonSetup);
         */
 
-
         ItemRegistry.register(modEventBus);
         EntityRegistry.register(modEventBus);
         ArmorMaterialRegistry.register(modEventBus);
@@ -42,6 +40,7 @@ public class ToxonyMain {
         MenuRegistry.register(modEventBus);
         RecipeRegistry.register(modEventBus);
         ParticleRegistry.register(modEventBus);
+        PotionRegistry.register(modEventBus);
         CreativeTabRegistry.register(modEventBus);
         LootModifierSerializerRegistry.register(modEventBus);
 
@@ -51,20 +50,9 @@ public class ToxonyMain {
         // Note that this is necessary if and only if we want *this* class (ToxonyMain) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         // NeoForge.EVENT_BUS.register(this);
-         /*
+
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, ToxonyConfig.SPEC, String.format("%s-common.toml", ToxonyMain.MOD_ID));
 
-        */
     }
-    /*
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        if (Config.logDirtBlock) LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
-    }
-
-    */
 }

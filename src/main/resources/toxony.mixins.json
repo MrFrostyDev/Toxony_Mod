@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "xyz.yfrostyf.toxony.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PlayerFoodExhaustionMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

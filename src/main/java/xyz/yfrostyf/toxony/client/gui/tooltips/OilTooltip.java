@@ -71,7 +71,7 @@ public class OilTooltip implements ClientTooltipComponent {
         TextureAtlasSprite textureatlassprite = mobEffectTextureManager.get(holder);
 
         if(uses >= 0){
-            int oilBarWidth = Mth.ceil(BAR_OIL_WIDTH * Math.min((float)(itemoil.maxUses()-uses)/(float)itemoil.maxUses(), 1));
+            int oilBarWidth = Mth.ceil(BAR_OIL_WIDTH * Math.min((float)(itemoil.getMaxUses()-uses)/(float)itemoil.getMaxUses(), 1));
 
             // Max Bar | (ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight)
             guiGraphics.blit(RESOURCE,

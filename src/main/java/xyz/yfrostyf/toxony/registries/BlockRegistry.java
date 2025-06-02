@@ -1,6 +1,5 @@
 package xyz.yfrostyf.toxony.registries;
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.affinity.AffinityBlockPair;
@@ -185,6 +183,15 @@ public class BlockRegistry {
             )
     );
 
+    public static final DeferredHolder<Block, Block> REDSTONE_MORTAR = BLOCKS.register(
+            "redstone_mortar",
+            () -> new RedstoneMortarBlock(BlockBehaviour.Properties.of()
+                    .strength(1.5f)
+                    .sound(SoundType.COPPER)
+                    .isRedstoneConductor((state,level,pos) -> true)
+            )
+    );
+
     public static final DeferredHolder<Block, Block> COPPER_CRUCIBLE = BLOCKS.register(
             "copper_crucible",
             () -> new CopperCrucibleBlock(BlockBehaviour.Properties.of()
@@ -231,6 +238,14 @@ public class BlockRegistry {
                     // A vararg of blocks that can have this block entity.
                     // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
                     MORTAR_PESTLE.get()
+            ).build(null)
+    );
+
+    public static final Supplier<BlockEntityType<RedstoneMortarBlockEntity>> REDSTONE_MORTAR_ENTITY = BLOCK_ENTITY_TYPES.register(
+            "redstone_mortar_entity",
+            () -> BlockEntityType.Builder.of(
+                    RedstoneMortarBlockEntity::new,
+                    REDSTONE_MORTAR.get()
             ).build(null)
     );
 

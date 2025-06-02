@@ -33,6 +33,7 @@ public class ClientToxData {
                               List<Holder<MobEffect>> mutagens,
                               Map<ResourceLocation, Integer> knownIngredients,
                               boolean deathState) {
+        if(toxData == null) newToxData();
         toxData.handleSyncedToxData(tox, tolerance, threshold, affinities, mutagens, knownIngredients , deathState);
     }
 

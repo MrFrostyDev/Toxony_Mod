@@ -6,10 +6,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.client.models.*;
+import xyz.yfrostyf.toxony.client.models.entities.GuidedSpiritEntityModel;
+import xyz.yfrostyf.toxony.client.models.items.*;
 import xyz.yfrostyf.toxony.client.renderers.MortarPestleRenderer;
 import xyz.yfrostyf.toxony.client.renderers.entities.BoltRenderer;
 import xyz.yfrostyf.toxony.client.renderers.entities.FlailBallRenderer;
+import xyz.yfrostyf.toxony.client.renderers.entities.GuidedSpiritRenderer;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.EntityRegistry;
 
@@ -24,28 +26,24 @@ public class RenderRegisterEvents {
         event.registerLayerDefinition(HunterArmorEntityModel.LAYER_LOCATION, HunterArmorEntityModel::createBodyLayer);
         event.registerLayerDefinition(ProfessionalHunterArmorEntityModel.LAYER_LOCATION, ProfessionalHunterArmorEntityModel::createBodyLayer);
         event.registerLayerDefinition(FlailBallEntityModel.LAYER_LOCATION, FlailBallEntityModel::createBodyLayer);
+
+        event.registerLayerDefinition(GuidedSpiritEntityModel.LAYER_LOCATION, GuidedSpiritEntityModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void onEntityRendererRegister(EntityRenderersEvent.RegisterRenderers event) {
+
+        // Item Entities
         event.registerEntityRenderer(EntityRegistry.OIL_POT.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(EntityRegistry.BOLT.get(), BoltRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FLAIL_BALL.get(), FlailBallRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FLINTLOCK_BALL.get(), context -> new ThrownItemRenderer<>(context, 0.4F, true));
+
+        // Entities
+        event.registerEntityRenderer(EntityRegistry.GUIDED_SPIRIT.get(), GuidedSpiritRenderer::new);
+
+        // Block Entities
+        event.registerBlockEntityRenderer(BlockRegistry.MORTAR_PESTLE_ENTITY.get(), MortarPestleRenderer::new);
     }
 
-    @SubscribeEvent
-    public static void onRegisterRenders(EntityRenderersEvent.RegisterRenderers event){
-        event.registerBlockEntityRenderer(
-                // The block entity type to register the renderer for.
-                BlockRegistry.MORTAR_PESTLE_ENTITY.get(),
-                // A function of BlockEntityRendererProvider.Context to BlockEntityRenderer.
-                MortarPestleRenderer::new
-        );
-
-        event.registerEntityRenderer(
-                EntityRegistry.FLAIL_BALL.get(),
-                FlailBallRenderer::new
-        );
-    }
 }

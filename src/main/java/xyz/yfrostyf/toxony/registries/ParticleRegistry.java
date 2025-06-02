@@ -43,4 +43,14 @@ public class ParticleRegistry {
             "flintlock_blast_large",
             () -> new SimpleParticleType(false)
     );
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GUIDED_SPIRIT_RELEASE = PARTICLE_TYPES.register(
+            "guided_spirit_release",
+            () -> new SimpleParticleType(false)
+    );
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AQUA_SPLASH = PARTICLE_TYPES.register(
+            "aqua_splash",
+            () -> new SimpleParticleType(false)
+    );
 }

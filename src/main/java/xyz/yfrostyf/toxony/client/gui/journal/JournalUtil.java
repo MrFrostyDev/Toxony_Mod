@@ -149,12 +149,18 @@ public class JournalUtil {
                                 Items.COPPER_INGOT, Items.REDSTONE, Items.COPPER_INGOT,
                                 EMPTY, ItemRegistry.POISON_PASTE.get(), EMPTY)
                 )
-                .TextCraftingPageScreenItem("journal.toxony.page.basic_tools.2", ItemRegistry.COPPER_SCALPEL.get(),
+                .TextImagePageScreen("journal.toxony.page.basic_tools.2", "textures/gui/journal/journal_gauge_image.png")
+                .TextImagePageScreen("journal.toxony.page.basic_tools.3", "textures/gui/journal/journal_toxin_gauge_image.png")
+                .TextImagePageScreen("journal.toxony.page.basic_tools.4", "textures/gui/journal/journal_tolerance_gauge_image.png")
+                .TextImagePageScreen("journal.toxony.page.basic_tools.5", "textures/gui/journal/journal_tolerance_gauge_image.png")
+                .TextImagePageScreen("journal.toxony.page.basic_tools.6", "textures/gui/journal/journal_death_gauge_image.png")
+                .TextPageScreen("journal.toxony.page.basic_tools.7")
+                .TextCraftingPageScreenItem("journal.toxony.page.basic_tools.8", ItemRegistry.COPPER_SCALPEL.get(),
                         List.of(EMPTY, Items.COPPER_INGOT, EMPTY,
                                 EMPTY, Items.IRON_NUGGET, EMPTY,
                                 EMPTY, Items.IRON_NUGGET, EMPTY)
                 )
-                .TextCraftingPageScreenItem("journal.toxony.page.basic_tools.3", ItemRegistry.MAGNIFYING_GLASS.get(),
+                .TextCraftingPageScreenItem("journal.toxony.page.basic_tools.9", ItemRegistry.MAGNIFYING_GLASS.get(),
                         List.of(Items.COPPER_INGOT, Items.GLASS_PANE, Items.COPPER_INGOT,
                                 EMPTY, Items.STICK, EMPTY,
                                 EMPTY, Items.STICK, EMPTY)
@@ -187,7 +193,12 @@ public class JournalUtil {
                                 recipe_toxic_blend.getIngredients().get(2), Ingredient.EMPTY
                         )
                 )
-
+                .TextCraftingPageScreenItem("journal.toxony.page.refined_process.7", ItemRegistry.REDSTONE_MORTAR.get(),
+                        List.of(Items.CHISELED_POLISHED_BLACKSTONE, ItemRegistry.MORTAR_PESTLE.get(), Items.CHISELED_POLISHED_BLACKSTONE,
+                                Items.COPPER_INGOT, Items.IRON_INGOT, Items.COPPER_INGOT,
+                                Items.COPPER_INGOT, Items.COMPARATOR, Items.COPPER_INGOT)
+                )
+                .TextPageScreen("journal.toxony.page.refined_process.8")
                 // |----------------- Alchemical Warfare ----------------- |
                 .ImagePageScreen("journal.toxony.page.alchemical_warfare.cover", "textures/gui/journal/journal_alchemical_warfare_cover.png")
                 .TextCraftingPageScreenItem("journal.toxony.page.alchemical_warfare.0", ItemRegistry.OIL_POT_SASH.get(),
@@ -261,26 +272,29 @@ public class JournalUtil {
                 .ImagePageScreen("journal.toxony.page.mutagens.cover", "textures/gui/journal/journal_mutagens_cover.png")
                 .TextPageScreen("journal.toxony.page.mutagens.0")
                 .TextPageScreen("journal.toxony.page.mutagens.1")
-                .TextPageScreen("journal.toxony.page.mutagens.2")
-                .TextCraftingPageScreenStack("journal.toxony.page.mutagens.3", ItemRegistry.REDSTONE_MIXTURE.get(),
+                .TextImagePageScreen("journal.toxony.page.mutagens.2", "textures/gui/journal/journal_full_gauge_image.png")
+                .TextPageScreen("journal.toxony.page.mutagens.3")
+                .TextPageScreen("journal.toxony.page.mutagens.4")
+                .TextPageScreen("journal.toxony.page.mutagens.5")
+                .TextCraftingPageScreenStack("journal.toxony.page.mutagens.6", ItemRegistry.REDSTONE_MIXTURE.get(),
                         List.of(PotionContents.createItemStack(ItemRegistry.TOX_VIAL.get(), Potions.WATER), Items.REDSTONE.getDefaultInstance(), EMPTY.getDefaultInstance(),
                                 EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(),
                                 EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance())
                 )
-                .TextCruciblePageScreenIngredient("journal.toxony.page.mutagens.4", ItemRegistry.REDSTONE_SOLUTION.get(),
+                .TextCruciblePageScreenIngredient("journal.toxony.page.mutagens.7", ItemRegistry.REDSTONE_SOLUTION.get(),
                         Ingredient.of(ItemRegistry.REDSTONE_MIXTURE.get())
                 )
-                .TextAlembicPageScreenIngredients("journal.toxony.page.mutagens.5", ItemRegistry.AFFINITY_SOLUTION.get(),
+                .TextAlembicPageScreenIngredients("journal.toxony.page.mutagens.8", ItemRegistry.AFFINITY_SOLUTION.get(),
                         List.of(recipe_affinity_solution.getIngredients().get(0), recipe_affinity_solution.getIngredients().get(1))
                 )
-                .TextCraftingPageScreenItem("journal.toxony.page.mutagens.6", ItemRegistry.COPPER_NEEDLE.get(),
+                .TextCraftingPageScreenItem("journal.toxony.page.mutagens.9", ItemRegistry.COPPER_NEEDLE.get(),
                         List.of(EMPTY, EMPTY, Items.IRON_NUGGET,
                                 EMPTY, ItemRegistry.TOXIN_CANISTER.get(), EMPTY,
                                 Items.COPPER_INGOT, EMPTY, EMPTY)
                 )
-                .TextPageScreen("journal.toxony.page.mutagens.7")
-                .TextPageScreen("journal.toxony.page.mutagens.8")
-                .TextPageScreen("journal.toxony.page.mutagens.9")
+                .TextPageScreen("journal.toxony.page.mutagens.10")
+                .TextPageScreen("journal.toxony.page.mutagens.11")
+                .TextPageScreen("journal.toxony.page.mutagens.12")
 
                 // |----------------- Evolved Flora ----------------- |
                 .ImagePageScreen("journal.toxony.page.evolved_flora.cover", "textures/gui/journal/journal_evolved_flora_cover.png")

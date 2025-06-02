@@ -32,7 +32,7 @@ public class HuntMobEffect extends MobEffect {
             MobEffectInstance effectInst = victim.getEffect(MobEffectRegistry.HUNT);
             if (effectInst == null) return;
             if(event.getSource().getEntity() instanceof LivingEntity attacker){
-                if(attacker.hasEffect(MobEffectRegistry.WOLF_MUTAGEN) || attacker.getType() == EntityType.WOLF){
+                if(attacker.hasEffect(MobEffectRegistry.BEAST_MUTAGEN) || attacker.getType() == EntityType.WOLF){
                     float damage = event.getOriginalDamage();
                     float dmgMod = attacker.getType() == EntityType.WOLF
                             ? 0.5F + ((float)effectInst.getAmplifier()/4)

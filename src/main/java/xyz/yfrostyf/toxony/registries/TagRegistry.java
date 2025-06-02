@@ -90,4 +90,9 @@ public class TagRegistry {
             Registries.ENTITY_TYPE,
             ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "silver_vulnerable")
     );
+
+    public static final TagKey<EntityType<?>> SPIRIT_RESISTANT = TagKey.create(
+            Registries.ENTITY_TYPE,
+            ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "spirit_resistant")
+    );
 }

@@ -22,5 +22,7 @@ public class ParticleEvents {
         event.registerSpriteSet(ParticleRegistry.CUT.get(), CutParticle.Provider::new);
         event.registerSpriteSet(ParticleRegistry.BLOOD_DRIP.get(), BloodDripParticle.Provider::new);
         event.registerSpriteSet(ParticleRegistry.FLINTLOCK_BLAST_LARGE.get(), FlintlockBlastLargeParticle.Provider::new);
+        event.registerSpriteSet(ParticleRegistry.GUIDED_SPIRIT_RELEASE.get(), GuidedSoulReleaseParticle.Provider::new);
+        event.registerSpriteSet(ParticleRegistry.AQUA_SPLASH.get(), AquaSplashParticle.Provider::new);
     }
 }

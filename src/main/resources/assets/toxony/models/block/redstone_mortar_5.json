@@ -1,0 +1,10 @@
+{
+	"credit": "MrFrostyDev, made with Blockbench",
+	"parent": "toxony:block/redstone_mortar_0",
+	"textures": {
+		"east": "toxony:block/redstone_mortar_side",
+		"up": "toxony:block/redstone_mortar_top_5",
+		"down": "toxony:block/redstone_mortar_bottom",
+		"particle": "toxony:block/redstone_mortar_top_0"
+	}
+}

@@ -27,6 +27,7 @@ public class DataInitialize {
         generator.addProvider(event.includeServer(), new ToxonyLootTableProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ToxonyGlobalLootModifierProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), blockTagsProvider);
+        generator.addProvider(event.includeClient(), new ToxonyItemModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeServer(), new ToxonyItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter()));
         generator.addProvider(event.includeServer(), new ToxonyEntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ToxonyEnchantmentTagsProvider(output, datapackProvider.getRegistryProvider(), existingFileHelper));

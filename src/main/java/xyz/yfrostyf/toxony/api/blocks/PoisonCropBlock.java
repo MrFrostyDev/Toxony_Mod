@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.affinity.AffinityBlockPair;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
@@ -39,7 +40,6 @@ import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
-import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -178,7 +178,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
             int age = this.getAge(state);
             if (age < this.getMaxAge()) {
                 float f = getGrowthSpeed(state, level, pos);
-                if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos, state, random.nextInt((int)(30.0F / f) + 1) == 0)) {
+                if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos, state, random.nextInt((int)(28.0F / f) + 1) == 0)) {
                     level.setBlock(pos, this.getStateForAge(age + 1), Block.UPDATE_CLIENTS);
                     net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(level, pos, state);
                 }
@@ -273,7 +273,7 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
                 f /= 2.0F;
             }
         }
-        return f;
+        return f * ToxonyConfig.PLANT_GROWTH_MULT.get().floatValue();
     }
 
     @Override

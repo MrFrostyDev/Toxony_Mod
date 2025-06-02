@@ -46,16 +46,16 @@ public class ToxGiverBlockItem extends BlockItem {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if(!(entity instanceof Player player))return stack;
         ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
-        plyToxData.addTox(tox);
 
-        ToxUtil.addToleranceWithTier(plyToxData, tolerance, tier, level);
+        if(stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)){
+            Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(stack, level);
+            AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, 1);
+        }
+
+        plyToxData.addTox(tox); // Add tox after affinities so they are applied before mutation occurs.
+        ToxUtil.addToleranceWithTier(player, plyToxData, tolerance, tier, level);
 
         if(level instanceof ServerLevel svlevel) {
-           if(stack.has(DataComponentsRegistry.POSSIBLE_AFFINITIES)){
-                Affinity affinity = AffinityUtil.readAffinityFromIngredientMap(stack, svlevel);
-                AffinityUtil.addAffinityByItem(plyToxData, stack, affinity, 1);
-           }
-
             mobEffectInstances.forEach((mobEffectInstance) -> {
                 Holder<MobEffect> effect = mobEffectInstance.getEffect();
 

@@ -31,7 +31,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.blocks.AlchemicalForgeBlock;
-import xyz.yfrostyf.toxony.client.gui.AlchemicalForgeMenu;
+import xyz.yfrostyf.toxony.client.gui.block.AlchemicalForgeMenu;
 import xyz.yfrostyf.toxony.recipes.AlchemicalForgeRecipe;
 import xyz.yfrostyf.toxony.recipes.inputs.AlchemicalForgeRecipeInput;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
@@ -164,7 +164,6 @@ public class AlchemicalForgeBlockEntity extends BlockEntity implements IItemHand
                     newResultItem = optionalRecipe.get().value().assemble(
                             new AlchemicalForgeRecipeInput(inputOutput, solutionItems, auxiliaryItems),
                             level.registryAccess());
-                    blockEntity.itemContainer.setStackInSlot(0, newResultItem);
                 }
 
                 for(int i=1; i<6; i++){
@@ -178,7 +177,7 @@ public class AlchemicalForgeBlockEntity extends BlockEntity implements IItemHand
                     }
                 }
 
-                blockEntity.itemContainer.setStackInSlot(0, newResultItem);
+                blockEntity.insertItem(0, newResultItem, false);
                 blockEntity.resetAlchemicalForge();
             }
             level.sendBlockUpdated(pos, blockEntity.getBlockState(), blockEntity.getBlockState(), Block.UPDATE_CLIENTS);
@@ -296,10 +295,11 @@ public class AlchemicalForgeBlockEntity extends BlockEntity implements IItemHand
         NonNullList<ItemStack> list = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, list, registries);
 
-        for(int i=0; i<CONTAINER_SIZE;i++){
-            this.insertItem(i, list.get(i), false);
+        int i = 0;
+        while(i<CONTAINER_SIZE){
+            this.itemContainer.setStackInSlot(i, list.get(i));
+            i++;
         }
-
         this.fuel = tag.getInt("Fuel");
         this.forgeProgress = tag.getInt("ProgressTime");
         this.isForging = tag.getBoolean("IsForging");
@@ -345,13 +345,12 @@ public class AlchemicalForgeBlockEntity extends BlockEntity implements IItemHand
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         ItemStack itemStack = stack.copy();
-        itemContainer.setStackInSlot(slot, itemStack);
-        return itemStack;
+        return this.itemContainer.insertItem(slot, itemStack, simulate);
     }
 
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        ItemStack targetStack = itemContainer.getStackInSlot(slot).copy();
+        ItemStack targetStack = this.itemContainer.getStackInSlot(slot).copy();
         ItemStack returnItem;
         if(targetStack.getCount() > amount){
             returnItem = targetStack.copy();
@@ -360,7 +359,7 @@ public class AlchemicalForgeBlockEntity extends BlockEntity implements IItemHand
         }
         else{
             returnItem = targetStack.copy();
-            itemContainer.setStackInSlot(slot, ItemStack.EMPTY);
+            this.itemContainer.setStackInSlot(slot, ItemStack.EMPTY);
         }
 
         return returnItem;

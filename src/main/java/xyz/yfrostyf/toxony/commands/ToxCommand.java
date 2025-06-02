@@ -5,14 +5,22 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
+import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
+import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
 import java.util.Collection;
+import java.util.Map;
 
 // thank you [IronsSpellsNSpellbooks Mod]
 
@@ -30,6 +38,10 @@ public class ToxCommand {
                         .then(Commands.argument("targets", EntityArgument.players())
                                 .then(Commands.argument("amount", IntegerArgumentType.integer())
                                         .executes((context) -> changeTox(context.getSource(), EntityArgument.getPlayers(context, "targets"), IntegerArgumentType.getInteger(context, "amount"), false)))))
+                .then(Commands.literal("discover")
+                        .then(Commands.argument("targets", EntityArgument.player())
+                                .then(Commands.argument("isRevealOrHide", IntegerArgumentType.integer(0, 1))
+                                        .executes((context -> discoverAffinities(context.getSource(), EntityArgument.getPlayer(context, "targets"), IntegerArgumentType.getInteger(context, "isRevealOrHide")))))))
                 .then(Commands.literal("get")
                         .then(Commands.argument("targets", EntityArgument.player())
                                 .executes((context) -> getTox(context.getSource(), EntityArgument.getPlayer(context, "targets"))))));
@@ -90,5 +102,30 @@ public class ToxCommand {
         source.sendSuccess(() -> Component.translatable("commands.tox.get.success.known_ingredients", svplayer.getDisplayName(), plyToxData.getKnownIngredients().toString()), true);
 
         return (int) plyToxData.getTox();
+    }
+
+    private static int discoverAffinities(CommandSourceStack source, ServerPlayer svplayer, int isRevealOrHide) {
+        ToxData plyToxData = svplayer.getData(TOX_DATA);
+        boolean isRevealed = isRevealOrHide != 0;
+
+        if(isRevealed){
+            Level level = svplayer.level();
+            Map<ResourceLocation, Affinity> map = AffinityUtil.getIngredientAffinityMap(level);
+
+            for(Map.Entry<ResourceLocation, Affinity> entry: map.entrySet()){
+                Item item = BuiltInRegistries.ITEM.get(entry.getKey());
+                if(item.equals(Items.AIR)) continue;
+                plyToxData.addKnownIngredients(item.getDefaultInstance(), ToxData.MINIMUM_KNOW);
+            }
+        }
+        else{
+            plyToxData.clearKnownIngredients();
+        }
+
+
+        PacketDistributor.sendToPlayer(svplayer, SyncToxDataPacket.create(plyToxData));
+        String setString = isRevealed ? "reveal" : "hide";
+        source.sendSuccess(() -> Component.translatable("commands.tox.discover." + setString, svplayer.getDisplayName()), true);
+        return 0;
     }
 }

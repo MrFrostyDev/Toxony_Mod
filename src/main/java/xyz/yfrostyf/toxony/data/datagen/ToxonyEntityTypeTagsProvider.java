@@ -3,10 +3,12 @@ package xyz.yfrostyf.toxony.data.datagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.util.CompatibilityUtil;
+import xyz.yfrostyf.toxony.registries.EntityRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.concurrent.CompletableFuture;
@@ -22,6 +24,13 @@ public class ToxonyEntityTypeTagsProvider extends EntityTypeTagsProvider {
         this.tag(TagRegistry.SILVER_VULNERABLE)
                 .addOptionalTags(
                         CompatibilityUtil.VAMPIRE
+                );
+
+        this.tag(TagRegistry.SPIRIT_RESISTANT)
+                .add(
+                        EntityType.VEX,
+                        EntityType.PHANTOM,
+                        EntityRegistry.GUIDED_SPIRIT.get()
                 );
     }
 }

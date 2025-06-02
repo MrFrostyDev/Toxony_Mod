@@ -49,34 +49,39 @@ public class MobEffectRegistry {
     // |-------------------------------------Mutagens--------------------------------------|
     // |-----------------------------------------------------------------------------------|
 
-    public static final DeferredHolder<MobEffect, MobEffect> WOLF_MUTAGEN = MOB_MUTAGENS.register(
-            "wolf_mutagen",
-            () -> new WolfMutagenEffect(MobEffectCategory.BENEFICIAL, 0xffffff)
+    public static final DeferredHolder<MobEffect, MobEffect> BEAST_MUTAGEN = MOB_MUTAGENS.register(
+            "beast_mutagen",
+            () -> new BeastMutagenEffect(MobEffectCategory.BENEFICIAL)
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> CAT_MUTAGEN = MOB_MUTAGENS.register(
-            "cat_mutagen",
-            () -> new CatMutagenEffect(MobEffectCategory.BENEFICIAL, 0xffffff)
+    public static final DeferredHolder<MobEffect, MobEffect> SPIRIT_MUTAGEN = MOB_MUTAGENS.register(
+            "spirit_mutagen",
+            () -> new SpiritMutagenEffect(MobEffectCategory.BENEFICIAL)
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> TURTLE_MUTAGEN = MOB_MUTAGENS.register(
-            "turtle_mutagen",
-            () -> new TurtleMutagenEffect(MobEffectCategory.BENEFICIAL, 0xffffff)
+    public static final DeferredHolder<MobEffect, MobEffect> AQUA_MUTAGEN = MOB_MUTAGENS.register(
+            "aqua_mutagen",
+            () -> new AquaMutagenEffect(MobEffectCategory.BENEFICIAL)
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> SPIDER_MUTAGEN = MOB_MUTAGENS.register(
-            "spider_mutagen",
-            () -> new SpiderMutagenEffect(MobEffectCategory.BENEFICIAL, 0xffffff)
+    public static final DeferredHolder<MobEffect, MobEffect> HOLLOW_MUTAGEN = MOB_MUTAGENS.register(
+            "hollow_mutagen",
+            () -> new HollowMutagenEffect(MobEffectCategory.BENEFICIAL)
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> WITHER_MUTAGEN = MOB_MUTAGENS.register(
-            "wither_mutagen",
-            () -> new WitherMutagenEffect(MobEffectCategory.BENEFICIAL, 0xffffff)
+    public static final DeferredHolder<MobEffect, MobEffect> NECROTIC_MUTAGEN = MOB_MUTAGENS.register(
+            "necrotic_mutagen",
+            () -> new NecroticMutagenEffect(MobEffectCategory.BENEFICIAL)
     );
 
-    public static final DeferredHolder<MobEffect, MobEffect> BLAZE_MUTAGEN = MOB_MUTAGENS.register(
-            "blaze_mutagen",
-            () -> new BlazeMutagenEffect(MobEffectCategory.BENEFICIAL, 0xffffff)
+    public static final DeferredHolder<MobEffect, MobEffect> INFERNAL_MUTAGEN = MOB_MUTAGENS.register(
+            "infernal_mutagen",
+            () -> new InfernalMutagenEffect(MobEffectCategory.BENEFICIAL)
+    );
+
+    public static final DeferredHolder<MobEffect, MobEffect> MOB_MUTAGEN = MOB_MUTAGENS.register(
+            "mob_mutagen",
+            () -> new MobMutagenEffect(MobEffectCategory.BENEFICIAL)
     );
 
 }

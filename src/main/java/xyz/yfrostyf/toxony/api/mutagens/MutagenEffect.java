@@ -13,12 +13,11 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.neoforged.neoforge.common.EffectCure;
+import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
-import java.util.Random;
 import java.util.Set;
 
 public class MutagenEffect extends MobEffect {
-    public static final Random RANDOM = new Random();
 
     protected MutagenEffect (MobEffectCategory category, int color) {
         super(category, color);
@@ -52,5 +51,7 @@ public class MutagenEffect extends MobEffect {
         atrInstance.removeModifier(modifier);
     }
 
-    public void removeModifiers(LivingEntity livingEntity) {}
+    public void removeModifiers(LivingEntity livingEntity) {
+        livingEntity.removeData(DataAttachmentRegistry.MUTAGEN_DATA);
+    }
 }

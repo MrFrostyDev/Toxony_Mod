@@ -58,7 +58,7 @@ public class AlembicBlock extends HorizontalDirectionalBlock implements EntityBl
         player.playSound(SoundEvents.AMETHYST_BLOCK_BREAK);
 
         // Server Side actions
-        if (level.isClientSide())return InteractionResult.SUCCESS;
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
         level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
 
         if(state.getValue(PART) == ChestType.RIGHT){
@@ -182,9 +182,9 @@ public class AlembicBlock extends HorizontalDirectionalBlock implements EntityBl
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if(state.getValue(PART) == ChestType.RIGHT)return;
-        if(!(level.getBlockEntity(pos) instanceof AlembicBlockEntity entity))return;
-        if(!entity.hasFuel())return;
+        if(state.getValue(PART) == ChestType.RIGHT) return;
+        if(!(level.getBlockEntity(pos) instanceof AlembicBlockEntity entity)) return;
+        if(!entity.hasFuel()) return;
 
         double d0 = (double)pos.getX() + 0.4 + (double)random.nextFloat() * 0.2;
         double d1 = (double)pos.getY() + 1.2 + (double)random.nextFloat() * 0.3;

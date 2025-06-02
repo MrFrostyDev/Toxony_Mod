@@ -5,12 +5,16 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -19,12 +23,14 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
+import xyz.yfrostyf.toxony.api.util.ToxUtil;
 import xyz.yfrostyf.toxony.api.util.VialUtil;
 import xyz.yfrostyf.toxony.damages.NeedleDamageSource;
-import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
-import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
-import xyz.yfrostyf.toxony.registries.ItemRegistry;
+import xyz.yfrostyf.toxony.network.SyncMobToxDataPacket;
+import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
+import xyz.yfrostyf.toxony.registries.*;
 
 import java.util.List;
 
@@ -55,7 +61,13 @@ public class ToxNeedleItem extends Item {
                     player.getInventory().add(affinityStack);
                 } else if (thisStack.has(DataComponents.POTION_CONTENTS)) {
                     PotionContents potionContents = thisStack.get(DataComponents.POTION_CONTENTS);
-                    player.getInventory().add(VialUtil.createPotionItemStack(ItemRegistry.TOX_VIAL.get(), potionContents.potion().get()));
+                    if(potionContents.is(PotionRegistry.TOXIN)){
+                        player.getInventory().add(new ItemStack(ItemRegistry.TOXIN, 1));
+                    }
+                    else{
+                        player.getInventory().add(VialUtil.createPotionItemStack(ItemRegistry.TOX_VIAL.get(), potionContents.potion().get()));
+                    }
+
                 }
 
                 otherStack.consume(1, player);
@@ -71,6 +83,7 @@ public class ToxNeedleItem extends Item {
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity targetEntity, InteractionHand thisHand) {
         float targetHealth = targetEntity.getHealth();
         float targetMaxHealth = targetEntity.getMaxHealth();
+        Level level = player.level();
         ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
 
         if(targetHealth <= 0 || !targetEntity.isAlive()) return InteractionResult.PASS;
@@ -82,7 +95,7 @@ public class ToxNeedleItem extends Item {
                 }
                 return InteractionResult.FAIL;
             }
-            handleKnowledgeFromItem(plyToxData, stack);
+            handleKnowledgeFromItem(player, plyToxData, stack);
             targetEntity.hurt(new NeedleDamageSource(player.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.PLAYER_ATTACK), player), 5.0F);
 
             player.playSound(SoundEvents.BEE_STING, 1.0F, 0.5F);
@@ -96,11 +109,13 @@ public class ToxNeedleItem extends Item {
         }
         else if(stack.has(DataComponents.POTION_CONTENTS)){
             PotionContents potionContents = stack.get(DataComponents.POTION_CONTENTS);
-            if( potionContents.hasEffects()){
+            if(potionContents.hasEffects() && !level.isClientSide()){
                 potionContents.forEachEffect(effect -> {
+                    handleToxin(targetEntity, effect.getEffect());
                     if (effect.getEffect().value().isInstantenous()) {
                         effect.getEffect().value().applyInstantenousEffect(player, player, targetEntity, effect.getAmplifier(), 1.0);
-                    } else {
+                    }
+                    else {
                         targetEntity.addEffect(effect);
                     }
                 });
@@ -109,6 +124,7 @@ public class ToxNeedleItem extends Item {
 
             player.playSound(SoundEvents.BEE_STING, 1.0F, 0.5F);
             player.awardStat(Stats.ITEM_USED.get(this));
+            player.getCooldowns().addCooldown(this, 60);
 
             if (!player.hasInfiniteMaterials()) {
                 player.setItemInHand(thisHand, new ItemStack(ItemRegistry.COPPER_NEEDLE));
@@ -120,13 +136,12 @@ public class ToxNeedleItem extends Item {
         return InteractionResult.PASS;
     }
 
-    private static void handleKnowledgeFromItem(ToxData toxData, ItemStack stack){
+    private static void handleKnowledgeFromItem(LivingEntity entity, ToxData toxData, ItemStack stack){
         ItemStack storedStack = new ItemStack(stack.get(DataComponentsRegistry.AFFINITY_STORED_ITEM).value());
-        Player player = toxData.getPlayer();
 
         toxData.addKnownIngredients(storedStack, 10);
         if(toxData.getIngredientProgress(storedStack) >= ToxData.MINIMUM_KNOW){
-            if(player.level().isClientSide()){
+            if(entity.level().isClientSide()){
                 Minecraft.getInstance().gui.setOverlayMessage(
                         Component.translatable("message.toxony.needle.knowledge.success", Component.translatable(storedStack.getDescriptionId()).getString()),
                         false
@@ -134,13 +149,49 @@ public class ToxNeedleItem extends Item {
             }
         }
         else{
-            if(player.level().isClientSide()){
+            if(entity.level().isClientSide()){
                 Minecraft.getInstance().gui.setOverlayMessage(
                         Component.translatable("message.toxony.needle.knowledge.fail", Component.translatable(storedStack.getDescriptionId()).getString()),
                         false
                 );
             }
         }
+    }
+
+    public static void handleToxin(LivingEntity targetEntity, Holder<MobEffect> effect){
+        if(targetEntity instanceof ServerPlayer svplayer){
+            ToxData toxData = svplayer.getData(DataAttachmentRegistry.TOX_DATA);
+            Float toxinAmt = toxData.getTox();
+
+            if(effect.is(MobEffects.REGENERATION) || effect.is(MobEffects.HEAL)){
+                toxinAmt += -8.0F;
+            }
+            if(effect.is(MobEffectRegistry.TOXIN) || effect.is(MobEffects.POISON)){
+                boolean isToxin = effect.is(MobEffectRegistry.TOXIN);
+                toxinAmt += isToxin ? 30.0F : 10.0F;
+            }
+
+            toxData.addTox(toxinAmt);
+            svplayer.setData(DataAttachmentRegistry.TOX_DATA, toxData);
+            PacketDistributor.sendToPlayer(svplayer, SyncToxDataPacket.create(toxData));
+
+        }
+        else{
+            float maxHealth = targetEntity.getMaxHealth();
+            Float toxinAmt = targetEntity.hasData(DataAttachmentRegistry.MOB_TOXIN) ? targetEntity.getData(DataAttachmentRegistry.MOB_TOXIN) : 0.0F;
+            float maxHealthMult = (float)Math.clamp((Math.sqrt(maxHealth) - 2) * 0.05, 0.0, 2.0);
+
+            if(effect.is(MobEffects.REGENERATION) || effect.is(MobEffects.HEAL)){
+                toxinAmt += -8.0F * maxHealthMult;
+            }
+            else if(effect.is(MobEffectRegistry.TOXIN) || effect.is(MobEffects.POISON)){
+                boolean isToxin = effect.is(MobEffectRegistry.TOXIN);
+                toxinAmt += isToxin ? 30.0F * maxHealthMult: 10.0F * maxHealthMult;
+            }
+            ToxUtil.setMobToxin(targetEntity, toxinAmt);
+        }
+
+
     }
 
     @Override

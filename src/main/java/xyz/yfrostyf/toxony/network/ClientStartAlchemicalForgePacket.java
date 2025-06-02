@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.client.gui.AlchemicalForgeMenu;
+import xyz.yfrostyf.toxony.client.gui.block.AlchemicalForgeMenu;
 
 public class ClientStartAlchemicalForgePacket implements CustomPacketPayload {
     public static final Type<ClientStartAlchemicalForgePacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "start_alchemical_forge"));

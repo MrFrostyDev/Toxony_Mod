@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Acidshot;
 import xyz.yfrostyf.toxony.entities.item.FlintlockBall;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
@@ -15,9 +16,9 @@ import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FlintlockRoundItem extends Item implements ProjectileItem {
-    private int damage;
+    private float damage;
 
-    public FlintlockRoundItem(Properties properties, int damage) {
+    public FlintlockRoundItem(Properties properties, float damage) {
         super(properties);
         this.damage = damage;
     }
@@ -33,7 +34,7 @@ public class FlintlockRoundItem extends Item implements ProjectileItem {
             }
         });
 
-        FlintlockBall flintlockBall = new FlintlockBall(level, stack, damage, value.get());
+        FlintlockBall flintlockBall = new FlintlockBall(level, stack, ToxonyConfig.IRON_ROUND_DAMAGE.get().floatValue(), value.get());
         return flintlockBall;
     }
 }

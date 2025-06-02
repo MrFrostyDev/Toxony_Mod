@@ -54,6 +54,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.WITCHFIRE_BOLT.get());
 
                 output.accept(ItemRegistry.MORTAR_PESTLE.get());
+                output.accept(ItemRegistry.REDSTONE_MORTAR.get());
                 output.accept(ItemRegistry.COPPER_CRUCIBLE.get());
                 output.accept(ItemRegistry.ALEMBIC.get());
                 output.accept(ItemRegistry.ALCHEMICAL_FORGE_PART.get());
@@ -106,6 +107,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.COPPER_SCALE.get());
                 output.accept(ItemRegistry.LOOSE_PAPER.get());
 
+                output.accept(ItemRegistry.GUIDED_SPIRIT_SPAWN_EGG.get());
             })
             .build()
     );

@@ -44,4 +44,11 @@ public class SoundEventRegistry {
                     "flintlock_load"
             ))
     );
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ALEMBIC_BOILING = SOUND_EVENTS.register(
+            "alembic_boiling",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID,
+                    "alembic_boiling"
+            ))
+    );
 }

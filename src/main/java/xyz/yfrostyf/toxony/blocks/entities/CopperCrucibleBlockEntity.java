@@ -9,6 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
@@ -30,10 +32,11 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.blocks.CopperCrucibleBlock;
-import xyz.yfrostyf.toxony.client.gui.CopperCrucibleMenu;
+import xyz.yfrostyf.toxony.client.gui.block.CopperCrucibleMenu;
 import xyz.yfrostyf.toxony.recipes.CrucibleRecipe;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
+import xyz.yfrostyf.toxony.registries.SoundEventRegistry;
 
 import java.util.Optional;
 
@@ -119,6 +122,16 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
     public static void tick(Level level, BlockPos pos, BlockState state, BlockEntity entity) {
         if(!(entity instanceof CopperCrucibleBlockEntity blockEntity))return;
 
+        // Client/Server Side actions
+        //
+        if (blockEntity.isLit()) {
+            if(level.getRandom().nextInt(20) == 0){
+                level.playSound(null, pos,
+                        SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS,
+                        0.6F + level.getRandom().nextFloat(), level.getRandom().nextFloat() * 0.7F + 0.6F);
+            }
+        }
+
         // Server Side actions
         if(level.isClientSide()){return;}
         ItemStack input = blockEntity.itemContainer.getStackInSlot(0);
@@ -139,7 +152,7 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
                 if (blockEntity.cookingProgress < blockEntity.cookingTotalTime) {
                     blockEntity.cookingProgress = Mth.clamp(blockEntity.cookingProgress + 1, 0, blockEntity.cookingTotalTime);
                 } else {
-                    blockEntity.itemContainer.setStackInSlot(0, blockEntity.getResultItem());
+                    blockEntity.insertItem(0, blockEntity.getResultItem(), false);
                     blockEntity.resetCrucible();
                 }
             }
@@ -228,8 +241,8 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         super.saveAdditional(tag, registries);
 
         NonNullList<ItemStack> list = NonNullList.create();
-        list.add(0, itemContainer.getStackInSlot(0).copy()); // store input/output item
-        list.add(1, itemContainer.getStackInSlot(1).copy()); // store fuel
+        list.add(0, this.itemContainer.getStackInSlot(0).copy()); // store input/output item
+        list.add(1, this.itemContainer.getStackInSlot(1).copy()); // store fuel
         list.addLast(resultItem); // store result item in sent list.
 
         ContainerHelper.saveAllItems(tag, list, registries);
@@ -246,8 +259,8 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         NonNullList<ItemStack> list = NonNullList.withSize(3, ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, list, registries);
 
-        this.insertItem(0, list.get(0), false); // receive input/output item
-        this.insertItem(1, list.get(1), false); // receive fuel
+        this.itemContainer.setStackInSlot(0, list.get(0)); // receive input/output item
+        this.itemContainer.setStackInSlot(1, list.get(1)); // receive fuel
         this.setResultItem(list.getLast()); // receive result item in sent list.
 
         this.litTime = tag.getInt("BurnTime");
@@ -296,13 +309,12 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         ItemStack itemStack = stack.copy();
-        itemContainer.setStackInSlot(slot, itemStack);
-        return itemStack;
+        return this.itemContainer.insertItem(slot, itemStack, simulate);
     }
 
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        ItemStack targetStack = itemContainer.getStackInSlot(slot).copy();
+        ItemStack targetStack = this.itemContainer.getStackInSlot(slot).copy();
         ItemStack returnItem;
         if(targetStack.getCount() > amount){
             returnItem = targetStack.copy();
@@ -311,7 +323,7 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         }
         else{
             returnItem = targetStack.copy();
-            itemContainer.setStackInSlot(slot, ItemStack.EMPTY);
+            this.itemContainer.setStackInSlot(slot, ItemStack.EMPTY);
         }
 
         return returnItem;

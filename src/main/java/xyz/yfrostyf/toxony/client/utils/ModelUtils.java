@@ -9,10 +9,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import xyz.yfrostyf.toxony.client.models.HunterArmorEntityModel;
-import xyz.yfrostyf.toxony.client.models.PlagueDoctorArmorEntityModel;
-import xyz.yfrostyf.toxony.client.models.PlaguebringerArmorEntityModel;
-import xyz.yfrostyf.toxony.client.models.ProfessionalHunterArmorEntityModel;
+import xyz.yfrostyf.toxony.client.models.items.HunterArmorEntityModel;
+import xyz.yfrostyf.toxony.client.models.items.PlagueDoctorArmorEntityModel;
+import xyz.yfrostyf.toxony.client.models.items.PlaguebringerArmorEntityModel;
+import xyz.yfrostyf.toxony.client.models.items.ProfessionalHunterArmorEntityModel;
 
 import java.util.Collections;
 import java.util.Map;

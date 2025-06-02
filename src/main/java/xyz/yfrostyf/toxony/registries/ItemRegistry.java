@@ -13,8 +13,10 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.items.*;
@@ -80,7 +82,6 @@ public class ItemRegistry {
             .stacksTo(1).durability(481)
     ));
 
-
     public static final DeferredHolder<Item, Item> HUNTER_HAT = ITEMS.register("hunter_hat", () -> new HunterArmorItem(
             ArmorMaterialRegistry.HUNTER_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()
             .stacksTo(1).durability(165)
@@ -124,7 +125,7 @@ public class ItemRegistry {
     // |-----------------------------------------------------------------------------------|
     // |--------------------------------------Tools----------------------------------------|
     // |-----------------------------------------------------------------------------------|
-    public static final DeferredHolder<Item, Item> TOX_GAUGE = ITEMS.register("tox_gauge", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredHolder<Item, Item> TOX_GAUGE = ITEMS.register("tox_gauge", () -> new ToxGaugeItem(new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> GLASS_VIAL = ITEMS.register("glass_vial", () -> new VialItem(new Item.Properties().stacksTo(64)));
     public static final DeferredHolder<Item, Item> TOX_VIAL = ITEMS.register("tox_vial", () -> new FullVialItem(new Item.Properties().stacksTo(64)));
 
@@ -167,8 +168,7 @@ public class ItemRegistry {
     ));
 
     public static final DeferredHolder<Item, Item> FLAIL = ITEMS.register("flail", () -> new FlailItem(new Item.Properties().stacksTo(1)
-            .durability(250).attributes(FlailItem.createAttributes(14.0F, -3.4F))
-    ));
+            .durability(250).attributes(FlailItem.createAttributes(14.0F, -3.4F))));
 
     // |-----------------------------------------------------------------------------------|
     // |-----------------------------------Cycle Bolts-------------------------------------|
@@ -421,11 +421,13 @@ public class ItemRegistry {
     // |------------------------------------Block Items------------------------------------|
     // |-----------------------------------------------------------------------------------|
     public static final DeferredHolder<Item, Item> MORTAR_PESTLE = ITEMS.register("mortar_pestle", () -> new BlockItem(BlockRegistry.MORTAR_PESTLE.get(), new Item.Properties().stacksTo(16)));
+    public static final DeferredHolder<Item, Item> REDSTONE_MORTAR = ITEMS.register("redstone_mortar", () -> new BlockItem(BlockRegistry.REDSTONE_MORTAR.get(), new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> COPPER_CRUCIBLE = ITEMS.register("copper_crucible", () -> new BlockItem(BlockRegistry.COPPER_CRUCIBLE.get(), new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> ALEMBIC = ITEMS.register("alembic", () -> new BlockItem(BlockRegistry.ALEMBIC.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, Item> ALCHEMICAL_FORGE_PART = ITEMS.register("alchemical_forge_part", () -> new BlockItem(BlockRegistry.ALCHEMICAL_FORGE_PART.get(), new Item.Properties().stacksTo(2)));
     public static final DeferredHolder<Item, Item> POISON_FARMLAND = ITEMS.register("poison_farmland", () -> new BlockItem(BlockRegistry.POISON_FARMLAND.get(), new Item.Properties()));
 
+    // Seeds
     public static final DeferredHolder<Item, Item> OCELOT_MINT_SEEDS = ITEMS.register("ocelot_mint_seeds", () -> new ItemNameBlockItem(BlockRegistry.OCELOT_MINT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> SNOW_MINT_SEEDS = ITEMS.register("snow_mint_seeds", () -> new ItemNameBlockItem(BlockRegistry.SNOW_MINT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> NIGHTSHADE_SEEDS = ITEMS.register("nightshade_seeds", () -> new ItemNameBlockItem(BlockRegistry.NIGHTSHADE.get(), new Item.Properties()));
@@ -506,6 +508,10 @@ public class ItemRegistry {
                     () -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0), 0.5F)
             )
     ))));
+
+    public static final DeferredHolder<Item, Item> GUIDED_SPIRIT_SPAWN_EGG = ITEMS.register("guided_spirit_spawn_egg", () -> new DeferredSpawnEggItem(
+            EntityRegistry.GUIDED_SPIRIT,0x478cfc, 0x9cc1ff, new Item.Properties()
+    ));
 
     // |----------------------------------------------------------------------------------|
     // |------------------------------------Methods---------------------------------------|

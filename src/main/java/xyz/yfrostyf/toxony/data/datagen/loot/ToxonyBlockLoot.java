@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
@@ -68,6 +69,8 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
         dropPoisonPlantDrops(BlockRegistry.WHIRLSNAP.get(), ItemRegistry.WHIRLSNAP.get());
         dropPoisonPlantDrops(BlockRegistry.BLOODROOT.get(), ItemRegistry.BLOODROOT.get());
         dropPoisonPlantDrops(BlockRegistry.WARPROOT.get(), ItemRegistry.WARPROOT.get());
+
+        dropOther(BlockRegistry.POISON_FARMLAND.get(), Items.COARSE_DIRT);
     }
 
     @Override

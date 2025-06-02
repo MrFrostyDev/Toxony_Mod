@@ -28,6 +28,13 @@ public class FlintlockBlastLargeParticle extends TextureSheetParticle {
     }
 
     @Override
+    public int getLightColor(float partialTick) {
+        int i = super.getLightColor(partialTick);
+        int k = i >> 16 & 0xFF;
+        return 240 | k << 16;
+    }
+
+    @Override
     public void tick() {
         if (this.age++ >= this.lifetime) {
             this.remove();

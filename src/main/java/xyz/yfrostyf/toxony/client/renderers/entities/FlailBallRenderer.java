@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.client.models.FlailBallEntityModel;
+import xyz.yfrostyf.toxony.client.models.items.FlailBallEntityModel;
 import xyz.yfrostyf.toxony.entities.item.FlailBall;
 
 @OnlyIn(Dist.CLIENT)

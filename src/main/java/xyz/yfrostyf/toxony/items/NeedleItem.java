@@ -15,6 +15,7 @@ import net.minecraft.world.level.Level;
 import xyz.yfrostyf.toxony.api.util.VialUtil;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
+import xyz.yfrostyf.toxony.registries.PotionRegistry;
 
 public class NeedleItem extends Item {
     public NeedleItem(Properties properties) {
@@ -40,6 +41,19 @@ public class NeedleItem extends Item {
                             Items.AIR.getDefaultInstance(),
                             player,
                             VialUtil.createAffinityStoredItemStack(ItemRegistry.TOX_NEEDLE.get(), storedHolder)
+                    ), level.isClientSide()
+            );
+        }
+        // If other hand is toxin, add toxin into needle
+        if(otherStack.is(ItemRegistry.TOXIN)){
+            player.getInventory().add(new ItemStack(ItemRegistry.GLASS_VIAL.get()));
+            otherStack.consume(1, player);
+            player.playSound(SoundEvents.BREWING_STAND_BREW, 1.0F, 0.8F);
+            return InteractionResultHolder.sidedSuccess(
+                    ItemUtils.createFilledResult(
+                            Items.AIR.getDefaultInstance(),
+                            player,
+                            VialUtil.createPotionItemStack(ItemRegistry.TOX_NEEDLE.get(), PotionRegistry.TOXIN)
                     ), level.isClientSide()
             );
         }

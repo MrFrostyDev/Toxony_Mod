@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
@@ -36,12 +37,13 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import xyz.yfrostyf.toxony.blocks.AlembicBlock;
-import xyz.yfrostyf.toxony.client.gui.AlembicMenu;
+import xyz.yfrostyf.toxony.client.gui.block.AlembicMenu;
 import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
 import xyz.yfrostyf.toxony.recipes.inputs.PairCombineRecipeInput;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.RecipeRegistry;
+import xyz.yfrostyf.toxony.registries.SoundEventRegistry;
 
 import java.util.Optional;
 
@@ -115,8 +117,19 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
     public static void tick(Level level, BlockPos pos, BlockState state, BlockEntity entity) {
         if(!(entity instanceof AlembicBlockEntity blockEntity))return;
 
+        // Client/Server Side actions
+        //
+        if (blockEntity.isBoiling()) {
+            if(level.getRandom().nextInt(50) == 0){
+                level.playSound(null, pos,
+                        SoundEventRegistry.ALEMBIC_BOILING.get(), SoundSource.BLOCKS,
+                        0.8F + level.getRandom().nextFloat(), 1.0F);
+            }
+        }
+
         // Server Side actions
-        if(level.isClientSide()){return;}
+        //
+        if(level.isClientSide())return;
         ItemStack output = blockEntity.itemContainer.getStackInSlot(0);
         ItemStack input = blockEntity.itemContainer.getStackInSlot(1);
         ItemStack fuel = blockEntity.itemContainer.getStackInSlot(2);
@@ -138,8 +151,8 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
                     blockEntity.fuel--;
                 }
                 else{
-                    blockEntity.itemContainer.setStackInSlot(0, result);
-                    blockEntity.itemContainer.setStackInSlot(1, returnStack);
+                    blockEntity.insertItem(0, result, false);
+                    blockEntity.insertItem(1, returnStack, false);
                     blockEntity.resetAlembic();
                 }
             }
@@ -173,6 +186,9 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
         if (blockEntity.isBoiling()) {
             state = state.setValue(AlembicBlock.LIT, Boolean.valueOf(true));
             level.setBlock(pos, state, AlembicBlock.UPDATE_ALL);
+            if(level.getRandom().nextInt(50) == 0){
+                level.playLocalSound(pos, SoundEventRegistry.ALEMBIC_BOILING.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+            }
         }
         else{
             state = state.setValue(AlembicBlock.LIT, Boolean.valueOf(false));
@@ -285,7 +301,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
 
         int i = 0;
         while(i<CONTAINER_SIZE){
-            this.insertItem(i, list.get(i), false);
+            this.itemContainer.setStackInSlot(i, list.get(i));
             i++;
         }
         this.returnStack = list.get(i); // receive remaining item in sent list.
@@ -336,8 +352,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         ItemStack itemStack = stack.copy();
-        itemContainer.setStackInSlot(slot, itemStack);
-        return itemStack;
+        return this.itemContainer.insertItem(slot, itemStack, simulate);
     }
 
     @Override

@@ -23,9 +23,9 @@ public class ToxonySoundDefinitionsProvider extends SoundDefinitionsProvider {
                         // The second parameter can be either SOUND or EVENT, and can be omitted if the former.
                         sound(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "mutagen_transform"))
                                 // Sets the volume. Also has a double counterpart.
-                                .volume(0.8f)
+                                .volume(0.8F)
                                 // Sets the pitch. Also has a double counterpart.
-                                .pitch(1.0f)
+                                .pitch(1.0F)
                                 // Sets the weight.
                                 .weight(2)
                                 // Sets the attenuation distance.
@@ -49,8 +49,8 @@ public class ToxonySoundDefinitionsProvider extends SoundDefinitionsProvider {
         add(SoundEventRegistry.FLINTLOCK_SHOOT, SoundDefinition.definition()
                 .with(
                         sound(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "flintlock_shoot"))
-                                .volume(1.0f)
-                                .pitch(1.0f)
+                                .volume(1.0F)
+                                .pitch(1.0F)
                                 .weight(2)
                                 .attenuationDistance(16)
                                 .stream(false)
@@ -64,8 +64,8 @@ public class ToxonySoundDefinitionsProvider extends SoundDefinitionsProvider {
         add(SoundEventRegistry.FLINTLOCK_CLICK, SoundDefinition.definition()
                 .with(
                         sound(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "flintlock_click"))
-                                .volume(0.8f)
-                                .pitch(1.0f)
+                                .volume(0.8F)
+                                .pitch(1.0F)
                                 .weight(2)
                                 .attenuationDistance(6)
                                 .stream(false)
@@ -79,8 +79,8 @@ public class ToxonySoundDefinitionsProvider extends SoundDefinitionsProvider {
         add(SoundEventRegistry.FLINTLOCK_LOAD, SoundDefinition.definition()
                 .with(
                         sound(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "flintlock_load"))
-                                .volume(0.8f)
-                                .pitch(1.0f)
+                                .volume(0.8F)
+                                .pitch(1.0F)
                                 .weight(2)
                                 .attenuationDistance(6)
                                 .stream(false)
@@ -88,6 +88,21 @@ public class ToxonySoundDefinitionsProvider extends SoundDefinitionsProvider {
                         sound("toxony:flintlock_load")
                 )
                 .subtitle("sound.toxony.flintlock_load")
+                .replace(false)
+        );
+
+        add(SoundEventRegistry.ALEMBIC_BOILING, SoundDefinition.definition()
+                .with(
+                        sound(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "alembic_boiling"))
+                                .volume(1.0F)
+                                .pitch(1.0F)
+                                .weight(2)
+                                .attenuationDistance(2)
+                                .stream(false)
+                                .preload(false),
+                        sound("toxony:alembic_boiling")
+                )
+                .subtitle("sound.toxony.alembic_boiling")
                 .replace(false)
         );
     }

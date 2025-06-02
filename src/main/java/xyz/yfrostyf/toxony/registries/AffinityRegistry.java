@@ -21,65 +21,70 @@ public class AffinityRegistry {
             "Moon",
             1,
             () -> List.of(
-                    MobEffectRegistry.WOLF_MUTAGEN,
-                    MobEffectRegistry.CAT_MUTAGEN
+                    MobEffectRegistry.BEAST_MUTAGEN,
+                    MobEffectRegistry.SPIRIT_MUTAGEN,
+                    MobEffectRegistry.HOLLOW_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> SUN = AFFINITIES.register("sun", () -> Affinity.create(
             "Sun",
             2,
             () -> List.of(
-                    MobEffectRegistry.CAT_MUTAGEN,
-                    MobEffectRegistry.BLAZE_MUTAGEN
+                    MobEffectRegistry.BEAST_MUTAGEN,
+                    MobEffectRegistry.INFERNAL_MUTAGEN
+
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> OCEAN = AFFINITIES.register("ocean", () -> Affinity.create(
             "Ocean",
             3,
             () -> List.of(
-                    MobEffectRegistry.TURTLE_MUTAGEN
+                    MobEffectRegistry.AQUA_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> FOREST = AFFINITIES.register("forest", () -> Affinity.create(
             "Forest",
             4,
             () -> List.of(
-                    MobEffectRegistry.WOLF_MUTAGEN,
-                    MobEffectRegistry.SPIDER_MUTAGEN
+                    MobEffectRegistry.BEAST_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> WIND = AFFINITIES.register("wind", () -> Affinity.create(
             "Wind",
             5,
             () -> List.of(
-                    MobEffectRegistry.TURTLE_MUTAGEN
+                    MobEffectRegistry.AQUA_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> COLD = AFFINITIES.register("cold", () -> Affinity.create(
             "Cold",
             6,
             () -> List.of(
-                    MobEffectRegistry.WOLF_MUTAGEN
+                    MobEffectRegistry.HOLLOW_MUTAGEN,
+                    MobEffectRegistry.NECROTIC_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> SOUL = AFFINITIES.register("soul", () -> Affinity.create(
             "Soul",
             7,
-            () -> List.of()
+            () -> List.of(
+                    MobEffectRegistry.SPIRIT_MUTAGEN,
+                    MobEffectRegistry.NECROTIC_MUTAGEN
+            )
     ));
     public static final DeferredHolder<Affinity, Affinity> DECAY = AFFINITIES.register("decay", () -> Affinity.create(
             "Decay",
             8,
             () -> List.of(
-                    MobEffectRegistry.WITHER_MUTAGEN
+                    MobEffectRegistry.NECROTIC_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> NETHER = AFFINITIES.register("nether", () -> Affinity.create(
             "Nether",
             9,
             () -> List.of(
-                    MobEffectRegistry.BLAZE_MUTAGEN,
-                    MobEffectRegistry.WITHER_MUTAGEN
+                    MobEffectRegistry.INFERNAL_MUTAGEN,
+                    MobEffectRegistry.NECROTIC_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> END = AFFINITIES.register("end", () -> Affinity.create(
@@ -91,7 +96,7 @@ public class AffinityRegistry {
             "Heat",
             11,
             () -> List.of(
-                    MobEffectRegistry.BLAZE_MUTAGEN
+                    MobEffectRegistry.INFERNAL_MUTAGEN
             )
     ));
 

@@ -66,20 +66,29 @@ public abstract class PageScreen extends Screen {
     }
 
     @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if(keyCode == Minecraft.getInstance().options.keyInventory.getKey().getValue()){
+            this.closeScreen();
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+/*    @Override
     public boolean handleComponentClicked(Style style) {
         ClickEvent clickevent = style.getClickEvent();
         if (clickevent == null) {
             return false;
         } else if (clickevent.getAction() != ClickEvent.Action.CHANGE_PAGE) {
             boolean flag = super.handleComponentClicked(style);
-            if (flag && clickevent.getAction() == ClickEvent.Action.RUN_COMMAND) {
+            if (flag && (clickevent.getAction() == ClickEvent.Action.RUN_COMMAND)) {
                 this.closeScreen();
             }
 
             return flag;
         }
         return false;
-    }
+    }*/
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -92,7 +101,7 @@ public abstract class PageScreen extends Screen {
 
     protected void closeScreen() {
         JournalUtil.setLastPageID(this.translateID);
-        this.minecraft.setScreen(null);
+        this.onClose();
     }
 
     @Override
@@ -151,7 +160,7 @@ public abstract class PageScreen extends Screen {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             if (this.isForward) {
                 if (this.isHoveredOrFocused()) {
-                    RenderSystem.setShaderTexture(0, BUTTONS_RIGHT_RESOURCE);
+                    // RenderSystem.setShaderTexture(0, BUTTONS_RIGHT_RESOURCE);
                         guiGraphics.blitSprite(
                                 BUTTONS_RIGHT_RESOURCE, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT,
                             0, 0, posX, posY, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT);
@@ -159,7 +168,7 @@ public abstract class PageScreen extends Screen {
             }
             else{
                 if (this.isHoveredOrFocused()) {
-                    RenderSystem.setShaderTexture(0, BUTTON_LEFT_RESOURCE);
+                    // RenderSystem.setShaderTexture(0, BUTTON_LEFT_RESOURCE);
                     guiGraphics.blitSprite(
                             BUTTON_LEFT_RESOURCE, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT,
                             0, 0, posX, posY, BUTTON_TEXTURE_WIDTH, BUTTON_TEXTURE_HEIGHT);

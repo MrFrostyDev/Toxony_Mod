@@ -28,15 +28,33 @@ public class PayloadRegistry {
         );
 
         registrar.playToClient(
+                SyncMobToxDataPacket.TYPE,
+                SyncMobToxDataPacket.STREAM_CODEC,
+                SyncMobToxDataPacket::handle
+        );
+
+        registrar.playToClient(
                 SyncIngredientAffinityMapPacket.TYPE,
                 SyncIngredientAffinityMapPacket.STREAM_CODEC,
                 SyncIngredientAffinityMapPacket::handle
         );
 
         registrar.playToClient(
+                SyncMutagenDataPacket.TYPE,
+                SyncMutagenDataPacket.STREAM_CODEC,
+                SyncMutagenDataPacket::handle
+        );
+
+        registrar.playToClient(
                 ServerSendMessagePacket.TYPE,
                 ServerSendMessagePacket.STREAM_CODEC,
                 ServerSendMessagePacket::handle
+        );
+
+        registrar.playToClient(
+                ServerNightPredatorPacket.TYPE,
+                ServerNightPredatorPacket.STREAM_CODEC,
+                ServerNightPredatorPacket::handle
         );
 
         registrar.playToServer(

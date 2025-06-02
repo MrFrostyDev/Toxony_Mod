@@ -1,4 +1,15 @@
 {
+  "alembic_boiling": {
+    "sounds": [
+      {
+        "attenuation_distance": 2,
+        "name": "toxony:alembic_boiling",
+        "weight": 2
+      },
+      "toxony:alembic_boiling"
+    ],
+    "subtitle": "sound.toxony.alembic_boiling"
+  },
   "flintlock_click": {
     "sounds": [
       {

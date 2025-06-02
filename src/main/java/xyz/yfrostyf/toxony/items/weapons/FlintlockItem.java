@@ -14,13 +14,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ChargedProjectiles;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import xyz.yfrostyf.toxony.data.datagen.enchantments.effects.Refill;
 import xyz.yfrostyf.toxony.entities.item.FlintlockBall;
 import xyz.yfrostyf.toxony.items.FlintlockRoundItem;
 import xyz.yfrostyf.toxony.registries.*;
@@ -276,6 +274,6 @@ public class FlintlockItem extends ProjectileWeaponItem {
 
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-        return repair.is(Items.COPPER_INGOT);
+        return repair.is(Items.IRON_INGOT);
     }
 }

@@ -9,7 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.client.gui.MortarPestleMenu;
+import xyz.yfrostyf.toxony.client.gui.block.MortarPestleMenu;
 
 public class ClientStartPestlingPacket implements CustomPacketPayload {
     public static final Type<ClientStartPestlingPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "start_pestling"));

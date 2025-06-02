@@ -147,6 +147,18 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_stone", has(Items.STONE))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.REDSTONE_MORTAR.get())
+                .pattern("SMS")
+                .pattern("CIC")
+                .pattern("CRC")
+                .define('M', ItemRegistry.MORTAR_PESTLE.get())
+                .define('C', Items.COPPER_INGOT)
+                .define('I', Items.IRON_INGOT)
+                .define('S', Items.CHISELED_POLISHED_BLACKSTONE)
+                .define('R', Items.COMPARATOR)
+                .unlockedBy("has_mortar_pestle", has(ItemRegistry.MORTAR_PESTLE.get()))
+                .save(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.COPPER_CRUCIBLE.get())
                 .pattern(" C ")
                 .pattern("CCC")

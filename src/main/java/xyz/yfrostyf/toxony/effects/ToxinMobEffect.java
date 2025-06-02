@@ -11,7 +11,7 @@ import xyz.yfrostyf.toxony.damages.ToxinDamageSource;
 import java.util.Set;
 
 public class ToxinMobEffect extends MobEffect {
-    private static final int color = 0x20b809;
+    private static final int color = 0x6ece36;
     private static final int BASE_TICK = 50;
 
     public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {

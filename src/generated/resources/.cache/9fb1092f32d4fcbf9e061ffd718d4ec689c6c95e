@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-05T11:28:59.4722621	Recipes
+// 1.21.1	2025-06-02T15:24:51.2771291	Recipes
 78c3135de7de1697adb41d06b47584fd81bce0a3 data/minecraft/advancement/recipes/combat/flail_smithing.json
 623b93f1974875b7f2efd77312a904fa5aa7bd40 data/minecraft/advancement/recipes/combat/flintlock_smithing.json
 7afbbed83d5ebabb5874b3e1a3adc7c6b5a14aac data/minecraft/advancement/recipes/combat/professional_hunter_boots_smithing.json
@@ -67,6 +67,7 @@ ac7417d88aa6835a0dc7c4edbbf440a142dab6fa data/toxony/advancement/recipes/misc/mo
 5c91b6a5a198bc2717383d8c7383294df5b5b1aa data/toxony/advancement/recipes/misc/nightshade_seeds.json
 4e4ac6c9649b8d790fadfb6a44f4e3778ac88062 data/toxony/advancement/recipes/misc/ocelot_mint_seeds.json
 c12d0c438129b919ee672af259d1e9d784f47efe data/toxony/advancement/recipes/misc/redstone_mixture.json
+ea1527fc1f8778b3a7ea1f6f6f67ef0aa574a8ef data/toxony/advancement/recipes/misc/redstone_mortar.json
 217f8baedc92e8629fc2983bf67820a9382fa22d data/toxony/advancement/recipes/misc/silver_scrap.json
 923a741f7a6ab348a6f4c37ffcd8d5ff5e688f10 data/toxony/advancement/recipes/misc/silver_steel_blend.json
 5be72525e8e9242863dc2e8be496a80adecb8541 data/toxony/advancement/recipes/misc/silver_steel_ingot.json
@@ -165,6 +166,7 @@ b1774c57d6becb383140105ed3f0261d7f22e982 data/toxony/recipe/plague_doctor_hood.j
 529c1221fae164a9613c90cf9d0d16dc855fb81d data/toxony/recipe/plague_doctor_leggings.json
 bdeca84659cb20e49962936dcc237dd13fb810f1 data/toxony/recipe/potion_flask.json
 73c023a8b6d779bd72d08011911f0c6854083497 data/toxony/recipe/redstone_mixture.json
+1bc01807e57f06a8d18ca72b7b1b29f0eb05fd93 data/toxony/recipe/redstone_mortar.json
 8c795bc30c86b37204e9534e565b60fef9d275cd data/toxony/recipe/silver_scrap.json
 44376a1d9bc05516c3e80c7b0e74a4442434b4a9 data/toxony/recipe/silver_steel_blend.json
 055991c5a8605f8e4f19e14ab4d77bc05fbdc25e data/toxony/recipe/silver_steel_ingot.json

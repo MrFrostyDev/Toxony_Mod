@@ -35,9 +35,6 @@ public class BlendItem extends ToxGiverItem {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if(!(entity instanceof Player player))return stack;
         ToxData plyToxData = player.getData(DataAttachmentRegistry.TOX_DATA);
-        plyToxData.addTox(tox);
-
-        ToxUtil.addToleranceWithTier(plyToxData, tolerance, tier, level);
 
         if(stack.has(DataComponentsRegistry.AFFINITY_STORED_ITEMS)) {
             List<Holder<Item>> stored_items = stack.get(DataComponentsRegistry.AFFINITY_STORED_ITEMS);
@@ -48,6 +45,9 @@ public class BlendItem extends ToxGiverItem {
                 }
             }
         }
+
+        plyToxData.addTox(tox); // Add tox after affinities so they are applied before mutation occurs.
+        ToxUtil.addToleranceWithTier(player, plyToxData, tolerance, tier, level);
 
         mobEffectInstances.forEach((mobEffectInstance) -> {
             boolean hasEffect = player.hasEffect(mobEffectInstance.getEffect());
@@ -64,7 +64,7 @@ public class BlendItem extends ToxGiverItem {
             }
 
             if (mobEffectInstance.getEffect().value().isInstantenous()) {
-                (mobEffectInstance.getEffect().value()).applyInstantenousEffect(player, player, entity, effectAmp, (double)1.0F);
+                (mobEffectInstance.getEffect().value()).applyInstantenousEffect(player, player, entity, effectAmp, 1.0F);
             } else {
                 player.addEffect(new MobEffectInstance(effect, mobEffectInstance.getDuration() + oldEffectDuration, Math.max(oldEffectAmp, effectAmp)));
             }
