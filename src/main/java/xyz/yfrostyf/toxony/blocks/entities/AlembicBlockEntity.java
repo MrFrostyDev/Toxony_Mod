@@ -151,8 +151,8 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
                     blockEntity.fuel--;
                 }
                 else{
-                    blockEntity.insertItem(0, result, false);
-                    blockEntity.insertItem(1, returnStack, false);
+                    blockEntity.itemContainer.setStackInSlot(0, result);
+                    blockEntity.itemContainer.setStackInSlot(1, returnStack);
                     blockEntity.resetAlembic();
                 }
             }
