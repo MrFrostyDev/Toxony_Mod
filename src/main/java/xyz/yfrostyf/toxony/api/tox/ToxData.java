@@ -7,15 +7,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -168,7 +165,6 @@ public class ToxData {
         else if (event.getNewTox() <= 0) {
             event.setNewTox(0);
             this.resetThreshold();
-            this.clearMutagens();
         }
 
         this.tox = event.getNewTox();
@@ -281,7 +277,7 @@ public class ToxData {
         for(MobEffectInstance effectInstance : activeEffects){
             if (effectInstance.getEffect().value() instanceof MutagenEffect effect){
                 effect.removeModifiers(player);
-                player.removeEffectNoUpdate(effectInstance.getEffect());
+                player.removeEffect(effectInstance.getEffect());
             }
         }
         for(Holder<MobEffect> effect : mutagens){

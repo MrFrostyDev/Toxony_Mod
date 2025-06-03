@@ -115,12 +115,8 @@ public class NecroticMutagenEffect extends MutagenEffect {
             MobEffectInstance effect = event.getEffectInstance();
             if(victimMutagen == null || victimMutagen.getAmplifier() < 1)return;
 
-            if(effect.is(MobEffects.HEAL) || effect.is(MobEffects.REGENERATION)){
+            if(effect.is(MobEffects.REGENERATION)){
                 event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
-                if(event.getEntity() instanceof LivingEntity livingEntity){
-                    int j = (int)(livingEntity.getHealth() * (double)(6 << effect.getAmplifier()) + 0.5);
-                    livingEntity.hurt(livingEntity.damageSources().magic(), (float)j);
-                }
             }
         }
 

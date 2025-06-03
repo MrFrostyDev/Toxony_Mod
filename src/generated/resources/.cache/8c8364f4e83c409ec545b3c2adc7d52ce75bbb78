@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-07T23:17:25.5524914	Tags for minecraft:item mod id vanilla
+// 1.21.1	2025-06-03T07:39:10.5775777	Tags for minecraft:item mod id vanilla
 57ca6054c0f30afd244bbe2e8ec743414d3ce00f data/minecraft/tags/item/chest_armor.json
 7b9aefd0c64296a8e96140f8837593e6c9b5ccfa data/minecraft/tags/item/enchantable/durability.json
 40a70992a972ae3810e5fbf79299da3989df3365 data/minecraft/tags/item/enchantable/sharp_weapon.json
@@ -10,7 +10,7 @@
 6458616a0f82b7a415f98a8d02da98eb1dcfb98e data/minecraft/tags/item/swords.json
 4f298793e22744c9c02d04d15dcdcabd2eef3d72 data/toxony/tags/item/bolts.json
 85db9601c6b79f5ddfa5bdbc012ae6835b7f77c5 data/toxony/tags/item/enchantable/flail.json
-05f9288ff13959de8340261c403d4c82858239c4 data/toxony/tags/item/ingredients/poisonous.json
+c6a9f88cb6cdf782c67e64dfd603c45dd7585f9a data/toxony/tags/item/ingredients/poisonous.json
 47cf4319cf394251c90590cc58d36a90d27b67c6 data/toxony/tags/item/oil_applicable.json
 e0ad19ee27de446db1c70f123c350f6a7b972e85 data/toxony/tags/item/oil_refiller.json
 c0cbb8f2c8d2ac0028efc77cadaf6b0f06906f8f data/toxony/tags/item/oil_repairable.json

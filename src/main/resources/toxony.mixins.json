@@ -3,6 +3,7 @@
   "package": "xyz.yfrostyf.toxony.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "HealMobEffectMixin",
     "PlayerFoodExhaustionMixin"
   ],
   "client": [],

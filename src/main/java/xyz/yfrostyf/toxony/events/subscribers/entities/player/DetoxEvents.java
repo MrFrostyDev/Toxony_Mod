@@ -18,6 +18,7 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.events.ChangeToxEvent;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.network.ServerSendMessagePacket;
+import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
 import static net.minecraft.core.component.DataComponents.POTION_CONTENTS;
@@ -72,9 +73,10 @@ public class DetoxEvents{
         LivingEntity entity = event.getEntity();
         ToxData toxData = event.getToxData();
 
-
         toxData.clearMutagens();
         toxData.clearAffinities();
+
+        entity.setData(DataAttachmentRegistry.TOX_DATA, toxData);
 
         entity.playSound(SoundEvents.AMETHYST_BLOCK_BREAK);
         if(entity.level() instanceof ServerLevel svlevel){
@@ -82,10 +84,9 @@ public class DetoxEvents{
                     entity.getX(),  entity.getY()+1.5,  entity.getZ(),
                     15, 0.75, 0.3, 0.75, 0);
             if(entity instanceof Player){
+                PacketDistributor.sendToPlayer((ServerPlayer)entity, SyncToxDataPacket.create(toxData));
                 PacketDistributor.sendToPlayer((ServerPlayer)entity, ServerSendMessagePacket.create("message.toxony.tox.mutagen_clear"));
             }
         }
-
-        entity.setData(DataAttachmentRegistry.TOX_DATA, toxData);
     }
 }

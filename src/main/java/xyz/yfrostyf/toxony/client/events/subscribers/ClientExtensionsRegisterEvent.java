@@ -212,7 +212,6 @@ public class ClientExtensionsRegisterEvent {
                 var event = net.neoforged.neoforge.client.ClientHooks.onScreenPotionSize(screen, j, !isSmall, i);
                 isSmall = !event.isCompact();
 
-
                 if (isSmall) {
                     guiGraphics.blitSprite(MUTAGEN_BACKGROUND_LARGE_SPRITE, x - 6, y, 120, 32);
                 }

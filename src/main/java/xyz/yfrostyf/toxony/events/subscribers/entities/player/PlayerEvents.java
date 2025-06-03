@@ -28,6 +28,7 @@ public class PlayerEvents {
         Player player = event.getEntity();
         ToxData plyToxData = event.getEntity().getData(DataAttachmentRegistry.TOX_DATA.get());
         plyToxData.setPlayer(player);
+        player.setData(DataAttachmentRegistry.TOX_DATA, plyToxData);
         plyToxData.applyMutagens();
 
         if(!player.level().isClientSide()){
@@ -107,14 +108,14 @@ public class PlayerEvents {
                 if(contents.potion().get() != Potions.WATER
                         && contents.potion().get() != Potions.AWKWARD
                         && contents.potion().get() != Potions.MUNDANE){
+                    ToxData toxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
                     if(event.getItem().getItem() instanceof PotionFlaskItem){
-                        ToxData toxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
                         toxData.addTox(15);
                     }
                     else{
-                        ToxData toxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
                         toxData.addTox(5);
                     }
+                    player.setData(DataAttachmentRegistry.TOX_DATA, toxData);
                 }
             }
         }

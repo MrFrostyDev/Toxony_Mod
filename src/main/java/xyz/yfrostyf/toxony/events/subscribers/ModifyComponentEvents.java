@@ -19,7 +19,6 @@ public class ModifyComponentEvents {
 
     @SubscribeEvent
     public static void modifyComponents(ModifyDefaultComponentsEvent event) {
-        // Sets the component on melon seeds
         event.modify(Items.POISONOUS_POTATO, builder ->
                 builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
                         AffinityRegistry.HEAT.getKey(), AffinityRegistry.FOREST.getKey()

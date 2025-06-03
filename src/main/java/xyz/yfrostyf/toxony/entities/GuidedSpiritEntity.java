@@ -5,7 +5,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -29,7 +28,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.registries.ParticleRegistry;
 
 import java.util.EnumSet;
@@ -88,7 +86,6 @@ public class GuidedSpiritEntity extends PathfinderMob implements TraceableEntity
 
     @Override
     public void tick() {
-        ToxonyMain.LOGGER.info("{}", this.getTarget());
         this.noPhysics = true;
         super.tick();
         this.noPhysics = false;

@@ -16,10 +16,10 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
-import xyz.yfrostyf.toxony.api.items.*;
+import xyz.yfrostyf.toxony.api.items.ToxGiverBlockItem;
+import xyz.yfrostyf.toxony.api.items.ToxGiverItem;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.oils.Oil;
 import xyz.yfrostyf.toxony.items.*;
@@ -281,7 +281,7 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> PURE_BLEND = ITEMS.register("pure_blend", () -> BlendItem.builder()
             .properties(new Item.Properties().stacksTo(1))
-            .tox(65).tolerance(40).tier(2)
+            .tox(65).tolerance(40).tier(3)
             .returnItem(() -> new ItemStack(Items.BOWL))
             .effect(new MobEffectInstance(MobEffectRegistry.TOXIN, 1800, 0))
             .build()

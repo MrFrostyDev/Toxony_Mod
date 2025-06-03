@@ -9,7 +9,7 @@
   "block.toxony.alchemical_forge": "Alchemical Forge",
   "block.toxony.alchemical_forge_part": "Alchemical Forge Part",
 
-  "block.toxony.false_berries_bush": "Sweet Berries",
+  "block.toxony.false_berry_bush": "Sweet Berry Bush",
   "block.toxony.ocelot_mint": "Ocelot Mint",
   "block.toxony.snow_mint": "Snow Mint",
   "block.toxony.nightshade": "Nightshade",
@@ -51,6 +51,8 @@
   "block.toxony.valentines_box": "Valentines Box",
   "block.toxony.poison_farmland": "Poison Farmland",
   "block.toxony.oil_layer": "Oil",
+
+  "entity.toxony.guided_spirit": "Guided Spirit",
 
   "item.toxony.silver_scrap": "Silver Scrap",
   "item.toxony.silver_steel_blend": "Silver Steel Blend",
@@ -252,7 +254,7 @@
   "mutageninfo.toxony.hollow_mutagen.2": "Gain permanent night vision.\n\nGain the ability to climb any walls.\n\nGain high knockback resistance.\n\nGain weakness under direct Sunlight.",
   "mutageninfo.toxony.necrotic_mutagen.0": "Raw food and rotten flesh will heal you.\n\nGain immunity to Hunger.",
   "mutageninfo.toxony.necrotic_mutagen.1": "Gain immunity to poison and wither effects.\n\nWhen getting hit, apply Poison to the attacker.\n\nYou are considered undead.",
-  "mutageninfo.toxony.necrotic_mutagen.2": "When hitting an entity, apply Wither for 5 seconds.\n\nUpon death, revive once back to half your health. Cannot occur again for 2 days.\n\nGain weakness under direct Sunlight.",
+  "mutageninfo.toxony.necrotic_mutagen.2": "When hitting an entity, apply Wither.\n\nUpon death, revive once back to half your health. Cannot occur again for 2 days.\n\nGain weakness under direct Sunlight.",
   "mutageninfo.toxony.infernal_mutagen.0": "Take less damage from being on fire.",
   "mutageninfo.toxony.infernal_mutagen.1": "When getting hit, set the attacker on fire.\n\nCrouch right-click items in the air to turn into charcoal. Only works if the item can be made into charcoal with a furnace.",
   "mutageninfo.toxony.infernal_mutagen.2": "Immunity to fire and lava.\n\nWhen hitting an entity, set entity on fire for 6 seconds.\n\n Gain weakness when in water or rain.",
