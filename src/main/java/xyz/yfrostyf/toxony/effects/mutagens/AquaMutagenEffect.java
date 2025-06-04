@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,9 +22,12 @@ import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenData;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
+import xyz.yfrostyf.toxony.api.util.CompatibilityUtil;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 import xyz.yfrostyf.toxony.registries.ParticleRegistry;
+
+import java.util.Optional;
 
 public class AquaMutagenEffect extends MutagenEffect {
     public static final String WATER_SPLASH_ACTIVE = "water_splash_active";
@@ -34,6 +38,10 @@ public class AquaMutagenEffect extends MutagenEffect {
     private static final AttributeModifier SUBMERGEDMINING_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "aqua_mutagen_submergedmining_modifier"), 4.0f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     private static final AttributeModifier OXYGEN_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "aqua_mutagen_oxygen_add"), 2.0, AttributeModifier.Operation.ADD_VALUE);
     private static final AttributeModifier OXYGEN_ENHANCED_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "aqua_mutagen_oxygen_mul"), 2.0, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
+    private static final String ICE_SPELL_POWER = "ice_spell_power";
+    private static final AttributeModifier ICE_SPELLPOWER_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "ice_spell_power_modifier"), 0.2F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
 
     public AquaMutagenEffect(MobEffectCategory category) {
         super(category, 0xffffff);
@@ -47,6 +55,9 @@ public class AquaMutagenEffect extends MutagenEffect {
         if(amplifier >= 1){
             addModifier(entity, Attributes.SUBMERGED_MINING_SPEED, SUBMERGEDMINING_MODIFIER);
             addModifier(entity, net.neoforged.neoforge.common.NeoForgeMod.SWIM_SPEED, SWIM_MODIFIER);
+
+            Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, ICE_SPELL_POWER);
+            ironsSpellOptional.ifPresent(attribute -> addModifier(entity, ironsSpellOptional.get(), ICE_SPELLPOWER_MODIFIER));
         }
         if(amplifier >= 2){
             addModifier(entity, Attributes.OXYGEN_BONUS, OXYGEN_ENHANCED_MODIFIER);
@@ -60,6 +71,9 @@ public class AquaMutagenEffect extends MutagenEffect {
         removeModifier(entity, Attributes.SUBMERGED_MINING_SPEED, SUBMERGEDMINING_MODIFIER);
         removeModifier(entity, net.neoforged.neoforge.common.NeoForgeMod.SWIM_SPEED, SWIM_MODIFIER);
         removeModifier(entity, Attributes.OXYGEN_BONUS, OXYGEN_ENHANCED_MODIFIER);
+
+        Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, ICE_SPELL_POWER);
+        ironsSpellOptional.ifPresent(attribute -> removeModifier(entity, ironsSpellOptional.get(), ICE_SPELLPOWER_MODIFIER));
     }
 
     @Override

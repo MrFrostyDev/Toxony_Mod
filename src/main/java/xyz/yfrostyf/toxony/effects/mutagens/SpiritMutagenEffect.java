@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
@@ -21,11 +22,14 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenData;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
+import xyz.yfrostyf.toxony.api.util.CompatibilityUtil;
 import xyz.yfrostyf.toxony.entities.GuidedSpiritEntity;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.EntityRegistry;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
+
+import java.util.Optional;
 
 public class SpiritMutagenEffect extends MutagenEffect {
     public static final String GUIDED_SPIRIT_ACTIVE = "guided_spirit_active";
@@ -33,6 +37,10 @@ public class SpiritMutagenEffect extends MutagenEffect {
     public static final int DEFAULT_GUIDED_SPIRIT_COOLDOWN = 400;
 
     private static final AttributeModifier FALL_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "spirit_mutagen_fall_modifier"), -0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
+    private static final String EVOCATION_SPELL_POWER = "evocation_spell_power";
+    private static final AttributeModifier EVOCATION_SPELLPOWER_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "evocation_spell_power_modifier"), 0.2F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
 
     public SpiritMutagenEffect(MobEffectCategory category) {
         super(category, 0xffffff);
@@ -43,6 +51,19 @@ public class SpiritMutagenEffect extends MutagenEffect {
         if(amplifier >= 0){
             addModifier(entity, Attributes.FALL_DAMAGE_MULTIPLIER, FALL_MODIFIER);
         }
+        if(amplifier >= 1){
+            Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, EVOCATION_SPELL_POWER);
+            ironsSpellOptional.ifPresent(attribute -> addModifier(entity, ironsSpellOptional.get(), EVOCATION_SPELLPOWER_MODIFIER));
+        }
+    }
+
+    @Override
+    public void removeModifiers(LivingEntity entity) {
+        super.removeModifiers(entity);
+        removeModifier(entity, Attributes.FALL_DAMAGE_MULTIPLIER, FALL_MODIFIER);
+
+        Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, EVOCATION_SPELL_POWER);
+        ironsSpellOptional.ifPresent(attribute -> removeModifier(entity, ironsSpellOptional.get(), EVOCATION_SPELLPOWER_MODIFIER));
     }
 
     @Override
@@ -66,12 +87,6 @@ public class SpiritMutagenEffect extends MutagenEffect {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 40, 0, true, false, false));
         }
         return true;
-    }
-
-    @Override
-    public void removeModifiers(LivingEntity entity) {
-        super.removeModifiers(entity);
-        removeModifier(entity, Attributes.FALL_DAMAGE_MULTIPLIER, FALL_MODIFIER);
     }
 
     @EventBusSubscriber

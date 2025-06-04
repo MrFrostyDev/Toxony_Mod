@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.effects.mutagens;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -9,6 +10,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
@@ -23,17 +25,23 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenData;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
+import xyz.yfrostyf.toxony.api.util.CompatibilityUtil;
 import xyz.yfrostyf.toxony.network.ServerNightPredatorPacket;
 import xyz.yfrostyf.toxony.network.SyncMutagenDataPacket;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 import xyz.yfrostyf.toxony.registries.SoundEventRegistry;
 
+import java.util.Optional;
+
 public class BeastMutagenEffect extends MutagenEffect {
     public static final String NIGHT_PREDATOR_ACTIVE = "night_predator_active";
 
     private static final AttributeModifier DAMAGEBOOST_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "wolf_mutagen_damage_modifier"), 0.15F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "wolf_mutagen_speed_modifier"), 0.3F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
+    private static final String NATURE_SPELL_POWER = "nature_spell_power";
+    private static final AttributeModifier NATURE_SPELLPOWER_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "nature_spell_power_modifier"), 0.2F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
     public BeastMutagenEffect(MobEffectCategory category) {
         super(category, 0xffffff);
@@ -43,6 +51,9 @@ public class BeastMutagenEffect extends MutagenEffect {
     public void onEffectStarted(LivingEntity entity, int amplifier) {
         if(amplifier >= 1){
             addModifier(entity, Attributes.ATTACK_DAMAGE, DAMAGEBOOST_MODIFIER);
+
+            Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, NATURE_SPELL_POWER);
+            ironsSpellOptional.ifPresent(attribute -> addModifier(entity, ironsSpellOptional.get(), NATURE_SPELLPOWER_MODIFIER));
         }
     }
 
@@ -50,6 +61,10 @@ public class BeastMutagenEffect extends MutagenEffect {
     public void removeModifiers(LivingEntity entity) {
         super.removeModifiers(entity);
         removeModifier(entity, Attributes.ATTACK_DAMAGE, DAMAGEBOOST_MODIFIER);
+
+        Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, NATURE_SPELL_POWER);
+        ironsSpellOptional.ifPresent(attribute -> removeModifier(entity, ironsSpellOptional.get(), NATURE_SPELLPOWER_MODIFIER));
+
         if(entity.hasEffect(MobEffectRegistry.BEAST_MUTAGEN)
                 && entity.getEffect(MobEffectRegistry.BEAST_MUTAGEN).getAmplifier() >= 2){
             DeactivateNightPredator(entity, entity.getData(DataAttachmentRegistry.MUTAGEN_DATA));

@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
 import javax.annotation.Nullable;
@@ -30,7 +29,6 @@ public abstract class HealMobEffectMixin {
 
     @Inject(method = "applyInstantenousEffect", at = @At("HEAD"), cancellable = true)
     public void applyInstantenousEffectForNecrotic(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity livingEntity, int amplifier, double health, CallbackInfo ci) {
-        ToxonyMain.LOGGER.debug("Test");
         if (!this.isHarm == livingEntity.hasEffect(MobEffectRegistry.NECROTIC_MUTAGEN)) {
             if(livingEntity.getEffect(MobEffectRegistry.NECROTIC_MUTAGEN).getAmplifier() >= 1){
                 int j = (int)(health * (double)(6 << amplifier) + 0.5);

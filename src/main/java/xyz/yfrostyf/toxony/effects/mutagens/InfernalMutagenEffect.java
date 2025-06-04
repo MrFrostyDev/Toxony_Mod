@@ -2,6 +2,7 @@ package xyz.yfrostyf.toxony.effects.mutagens;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -12,9 +13,14 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -22,16 +28,41 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
+import xyz.yfrostyf.toxony.api.util.CompatibilityUtil;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
 
 import java.util.List;
+import java.util.Optional;
 
 public class InfernalMutagenEffect extends MutagenEffect {
     private static List<SmeltingRecipe> charcoalRecipeCache = null;
 
+    private static final String FIRE_SPELL_POWER = "fire_spell_power";
+    private static final AttributeModifier FIRE_SPELLPOWER_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "fire_spell_power_modifier"), 0.2F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
+
     public InfernalMutagenEffect(MobEffectCategory category) {
         super(category, 0xffffff);
+    }
+
+    @Override
+    public void onEffectStarted(LivingEntity entity, int amplifier) {
+        super.onEffectAdded(entity, amplifier);
+
+        if(amplifier >= 1){
+            Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, FIRE_SPELL_POWER);
+            ironsSpellOptional.ifPresent(attribute -> addModifier(entity, ironsSpellOptional.get(), FIRE_SPELLPOWER_MODIFIER));
+        }
+    }
+
+    @Override
+    public void removeModifiers(LivingEntity entity) {
+        super.removeModifiers(entity);
+
+        Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, FIRE_SPELL_POWER);
+        ironsSpellOptional.ifPresent(attribute -> removeModifier(entity, ironsSpellOptional.get(), FIRE_SPELLPOWER_MODIFIER));
     }
 
     @Override

@@ -1,10 +1,12 @@
 package xyz.yfrostyf.toxony.effects.mutagens;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,6 +16,8 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -23,18 +27,44 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
+import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenData;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
+import xyz.yfrostyf.toxony.api.util.CompatibilityUtil;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
+
+import java.util.Optional;
 
 public class NecroticMutagenEffect extends MutagenEffect {
     public static final String RESURRECTION_ACTIVE = "resurrection_active";
     public static final String RESURRECTION_COOLDOWN = "resurrection_cooldown";
     public static final int DEFAULT_RESURRECTION_COOLDOWN = 200; // 48000;
 
+    private static final String BLOOD_SPELL_POWER = "blood_spell_power";
+    private static final AttributeModifier BLOOD_SPELLPOWER_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, "blood_spell_power_modifier"), 0.2F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
+
     public NecroticMutagenEffect(MobEffectCategory category) {
         super(category, 0xffffff);
+    }
+
+    @Override
+    public void onEffectStarted(LivingEntity entity, int amplifier) {
+        super.onEffectAdded(entity, amplifier);
+
+        if(amplifier >= 1){
+            Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, BLOOD_SPELL_POWER);
+            ironsSpellOptional.ifPresent(attribute -> addModifier(entity, ironsSpellOptional.get(), BLOOD_SPELLPOWER_MODIFIER));
+        }
+    }
+
+    @Override
+    public void removeModifiers(LivingEntity entity) {
+        super.removeModifiers(entity);
+
+        Optional<Holder.Reference<Attribute>> ironsSpellOptional = CompatibilityUtil.getModAttribute(entity.level(), CompatibilityUtil.IRON_SPELLS, BLOOD_SPELL_POWER);
+        ironsSpellOptional.ifPresent(attribute -> removeModifier(entity, ironsSpellOptional.get(), BLOOD_SPELLPOWER_MODIFIER));
     }
 
     @Override
