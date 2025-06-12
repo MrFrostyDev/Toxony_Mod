@@ -19,26 +19,40 @@ public abstract class HealMobEffectMixin {
 
     @Inject(method = "applyEffectTick", at = @At("HEAD"), cancellable = true)
     public void applyEffectTickForNecrotic(LivingEntity livingEntity, int amplifier, CallbackInfoReturnable<Boolean> cir) {
-        if (!this.isHarm == livingEntity.hasEffect(MobEffectRegistry.NECROTIC_MUTAGEN)) {
-            if(livingEntity.getEffect(MobEffectRegistry.NECROTIC_MUTAGEN).getAmplifier() >= 1){
-                livingEntity.hurt(livingEntity.damageSources().magic(), (float)(6 << amplifier));
-                cir.setReturnValue(true);
+        boolean hasNecrotic = livingEntity.hasEffect(MobEffectRegistry.NECROTIC_MUTAGEN);
+        if(hasNecrotic){
+            if (!this.isHarm) {
+                if(livingEntity.getEffect(MobEffectRegistry.NECROTIC_MUTAGEN).getAmplifier() >= 1){
+                    livingEntity.hurt(livingEntity.damageSources().magic(), (float)(6 << amplifier));
+                }
             }
+            else{
+                livingEntity.heal((float)Math.max(4 << amplifier, 0));
+            }
+            cir.setReturnValue(true);
         }
     }
 
     @Inject(method = "applyInstantenousEffect", at = @At("HEAD"), cancellable = true)
     public void applyInstantenousEffectForNecrotic(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity livingEntity, int amplifier, double health, CallbackInfo ci) {
-        if (!this.isHarm == livingEntity.hasEffect(MobEffectRegistry.NECROTIC_MUTAGEN)) {
-            if(livingEntity.getEffect(MobEffectRegistry.NECROTIC_MUTAGEN).getAmplifier() >= 1){
-                int j = (int)(health * (double)(6 << amplifier) + 0.5);
-                if (source == null) {
-                    livingEntity.hurt(livingEntity.damageSources().magic(), (float)j);
-                } else {
-                    livingEntity.hurt(livingEntity.damageSources().indirectMagic(source, indirectSource), (float)j);
+        boolean hasNecrotic = livingEntity.hasEffect(MobEffectRegistry.NECROTIC_MUTAGEN);
+        if(hasNecrotic) {
+            if (!this.isHarm) {
+                if(livingEntity.getEffect(MobEffectRegistry.NECROTIC_MUTAGEN).getAmplifier() >= 1){
+                    int j = (int)(health * (double)(6 << amplifier) + 0.5);
+                    if (source == null) {
+                        livingEntity.hurt(livingEntity.damageSources().magic(), (float)j);
+                    } else {
+                        livingEntity.hurt(livingEntity.damageSources().indirectMagic(source, indirectSource), (float)j);
+                    }
+
                 }
-                ci.cancel();
             }
+            else{
+                int i = (int)(health * (double)(4 << amplifier) + 0.5);
+                livingEntity.heal((float)i);
+            }
+            ci.cancel();
         }
     }
 }
