@@ -72,6 +72,11 @@ public class RecipeRegistry {
             AlchemicalForgeRecipe.Serializer::new);
 
     // Ingredient Types
+    public static final Supplier<IngredientType<PossibleAffinityIngredient>> POSSIBLE_AFFINITY = INGREDIENT_TYPES.register(
+            "possible_affinity",
+            () -> new IngredientType<PossibleAffinityIngredient>(PossibleAffinityIngredient.CODEC, PossibleAffinityIngredient.STREAM_CODEC)
+    );
+
     public static final Supplier<IngredientType<AffinityIngredient>> AFFINITY = INGREDIENT_TYPES.register(
             "affinity",
             () -> new IngredientType<>(AffinityIngredient.CODEC, AffinityIngredient.STREAM_CODEC)

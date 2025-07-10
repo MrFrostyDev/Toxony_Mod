@@ -8,7 +8,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import xyz.yfrostyf.toxony.data.datagen.recipebuilders.AlembicRecipeBuilder;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
-import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -44,18 +43,10 @@ public class ToxonyAlembicRecipes extends RecipeProvider {
                 .build(output);
 
         new AlembicRecipeBuilder(new ItemStack(ItemRegistry.AFFINITY_SOLUTION.get()))
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
+                .possibleIngredient()
                 .ingredientToConvert(ItemRegistry.REDSTONE_SOLUTION.get())
                 .boilTime(800)
                 .unlockedByItems("has_redstone_solution", ItemRegistry.REDSTONE_SOLUTION.get())
-                .build(output);
-
-        new AlembicRecipeBuilder(new ItemStack(ItemRegistry.AFFINITY_SOLUTION.get()))
-                .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
-                .ingredientToConvert(ItemRegistry.REDSTONE_SOLUTION.get())
-                .boilTime(800)
-                .unlockedByItems("has_redstone_solution", ItemRegistry.REDSTONE_SOLUTION.get())
-                .suffix("_alt")
                 .build(output);
     }
 }

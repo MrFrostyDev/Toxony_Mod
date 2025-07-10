@@ -1,6 +1,9 @@
 package xyz.yfrostyf.toxony.data.datagen.recipebuilders;
 
-import net.minecraft.advancements.*;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
@@ -19,12 +22,15 @@ import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.recipes.AffinityIngredient;
 import xyz.yfrostyf.toxony.recipes.MortarPestleRecipe;
+import xyz.yfrostyf.toxony.recipes.PossibleAffinityIngredient;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Optional;
 
 
 public class MortarPestleRecipeBuilder implements RecipeBuilder {
-    protected String suffix = "";
     protected ItemStack result;
     protected Optional<ItemStack> use = Optional.empty();
     protected NonNullList<Ingredient> ingredients = NonNullList.create();
@@ -33,11 +39,6 @@ public class MortarPestleRecipeBuilder implements RecipeBuilder {
 
     public MortarPestleRecipeBuilder(ItemStack result) {
         this.result = result;
-    }
-
-    public MortarPestleRecipeBuilder suffix(String suffix){
-        this.suffix = suffix;
-        return this;
     }
 
     public MortarPestleRecipeBuilder ingredient(ItemLike item) {
@@ -57,6 +58,11 @@ public class MortarPestleRecipeBuilder implements RecipeBuilder {
 
     public MortarPestleRecipeBuilder ingredient(Affinity affinity) {
         ingredients.add(new Ingredient(new AffinityIngredient(affinity)));
+        return this;
+    }
+
+    public MortarPestleRecipeBuilder possibleIngredient() {
+        ingredients.add(new Ingredient(new PossibleAffinityIngredient()));
         return this;
     }
 
@@ -94,9 +100,15 @@ public class MortarPestleRecipeBuilder implements RecipeBuilder {
     }
 
     public void build(RecipeOutput output){
+        String pathName = BuiltInRegistries.ITEM.getKey(result.getItem()).getPath();
+        save(output, ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, pathName).withPrefix("mortar/"));
+    }
+
+    public void build(RecipeOutput output, String suffix){
         String pathName = BuiltInRegistries.ITEM.getKey(result.getItem()).getPath() + suffix;
         save(output, ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, pathName).withPrefix("mortar/"));
     }
+
 
     // Saves a recipe using the given RecipeOutput and ResourceLocation. This method is defined in the RecipeBuilder interface.
     @Override

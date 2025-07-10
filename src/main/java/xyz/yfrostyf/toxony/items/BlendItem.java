@@ -75,7 +75,10 @@ public class BlendItem extends ToxGiverItem {
 
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
-        return Optional.of(new StoredAffinityStacksTooltip.StoredAffinityStacksTooltipComponent(stack));
+        if(stack.has(DataComponentsRegistry.AFFINITY_STORED_ITEMS)){
+            return Optional.of(new StoredAffinityStacksTooltip.StoredAffinityStacksTooltipComponent(stack));
+        }
+        return super.getTooltipImage(stack);
     }
 
     public static Builder builder(){

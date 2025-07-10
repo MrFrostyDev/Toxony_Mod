@@ -98,6 +98,9 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.OIL_POT_BANDOLIER.get());
                 output.accept(ItemRegistry.ETERNAL_PLAGUE.get());
 
+                output.accept(ItemRegistry.POISON_BLEND.get());
+                output.accept(ItemRegistry.TOXIC_BLEND.get());
+                output.accept(ItemRegistry.PURE_BLEND.get());
                 output.accept(ItemRegistry.TOXIN_CANISTER.get());
                 output.accept(ItemRegistry.ALEMBIC_BASE.get());
                 output.accept(ItemRegistry.VALENTINES_BOX.get());

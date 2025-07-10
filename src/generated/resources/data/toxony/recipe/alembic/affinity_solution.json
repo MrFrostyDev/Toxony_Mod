@@ -2,7 +2,7 @@
   "type": "toxony:alembic",
   "boiltime": 800,
   "ingredient": {
-    "tag": "toxony:plants/poisonous"
+    "type": "toxony:possible_affinity"
   },
   "ingredient_to_convert": {
     "item": "toxony:redstone_solution"

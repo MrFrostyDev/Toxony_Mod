@@ -18,6 +18,7 @@ import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.recipes.AlembicRecipe;
+import xyz.yfrostyf.toxony.recipes.PossibleAffinityIngredient;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -25,7 +26,6 @@ import java.util.Optional;
 
 
 public class AlembicRecipeBuilder implements RecipeBuilder {
-    protected String suffix = "";
     protected ItemStack result;
     protected ItemStack remainingItem;
     protected Ingredient ingredient;
@@ -37,11 +37,6 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
     public AlembicRecipeBuilder(ItemStack result) {
         this.result = result;
         this.boiltime = 200;
-    }
-
-    public AlembicRecipeBuilder suffix(String suffix){
-        this.suffix = suffix;
-        return this;
     }
 
     public AlembicRecipeBuilder ingredient(ItemLike item) {
@@ -61,6 +56,11 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
 
     public AlembicRecipeBuilder ingredient(Ingredient ingredient) {
         this.ingredient = ingredient;
+        return this;
+    }
+
+    public AlembicRecipeBuilder possibleIngredient() {
+        this.ingredient = new Ingredient(new PossibleAffinityIngredient());
         return this;
     }
 
@@ -115,6 +115,11 @@ public class AlembicRecipeBuilder implements RecipeBuilder {
     }
 
     public void build(RecipeOutput output){
+        String pathName = BuiltInRegistries.ITEM.getKey(result.getItem()).getPath();
+        save(output, ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, pathName).withPrefix("alembic/"));
+    }
+
+    public void build(RecipeOutput output, String suffix){
         String pathName = BuiltInRegistries.ITEM.getKey(result.getItem()).getPath() + suffix;
         save(output, ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, pathName).withPrefix("alembic/"));
     }

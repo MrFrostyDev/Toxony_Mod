@@ -5,7 +5,7 @@
       "item": "toxony:poison_paste"
     },
     {
-      "tag": "toxony:ingredients/poisonous"
+      "type": "toxony:possible_affinity"
     }
   ],
   "result": {

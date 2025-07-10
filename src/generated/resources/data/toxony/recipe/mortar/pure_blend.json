@@ -5,13 +5,13 @@
       "item": "toxony:toxin"
     },
     {
-      "tag": "toxony:ingredients/poisonous"
+      "type": "toxony:possible_affinity"
     },
     {
-      "tag": "toxony:plants/poisonous"
+      "type": "toxony:possible_affinity"
     },
     {
-      "tag": "toxony:plants/poisonous"
+      "type": "toxony:possible_affinity"
     }
   ],
   "result": {

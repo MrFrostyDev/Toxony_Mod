@@ -129,44 +129,26 @@ public class ToxonyMortarRecipes extends RecipeProvider {
         // Blend Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.POISON_BLEND.get()))
                 .ingredient(ItemRegistry.POISON_PASTE.get())
-                .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
+                .possibleIngredient()
                 .use(Items.BOWL)
                 .unlockedByItems("has_poisonous_paste", ItemRegistry.POISON_PASTE.get())
-                .build(output);
-
-        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.POISON_BLEND.get()))
-                .ingredient(ItemRegistry.POISON_PASTE.get())
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
-                .use(Items.BOWL)
-                .unlockedByItems("has_poisonous_paste", ItemRegistry.POISON_PASTE.get())
-                .suffix("_alt")
                 .build(output);
 
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.TOXIC_BLEND.get()))
                 .ingredient(ItemRegistry.TOXIC_PASTE.get())
-                .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
+                .possibleIngredient()
+                .possibleIngredient()
                 .use(Items.BOWL)
                 .unlockedByItems("has_toxic_paste", ItemRegistry.TOXIC_PASTE.get())
                 .build(output);
 
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.PURE_BLEND.get()))
                 .ingredient(ItemRegistry.TOXIN.get())
-                .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
+                .possibleIngredient()
+                .possibleIngredient()
+                .possibleIngredient()
                 .use(Items.BOWL)
                 .unlockedByItems("has_poisonous_paste", ItemRegistry.POISON_PASTE.get())
-                .build(output);
-
-        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.PURE_BLEND.get()))
-                .ingredient(ItemRegistry.TOXIN.get())
-                .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
-                .ingredient(TagRegistry.POISONOUS_INGREDIENTS_ITEM)
-                .ingredient(TagRegistry.POISONOUS_PLANTS_ITEM)
-                .use(Items.BOWL)
-                .unlockedByItems("has_poisonous_paste", ItemRegistry.POISON_PASTE.get())
-                .suffix("_alt")
                 .build(output);
 
         // Misc  Recipes
@@ -178,8 +160,7 @@ public class ToxonyMortarRecipes extends RecipeProvider {
         new MortarPestleRecipeBuilder(new ItemStack(Items.GREEN_DYE, 8))
                 .ingredient(ItemRegistry.TOXIC_PASTE.get())
                 .unlockedByItems("has_toxic_paste", ItemRegistry.TOXIC_PASTE.get())
-                .suffix("_alt")
-                .build(output);
+                .build(output, "_alt");
     }
 
 

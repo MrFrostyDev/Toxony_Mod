@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-02T15:24:51.2771291	Recipes
+// 1.21.1	2025-06-26T12:35:35.2022419	Recipes
 78c3135de7de1697adb41d06b47584fd81bce0a3 data/minecraft/advancement/recipes/combat/flail_smithing.json
 623b93f1974875b7f2efd77312a904fa5aa7bd40 data/minecraft/advancement/recipes/combat/flintlock_smithing.json
 7afbbed83d5ebabb5874b3e1a3adc7c6b5a14aac data/minecraft/advancement/recipes/combat/professional_hunter_boots_smithing.json
@@ -33,7 +33,6 @@ feba714615d2f32482e3ab8f5b48f864f3661cd8 data/toxony/advancement/recipes/alchemi
 f31de906aa494f3f8cf8cb237f3cbcfea2dd532e data/toxony/advancement/recipes/alchemical_forge/plaguebringer_mask.json
 bc34a8ef7fe1b0b94ec0415114066c57acc4a1f8 data/toxony/advancement/recipes/alchemical_forge/witching_blade.json
 e4637caab11620579928495aeda8586a9f33b739 data/toxony/advancement/recipes/alembic/affinity_solution.json
-ef60b375dc590e01e993e5356fdab69e03f87f99 data/toxony/advancement/recipes/alembic/affinity_solution_alt.json
 dcf2cf6fcea3e789103154a4f53e62e792497c33 data/toxony/advancement/recipes/alembic/empty_tox_pot.json
 899aaf991709a0e7fce59f48510996e626f89ad8 data/toxony/advancement/recipes/alembic/toxic_leather.json
 71a84feadd8ca396557033fbd0e28c586f05008c data/toxony/advancement/recipes/alembic/toxin.json
@@ -89,11 +88,9 @@ c152fe3a18e09712e45c461e28515d6b9a234b53 data/toxony/advancement/recipes/mortar/
 d7d2551468c688cc0bc6002bfe802b7bb1f0f57f data/toxony/advancement/recipes/mortar/mending_oil_pot.json
 036a982053142c953515784a4ba26e807e4ae995 data/toxony/advancement/recipes/mortar/oil_base.json
 3b17238c3ae089083f955bd63e446802ca998a98 data/toxony/advancement/recipes/mortar/poison_blend.json
-a0428d5b7b42080fe2114a8525accdfb5edda03f data/toxony/advancement/recipes/mortar/poison_blend_alt.json
 e4f0b632db5f7bbd470f1f28f8c71f05f02585cb data/toxony/advancement/recipes/mortar/poison_oil_pot.json
 01024142398ab3eeff954f45b1c318d0e89d3cd3 data/toxony/advancement/recipes/mortar/poison_paste.json
 4848fa043c96d9bbf738eaac1472cb444c5339fa data/toxony/advancement/recipes/mortar/pure_blend.json
-75c8878d74bb87ba4d7ab3cdd10c455665144d1d data/toxony/advancement/recipes/mortar/pure_blend_alt.json
 fb02ceef3b3c6216839a1b356ab2e90610cb59ad data/toxony/advancement/recipes/mortar/regeneration_tox_pot.json
 387b47a89200ca412a97c8a828cadd2181dd51ed data/toxony/advancement/recipes/mortar/smoke_tox_pot.json
 4417fd06cb7eea6551570c6a56d54ca11f601e21 data/toxony/advancement/recipes/mortar/toxic_blend.json
@@ -112,8 +109,7 @@ b3592fc63e0090be7f5a1885e5ed0134d2df8057 data/toxony/recipe/alchemical_forge/pla
 5ea5ae04284d95dc33d5da7ae121f4fa023edd47 data/toxony/recipe/alchemical_forge/witching_blade.json
 e0196ac9d31c3b1b25d7e71adf0770dfc36f814c data/toxony/recipe/alchemical_forge_part.json
 ee3c670fa06e5d85398d6e4fe6e3d54bfbe9e649 data/toxony/recipe/alembic.json
-b326c70d26cfef856ee87f1d65b71720bc0cb13f data/toxony/recipe/alembic/affinity_solution.json
-1f4aaec9f2b3b56eced2ee4ee7a0804993052ebb data/toxony/recipe/alembic/affinity_solution_alt.json
+20a38d1d002065ff2b62de4ac663ad9db2a68cd6 data/toxony/recipe/alembic/affinity_solution.json
 c909218442766c3c58880fe5ca3ff597b7443db1 data/toxony/recipe/alembic/empty_tox_pot.json
 a102483c5411d73ccd866cac357403c19f3ee9e9 data/toxony/recipe/alembic/toxic_leather.json
 44cbabd82b8a593f39a324af631fce8be46f3d88 data/toxony/recipe/alembic/toxin.json
@@ -144,15 +140,13 @@ e0ae35c6e8d0f7919593b4b73146b75e6368b7d3 data/toxony/recipe/mortar/fire_resistan
 f8054a6a9bfe0e81bfe50c07c3a46a1c747477c5 data/toxony/recipe/mortar/green_dye_alt.json
 d51eac24567019e0cda52560231e72982f789471 data/toxony/recipe/mortar/mending_oil_pot.json
 39a66820c902aa50691665b4d8169b0edb2b271e data/toxony/recipe/mortar/oil_base.json
-68b3d446743d2aa00a61c8d6d6dd4e3300ef033e data/toxony/recipe/mortar/poison_blend.json
-f9972307e568df1b71c95749528fb098aed717c7 data/toxony/recipe/mortar/poison_blend_alt.json
+68dcd7a3292f98e7a97e01daee4b7d62f0abbf19 data/toxony/recipe/mortar/poison_blend.json
 8135d4194fab27e33e84a490059ab536e25892a4 data/toxony/recipe/mortar/poison_oil_pot.json
 db6b4b5749619cc247735b146a82cbadc5880598 data/toxony/recipe/mortar/poison_paste.json
-220df4723b56ead9558850bb15abf647f3e1c7ad data/toxony/recipe/mortar/pure_blend.json
-7619a8a767d5e69f76c25d9bc3beb5b7ed90e670 data/toxony/recipe/mortar/pure_blend_alt.json
+eaf57371345bbfe5b1a8b9b587f01d2db6f06164 data/toxony/recipe/mortar/pure_blend.json
 f142c699245f36ffda81ccd30abb5c91b2bde731 data/toxony/recipe/mortar/regeneration_tox_pot.json
 a4db6466b3f831152101e1fd2a1964fd44a6781b data/toxony/recipe/mortar/smoke_tox_pot.json
-88400d8b2a7caf5ef2d3553f2b32f3cdda0104a1 data/toxony/recipe/mortar/toxic_blend.json
+42162f4166443bf2bb3ac72c5f8a76b6bb96ea4c data/toxony/recipe/mortar/toxic_blend.json
 e083e11a1bd809e9554f7bfa6839c40323feb57e data/toxony/recipe/mortar/toxin_tox_pot.json
 0676a2d319cd2cff8da37d3dfbc606880cca4218 data/toxony/recipe/mortar/witchfire_tox_pot.json
 cab8b5350c88e11bc97ad361bb9effd5db9b356f data/toxony/recipe/mortar_pestle.json
