@@ -54,6 +54,7 @@ public class ToxonyBlockTagsProvider extends BlockTagsProvider {
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(
+                        BlockRegistry.REDSTONE_MORTAR.get(),
                         BlockRegistry.ANCIENT_SILVER.get(),
                         BlockRegistry.ALCHEMICAL_FORGE.get(),
                         BlockRegistry.ALCHEMICAL_FORGE_PART.get()

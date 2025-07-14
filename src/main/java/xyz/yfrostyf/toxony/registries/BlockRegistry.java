@@ -187,6 +187,7 @@ public class BlockRegistry {
             "redstone_mortar",
             () -> new RedstoneMortarBlock(BlockBehaviour.Properties.of()
                     .strength(1.5f)
+                    .requiresCorrectToolForDrops()
                     .sound(SoundType.COPPER)
                     .isRedstoneConductor((state,level,pos) -> true)
             )
