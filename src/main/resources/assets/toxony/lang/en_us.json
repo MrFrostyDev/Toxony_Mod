@@ -257,7 +257,7 @@
   "mutageninfo.toxony.necrotic_mutagen.2": "When hitting an entity, apply Wither.\n\nUpon death, revive once back to half your health. Cannot occur again for 2 days.\n\nGain weakness under direct Sunlight.",
   "mutageninfo.toxony.infernal_mutagen.0": "Take less damage from being on fire.",
   "mutageninfo.toxony.infernal_mutagen.1": "When getting hit, set the attacker on fire.\n\nCrouch right-click items in the air to turn into charcoal. Only works if the item can be made into charcoal with a furnace.",
-  "mutageninfo.toxony.infernal_mutagen.2": "Immunity to fire and lava.\n\nWhen hitting an entity, set entity on fire for 6 seconds.\n\n Gain weakness when in water or rain.",
+  "mutageninfo.toxony.infernal_mutagen.2": "Immunity to fire and lava.\n\nWhen hitting an entity, set entity on fire for 6 seconds.\n\nGain weakness when in water or rain.",
   "mutageninfo.toxony.spirit_mutagen.0": "Take 50% less damage from Spirit-based entities (Phantoms and Vexes).\n\nTake 50% less fall damage.",
   "mutageninfo.toxony.spirit_mutagen.1": "20% chance to ignore physical damage and turn invisible.\n\nYour attacks can summon 1 Guided Spirit that damages and slows your target on impact.",
   "mutageninfo.toxony.spirit_mutagen.2": "Gain permanent slow falling.\n\nSummon 3 Guided Spirits instead of 1.\n\nTake 30% more damage from magic sources.",

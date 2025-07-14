@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-28T14:10:23.9549973	Loot Tables
+// 1.21.1	2025-07-14T11:32:29.149285	Loot Tables
 e85df1c82d819786b6012243d6a42e6d9b7ec822 data/toxony/loot_table/blocks/alchemical_forge.json
 229832c3499a527d956e3f67e3db79abdaf7cffd data/toxony/loot_table/blocks/alchemical_forge_part.json
 b3b06e45f3b27679b3c855cc065baed90d76388e data/toxony/loot_table/blocks/alembic.json
@@ -15,6 +15,7 @@ eaf4e73b3db3d7cc4ed6eb6af289696c26ba39d7 data/toxony/loot_table/blocks/mortar_pe
 a98ea13a919adda6e90a6eaeb15ed8c0087a77c5 data/toxony/loot_table/blocks/nightshade.json
 33d80ede665a4bd339be89c34edb234c512b8496 data/toxony/loot_table/blocks/ocelot_mint.json
 e47c4f99b23a7b550ba356443581de86ac895044 data/toxony/loot_table/blocks/poison_farmland.json
+c439e43240bcd930bbb58e3b8c873c65e3462b47 data/toxony/loot_table/blocks/redstone_mortar.json
 f09ff8e4343fdb1ff350e582377eca34e908eebb data/toxony/loot_table/blocks/snow_mint.json
 35d4af9573d5ea39e2da807cbdd5b5908259ddb5 data/toxony/loot_table/blocks/sunspot.json
 0917c1417ff026f41e09ad258620eaecfd961dab data/toxony/loot_table/blocks/vial_rack.json

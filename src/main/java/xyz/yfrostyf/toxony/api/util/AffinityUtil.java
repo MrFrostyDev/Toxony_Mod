@@ -19,7 +19,7 @@ import java.util.Optional;
 
 public class AffinityUtil {
     public static IngredientAffinityMapData computeIngredientAffinityMap(ServerLevel svlevel){
-        SavedData savedData = svlevel.getDataStorage().computeIfAbsent(IngredientAffinityMapData.factory(), "toxony_affinity_map");
+        SavedData savedData = svlevel.getServer().overworld().getDataStorage().computeIfAbsent(IngredientAffinityMapData.factory(), "toxony_affinity_map");
         if(savedData instanceof IngredientAffinityMapData affinityMapSavedData){
             return affinityMapSavedData;
         }

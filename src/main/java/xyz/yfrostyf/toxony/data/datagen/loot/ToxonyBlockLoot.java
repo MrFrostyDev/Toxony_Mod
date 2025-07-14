@@ -42,6 +42,7 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
         dropOther(BlockRegistry.LOST_JOURNAL.get(), ItemRegistry.LOST_JOURNAL.get());
 
         dropSelf(BlockRegistry.MORTAR_PESTLE.get());
+        dropSelf(BlockRegistry.REDSTONE_MORTAR.get());
         dropSelf(BlockRegistry.COPPER_CRUCIBLE.get());
         dropSelf(BlockRegistry.ALEMBIC.get());
         dropSelf(BlockRegistry.ALCHEMICAL_FORGE_PART.get());

@@ -24,7 +24,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -41,10 +43,11 @@ import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
-public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
+public class PoisonCropBlock extends CropBlock implements BonemealableBlock {
     public static final MapCodec<PoisonCropBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> // Given an instance
             instance.group(
                     propertiesCodec(),
@@ -210,10 +213,6 @@ public class PoisonCropBlock extends BushBlock implements BonemealableBlock {
 
     public BlockState getStateForAge(int age) {
         return this.defaultBlockState().setValue(this.getAgeProperty(), Integer.valueOf(age));
-    }
-
-    public final boolean isMaxAge(BlockState state) {
-        return this.getAge(state) >= this.getMaxAge();
     }
 
     @Override
