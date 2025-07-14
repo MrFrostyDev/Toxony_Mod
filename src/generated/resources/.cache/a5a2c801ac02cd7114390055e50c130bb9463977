@@ -1,5 +1,5 @@
-// 1.21.1	2025-05-04T14:21:35.1194359	Tags for minecraft:block mod id toxony
-5a6d24a4ca4fce721c8e89418b13d75360b7ddea data/minecraft/tags/block/mineable/pickaxe.json
+// 1.21.1	2025-07-14T11:37:31.8965085	Tags for minecraft:block mod id toxony
+e6e5e9c142814d59bd50437a6730c79cce457925 data/minecraft/tags/block/mineable/pickaxe.json
 5a6d24a4ca4fce721c8e89418b13d75360b7ddea data/minecraft/tags/block/needs_diamond_tool.json
 3deb608e2c15a202649df5a87590f2fd649aab6a data/toxony/tags/block/open_flame.json
 e79b394eeb6b67e65dcd26a24faa4b3090de728e data/toxony/tags/block/plants/poisonous.json
