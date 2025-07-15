@@ -39,7 +39,7 @@ public class MendingOilPotBlock extends OilPotBlock {
         int maxDamage = blockEntity.getMaxDamage();
         boolean hasNoOil = damage >= maxDamage;
 
-        boolean isItemDamageable = stack.isDamaged() && stack.is(TagRegistry.OIL_REPAIRABLE);
+        boolean isItemDamageable = stack.isDamaged() && stack.is(TagRegistry.OIL_REPAIRABLE) && !hasNoOil;
         boolean canAddOilBase = stack.is(TagRegistry.CAN_REFILL_OIL) && damage > 0;
 
         if(level.isClientSide()){
