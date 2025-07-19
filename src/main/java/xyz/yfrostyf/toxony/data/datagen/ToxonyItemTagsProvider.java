@@ -165,5 +165,15 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                 .add(
                         ItemRegistry.OCELOT_MINT.get()
                 );
+
+        this.tag(ItemTags.BOOKSHELF_BOOKS)
+                .add(
+                        ItemRegistry.LOST_JOURNAL.get()
+                );
+
+        this.tag(ItemTags.LECTERN_BOOKS)
+                .add(
+                        ItemRegistry.LOST_JOURNAL.get()
+                );
     }
 }

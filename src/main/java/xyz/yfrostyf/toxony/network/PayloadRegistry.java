@@ -1,9 +1,9 @@
 package xyz.yfrostyf.toxony.network;
 
 
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import xyz.yfrostyf.toxony.ToxonyMain;
 
@@ -55,6 +55,12 @@ public class PayloadRegistry {
                 ServerNightPredatorPacket.TYPE,
                 ServerNightPredatorPacket.STREAM_CODEC,
                 ServerNightPredatorPacket::handle
+        );
+
+        registrar.playToClient(
+                ServerStartLostJournal.TYPE,
+                ServerStartLostJournal.STREAM_CODEC,
+                ServerStartLostJournal::handle
         );
 
         registrar.playToServer(

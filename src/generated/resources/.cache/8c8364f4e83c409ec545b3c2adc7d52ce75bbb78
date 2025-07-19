@@ -1,10 +1,12 @@
-// 1.21.1	2025-06-03T07:39:10.5775777	Tags for minecraft:item mod id vanilla
+// 1.21.1	2025-07-18T20:00:05.6880551	Tags for minecraft:item mod id vanilla
+745186579dec10546c5177613f9a1d8f894b217b data/minecraft/tags/item/bookshelf_books.json
 57ca6054c0f30afd244bbe2e8ec743414d3ce00f data/minecraft/tags/item/chest_armor.json
 7b9aefd0c64296a8e96140f8837593e6c9b5ccfa data/minecraft/tags/item/enchantable/durability.json
 40a70992a972ae3810e5fbf79299da3989df3365 data/minecraft/tags/item/enchantable/sharp_weapon.json
 31b12b36fa160c3c9cd0631dccd9d2b0bccb27a3 data/minecraft/tags/item/enchantable/weapon.json
 1e9cc4c350daadd3c1444186713136c8a7f8c341 data/minecraft/tags/item/foot_armor.json
 55d118fbcd2560a9af24a0ce27817581e2cee5f1 data/minecraft/tags/item/head_armor.json
+745186579dec10546c5177613f9a1d8f894b217b data/minecraft/tags/item/lectern_books.json
 59da1c5a617478ba2ec3733e4329f4d0dd14f709 data/minecraft/tags/item/leg_armor.json
 99de758097dc3fe0a2e2a9fb2114b2355fd22afb data/minecraft/tags/item/ocelot_food.json
 6458616a0f82b7a415f98a8d02da98eb1dcfb98e data/minecraft/tags/item/swords.json
