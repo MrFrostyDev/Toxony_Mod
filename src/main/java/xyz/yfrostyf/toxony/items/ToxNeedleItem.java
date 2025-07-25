@@ -8,7 +8,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -24,11 +23,11 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
+import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
 import xyz.yfrostyf.toxony.api.util.VialUtil;
 import xyz.yfrostyf.toxony.damages.NeedleDamageSource;
-import xyz.yfrostyf.toxony.network.SyncMobToxDataPacket;
 import xyz.yfrostyf.toxony.network.SyncToxDataPacket;
 import xyz.yfrostyf.toxony.registries.*;
 
@@ -140,7 +139,7 @@ public class ToxNeedleItem extends Item {
         ItemStack storedStack = new ItemStack(stack.get(DataComponentsRegistry.AFFINITY_STORED_ITEM).value());
 
         toxData.addKnownIngredients(storedStack, 10);
-        if(toxData.getIngredientProgress(storedStack) >= ToxData.MINIMUM_KNOW){
+        if(toxData.getIngredientProgress(storedStack) >= ToxonyConfig.MIN_KNOWLEDGE_REQ.get()){
             if(entity.level().isClientSide()){
                 Minecraft.getInstance().gui.setOverlayMessage(
                         Component.translatable("message.toxony.needle.knowledge.success", Component.translatable(storedStack.getDescriptionId()).getString()),

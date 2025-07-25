@@ -11,7 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
@@ -21,7 +24,10 @@ import xyz.yfrostyf.toxony.data.datagen.enchantments.ToxonyEnchantments;
 import xyz.yfrostyf.toxony.registries.AffinityRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class JournalUtil {
     public static String lastPageID = "journal.toxony.page.cover";
@@ -60,6 +66,8 @@ public class JournalUtil {
         Recipe<?> recipe_toxic_blend = getRecipe(manager, "mortar/toxic_blend").value();
         Recipe<?> recipe_poison_paste = getRecipe(manager, "mortar/poison_paste").value();
         Recipe<?> recipe_toxin_tox_pot = getRecipe(manager, "mortar/toxin_tox_pot").value();
+        Recipe<?> recipe_affinity_fusion_mix = getRecipe(manager, "mortar/affinity_fusion_mix").value();
+        Recipe<?> recipe_affinity_unknown_substance = getRecipe(manager, "crucible/affinity_unknown_substance").value();
 
         Recipe<?> recipe_toxin = getRecipe(manager, "alembic/toxin").value();
         Recipe<?> recipe_affinity_solution = getRecipe(manager, "alembic/affinity_solution").value();
@@ -310,6 +318,13 @@ public class JournalUtil {
                                 new Pair<>(new ItemStack(ItemRegistry.BLOODROOT), new ItemStack(ItemRegistry.WARPROOT)), AffinityRegistry.COLD.get()
                         )
                 )
+                .TextMortarPageScreenIngredients("journal.toxony.page.evolved_flora.3", ItemRegistry.AFFINITY_FUSION_MIX.get(),
+                        List.of(recipe_affinity_fusion_mix.getIngredients().get(0), recipe_affinity_fusion_mix.getIngredients().get(1),
+                                recipe_affinity_fusion_mix.getIngredients().get(2), recipe_affinity_fusion_mix.getIngredients().get(3))
+                )
+                .TextCruciblePageScreenIngredient("journal.toxony.page.evolved_flora.4", ItemRegistry.UNKNOWN_SUBSTANCE.get(),
+                        recipe_affinity_unknown_substance.getIngredients().getFirst())
+                .TextSingleItemTopScreen("journal.toxony.page.evolved_flora.5", ItemRegistry.UNKNOWN_SUBSTANCE.get())
 
                 // |----------------- Advanced Oils ----------------- |
                 .ImagePageScreen("journal.toxony.page.advanced_oils.cover", "textures/gui/journal/journal_advanced_oils_cover.png")

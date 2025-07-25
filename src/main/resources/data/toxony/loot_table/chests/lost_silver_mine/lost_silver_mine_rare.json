@@ -39,17 +39,17 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_pickaxe",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_ingot",
           "weight": 5
         },
         {
           "type": "minecraft:item",
+          "name": "minecraft:iron_ingot",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:lapis_lazuli",
-          "weight": 3
+          "weight": 5
         }
       ]
     }

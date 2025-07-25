@@ -94,6 +94,14 @@ public class AlchemicalForgeBlockEntity extends BlockEntity implements IItemHand
                 if(slot == 3 || slot == 4 || slot == 5) return 1;
                 return Item.DEFAULT_MAX_STACK_SIZE;
             }
+
+            @Override
+            protected void onContentsChanged(int slot) {
+                if(level != null){
+                    level.sendBlockUpdated(pos, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+                    setChanged();
+                }
+            }
         };
     }
 

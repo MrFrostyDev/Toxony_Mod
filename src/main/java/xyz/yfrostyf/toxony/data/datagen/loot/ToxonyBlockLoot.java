@@ -10,6 +10,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -27,7 +28,7 @@ import java.util.Set;
 
 
 //
-// Thank you Farmer's Delight's Git Repository for code reference!
+// Thank you, Farmer's Delight's Git Repository for code reference!
 //
 public class ToxonyBlockLoot extends BlockLootSubProvider {
 
@@ -40,7 +41,7 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
     @Override
     public void generate() {
         dropOther(BlockRegistry.LOST_JOURNAL.get(), ItemRegistry.LOST_JOURNAL.get());
-
+        
         dropSelf(BlockRegistry.MORTAR_PESTLE.get());
         dropSelf(BlockRegistry.REDSTONE_MORTAR.get());
         dropSelf(BlockRegistry.COPPER_CRUCIBLE.get());
@@ -72,6 +73,24 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
         dropPoisonPlantDrops(BlockRegistry.WARPROOT.get(), ItemRegistry.WARPROOT.get());
 
         dropOther(BlockRegistry.POISON_FARMLAND.get(), Items.COARSE_DIRT);
+
+        this.add(BlockRegistry.CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.CANDLE));
+        this.add(BlockRegistry.WHITE_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.WHITE_CANDLE));
+        this.add(BlockRegistry.ORANGE_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.ORANGE_CANDLE));
+        this.add(BlockRegistry.MAGENTA_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.MAGENTA_CANDLE));
+        this.add(BlockRegistry.LIGHT_BLUE_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.LIGHT_BLUE_CANDLE));
+        this.add(BlockRegistry.YELLOW_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.YELLOW_CANDLE));
+        this.add(BlockRegistry.LIME_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.LIME_CANDLE));
+        this.add(BlockRegistry.PINK_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.PINK_CANDLE));
+        this.add(BlockRegistry.GRAY_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.GRAY_CANDLE));
+        this.add(BlockRegistry.LIGHT_GRAY_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.LIGHT_GRAY_CANDLE));
+        this.add(BlockRegistry.CYAN_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.CYAN_CANDLE));
+        this.add(BlockRegistry.PURPLE_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.PURPLE_CANDLE));
+        this.add(BlockRegistry.BLUE_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.BLUE_CANDLE));
+        this.add(BlockRegistry.BROWN_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.BROWN_CANDLE));
+        this.add(BlockRegistry.GREEN_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.GREEN_CANDLE));
+        this.add(BlockRegistry.RED_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.RED_CANDLE));
+        this.add(BlockRegistry.BLACK_CANDLE_TOXIC_CAKE.get(), createCandleCakeDrops(Blocks.BLACK_CANDLE));
     }
 
     @Override

@@ -215,6 +215,17 @@ public class    ToxonyCraftingTableRecipes extends RecipeProvider {
                 .unlockedBy("has_poison_paste", has(ItemRegistry.POISON_PASTE.get()))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ItemRegistry.TOXIC_CAKE.get())
+                .pattern("TTT")
+                .pattern("SES")
+                .pattern("WWW")
+                .define('T', ItemRegistry.TOXIC_PASTE.get())
+                .define('S', Items.SUGAR)
+                .define('E', Items.EGG)
+                .define('W', Items.WHEAT)
+                .unlockedBy("has_toxic_paste", has(ItemRegistry.TOXIC_PASTE.get()))
+                .save(output);
+
         // Armor
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.PLAGUE_DOCTOR_COAT.get())
                 .pattern("C C")

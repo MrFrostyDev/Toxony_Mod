@@ -109,6 +109,7 @@ public class OilPotBlock extends Block implements EntityBlock {
         boolean canAddOilBolt = !itemOil.isEmpty() && stack.is(ItemRegistry.BOLT) && !hasNoOil;
         boolean canAddOilBase = stack.is(TagRegistry.CAN_REFILL_OIL) && damage > 0;
 
+        ItemInteractionResult interactionResult = ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if(level.isClientSide()){
             if(hasNoOil && !stack.is(TagRegistry.CAN_REFILL_OIL)){
                 Minecraft.getInstance().gui.setOverlayMessage(
@@ -137,7 +138,7 @@ public class OilPotBlock extends Block implements EntityBlock {
                     1.0F, 0.8F
             );
 
-            return ItemInteractionResult.SUCCESS;
+            interactionResult = ItemInteractionResult.SUCCESS;
         }
         else if(canAddOilBolt){
             Optional<Holder.Reference<Item>> optionalHolder = OilUtil.getBoltByOilItem(oilPotBlock.getOil(), level);
@@ -151,7 +152,7 @@ public class OilPotBlock extends Block implements EntityBlock {
                 );
             }
 
-            return ItemInteractionResult.SUCCESS;
+            interactionResult = ItemInteractionResult.SUCCESS;
         }
         else if(canAddOilBase){
             blockEntity.setDamage(0);
@@ -165,10 +166,15 @@ public class OilPotBlock extends Block implements EntityBlock {
                     1.0F, 0.8F
             );
 
-            return ItemInteractionResult.SUCCESS;
+            interactionResult = ItemInteractionResult.SUCCESS;
         }
 
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if(interactionResult.consumesAction()){
+            level.sendBlockUpdated(pos, blockEntity.getBlockState(), blockEntity.getBlockState(), Block.UPDATE_ALL);
+            blockEntity.setChanged();
+        }
+
+        return interactionResult;
     }
 
     @Override

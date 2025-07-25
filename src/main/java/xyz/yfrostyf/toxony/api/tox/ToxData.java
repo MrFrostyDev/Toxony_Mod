@@ -20,6 +20,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.Nullable;
+import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.events.ChangeThresholdEvent;
 import xyz.yfrostyf.toxony.api.events.ChangeToleranceEvent;
@@ -27,6 +28,7 @@ import xyz.yfrostyf.toxony.api.events.ChangeToxEvent;
 import xyz.yfrostyf.toxony.api.mutagens.MutagenEffect;
 import xyz.yfrostyf.toxony.api.registries.ToxonyRegistries;
 import xyz.yfrostyf.toxony.api.util.ToxUtil;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.*;
 
@@ -63,8 +65,9 @@ public class ToxData {
     public static final int MAX_MUTAGENS = 3; // Be aware of the max tolerance as if that changes, this must as well.
     public static final int MIN_TOLERANCE = 10;
     public static final int DEFAULT_TOLERANCE = 30;
-    public static final int MINIMUM_KNOW = 20;
     public static final int THRESHOLD_MULTIPLIER = 100;
+
+    public static int MINIMUM_KNOW = 20;
 
     private @Nullable Player player;
     // Synced Data
@@ -97,6 +100,15 @@ public class ToxData {
         this.mutagens = mutagens;
         this.knownIngredients = knownIngredients;
         this.deathState = deathState;
+
+        // Add the affinity substances to the known map
+        MINIMUM_KNOW = ToxonyConfig.MIN_KNOWLEDGE_REQ.get();
+        knownIngredients.put(ItemRegistry.COLD_SUBSTANCE.getId(), MINIMUM_KNOW);
+        knownIngredients.put(ItemRegistry.HEAT_SUBSTANCE.getId(), MINIMUM_KNOW);
+        knownIngredients.put(ItemRegistry.DECAY_SUBSTANCE.getId(), MINIMUM_KNOW);
+        knownIngredients.put(ItemRegistry.FOREST_SUBSTANCE.getId(), MINIMUM_KNOW);
+        knownIngredients.put(ItemRegistry.OCEAN_SUBSTANCE.getId(), MINIMUM_KNOW);
+        knownIngredients.put(ItemRegistry.NETHER_SUBSTANCE.getId(), MINIMUM_KNOW);
     }
 
     public Player getPlayer(){

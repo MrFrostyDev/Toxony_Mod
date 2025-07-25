@@ -92,4 +92,13 @@ public class EntityRegistry {
                     .updateInterval(2)
                     .build("flintlock_ball")
     );
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ToxicCakeProjectile>> TOXIC_CAKE_PROJECTILE = ENTITIES.register(
+            "toxic_cake_projectile",
+            () -> EntityType.Builder.<ToxicCakeProjectile>of(ToxicCakeProjectile::new, MobCategory.MISC)
+                    .sized(0.3F, 0.3F)
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+                    .build("toxic_cake_projectile")
+    );
 }

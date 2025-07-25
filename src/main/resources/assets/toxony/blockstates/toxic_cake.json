@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "toxony:block/toxic_cake"
+    },
+    "bites=1": {
+      "model": "toxony:block/toxic_cake_1"
+    },
+    "bites=2": {
+      "model": "toxony:block/toxic_cake_2"
+    },
+    "bites=3": {
+      "model": "toxony:block/toxic_cake_3"
+    },
+    "bites=4": {
+      "model": "toxony:block/toxic_cake_4"
+    },
+    "bites=5": {
+      "model": "toxony:block/toxic_cake_5"
+    }
+  }
+}

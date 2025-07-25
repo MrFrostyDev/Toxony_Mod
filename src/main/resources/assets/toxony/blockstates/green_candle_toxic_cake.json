@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "toxony:block/green_candle_toxic_cake"
+    },
+    "lit=true": {
+      "model": "toxony:block/green_candle_toxic_cake_lit"
+    }
+  }
+}

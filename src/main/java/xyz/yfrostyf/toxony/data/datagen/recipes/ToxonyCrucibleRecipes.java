@@ -30,5 +30,11 @@ public class ToxonyCrucibleRecipes extends RecipeProvider {
                 .cookTime(600)
                 .unlockedByItems("has_redstone_mixture", ItemRegistry.REDSTONE_MIXTURE.get())
                 .build(output);
+
+        new CrucibleRecipeBuilder(new ItemStack(ItemRegistry.UNKNOWN_SUBSTANCE))
+                .ingredient(ItemRegistry.AFFINITY_FUSION_MIX.get())
+                .cookTime(600)
+                .unlockedByItems("has_affinity_fusion_mix", ItemRegistry.AFFINITY_FUSION_MIX.get())
+                .build(output);
     }
 }

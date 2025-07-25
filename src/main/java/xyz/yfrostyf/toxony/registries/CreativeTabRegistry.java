@@ -104,6 +104,7 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.TOXIN_CANISTER.get());
                 output.accept(ItemRegistry.ALEMBIC_BASE.get());
                 output.accept(ItemRegistry.VALENTINES_BOX.get());
+                output.accept(ItemRegistry.TOXIC_CAKE.get());
 
                 output.accept(ItemRegistry.VIAL_RACK.get());
                 output.accept(ItemRegistry.BELL_JAR.get());
@@ -154,6 +155,15 @@ public class CreativeTabRegistry {
                 output.accept(ItemRegistry.WHIRLSNAP_SEEDS.get());
                 output.accept(ItemRegistry.BLOODROOT_FUNGUS.get());
                 output.accept(ItemRegistry.WARPROOT_FUNGUS.get());
+
+                output.accept(ItemRegistry.AFFINITY_FUSION_MIX.get());
+                output.accept(ItemRegistry.UNKNOWN_SUBSTANCE.get());
+                output.accept(ItemRegistry.HEAT_SUBSTANCE.get());
+                output.accept(ItemRegistry.DECAY_SUBSTANCE.get());
+                output.accept(ItemRegistry.OCEAN_SUBSTANCE.get());
+                output.accept(ItemRegistry.FOREST_SUBSTANCE.get());
+                output.accept(ItemRegistry.NETHER_SUBSTANCE.get());
+                output.accept(ItemRegistry.COLD_SUBSTANCE.get());
 
                 output.accept(ItemRegistry.ANCIENT_SILVER.get());
                 output.accept(ItemRegistry.SILVER_SCRAP.get());

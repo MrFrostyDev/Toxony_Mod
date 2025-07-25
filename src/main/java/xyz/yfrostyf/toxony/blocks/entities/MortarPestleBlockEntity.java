@@ -22,7 +22,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -92,7 +92,15 @@ public class MortarPestleBlockEntity extends BlockEntity implements IItemHandler
         pestleCount = 0;
         pestleTick = 0;
         resultItem = ItemStack.EMPTY;
-        itemContainer = new ItemStackHandler(CONTAINER_SIZE);
+        itemContainer = new ItemStackHandler(CONTAINER_SIZE){
+            @Override
+            protected void onContentsChanged(int slot) {
+                if(level != null){
+                    level.sendBlockUpdated(pos, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+                    setChanged();
+                }
+            }
+        };
     }
 
     //

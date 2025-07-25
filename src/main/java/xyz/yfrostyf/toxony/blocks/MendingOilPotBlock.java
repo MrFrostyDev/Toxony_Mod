@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import xyz.yfrostyf.toxony.blocks.entities.OilPotBlockEntity;
@@ -42,6 +43,7 @@ public class MendingOilPotBlock extends OilPotBlock {
         boolean isItemDamageable = stack.isDamaged() && stack.is(TagRegistry.OIL_REPAIRABLE) && !hasNoOil;
         boolean canAddOilBase = stack.is(TagRegistry.CAN_REFILL_OIL) && damage > 0;
 
+        ItemInteractionResult interactionResult = ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if(level.isClientSide()){
             if(hasNoOil && !stack.is(TagRegistry.CAN_REFILL_OIL)){
                 Minecraft.getInstance().gui.setOverlayMessage(
@@ -63,7 +65,7 @@ public class MendingOilPotBlock extends OilPotBlock {
                     1.0F, 0.8F
             );
 
-            return ItemInteractionResult.SUCCESS;
+            interactionResult = ItemInteractionResult.SUCCESS;
         }
         else if(canAddOilBase){
             blockEntity.setDamage(0);
@@ -77,9 +79,14 @@ public class MendingOilPotBlock extends OilPotBlock {
                     1.0F, 0.8F
             );
 
-            return ItemInteractionResult.SUCCESS;
+            interactionResult = ItemInteractionResult.SUCCESS;
         }
 
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if(interactionResult.consumesAction()){
+            level.sendBlockUpdated(pos, blockEntity.getBlockState(), blockEntity.getBlockState(), Block.UPDATE_ALL);
+            blockEntity.setChanged();
+        }
+
+        return interactionResult;
     }
 }

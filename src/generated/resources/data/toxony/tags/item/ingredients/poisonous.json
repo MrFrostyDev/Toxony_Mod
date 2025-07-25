@@ -7,6 +7,12 @@
     "toxony:toxic_spit",
     "toxony:poison_sac",
     "toxony:bog_bone",
-    "toxony:acid_slimeball"
+    "toxony:acid_slimeball",
+    "toxony:heat_substance",
+    "toxony:cold_substance",
+    "toxony:decay_substance",
+    "toxony:ocean_substance",
+    "toxony:nether_substance",
+    "toxony:forest_substance"
   ]
 }

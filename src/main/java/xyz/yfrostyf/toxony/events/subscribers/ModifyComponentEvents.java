@@ -47,6 +47,18 @@ public class ModifyComponentEvents {
                 ))
         );
 
+        event.modify(Items.LILY_OF_THE_VALLEY, builder ->
+                builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
+                        AffinityRegistry.FOREST.getKey(), AffinityRegistry.HEAT.getKey()
+                ))
+        );
+
+        event.modify(Items.RED_MUSHROOM, builder ->
+                builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
+                        AffinityRegistry.FOREST.getKey()
+                ))
+        );
+
         event.modify(Items.PUFFERFISH, builder ->
                 builder.set(DataComponentsRegistry.POSSIBLE_AFFINITIES.get(), List.of(
                         AffinityRegistry.OCEAN.getKey()

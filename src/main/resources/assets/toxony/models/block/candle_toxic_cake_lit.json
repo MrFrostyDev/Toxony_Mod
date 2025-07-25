@@ -1,0 +1,8 @@
+{
+  "parent": "toxony:block/candle_toxic_cake_template",
+  "textures": {
+    "cake": "toxony:block/toxic_cake",
+    "candle": "minecraft:block/candle_lit",
+    "particle": "toxony:block/toxic_cake"
+  }
+}

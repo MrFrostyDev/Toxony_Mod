@@ -106,6 +106,14 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
                 if(slot == 0 || slot == 1)return 1;
                 return Item.DEFAULT_MAX_STACK_SIZE;
             }
+
+            @Override
+            protected void onContentsChanged(int slot) {
+                if(level != null){
+                    level.sendBlockUpdated(pos, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+                    setChanged();
+                }
+            }
         };
     }
 
@@ -194,8 +202,6 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
             state = state.setValue(AlembicBlock.LIT, Boolean.valueOf(false));
             level.setBlock(pos, state, AlembicBlock.UPDATE_ALL);
         }
-
-        level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
     }
 
     public Optional<RecipeHolder<AlembicRecipe>> findRecipe() {
@@ -211,7 +217,7 @@ public class AlembicBlockEntity extends BlockEntity implements IItemHandler, Men
                 this.level);
     }
 
-    private static ItemStack findPotionAmplify(ItemStack stack){
+    private static ItemStack findPotionAmplify(ItemStack stack) {
         if(!(stack.getItem() instanceof PotionItem))return ItemStack.EMPTY;
 
         Optional<Holder<Potion>> optional = stack.getComponents().getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).potion();

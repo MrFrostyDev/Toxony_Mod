@@ -1,4 +1,5 @@
 package xyz.yfrostyf.toxony.commands;
+
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
+import xyz.yfrostyf.toxony.ToxonyConfig;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
@@ -21,8 +23,6 @@ import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 
 import java.util.Collection;
 import java.util.Map;
-
-// thank you [IronsSpellsNSpellbooks Mod]
 
 import static xyz.yfrostyf.toxony.registries.DataAttachmentRegistry.TOX_DATA;
 
@@ -115,7 +115,7 @@ public class ToxCommand {
             for(Map.Entry<ResourceLocation, Affinity> entry: map.entrySet()){
                 Item item = BuiltInRegistries.ITEM.get(entry.getKey());
                 if(item.equals(Items.AIR)) continue;
-                plyToxData.addKnownIngredients(item.getDefaultInstance(), ToxData.MINIMUM_KNOW);
+                plyToxData.addKnownIngredients(item.getDefaultInstance(), ToxonyConfig.MIN_KNOWLEDGE_REQ.get());
             }
         }
         else{

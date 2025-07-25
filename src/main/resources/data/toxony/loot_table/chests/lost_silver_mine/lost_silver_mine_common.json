@@ -35,7 +35,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:coal",
-          "weight": 5,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -64,7 +64,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:bread",
-          "weight": 5,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -88,12 +88,12 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_pickaxe",
-          "weight": 2
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_shovel",
-          "weight": 2
+          "weight": 3
         }
       ]
     }

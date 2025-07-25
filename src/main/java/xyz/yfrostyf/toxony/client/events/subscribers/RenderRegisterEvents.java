@@ -38,6 +38,7 @@ public class RenderRegisterEvents {
         event.registerEntityRenderer(EntityRegistry.BOLT.get(), BoltRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FLAIL_BALL.get(), FlailBallRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FLINTLOCK_BALL.get(), context -> new ThrownItemRenderer<>(context, 0.4F, true));
+        event.registerEntityRenderer(EntityRegistry.TOXIC_CAKE_PROJECTILE.get(), context -> new ThrownItemRenderer<>(context, 0.4F, false));
 
         // Entities
         event.registerEntityRenderer(EntityRegistry.GUIDED_SPIRIT.get(), GuidedSpiritRenderer::new);

@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.blocks.CopperCrucibleBlock;
 import xyz.yfrostyf.toxony.client.gui.block.CopperCrucibleMenu;
 import xyz.yfrostyf.toxony.recipes.CrucibleRecipe;
@@ -110,6 +111,14 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
                 if(slot == 0)return 1;
                 return Item.DEFAULT_MAX_STACK_SIZE;
             }
+
+            @Override
+            protected void onContentsChanged(int slot) {
+                if(level != null){
+                    level.sendBlockUpdated(pos, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+                    setChanged();
+                }
+            }
         };
     }
 
@@ -140,6 +149,9 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         // Lit crucible if currently not lit and has fuel
         if (!blockEntity.isLit() && !fuel.isEmpty() && !blockEntity.getResultItem().isEmpty()) {
             ItemStack extract = blockEntity.itemContainer.extractItem(1, 1, false);
+            if(extract.hasCraftingRemainingItem() && blockEntity.itemContainer.getStackInSlot(1).isEmpty()){
+                blockEntity.itemContainer.setStackInSlot(1, extract.getCraftingRemainingItem());
+            }
             blockEntity.litTime = extract.getBurnTime(blockEntity.recipeType);
             blockEntity.litDuration = blockEntity.litTime;
         }
@@ -165,7 +177,7 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         if(result.isEmpty() && blockEntity.findRecipe().isPresent()){
             Optional<RecipeHolder<CrucibleRecipe>> recipe = blockEntity.findRecipe();
             blockEntity.setResultItem(recipe.get().value().assemble(
-                    new SingleRecipeInput(blockEntity.itemContainer.getStackInSlot(0)),
+                    new SingleRecipeInput(input),
                     level.registryAccess()
             ));
             blockEntity.cookingTotalTime = recipe.get().value().getCookTime();
@@ -174,14 +186,10 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         // For visuals when lit
         if (blockEntity.isLit()) {
             state = state.setValue(CopperCrucibleBlock.LIT, Boolean.valueOf(true));
-            level.setBlock(pos, state, CopperCrucibleBlock.UPDATE_ALL);
         }
         else{
             state = state.setValue(CopperCrucibleBlock.LIT, Boolean.valueOf(false));
-            level.setBlock(pos, state, CopperCrucibleBlock.UPDATE_ALL);
         }
-
-        level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
     }
 
     public Optional<RecipeHolder<CrucibleRecipe>> findRecipe() {
@@ -246,6 +254,10 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
 
         ContainerHelper.saveAllItems(tag, list, registries);
 
+        for(ItemStack stack : list){
+            ToxonyMain.LOGGER.debug("[Save]: " + stack.toString());
+        }
+
         tag.putInt("BurnTime", this.litTime);
         tag.putInt("CookTime", this.cookingProgress);
         tag.putInt("CookTimeTotal", this.cookingTotalTime);
@@ -262,6 +274,10 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         this.itemContainer.setStackInSlot(1, list.get(1)); // receive fuel
         this.setResultItem(list.getLast()); // receive result item in sent list.
 
+        for(ItemStack stack : list){
+            ToxonyMain.LOGGER.debug("[Load]: " + stack.toString());
+        }
+
         this.litTime = tag.getInt("BurnTime");
         this.cookingProgress = tag.getInt("CookTime");
         this.cookingTotalTime = tag.getInt("CookTimeTotal");
@@ -275,16 +291,11 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         return tag;
     }
 
-    // Return our packet here. This method returning a non-null result tells the game to use this packet for syncing.
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
-        // The packet uses the CompoundTag returned by #getUpdateTag. An alternative overload of #create exists
-        // that allows you to specify a custom update tag, including the ability to omit data the client might not need.
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    // Optionally: Run some custom logic when the packet is received.
-    // The super/default implementation forwards to #loadAdditional.
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider registries) {
         super.onDataPacket(connection, packet, registries);
@@ -293,7 +304,6 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
     //
     // |-----------------------Container Methods-----------------------|
     //
-
 
     @Override
     public int getSlots() {

@@ -120,13 +120,22 @@ public class ToxonyItemTagsProvider extends ItemTagsProvider {
                         ItemRegistry.TOXIC_SPIT.get(),
                         ItemRegistry.POISON_SAC.get(),
                         ItemRegistry.BOG_BONE.get(),
-                        ItemRegistry.ACID_SLIMEBALL.get()
+                        ItemRegistry.ACID_SLIMEBALL.get(),
+
+                        ItemRegistry.HEAT_SUBSTANCE.get(),
+                        ItemRegistry.COLD_SUBSTANCE.get(),
+                        ItemRegistry.DECAY_SUBSTANCE.get(),
+                        ItemRegistry.OCEAN_SUBSTANCE.get(),
+                        ItemRegistry.NETHER_SUBSTANCE.get(),
+                        ItemRegistry.FOREST_SUBSTANCE.get()
                 );
 
         this.tag(TagRegistry.POISONOUS_PLANTS_ITEM)
                 .add(
                         Items.POISONOUS_POTATO,
                         Items.WITHER_ROSE,
+                        Items.LILY_OF_THE_VALLEY,
+                        Items.RED_MUSHROOM,
                         ItemRegistry.FALSE_BERRIES.get(),
                         ItemRegistry.OCELOT_MINT.get(),
                         ItemRegistry.SNOW_MINT.get(),

@@ -4,22 +4,20 @@ import net.minecraft.advancements.critereon.EntityEquipmentPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MobEffectsPredicate;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
+import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.data.datagen.loot.PiglinBarterLootModifier;
 import xyz.yfrostyf.toxony.data.datagen.loot.ToxDropLootModifier;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.MobEffectRegistry;
@@ -44,6 +42,20 @@ public class ToxonyGlobalLootModifierProvider extends GlobalLootModifierProvider
         dropUniqueWhilePoisoned("squid_unique_tox_drop", EntityType.SQUID, ItemRegistry.POISON_SAC.get(), 1, 2);
         dropUniqueWhilePoisoned("glow_squid_unique_tox_drop", EntityType.GLOW_SQUID, ItemRegistry.POISON_SAC.get(), 1, 2);
         dropUniqueWhileScalpel("bogged_unique_tox_drop", EntityType.BOGGED, ItemRegistry.BOG_BONE.get(), 1, 2);
+
+        addPiglinBarterItem("bloodroot_barter_drop", ItemRegistry.BLOODROOT.get(), 1, 2);
+    }
+
+    private void addPiglinBarterItem(String name, Item dropItem, int min, int max){
+        LootItemCondition lootTableIdCondition = LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("gameplay/piglin_bartering")).build();
+
+        this.add(name,
+                new PiglinBarterLootModifier(new LootItemCondition[]{
+                        lootTableIdCondition
+                },
+                        dropItem, min, max
+                )
+        );
     }
 
     private void dropUniqueWhilePoisoned(String name, EntityType entity, Item dropItem, int min, int max){

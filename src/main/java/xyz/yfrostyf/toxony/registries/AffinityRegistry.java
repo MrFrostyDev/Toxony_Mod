@@ -83,8 +83,7 @@ public class AffinityRegistry {
             "Nether",
             9,
             () -> List.of(
-                    MobEffectRegistry.INFERNAL_MUTAGEN,
-                    MobEffectRegistry.NECROTIC_MUTAGEN
+                    MobEffectRegistry.INFERNAL_MUTAGEN
             )
     ));
     public static final DeferredHolder<Affinity, Affinity> END = AFFINITIES.register("end", () -> Affinity.create(

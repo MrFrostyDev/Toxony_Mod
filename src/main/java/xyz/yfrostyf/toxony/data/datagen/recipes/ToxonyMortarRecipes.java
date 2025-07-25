@@ -26,6 +26,15 @@ public class ToxonyMortarRecipes extends RecipeProvider {
                 .unlockedByTag("has_poisonous_plant", TagRegistry.POISONOUS_PLANTS_ITEM)
                 .build(output);
 
+        new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.AFFINITY_FUSION_MIX.get()))
+                .possibleIngredient()
+                .possibleIngredient()
+                .possibleIngredient()
+                .ingredient(Items.NETHER_WART)
+                .unlockedByTag("has_poisonous_ingredient", TagRegistry.POISONOUS_INGREDIENTS_ITEM)
+                .unlockedByTag("has_poisonous_plant", TagRegistry.POISONOUS_PLANTS_ITEM)
+                .build(output);
+
         // Oil Recipes
         // Oils Tier 0 Recipes
         new MortarPestleRecipeBuilder(new ItemStack(ItemRegistry.POISON_OIL_POT.get()))

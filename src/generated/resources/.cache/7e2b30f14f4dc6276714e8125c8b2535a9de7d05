@@ -1,5 +1,6 @@
-// 1.21.1	2025-04-26T11:24:22.8415822	Global Loot Modifiers : toxony
-4813242da0cd45a5e481457a7f1068029140367b data/neoforge/loot_modifiers/global_loot_modifiers.json
+// 1.21.1	2025-07-25T11:09:24.9730457	Global Loot Modifiers : toxony
+e0d6c35cdb11f4a5464c81fba17987648d1cf549 data/neoforge/loot_modifiers/global_loot_modifiers.json
+b4b9f7de3510afa4ecf86b54b080ac3718862314 data/toxony/loot_modifiers/bloodroot_barter_drop.json
 471cc0210308ff3da35c3c8bfdaf11986be6a6ff data/toxony/loot_modifiers/bogged_unique_tox_drop.json
 bafe4d47e0113f7441477434957e0a2782da79c6 data/toxony/loot_modifiers/glow_squid_unique_tox_drop.json
 7e61788cf2f6a45e129e6ab59ac4c3023a000937 data/toxony/loot_modifiers/llama_unique_tox_drop.json

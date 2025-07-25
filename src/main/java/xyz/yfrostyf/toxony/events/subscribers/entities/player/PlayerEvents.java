@@ -107,7 +107,10 @@ public class PlayerEvents {
             if(contents.potion().isPresent()){
                 if(contents.potion().get() != Potions.WATER
                         && contents.potion().get() != Potions.AWKWARD
-                        && contents.potion().get() != Potions.MUNDANE){
+                        && contents.potion().get() != Potions.MUNDANE
+                        && contents.potion().get() != Potions.REGENERATION
+                        && contents.potion().get() != Potions.STRONG_REGENERATION
+                        && contents.potion().get() != Potions.LONG_REGENERATION){
                     ToxData toxData = player.getData(DataAttachmentRegistry.TOX_DATA.get());
                     if(event.getItem().getItem() instanceof PotionFlaskItem){
                         toxData.addTox(15);

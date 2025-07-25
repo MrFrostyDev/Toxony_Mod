@@ -66,5 +66,27 @@ public class ToxonyBlockTagsProvider extends BlockTagsProvider {
                         BlockRegistry.ALCHEMICAL_FORGE.get(),
                         BlockRegistry.ALCHEMICAL_FORGE_PART.get()
                 );
+
+        this.tag(BlockTags.CANDLE_CAKES)
+                .add(
+                        BlockRegistry.TOXIC_CAKE.get(),
+                        BlockRegistry.CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.WHITE_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.ORANGE_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.MAGENTA_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.LIGHT_BLUE_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.YELLOW_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.LIME_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.PINK_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.GRAY_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.LIGHT_GRAY_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.CYAN_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.PURPLE_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.BLUE_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.BROWN_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.GREEN_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.RED_CANDLE_TOXIC_CAKE.get(),
+                        BlockRegistry.BLACK_CANDLE_TOXIC_CAKE.get()
+                );
     }
 }

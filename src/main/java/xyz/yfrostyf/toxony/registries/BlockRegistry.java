@@ -6,9 +6,12 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -27,6 +30,7 @@ import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 public class BlockRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ToxonyMain.MOD_ID);
@@ -394,9 +398,126 @@ public class BlockRegistry {
             )
     );
 
+    public static final DeferredHolder<Block, Block> TOXIC_CAKE = BLOCKS.register(
+            "toxic_cake",
+            () -> new ToxicCakeBlock(BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .strength(0.5F)
+                    .sound(SoundType.SLIME_BLOCK)
+                    .pushReaction(PushReaction.DESTROY)
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()).lightLevel(litBlockEmission(3))
+            )
+    );
+
+    public static final DeferredHolder<Block, Block> WHITE_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "white_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.WHITE_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> ORANGE_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "orange_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.ORANGE_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(CANDLE_TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> MAGENTA_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "magenta_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.MAGENTA_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> LIGHT_BLUE_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "light_blue_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.LIGHT_BLUE_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> YELLOW_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "yellow_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.YELLOW_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> LIME_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "lime_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.LIME_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> PINK_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "pink_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.PINK_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> GRAY_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "gray_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.GRAY_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> LIGHT_GRAY_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "light_gray_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.GRAY_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> CYAN_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "cyan_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.CYAN_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> PURPLE_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "purple_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.PURPLE_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> BLUE_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "blue_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.BLUE_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> BROWN_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "brown_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.BROWN_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> GREEN_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "green_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.GREEN_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> RED_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "red_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.RED_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
+    public static final DeferredHolder<Block, Block> BLACK_CANDLE_TOXIC_CAKE = BLOCKS.register(
+            "black_candle_toxic_cake",
+            () -> new CandleToxicCakeBlock(Blocks.BLACK_CANDLE, BlockBehaviour.Properties
+                    .ofLegacyCopy(TOXIC_CAKE.get()))
+    );
+
     // |----------------------------------------------------------------------------------|
     // |------------------------------------Methods---------------------------------------|
     // |----------------------------------------------------------------------------------|
+    private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
+        return state -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
+    }
+
     private static DeferredHolder<Block, Block> createOilPotBlock(String name, Supplier<Holder<Item>> oilPotItem){
         return BLOCKS.register(name, () -> new OilPotBlock(BlockBehaviour.Properties.of()
                 .strength(0.6f)
