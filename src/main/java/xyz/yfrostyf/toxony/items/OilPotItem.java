@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.util.OilUtil;
 import xyz.yfrostyf.toxony.blocks.OilPotBlock;
@@ -107,10 +108,22 @@ public class OilPotItem extends Item {
         ItemStack placingStack = context.getItemInHand();
         BlockState levelBlockState = level.getBlockState(blockpos);
 
-        if(!(placingStack.getItem() instanceof OilPotItem))return InteractionResult.FAIL;
+        Block block = this.getOilPotBlock().value();
+        BlockState newBlockState = block.defaultBlockState()
+                .setValue(OilPotBlock.OIL_LEFT,
+                        OilPotBlock.getBlockDamage(
+                                placingStack.getMaxDamage(),
+                                placingStack.getDamageValue()
+                        )
+                );
 
-        BlockState newBlockState = this.getOilPotBlock().value().defaultBlockState()
-                .setValue(OilPotBlock.OIL_LEFT, OilPotBlock.getBlockDamage(placingStack.getMaxDamage(), placingStack.getDamageValue()));
+        if(!(placingStack.getItem() instanceof OilPotItem)) return InteractionResult.FAIL;
+        if (!newBlockState.getBlock().isEnabled(context.getLevel().enabledFeatures())) return InteractionResult.FAIL;
+        if (!context.canPlace()) return InteractionResult.FAIL;
+
+        BlockState blockstate = this.getPlacementState(context, block);
+        if (blockstate == null) return InteractionResult.FAIL;
+        if (!this.placeBlock(context, blockstate)) return InteractionResult.FAIL;
 
         if (!context.getLevel().setBlock(blockpos, newBlockState, OilPotBlock.UPDATE_ALL_IMMEDIATE)) return InteractionResult.FAIL;
 
@@ -138,6 +151,22 @@ public class OilPotItem extends Item {
         level.gameEvent(GameEvent.BLOCK_PLACE, blockpos, GameEvent.Context.of(player, levelBlockState));
         placingStack.consume(1, player);
         return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    protected BlockState getPlacementState(BlockPlaceContext context, Block block) {
+        BlockState blockstate = block.getStateForPlacement(context);
+        return blockstate != null && this.canPlace(context, blockstate) ? blockstate : null;
+    }
+
+    protected boolean canPlace(BlockPlaceContext context, BlockState state) {
+        Player player = context.getPlayer();
+        CollisionContext collisioncontext = player == null ? CollisionContext.empty() : CollisionContext.of(player);
+        return (state.canSurvive(context.getLevel(), context.getClickedPos()))
+                && context.getLevel().isUnobstructed(state, context.getClickedPos(), collisioncontext);
+    }
+
+    protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
+        return context.getLevel().setBlock(context.getClickedPos(), state, 11);
     }
 
     private static void updateBlockEntityComponents(Level level, BlockPos poa, ItemStack stack) {

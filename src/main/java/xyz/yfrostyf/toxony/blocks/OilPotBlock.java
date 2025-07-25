@@ -18,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -32,6 +34,7 @@ import xyz.yfrostyf.toxony.api.oils.ItemOil;
 import xyz.yfrostyf.toxony.api.util.OilUtil;
 import xyz.yfrostyf.toxony.blocks.entities.OilPotBlockEntity;
 import xyz.yfrostyf.toxony.items.OilPotItem;
+import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
@@ -194,5 +197,19 @@ public class OilPotBlock extends Block implements EntityBlock {
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new OilPotBlockEntity(pos, state);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        if(state.is(BlockRegistry.FIRE_RESISTANCE_OIL_POT)) return ItemRegistry.FIRE_RESISTANCE_OIL_POT.get().getDefaultInstance();
+        if(state.is(BlockRegistry.GLOWING_OIL_POT)) return ItemRegistry.GLOWING_OIL_POT.get().getDefaultInstance();
+        if(state.is(BlockRegistry.FATIGUE_OIL_POT)) return ItemRegistry.FATIGUE_OIL_POT.get().getDefaultInstance();
+        if(state.is(BlockRegistry.POISON_OIL_POT)) return ItemRegistry.POISON_OIL_POT.get().getDefaultInstance();
+        if(state.is(BlockRegistry.SMOKE_TOX_POT)) return ItemRegistry.SMOKE_TOX_POT.get().getDefaultInstance();
+        if(state.is(BlockRegistry.REGENERATION_TOX_POT)) return ItemRegistry.REGENERATION_TOX_POT.get().getDefaultInstance();
+        if(state.is(BlockRegistry.WITCHFIRE_TOX_POT)) return ItemRegistry.WITCHFIRE_TOX_POT.get().getDefaultInstance();
+        if(state.is(BlockRegistry.TOXIN_TOX_POT)) return ItemRegistry.TOXIN_TOX_POT.get().getDefaultInstance();
+        if(state.is(BlockRegistry.ACID_OIL_POT)) return ItemRegistry.ACID_OIL_POT.get().getDefaultInstance();
+        else return ItemRegistry.EMPTY_OIL_POT.get().getDefaultInstance();
     }
 }

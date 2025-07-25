@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 public class FalseBerryBushBlock extends SweetBerryBushBlock {
@@ -54,5 +55,10 @@ public class FalseBerryBushBlock extends SweetBerryBushBlock {
             net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(level, pos, state);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(blockstate));
         }
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        return ItemRegistry.FALSE_BERRIES.get().getDefaultInstance();
     }
 }

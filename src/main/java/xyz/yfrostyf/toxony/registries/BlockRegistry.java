@@ -20,12 +20,12 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.yfrostyf.toxony.ToxonyMain;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 import xyz.yfrostyf.toxony.api.affinity.AffinityBlockPair;
-import xyz.yfrostyf.toxony.api.blocks.PoisonCropBlock;
-import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.*;
 import xyz.yfrostyf.toxony.blocks.entities.*;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
+import xyz.yfrostyf.toxony.blocks.plants.PoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.plants.WildOcelotMintBlock;
+import xyz.yfrostyf.toxony.blocks.plants.WildPoisonCropBlock;
 
 import java.util.List;
 import java.util.Optional;

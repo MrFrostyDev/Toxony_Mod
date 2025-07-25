@@ -16,8 +16,8 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import xyz.yfrostyf.toxony.ToxonyMain;
-import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.blocks.plants.FalseBerryBushBlock;
+import xyz.yfrostyf.toxony.blocks.plants.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 
 import java.util.List;

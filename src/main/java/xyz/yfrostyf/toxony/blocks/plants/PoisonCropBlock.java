@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.api.blocks;
+package xyz.yfrostyf.toxony.blocks.plants;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xyz.yfrostyf.toxony.ToxonyConfig;
@@ -40,8 +41,10 @@ import xyz.yfrostyf.toxony.api.affinity.AffinityBlockPair;
 import xyz.yfrostyf.toxony.api.tox.ToxData;
 import xyz.yfrostyf.toxony.api.util.AffinityUtil;
 import xyz.yfrostyf.toxony.blocks.PoisonFarmBlock;
+import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.DataAttachmentRegistry;
 import xyz.yfrostyf.toxony.registries.DataComponentsRegistry;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.List;
 import java.util.Optional;
@@ -312,6 +315,22 @@ public class PoisonCropBlock extends CropBlock implements BonemealableBlock {
             }
         }
         super.entityInside(state, level, pos, entity);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        if(state.is(BlockRegistry.OCELOT_MINT)) return ItemRegistry.OCELOT_MINT_SEEDS.get().getDefaultInstance();
+        if(state.is(BlockRegistry.COLDSNAP)) return ItemRegistry.COLDSNAP_SEEDS.get().getDefaultInstance();
+        if(state.is(BlockRegistry.NIGHTSHADE)) return ItemRegistry.NIGHTSHADE_SEEDS.get().getDefaultInstance();
+        if(state.is(BlockRegistry.WATER_HEMLOCK)) return ItemRegistry.WATER_HEMLOCK_SEEDS.get().getDefaultInstance();
+        if(state.is(BlockRegistry.BLOODROOT)) return ItemRegistry.BLOODROOT_FUNGUS.get().getDefaultInstance();
+
+        if(state.is(BlockRegistry.SNOW_MINT)) return ItemRegistry.SNOW_MINT_SEEDS.get().getDefaultInstance();
+        if(state.is(BlockRegistry.WHIRLSNAP)) return ItemRegistry.WHIRLSNAP_SEEDS.get().getDefaultInstance();
+        if(state.is(BlockRegistry.SUNSPOT)) return ItemRegistry.SUNSPOT_SEEDS.get().getDefaultInstance();
+        if(state.is(BlockRegistry.MOONLIGHT_HEMLOCK)) return ItemRegistry.MOONLIGHT_HEMLOCK_SEEDS.get().getDefaultInstance();
+        if(state.is(BlockRegistry.WARPROOT)) return ItemRegistry.WARPROOT_FUNGUS.get().getDefaultInstance();
+        else return ItemRegistry.OCELOT_MINT_SEEDS.get().getDefaultInstance();
     }
 
     // |===========================================================================|

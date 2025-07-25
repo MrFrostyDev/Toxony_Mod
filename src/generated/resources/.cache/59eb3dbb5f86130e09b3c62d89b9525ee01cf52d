@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-24T14:24:41.2183945	Loot Tables
+// 1.21.1	2025-07-25T19:44:25.2892392	Loot Tables
 e85df1c82d819786b6012243d6a42e6d9b7ec822 data/toxony/loot_table/blocks/alchemical_forge.json
 229832c3499a527d956e3f67e3db79abdaf7cffd data/toxony/loot_table/blocks/alchemical_forge_part.json
 b3b06e45f3b27679b3c855cc065baed90d76388e data/toxony/loot_table/blocks/alembic.json
@@ -38,9 +38,9 @@ f09ff8e4343fdb1ff350e582377eca34e908eebb data/toxony/loot_table/blocks/snow_mint
 4f97da178784f257d9c051332cc7967c41c4ae84 data/toxony/loot_table/blocks/water_hemlock.json
 c0c68397f8cadabd292c697f6a32d01b3ab9c58e data/toxony/loot_table/blocks/whirlsnap.json
 61f0f9cdeb2e3694917bd288acfb988c98c0b7f5 data/toxony/loot_table/blocks/white_candle_toxic_cake.json
-5f41488c3858d59eaebaaf1805f9a9d42447f250 data/toxony/loot_table/blocks/wild_bloodroot.json
-ed09a366d30111974d1bd646b790e1f22c176cad data/toxony/loot_table/blocks/wild_coldsnap.json
-03a5602db0e7a1ffbd46d3f6bb9f90f65731b445 data/toxony/loot_table/blocks/wild_nightshade.json
-f253b20cea3fa6bc9ce8cedebc3be100d5244f99 data/toxony/loot_table/blocks/wild_ocelot_mint.json
-23377ed25341f9d9b7c3a0d24800943a0a2a2723 data/toxony/loot_table/blocks/wild_water_hemlock.json
+49b47cdacea6521c2031639d7e51dade09a2dac4 data/toxony/loot_table/blocks/wild_bloodroot.json
+3971fd263275fc964f596f81f53a512847f7378b data/toxony/loot_table/blocks/wild_coldsnap.json
+3ef74e133f578ae80eb75f7b1ee9f6db7185e2a8 data/toxony/loot_table/blocks/wild_nightshade.json
+e865d5e96b98d91f8508bc81a7138ea0570995bb data/toxony/loot_table/blocks/wild_ocelot_mint.json
+a8b3d5d1442b541f456fa5bde091ab4115177570 data/toxony/loot_table/blocks/wild_water_hemlock.json
 01fe214f4a4e530c84e0291c18ad3ca1d583fec5 data/toxony/loot_table/blocks/yellow_candle_toxic_cake.json

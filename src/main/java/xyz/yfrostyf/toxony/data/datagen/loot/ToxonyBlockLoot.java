@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.data.datagen.loot;
 
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -13,13 +14,15 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import xyz.yfrostyf.toxony.api.blocks.PoisonCropBlock;
-import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
+import xyz.yfrostyf.toxony.blocks.plants.PoisonCropBlock;
+import xyz.yfrostyf.toxony.blocks.plants.WildPoisonCropBlock;
 import xyz.yfrostyf.toxony.registries.BlockRegistry;
 import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
@@ -56,11 +59,12 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
         dropSelf(BlockRegistry.COPPER_SCALE.get());
         dropSelf(BlockRegistry.LOOSE_PAPER.get());
 
-        dropWildPoisonPlantDrops(BlockRegistry.WILD_OCELOT_MINT.get(), ItemRegistry.OCELOT_MINT.get());
-        dropWildPoisonPlantDrops(BlockRegistry.WILD_NIGHTSHADE.get(), ItemRegistry.NIGHTSHADE.get());
-        dropWildPoisonPlantDrops(BlockRegistry.WILD_WATER_HEMLOCK.get(), ItemRegistry.WATER_HEMLOCK.get());
-        dropWildPoisonPlantDrops(BlockRegistry.WILD_COLDSNAP.get(), ItemRegistry.COLDSNAP.get());
-        dropWildPoisonPlantDrops(BlockRegistry.WILD_BLOODROOT.get(), ItemRegistry.BLOODROOT.get());
+        dropWildPoisonPlantDrops(BlockRegistry.WILD_OCELOT_MINT.get(), ItemRegistry.OCELOT_MINT.get(), ItemRegistry.WILD_OCELOT_MINT.get());
+        dropWildPoisonPlantDrops(BlockRegistry.WILD_NIGHTSHADE.get(), ItemRegistry.NIGHTSHADE.get(), ItemRegistry.WILD_NIGHTSHADE.get());
+        dropWildPoisonPlantDrops(BlockRegistry.WILD_WATER_HEMLOCK.get(), ItemRegistry.WATER_HEMLOCK.get(), ItemRegistry.WILD_WATER_HEMLOCK.get());
+        dropWildPoisonPlantDrops(BlockRegistry.WILD_COLDSNAP.get(), ItemRegistry.COLDSNAP.get(), ItemRegistry.WILD_COLDSNAP.get());
+        dropWildPoisonPlantDrops(BlockRegistry.WILD_BLOODROOT.get(), ItemRegistry.BLOODROOT.get(), ItemRegistry.WILD_BLOODROOT.get());
+
         dropPoisonPlantDrops(BlockRegistry.OCELOT_MINT.get(), ItemRegistry.OCELOT_MINT.get());
         dropPoisonPlantDrops(BlockRegistry.SNOW_MINT.get(), ItemRegistry.SNOW_MINT.get());
         dropPoisonPlantDrops(BlockRegistry.NIGHTSHADE.get(), ItemRegistry.NIGHTSHADE.get());
@@ -103,19 +107,25 @@ public class ToxonyBlockLoot extends BlockLootSubProvider {
         return lootTables;
     }
 
-    protected void dropWildPoisonPlantDrops(Block cropBlock, Item grownCropItem){
+    protected void dropWildPoisonPlantDrops(Block cropBlock, Item grownCropItem, Item blockItem){
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         this.add(cropBlock, this.applyExplosionDecay(
                 cropBlock,
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
-                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
-                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildPoisonCropBlock.AGE, WildPoisonCropBlock.MAX_AGE)))
-                                .add(LootItem.lootTableItem(grownCropItem))
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                                .add(AlternativesEntry.alternatives(
+                                        LootItem.lootTableItem(blockItem)
+                                                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS))),
+                                        LootItem.lootTableItem(grownCropItem)
+                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildPoisonCropBlock.AGE, WildPoisonCropBlock.MAX_AGE)))
+                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                                        )
+
+                                )
                         )
-            )
+                )
         );
     }
 

@@ -13,11 +13,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import xyz.yfrostyf.toxony.blocks.entities.OilPotBlockEntity;
 import xyz.yfrostyf.toxony.items.MendingOilPotItem;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.function.Supplier;
@@ -88,5 +91,10 @@ public class MendingOilPotBlock extends OilPotBlock {
         }
 
         return interactionResult;
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        return ItemRegistry.MENDING_OIL_POT.get().getDefaultInstance();
     }
 }

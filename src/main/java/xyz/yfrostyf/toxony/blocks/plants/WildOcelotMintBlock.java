@@ -1,18 +1,21 @@
 package xyz.yfrostyf.toxony.blocks.plants;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
-
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import xyz.yfrostyf.toxony.api.blocks.WildPoisonCropBlock;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.List;
 
@@ -34,6 +37,11 @@ public class WildOcelotMintBlock extends WildPoisonCropBlock {
                 }
             }
         }
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        return ItemRegistry.WILD_OCELOT_MINT.get().getDefaultInstance();
     }
 }
 

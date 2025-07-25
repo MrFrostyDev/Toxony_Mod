@@ -1,4 +1,4 @@
-package xyz.yfrostyf.toxony.api.blocks;
+package xyz.yfrostyf.toxony.blocks.plants;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -20,16 +20,22 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import xyz.yfrostyf.toxony.registries.BlockRegistry;
+import xyz.yfrostyf.toxony.registries.ItemRegistry;
 
 import java.util.List;
 
@@ -146,5 +152,14 @@ public class WildPoisonCropBlock extends BushBlock implements BonemealableBlock 
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         int i = Math.min(3, state.getValue(AGE) + 1);
         level.setBlock(pos, state.setValue(AGE, Integer.valueOf(i)), 2);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        if(state.is(BlockRegistry.WILD_COLDSNAP)) return ItemRegistry.WILD_COLDSNAP.get().getDefaultInstance();
+        if(state.is(BlockRegistry.WILD_NIGHTSHADE)) return ItemRegistry.WILD_NIGHTSHADE.get().getDefaultInstance();
+        if(state.is(BlockRegistry.WILD_WATER_HEMLOCK)) return ItemRegistry.WILD_WATER_HEMLOCK.get().getDefaultInstance();
+        if(state.is(BlockRegistry.WILD_BLOODROOT)) return ItemRegistry.WILD_BLOODROOT.get().getDefaultInstance();
+        else return ItemRegistry.WILD_OCELOT_MINT.get().getDefaultInstance();
     }
 }

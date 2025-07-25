@@ -469,6 +469,13 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> BLOODROOT_FUNGUS = ITEMS.register("bloodroot_fungus", () -> new ItemNameBlockItem(BlockRegistry.BLOODROOT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> WARPROOT_FUNGUS = ITEMS.register("warproot_fungus", () -> new ItemNameBlockItem(BlockRegistry.WARPROOT.get(), new Item.Properties()));
 
+    // Plants
+    public static final DeferredHolder<Item, Item> WILD_OCELOT_MINT = ITEMS.register("wild_ocelot_mint", () -> new BlockItem(BlockRegistry.WILD_OCELOT_MINT.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> WILD_COLDSNAP = ITEMS.register("wild_coldsnap", () -> new BlockItem(BlockRegistry.WILD_COLDSNAP.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> WILD_NIGHTSHADE = ITEMS.register("wild_nightshade", () -> new BlockItem(BlockRegistry.WILD_NIGHTSHADE.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> WILD_WATER_HEMLOCK = ITEMS.register("wild_water_hemlock", () -> new BlockItem(BlockRegistry.WILD_WATER_HEMLOCK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> WILD_BLOODROOT = ITEMS.register("wild_bloodroot", () -> new BlockItem(BlockRegistry.WILD_BLOODROOT.get(), new Item.Properties()));
+
     // Decoration
     public static final DeferredHolder<Item, Item> VIAL_RACK = ITEMS.register("vial_rack", () -> new BlockItem(BlockRegistry.VIAL_RACK.get(), new Item.Properties().stacksTo(16)));
     public static final DeferredHolder<Item, Item> BELL_JAR = ITEMS.register("bell_jar", () -> new BlockItem(BlockRegistry.BELL_JAR.get(), new Item.Properties().stacksTo(16)));

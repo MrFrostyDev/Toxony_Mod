@@ -240,10 +240,15 @@
   "oil.toxony.witchfire": "Witchfire",
 
   "effect.toxony.hunt": "Hunt",
+  "effect.toxony.hunt.desc": "Increase the damage taken from wolves and players with the beast mutagen.",
   "effect.toxony.toxin": "Toxin",
+  "effect.toxony.toxin.desc": "Slowly lose large chunks of hearts. Does not stop at one heart.",
   "effect.toxony.acid": "Acid",
+  "effect.toxony.acid.desc": "Slowly lose hearts and reduce the effectiveness of armor temporarily.",
   "effect.toxony.flammable": "Flammable",
+  "effect.toxony.flammable.desc": "Become vulnerable to open flames and catch on fire when close to them.",
   "effect.toxony.cripple": "Cripple",
+  "effect.toxony.cripple.desc": "Increase the damage taken from physical attacks.",
 
   "effect.toxony.beast_mutagen": "Beast Mutagen",
   "effect.toxony.beast_mutagen.desc": "A mutagen that enhances your ferocity and damage (Especially alongside wolves). Become even more deadly in the night.",
