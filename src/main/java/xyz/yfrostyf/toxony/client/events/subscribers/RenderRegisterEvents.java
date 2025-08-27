@@ -46,5 +46,4 @@ public class RenderRegisterEvents {
         // Block Entities
         event.registerBlockEntityRenderer(BlockRegistry.MORTAR_PESTLE_ENTITY.get(), MortarPestleRenderer::new);
     }
-
 }

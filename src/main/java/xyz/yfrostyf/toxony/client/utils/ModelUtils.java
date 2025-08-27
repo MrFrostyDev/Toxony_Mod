@@ -28,7 +28,7 @@ public class ModelUtils {
                     new ModelPart(Collections.emptyList(), Map.of(
                             "left_leg", EMPTY,
                             "right_leg", EMPTY,
-                            "head", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).Head,
+                            "head", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).head,
                             "hat", EMPTY,
                             "body", EMPTY,
                             "right_arm", EMPTY,
@@ -48,9 +48,9 @@ public class ModelUtils {
                             "right_leg", EMPTY,
                             "head", EMPTY,
                             "hat", EMPTY,
-                            "body", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).Body,
-                            "right_arm", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).RightArm,
-                            "left_arm", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).LeftArm
+                            "body", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).body,
+                            "right_arm", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).rightArm,
+                            "left_arm", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).leftArm
                     ))
             );
             model.crouching = livingEntity.isShiftKeyDown();
@@ -62,8 +62,8 @@ public class ModelUtils {
         public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
             HumanoidModel model = new HumanoidModel(
                     new ModelPart(Collections.emptyList(), Map.of(
-                            "left_leg", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).LeftLeg,
-                            "right_leg", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).RightLeg,
+                            "left_leg", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).leftLeg,
+                            "right_leg", new PlagueDoctorArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlagueDoctorArmorEntityModel.LAYER_LOCATION)).rightLeg,
                             "head", EMPTY,
                             "hat", EMPTY,
                             "body", EMPTY,
@@ -84,7 +84,7 @@ public class ModelUtils {
                     new ModelPart(Collections.emptyList(), Map.of(
                             "left_leg", EMPTY,
                             "right_leg", EMPTY,
-                            "head", new PlaguebringerArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).Head,
+                            "head", new PlaguebringerArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).head,
                             "hat", EMPTY,
                             "body", EMPTY,
                             "right_arm", EMPTY,
@@ -104,9 +104,9 @@ public class ModelUtils {
                             "right_leg", EMPTY,
                             "head", EMPTY,
                             "hat", EMPTY,
-                            "body", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).Body,
-                            "right_arm", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).RightArm,
-                            "left_arm", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).LeftArm
+                            "body", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).body,
+                            "right_arm", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).rightArm,
+                            "left_arm", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).leftArm
                     ))
             );
             model.crouching = livingEntity.isShiftKeyDown();
@@ -118,8 +118,8 @@ public class ModelUtils {
         public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
             HumanoidModel model = new HumanoidModel(
                     new ModelPart(Collections.emptyList(), Map.of(
-                            "left_leg", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).LeftLeg,
-                            "right_leg", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).RightLeg,
+                            "left_leg", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).leftLeg,
+                            "right_leg", new PlaguebringerArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(PlaguebringerArmorEntityModel.LAYER_LOCATION)).rightLeg,
                             "head", EMPTY,
                             "hat", EMPTY,
                             "body", EMPTY,
@@ -140,7 +140,7 @@ public class ModelUtils {
                     new ModelPart(Collections.emptyList(), Map.of(
                             "left_leg", EMPTY,
                             "right_leg", EMPTY,
-                            "head", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).Head,
+                            "head", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).head,
                             "hat", EMPTY,
                             "body", EMPTY,
                             "right_arm", EMPTY,
@@ -160,9 +160,9 @@ public class ModelUtils {
                             "right_leg", EMPTY,
                             "head", EMPTY,
                             "hat", EMPTY,
-                            "body", new HunterArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).Body,
-                            "right_arm", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).RightArm,
-                            "left_arm", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).LeftArm
+                            "body", new HunterArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).body,
+                            "right_arm", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).rightArm,
+                            "left_arm", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).leftArm
                     ))
             );
             model.crouching = livingEntity.isShiftKeyDown();
@@ -174,8 +174,8 @@ public class ModelUtils {
         public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
             HumanoidModel model = new HumanoidModel(
                     new ModelPart(Collections.emptyList(), Map.of(
-                            "left_leg", new HunterArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).LeftLeg,
-                            "right_leg", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).RightLeg,
+                            "left_leg", new HunterArmorEntityModel<>(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).leftLeg,
+                            "right_leg", new HunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(HunterArmorEntityModel.LAYER_LOCATION)).rightLeg,
                             "head", EMPTY,
                             "hat", EMPTY,
                             "body", EMPTY,
@@ -196,7 +196,7 @@ public class ModelUtils {
                     new ModelPart(Collections.emptyList(), Map.of(
                             "left_leg", EMPTY,
                             "right_leg", EMPTY,
-                            "head", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).Head,
+                            "head", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).head,
                             "hat", EMPTY,
                             "body", EMPTY,
                             "right_arm", EMPTY,
@@ -216,9 +216,9 @@ public class ModelUtils {
                             "right_leg", EMPTY,
                             "head", EMPTY,
                             "hat", EMPTY,
-                            "body", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).Body,
-                            "right_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightArm,
-                            "left_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftArm
+                            "body", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).body,
+                            "right_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).rightArm,
+                            "left_arm", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).leftArm
                     ))
             );
             model.crouching = livingEntity.isShiftKeyDown();
@@ -230,8 +230,8 @@ public class ModelUtils {
         public static HumanoidModel<?> getLegs(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original){
             HumanoidModel model = new HumanoidModel(
                     new ModelPart(Collections.emptyList(), Map.of(
-                            "left_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).LeftLeg,
-                            "right_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).RightLeg,
+                            "left_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).leftLeg,
+                            "right_leg", new ProfessionalHunterArmorEntityModel(MINECRAFT_MODEL_SET.bakeLayer(ProfessionalHunterArmorEntityModel.LAYER_LOCATION)).rightLeg,
                             "head", EMPTY,
                             "hat", EMPTY,
                             "body", EMPTY,

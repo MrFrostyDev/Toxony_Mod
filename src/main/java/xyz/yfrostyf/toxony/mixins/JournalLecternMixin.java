@@ -23,7 +23,7 @@ import static net.minecraft.world.level.block.LecternBlock.HAS_BOOK;
 @Mixin(targets = "net.minecraft.world.level.block.LecternBlock")
 public abstract class JournalLecternMixin {
 
-    @Inject(method = "useWithoutItem", at = @At("HEAD"))
+    @Inject(method = "useWithoutItem", at = @At("HEAD"), cancellable = true)
     protected void useWithoutItemForJournal(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         if (state.getValue(HAS_BOOK)) {
             BlockEntity blockentity = level.getBlockEntity(pos);
