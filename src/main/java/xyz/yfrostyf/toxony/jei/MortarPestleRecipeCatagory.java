@@ -45,7 +45,7 @@ public class MortarPestleRecipeCatagory implements IRecipeCategory<MortarPestleR
 
     @Override
     public Component getTitle() {
-        return Component.translatable("block.toxony.copper_crucible");
+        return Component.translatable("block.toxony.mortar_pestle");
     }
 
     @Override
