@@ -125,11 +125,11 @@ public class OilPotItem extends Item {
         if (blockstate == null) return InteractionResult.FAIL;
         if (!this.placeBlock(context, blockstate)) return InteractionResult.FAIL;
 
-        if (!context.getLevel().setBlock(blockpos, newBlockState, OilPotBlock.UPDATE_ALL_IMMEDIATE)) return InteractionResult.FAIL;
-
+        context.getLevel().setBlock(blockpos, newBlockState, OilPotBlock.UPDATE_ALL_IMMEDIATE);
         if(level.getBlockEntity(blockpos) instanceof OilPotBlockEntity blockEntity){
             blockEntity.setMaxDamage(placingStack.getMaxDamage());
             blockEntity.setDamage(placingStack.getDamageValue());
+            blockEntity.setChanged();
         }
 
         if (levelBlockState.is(newBlockState.getBlock())) {
