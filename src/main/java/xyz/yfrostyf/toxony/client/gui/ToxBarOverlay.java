@@ -96,7 +96,14 @@ public class ToxBarOverlay implements LayeredDraw.Layer {
         int posX = guiGraphics.guiWidth()/2 - 88;
         int posY = guiGraphics.guiHeight() - 72;
 
-        // Back Bar | (ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight)
+        /*
+        *  (ResourceLocation atlasLocation, int x, int y,
+        *   float uOffset, float vOffset,
+        *   int width, int height,
+        *   int textureWidth, int textureHeight)
+        */
+
+        // Back Bar
         guiGraphics.blit(RESOURCE,
                 posX-2, posY,
                 BAR_UOFFSET, BarBackVOffset,

@@ -1,5 +1,6 @@
 package xyz.yfrostyf.toxony.client.gui.journal;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -9,10 +10,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -67,7 +66,9 @@ public abstract class PageScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if(keyCode == Minecraft.getInstance().options.keyInventory.getKey().getValue()){
+        if(keyCode == Minecraft.getInstance().options.keyInventory.getKey().getValue()
+                || keyCode == InputConstants.KEY_E
+                || keyCode == InputConstants.KEY_Q){
             this.closeScreen();
             return true;
         }

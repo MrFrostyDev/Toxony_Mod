@@ -44,7 +44,7 @@ public class SmokeBolt extends Bolt {
         if(this.level() instanceof ServerLevel svlevel){
             svlevel.playSound(null, result.getLocation().x, result.getLocation().y, result.getLocation().z, SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.NEUTRAL);
             svlevel.sendParticles(ParticleRegistry.SMOKE.get(),
-                    result.getLocation().x, result.getLocation().y+1.0, result.getLocation().z,
+                    result.getLocation().x, result.getLocation().y + 1.0, result.getLocation().z,
                     3, 0.7, 0.5, 0.7, this.random.nextInt(4) * 0.1);
         }
     }

@@ -141,7 +141,7 @@ public class CopperCrucibleBlockEntity extends BlockEntity implements IItemHandl
         }
 
         // Server Side actions
-        if(level.isClientSide()){return;}
+        if(level.isClientSide())return;
         ItemStack input = blockEntity.itemContainer.getStackInSlot(0);
         ItemStack fuel = blockEntity.itemContainer.getStackInSlot(1);
         ItemStack result = blockEntity.getResultItem();

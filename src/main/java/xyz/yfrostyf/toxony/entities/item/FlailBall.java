@@ -33,9 +33,6 @@ import xyz.yfrostyf.toxony.registries.EntityRegistry;
 
 import java.util.List;
 
-import static xyz.yfrostyf.toxony.api.util.CompatibilityUtil.VAMPIRE;
-import static xyz.yfrostyf.toxony.api.util.CompatibilityUtil.WEREWOLF;
-
 // Based on Minecraft's FishingHook entity.
 
 public class FlailBall extends Projectile {
@@ -89,8 +86,7 @@ public class FlailBall extends Projectile {
         vec3 = vec3.multiply(
                 0.6 / d3 + this.random.triangle(0.5, 0.0103365), 0.6 / d3 + this.random.triangle(0.5, 0.0103365), 0.6 / d3 + this.random.triangle(0.5, 0.0103365)
         );
-        Vec3 forceMultiplier = new Vec3(1 + (force - 1) * 0.25, 1 + (force - 1) * 0.25, 1 + (force - 1) * 0.25);
-        this.setDeltaMovement(vec3.multiply(forceMultiplier));
+        this.setDeltaMovement(vec3.scale(1 + (force - 1) * 0.25));
 
         this.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
         this.setXRot((float)(Mth.atan2(vec3.y, vec3.horizontalDistance()) * 180.0F / (float)Math.PI));

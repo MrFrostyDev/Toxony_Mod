@@ -14,7 +14,7 @@ import xyz.yfrostyf.toxony.registries.TagRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
-public class    ToxonyCraftingTableRecipes extends RecipeProvider {
+public class ToxonyCraftingTableRecipes extends RecipeProvider {
 
     public ToxonyCraftingTableRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);

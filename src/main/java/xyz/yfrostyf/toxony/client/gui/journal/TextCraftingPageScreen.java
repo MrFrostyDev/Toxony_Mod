@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.client.utils.ClientUtil;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class TextCraftingPageScreen extends TextPageScreen{
 
                     final ItemStack stack;
                     if(ingredients.size() == 1) stack = ingredients.getFirst();
-                    else if(ingredients.size() > 1) stack = ingredients.get((int)(this.minecraft.level.getGameTime() % (20L * ingredients.size()) / 20));
+                    else if(ingredients.size() > 1) stack = ingredients.get((int)(ClientUtil.getClientTick() % (20L * ingredients.size()) / 20));
                     else continue;
 
                     if (!stack.isEmpty()) {

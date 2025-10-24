@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import xyz.yfrostyf.toxony.ToxonyMain;
+import xyz.yfrostyf.toxony.client.utils.ClientUtil;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class TextCruciblePageScreen extends TextPageScreen{
         int posY = halfScreenPosY + 45+17;
 
         if (!inputItem.isEmpty()) {
-            final ItemStack stack = inputItem.get((int)(this.minecraft.level.getGameTime() % (20L * inputItem.size()) / 20));
+            final ItemStack stack = inputItem.get((int)(ClientUtil.getClientTick() % (20L * inputItem.size()) / 20));
 
             if (!stack.isEmpty()) {
                 guiGraphics.renderItem(stack, posX, posY);

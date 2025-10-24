@@ -162,7 +162,6 @@ public class AlembicBlock extends HorizontalDirectionalBlock implements EntityBl
             level.blockUpdated(pos, Blocks.AIR);
             state.updateNeighbourShapes(level, pos, 3);
         }
-        super.setPlacedBy(level, pos, state, placer, stack);
     }
 
     @Override

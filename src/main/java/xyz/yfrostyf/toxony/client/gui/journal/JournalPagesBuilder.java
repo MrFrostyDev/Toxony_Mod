@@ -5,13 +5,11 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
 import xyz.yfrostyf.toxony.api.affinity.Affinity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JournalPagesBuilder {
     List<PageScreen> pages = new ArrayList<>();
@@ -94,24 +92,37 @@ public class JournalPagesBuilder {
         return TextCraftingPageScreenStacks(translateId, output, newList);
     }
 
-    public JournalPagesBuilder TextMortarPageScreen(String translateId, Item output, List<ItemLike> inputs){
-        return TextMortarPageScreenIngredients(translateId, output, inputs.stream().map(Ingredient::of).toList());
-    }
-
-    public JournalPagesBuilder TextMortarPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs){
-        pages.add(new TextMortarPageScreen(translateId, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
+    public JournalPagesBuilder TextMortarPageScreen(String translateId, Item output, Optional<RecipeHolder<?>> recipeHolder){
+        if(recipeHolder.isPresent()){
+            pages.add(new TextMortarPageScreen(translateId, output.getDefaultInstance(), ListIngredientsToItemStack(recipeHolder.get().value().getIngredients()), indexCount, emptyJournal));
+        }
+        else{
+            pages.add(new TextSingleItemTopScreen(translateId, indexCount, output.getDefaultInstance(), emptyJournal));
+        }
         indexCount++;
         return this;
     }
 
-    public JournalPagesBuilder TextCruciblePageScreenIngredient(String translateId, Item output, Ingredient input){
-        pages.add(new TextCruciblePageScreen(translateId, output.getDefaultInstance(), Arrays.asList(input.getItems()), indexCount, emptyJournal));
+    public JournalPagesBuilder TextCruciblePageScreen(String translateId, Item output, Optional<RecipeHolder<?>> recipeHolder){
+        if(recipeHolder.isPresent()){
+            pages.add(new TextCruciblePageScreen(translateId, output.getDefaultInstance(), Arrays.asList(recipeHolder.get().value().getIngredients().getFirst().getItems()), indexCount, emptyJournal));
+        }
+        else{
+            pages.add(new TextSingleItemTopScreen(translateId, indexCount, output.getDefaultInstance(), emptyJournal));
+        }
         indexCount++;
         return this;
     }
 
-    public JournalPagesBuilder TextAlembicPageScreenIngredients(String translateId, Item output, List<Ingredient> inputs){
-        pages.add(new TextAlembicPageScreen(translateId, output.getDefaultInstance(), ListIngredientsToItemStack(inputs), indexCount, emptyJournal));
+    public JournalPagesBuilder TextAlembicPageScreen(String translateId, Item output, Optional<RecipeHolder<?>> recipeHolder){
+        if(recipeHolder.isPresent()){
+            pages.add(new TextAlembicPageScreen(translateId, output.getDefaultInstance(), ListIngredientsToItemStack(
+                    List.of(recipeHolder.get().value().getIngredients().get(0), recipeHolder.get().value().getIngredients().get(1))
+            ), indexCount, emptyJournal));
+        }
+        else{
+            pages.add(new TextSingleItemTopScreen(translateId, indexCount, output.getDefaultInstance(), emptyJournal));
+        }
         indexCount++;
         return this;
     }

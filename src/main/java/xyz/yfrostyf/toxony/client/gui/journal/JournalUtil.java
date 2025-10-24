@@ -11,8 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -62,17 +60,7 @@ public class JournalUtil {
     }
 
     public static JournalPagesBuilder createPages(){
-        Recipe<?> recipe_poison_blend = getRecipe(manager, "mortar/poison_blend").value();
-        Recipe<?> recipe_toxic_blend = getRecipe(manager, "mortar/toxic_blend").value();
-        Recipe<?> recipe_poison_paste = getRecipe(manager, "mortar/poison_paste").value();
-        Recipe<?> recipe_toxin_tox_pot = getRecipe(manager, "mortar/toxin_tox_pot").value();
-        Recipe<?> recipe_affinity_fusion_mix = getRecipe(manager, "mortar/affinity_fusion_mix").value();
-        Recipe<?> recipe_affinity_unknown_substance = getRecipe(manager, "crucible/affinity_unknown_substance").value();
-
-        Recipe<?> recipe_toxin = getRecipe(manager, "alembic/toxin").value();
-        Recipe<?> recipe_affinity_solution = getRecipe(manager, "alembic/affinity_solution").value();
-
-        Recipe<?> recipe_toxic_paste = getRecipe(manager, "crucible/toxic_paste").value();
+        Optional<RecipeHolder<?>>  recipe_toxic_paste = getRecipe(manager, "crucible/toxic_paste");
 
         return new JournalPagesBuilder()
                 // |----------------- Intro/Index ----------------- |
@@ -91,10 +79,7 @@ public class JournalUtil {
                 )
                 .TextPageScreen("journal.toxony.page.poison_basics.2")
                 .TextPageScreen("journal.toxony.page.poison_basics.3")
-                .TextMortarPageScreenIngredients("journal.toxony.page.poison_basics.4", ItemRegistry.POISON_PASTE.get(),
-                        List.of(recipe_poison_paste.getIngredients().get(0), recipe_poison_paste.getIngredients().get(1),
-                                recipe_poison_paste.getIngredients().get(2), Ingredient.EMPTY)
-                )
+                .TextMortarPageScreen("journal.toxony.page.poison_basics.4", ItemRegistry.POISON_PASTE.get(), getRecipe(manager, "mortar/poison_paste"))
                 .TextPageScreen("journal.toxony.page.poison_basics.5")
 
                 // |----------------- Poisonous Flora ----------------- |
@@ -112,11 +97,7 @@ public class JournalUtil {
                 .TextSingleItemTopScreen("journal.toxony.page.poisonous_flora.10", ItemRegistry.BOG_BONE.get())
                 .TextSingleItemTopScreen("journal.toxony.page.poisonous_flora.11", ItemRegistry.ACID_SLIMEBALL.get())
                 .TextPageScreen("journal.toxony.page.poisonous_flora.12")
-                .TextMortarPageScreenIngredients("journal.toxony.page.poisonous_flora.13", ItemRegistry.POISON_BLEND.get(),
-                        List.of(recipe_poison_blend.getIngredients().get(0), recipe_poison_blend.getIngredients().get(1),
-                                Ingredient.EMPTY, Ingredient.EMPTY
-                        )
-                )
+                .TextMortarPageScreen("journal.toxony.page.poisonous_flora.13", ItemRegistry.POISON_BLEND.get(), getRecipe(manager, "mortar/poison_blend"))
                 .TextPageScreen("journal.toxony.page.poisonous_flora.14")
 
                 // |----------------- Oil Basics ----------------- |
@@ -127,26 +108,10 @@ public class JournalUtil {
                                 Items.CLAY_BALL, ItemRegistry.POISON_PASTE.get(), Items.CLAY_BALL,
                                 EMPTY, Items.CLAY_BALL, EMPTY)
                 )
-                .TextMortarPageScreen("journal.toxony.page.oil_basics.2", ItemRegistry.POISON_OIL_POT.get(),
-                        List.of(Items.HONEYCOMB, ItemRegistry.POISON_PASTE.get(),
-                                EMPTY, EMPTY
-                        )
-                )
-                .TextMortarPageScreen("journal.toxony.page.oil_basics.3", ItemRegistry.FATIGUE_OIL_POT.get(),
-                        List.of(Items.HONEYCOMB, Items.FERMENTED_SPIDER_EYE,
-                                ItemRegistry.WATER_HEMLOCK.get(), EMPTY
-                        )
-                )
-                .TextMortarPageScreen("journal.toxony.page.oil_basics.4", ItemRegistry.GLOWING_OIL_POT.get(),
-                        List.of(Items.HONEYCOMB, Items.GLOW_INK_SAC,
-                                EMPTY, EMPTY
-                        )
-                )
-                .TextMortarPageScreen("journal.toxony.page.oil_basics.5", ItemRegistry.FIRE_RESISTANCE_OIL_POT.get(),
-                        List.of(Items.HONEYCOMB, ItemRegistry.BLOODROOT.get(),
-                                EMPTY, EMPTY
-                        )
-                )
+                .TextMortarPageScreen("journal.toxony.page.oil_basics.2", ItemRegistry.POISON_OIL_POT.get(), getRecipe(manager, "mortar/poison_oil_pot"))
+                .TextMortarPageScreen("journal.toxony.page.oil_basics.3", ItemRegistry.FATIGUE_OIL_POT.get(), getRecipe(manager, "mortar/fatigue_oil_pot"))
+                .TextMortarPageScreen("journal.toxony.page.oil_basics.4", ItemRegistry.GLOWING_OIL_POT.get(), getRecipe(manager, "mortar/glowing_oil_pot"))
+                .TextMortarPageScreen("journal.toxony.page.oil_basics.5", ItemRegistry.FIRE_RESISTANCE_OIL_POT.get(), getRecipe(manager, "mortar/fire_resistance_oil_pot"))
                 .TextPageScreen("journal.toxony.page.oil_basics.6")
 
                 // |----------------- Basic Tools ----------------- |
@@ -182,25 +147,11 @@ public class JournalUtil {
                                 Items.COPPER_INGOT, Items.COPPER_INGOT, Items.COPPER_INGOT,
                                 Items.IRON_INGOT, Items.CHARCOAL, Items.IRON_INGOT)
                 )
-                .TextCruciblePageScreenIngredient("journal.toxony.page.refined_process.2", ItemRegistry.TOXIC_PASTE.get(),
-                        Ingredient.of(ItemRegistry.POISON_PASTE.get())
-                )
+                .TextCruciblePageScreen("journal.toxony.page.refined_process.2", ItemRegistry.TOXIC_PASTE.get(), getRecipe(manager, "crucible/toxic_paste"))
                 .TextPageScreen("journal.toxony.page.refined_process.3")
-                .TextMortarPageScreen("journal.toxony.page.refined_process.4", ItemRegistry.ACID_OIL_POT.get(),
-                        List.of(Items.HONEYCOMB, ItemRegistry.TOXIC_PASTE.get(),
-                                ItemRegistry.ACID_SLIMEBALL.get(), ItemRegistry.ACID_SLIMEBALL.get()
-                        )
-                )
-                .TextMortarPageScreen("journal.toxony.page.refined_process.5", ItemRegistry.MENDING_OIL_POT.get(),
-                        List.of(Items.HONEYCOMB, ItemRegistry.TOXIC_PASTE.get(),
-                                ItemRegistry.TOXIC_SPIT.get(), ItemRegistry.OCELOT_MINT.get()
-                        )
-                )
-                .TextMortarPageScreenIngredients("journal.toxony.page.refined_process.6", ItemRegistry.TOXIC_BLEND.get(),
-                        List.of(recipe_toxic_blend.getIngredients().get(0), recipe_toxic_blend.getIngredients().get(1),
-                                recipe_toxic_blend.getIngredients().get(2), Ingredient.EMPTY
-                        )
-                )
+                .TextMortarPageScreen("journal.toxony.page.refined_process.4", ItemRegistry.ACID_OIL_POT.get(), getRecipe(manager, "mortar/acid_oil_pot"))
+                .TextMortarPageScreen("journal.toxony.page.refined_process.5", ItemRegistry.MENDING_OIL_POT.get(), getRecipe(manager, "mortar/mending_oil_pot"))
+                .TextMortarPageScreen("journal.toxony.page.refined_process.6", ItemRegistry.TOXIC_BLEND.get(), getRecipe(manager, "mortar/toxic_blend"))
                 .TextCraftingPageScreenItem("journal.toxony.page.refined_process.7", ItemRegistry.REDSTONE_MORTAR.get(),
                         List.of(Items.CHISELED_POLISHED_BLACKSTONE, ItemRegistry.MORTAR_PESTLE.get(), Items.CHISELED_POLISHED_BLACKSTONE,
                                 Items.COPPER_INGOT, Items.IRON_INGOT, Items.COPPER_INGOT,
@@ -257,7 +208,7 @@ public class JournalUtil {
                 .TextCraftingPageScreenItem("journal.toxony.page.pure_chemistry.3", ItemRegistry.ALEMBIC.get(),
                         List.of(Items.COPPER_INGOT, EMPTY, EMPTY,
                                 Items.COPPER_INGOT, Items.IRON_INGOT, EMPTY,
-                                ItemRegistry.ALEMBIC_BASE.get(), EMPTY, Items.COPPER_INGOT)
+                                ItemRegistry.ALEMBIC_BASE.get(), EMPTY, ItemRegistry.TOXIN_CANISTER.get())
                 )
                 .TextCraftingPageScreenItem("journal.toxony.page.pure_chemistry.4", ItemRegistry.ALEMBIC_BASE.get(),
                         List.of(EMPTY, Items.IRON_INGOT, EMPTY,
@@ -272,9 +223,7 @@ public class JournalUtil {
                                 EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance())
                 )
                 .TextPageScreen("journal.toxony.page.pure_chemistry.8")
-                .TextAlembicPageScreenIngredients("journal.toxony.page.pure_chemistry.9", ItemRegistry.TOXIN.get(),
-                        List.of(recipe_toxin.getIngredients().get(0), recipe_toxin.getIngredients().get(1))
-                )
+                .TextAlembicPageScreen("journal.toxony.page.pure_chemistry.9", ItemRegistry.TOXIN.get(), getRecipe(manager, "alembic/toxin"))
 
                 // |----------------- Mutagens ----------------- |
                 .ImagePageScreen("journal.toxony.page.mutagens.cover", "textures/gui/journal/journal_mutagens_cover.png")
@@ -289,12 +238,8 @@ public class JournalUtil {
                                 EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(),
                                 EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance(), EMPTY.getDefaultInstance())
                 )
-                .TextCruciblePageScreenIngredient("journal.toxony.page.mutagens.7", ItemRegistry.REDSTONE_SOLUTION.get(),
-                        Ingredient.of(ItemRegistry.REDSTONE_MIXTURE.get())
-                )
-                .TextAlembicPageScreenIngredients("journal.toxony.page.mutagens.8", ItemRegistry.AFFINITY_SOLUTION.get(),
-                        List.of(recipe_affinity_solution.getIngredients().get(0), recipe_affinity_solution.getIngredients().get(1))
-                )
+                .TextCruciblePageScreen("journal.toxony.page.mutagens.7", ItemRegistry.REDSTONE_SOLUTION.get(), getRecipe(manager, "crucible/redstone_solution"))
+                .TextAlembicPageScreen("journal.toxony.page.mutagens.8", ItemRegistry.AFFINITY_SOLUTION.get(),  getRecipe(manager, "alembic/affinity_solution"))
                 .TextCraftingPageScreenItem("journal.toxony.page.mutagens.9", ItemRegistry.COPPER_NEEDLE.get(),
                         List.of(EMPTY, EMPTY, Items.IRON_NUGGET,
                                 EMPTY, ItemRegistry.TOXIN_CANISTER.get(), EMPTY,
@@ -318,57 +263,25 @@ public class JournalUtil {
                                 new Pair<>(new ItemStack(ItemRegistry.BLOODROOT), new ItemStack(ItemRegistry.WARPROOT)), AffinityRegistry.COLD.get()
                         )
                 )
-                .TextMortarPageScreenIngredients("journal.toxony.page.evolved_flora.3", ItemRegistry.AFFINITY_FUSION_MIX.get(),
-                        List.of(recipe_affinity_fusion_mix.getIngredients().get(0), recipe_affinity_fusion_mix.getIngredients().get(1),
-                                recipe_affinity_fusion_mix.getIngredients().get(2), recipe_affinity_fusion_mix.getIngredients().get(3))
-                )
-                .TextCruciblePageScreenIngredient("journal.toxony.page.evolved_flora.4", ItemRegistry.UNKNOWN_SUBSTANCE.get(),
-                        recipe_affinity_unknown_substance.getIngredients().getFirst())
+                .TextMortarPageScreen("journal.toxony.page.evolved_flora.3", ItemRegistry.AFFINITY_FUSION_MIX.get(),  getRecipe(manager, "mortar/affinity_fusion_mix"))
+                .TextCruciblePageScreen("journal.toxony.page.evolved_flora.4", ItemRegistry.UNKNOWN_SUBSTANCE.get(),  getRecipe(manager, "crucible/affinity_unknown_substance"))
                 .TextSingleItemTopScreen("journal.toxony.page.evolved_flora.5", ItemRegistry.UNKNOWN_SUBSTANCE.get())
 
                 // |----------------- Advanced Oils ----------------- |
                 .ImagePageScreen("journal.toxony.page.advanced_oils.cover", "textures/gui/journal/journal_advanced_oils_cover.png")
                 .TextPageScreen("journal.toxony.page.advanced_oils.0")
-                .TextAlembicPageScreenIngredients("journal.toxony.page.advanced_oils.1", ItemRegistry.EMPTY_TOX_POT.get(),
-                        List.of(Ingredient.of(ItemRegistry.TOXIN.get()), Ingredient.of(ItemRegistry.EMPTY_OIL_POT.get()))
-                )
-                .TextMortarPageScreenIngredients("journal.toxony.page.advanced_oils.2", ItemRegistry.TOXIN_TOX_POT.get(),
-                        List.of(recipe_toxin_tox_pot.getIngredients().get(0), recipe_toxin_tox_pot.getIngredients().get(1),
-                                recipe_toxin_tox_pot.getIngredients().get(2), Ingredient.EMPTY
-                        )
-                )
-                .TextMortarPageScreenIngredients("journal.toxony.page.advanced_oils.3", ItemRegistry.SMOKE_TOX_POT.get(),
-                        List.of(Ingredient.of(Items.HONEYCOMB), Ingredient.of(Items.FERMENTED_SPIDER_EYE),
-                                Ingredient.of(ItemRegistry.WATER_HEMLOCK.get()), Ingredient.EMPTY
-                        )
-                )
-                .TextMortarPageScreenIngredients("journal.toxony.page.advanced_oils.4", ItemRegistry.REGENERATION_TOX_POT.get(),
-                        List.of(Ingredient.of(Items.HONEYCOMB), Ingredient.of(Items.GHAST_TEAR),
-                                Ingredient.of(ItemRegistry.SUNSPOT.get()), Ingredient.EMPTY
-                        )
-                )
-                .TextMortarPageScreen("journal.toxony.page.advanced_oils.5", ItemRegistry.ACID_TOX_POT.get(),
-                        List.of(Items.HONEYCOMB, ItemRegistry.WARPROOT.get(),
-                                ItemRegistry.BOG_BONE.get(), ItemRegistry.ACID_SLIMEBALL.get()
-                        )
-                )
-                .TextMortarPageScreenIngredients("journal.toxony.page.advanced_oils.6", ItemRegistry.WITCHFIRE_TOX_POT.get(),
-                        List.of(Ingredient.of(Items.HONEYCOMB), Ingredient.of(ItemRegistry.WARPROOT.get()),
-                                Ingredient.of(Items.BLAZE_POWDER), Ingredient.EMPTY
-                        )
-                )
-                .TextMortarPageScreenIngredients("journal.toxony.page.advanced_oils.7", ItemRegistry.OIL_BASE.get(),
-                        List.of(Ingredient.of(Items.HONEYCOMB), Ingredient.of(ItemRegistry.TOXIC_PASTE.get()),
-                                Ingredient.EMPTY, Ingredient.EMPTY
-                        )
-                )
+                .TextAlembicPageScreen("journal.toxony.page.advanced_oils.1", ItemRegistry.EMPTY_TOX_POT.get(), getRecipe(manager, "alembic/empty_tox_pot"))
+                .TextMortarPageScreen("journal.toxony.page.advanced_oils.2", ItemRegistry.TOXIN_TOX_POT.get(), getRecipe(manager, "mortar/toxin_tox_pot"))
+                .TextMortarPageScreen("journal.toxony.page.advanced_oils.3", ItemRegistry.SMOKE_TOX_POT.get(), getRecipe(manager, "mortar/smoke_tox_pot"))
+                .TextMortarPageScreen("journal.toxony.page.advanced_oils.4", ItemRegistry.REGENERATION_TOX_POT.get(), getRecipe(manager, "mortar/regeneration_tox_pot"))
+                .TextMortarPageScreen("journal.toxony.page.advanced_oils.5", ItemRegistry.ACID_TOX_POT.get(), getRecipe(manager, "mortar/acid_tox_pot"))
+                .TextMortarPageScreen("journal.toxony.page.advanced_oils.6", ItemRegistry.WITCHFIRE_TOX_POT.get(), getRecipe(manager, "mortar/witchfire_tox_pot"))
+                .TextMortarPageScreen("journal.toxony.page.advanced_oils.7", ItemRegistry.OIL_BASE.get(), getRecipe(manager, "mortar/oil_base"))
 
                 // |----------------- Evolving Warfare ----------------- |
                 .ImagePageScreen("journal.toxony.page.evolving_warfare.cover", "textures/gui/journal/journal_evolving_warfare_cover.png")
                 .TextPageScreen("journal.toxony.page.evolving_warfare.0")
-                .TextAlembicPageScreenIngredients("journal.toxony.page.evolving_warfare.1", ItemRegistry.TOXIC_LEATHER.get(),
-                        List.of(Ingredient.of(ItemRegistry.TOXIN.get()), Ingredient.of(Items.LEATHER))
-                )
+                .TextAlembicPageScreen("journal.toxony.page.evolving_warfare.1", ItemRegistry.TOXIC_LEATHER.get(), getRecipe(manager, "alembic/toxic_leather"))
                 .TextCraftingPageScreenItem("journal.toxony.page.evolving_warfare.2", ItemRegistry.PLAGUE_DOCTOR_COAT.get(),
                         List.of(Items.CHAIN, EMPTY, Items.CHAIN,
                                 ItemRegistry.TOXIC_LEATHER.get(), ItemRegistry.TOXIC_LEATHER.get(), ItemRegistry.TOXIC_LEATHER.get(),
@@ -414,12 +327,12 @@ public class JournalUtil {
 
     }
 
-    private static RecipeHolder<?> getRecipe(RecipeManager manager, String location){
+    private static Optional<RecipeHolder<?>> getRecipe(RecipeManager manager, String location){
         Optional<RecipeHolder<?>> optional = Optional.empty();
         if(level != null){
             optional = manager.byKey(ResourceLocation.fromNamespaceAndPath(ToxonyMain.MOD_ID, location));
         }
-        return optional.orElseThrow();
+        return optional;
     }
 
     private static ItemStack createEnchantedItemStack(Item itemStack, ResourceKey<Enchantment> key){
