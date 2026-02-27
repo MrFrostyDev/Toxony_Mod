@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-28T18:16:18.936219	Registries
+// 1.21.1	2026-02-27T01:31:39.829879416	Registries
 908028b01c327551eb93c95e70c467d8fed09526 data/toxony/enchantment/acidshot.json
 105309e95c66f89a0a746e997da052152dd2bdfb data/toxony/enchantment/impact.json
 07bf469e895543040100ce89d80c3d483a1b998c data/toxony/enchantment/refill.json
@@ -13,8 +13,8 @@ f9ab7fbb0313b149b0ccabbe0a93507d6c418d36 data/toxony/neoforge/biome_modifier/add
 81578c32298674478661379b04cf99309ddf6abe data/toxony/worldgen/configured_feature/patch_false_berry_bush.json
 3ecc72a0e420756b9ffb98c27b6a7045d3a066d9 data/toxony/worldgen/configured_feature/patch_wild_bloodroot.json
 ca098147c3f76b72919927cd006a66e11a36189d data/toxony/worldgen/configured_feature/wild_coldsnap.json
-7b1a41168f208c826a0f816aae81556dd4b373a1 data/toxony/worldgen/configured_feature/wild_nightshade.json
-63995e123573efac9d579dec299b53c088bef15a data/toxony/worldgen/configured_feature/wild_ocelot_mint.json
+df0f1073fa4903dde7a393a4adf28f0f2b7bf657 data/toxony/worldgen/configured_feature/wild_nightshade.json
+7eac49920989ada2f369662cd5a6a80e1f229eba data/toxony/worldgen/configured_feature/wild_ocelot_mint.json
 cac24347f26a84e092c9f0ac293c031342588425 data/toxony/worldgen/configured_feature/wild_water_hemlock.json
 8f7f01bde7ec2887dd5c21c4aba828c8da70b262 data/toxony/worldgen/placed_feature/false_berry_bush_placed.json
 2d71f05c8c938e7a49943b2097f3680f873e7dc6 data/toxony/worldgen/placed_feature/ore_ancient_silver_small.json
