@@ -48,23 +48,25 @@ public class ToxonyConfiguredFeatures {
                 ));
 
         register(context, WILD_OCELOT_MINT, Feature.FLOWER,
-                FeatureUtils.simplePatchConfiguration(
+                ToxonyFeatureUtils.simplePatchConfiguration(
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_OCELOT_MINT.get().defaultBlockState()
                                         .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(WildPoisonCropBlock.MAX_AGE)))
                         ),
-                        List.of(Blocks.GRASS_BLOCK)
+                        // TODO: Replace with #minecraft:grass_blocks in 26.1
+                        BlockTags.DIRT
                 ));
 
         register(context, WILD_NIGHTSHADE, Feature.FLOWER,
-                FeatureUtils.simplePatchConfiguration(
+                ToxonyFeatureUtils.simplePatchConfiguration(
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(BlockRegistry.WILD_NIGHTSHADE.get().defaultBlockState()
                                         .setValue(WildPoisonCropBlock.AGE, Integer.valueOf(WildPoisonCropBlock.MAX_AGE)))
                         ),
-                        List.of(Blocks.GRASS_BLOCK)
+                        // TODO: Replace with #minecraft:grass_blocks in 26.1
+                        BlockTags.DIRT
                 ));
 
         register(context, WILD_WATER_HEMLOCK, Feature.FLOWER,
