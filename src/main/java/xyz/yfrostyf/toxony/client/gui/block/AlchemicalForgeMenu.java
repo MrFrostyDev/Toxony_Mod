@@ -131,7 +131,7 @@ public class AlchemicalForgeMenu extends AbstractContainerMenu {
             if (!this.moveItemStackTo(rawStack, 0, 3, false)) {
                 if (!this.moveItemStackTo(rawStack, 3, 6, true)) {
                     if (selectedSlotIndex < 35) {
-                        if (!this.moveItemStackTo(rawStack, 35, 44, false)) {
+                        if (!this.moveItemStackTo(rawStack, 35, 43, false)) {
                             return ItemStack.EMPTY;
                         }
                     }
