@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_flintlock": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:flintlock"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "toxony:iron_round"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_flintlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "toxony:iron_round"
+    ]
+  }
+}

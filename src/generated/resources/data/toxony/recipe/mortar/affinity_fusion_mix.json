@@ -1,0 +1,21 @@
+{
+  "type": "toxony:mortar_pestle",
+  "ingredients": [
+    {
+      "type": "toxony:possible_affinity"
+    },
+    {
+      "type": "toxony:possible_affinity"
+    },
+    {
+      "type": "toxony:possible_affinity"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:affinity_fusion_mix"
+  }
+}

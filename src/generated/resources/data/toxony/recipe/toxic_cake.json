@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "minecraft:egg"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "T": {
+      "item": "toxony:toxic_paste"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "SES",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:toxic_cake"
+  }
+}

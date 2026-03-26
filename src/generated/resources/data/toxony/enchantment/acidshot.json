@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 5,
+  "description": {
+    "translate": "enchantment.toxony.acidshot"
+  },
+  "effects": {
+    "toxony:acidshot": {
+      "value": 1.0
+    }
+  },
+  "max_cost": {
+    "base": 30,
+    "per_level_above_first": 12
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 12
+  },
+  "slots": [
+    "mainhand",
+    "offhand"
+  ],
+  "supported_items": "toxony:flintlock",
+  "weight": 2
+}

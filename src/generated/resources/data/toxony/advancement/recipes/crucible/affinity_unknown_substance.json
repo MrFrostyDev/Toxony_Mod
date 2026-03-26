@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_affinity_fusion_mix": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:affinity_fusion_mix"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "toxony:crucible/affinity_unknown_substance"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_affinity_fusion_mix"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "toxony:crucible/affinity_unknown_substance"
+    ]
+  }
+}

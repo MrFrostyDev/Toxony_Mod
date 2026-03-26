@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ancient_silver": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:ancient_silver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "toxony:silver_scrap"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ancient_silver"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "toxony:silver_scrap"
+    ]
+  }
+}

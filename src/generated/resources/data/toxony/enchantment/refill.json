@@ -1,0 +1,28 @@
+{
+  "anvil_cost": 5,
+  "description": {
+    "translate": "enchantment.toxony.refill"
+  },
+  "effects": {
+    "toxony:refill": {
+      "value": 0.5
+    }
+  },
+  "max_cost": {
+    "base": 30,
+    "per_level_above_first": 12
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 12
+  },
+  "slots": [
+    "any"
+  ],
+  "supported_items": [
+    "toxony:potion_flask",
+    "toxony:toxin_flask"
+  ],
+  "weight": 2
+}

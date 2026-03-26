@@ -1,0 +1,12 @@
+{
+  "type": "toxony:piglin_barter_loot_modifier",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/piglin_bartering"
+    }
+  ],
+  "drop_item": "toxony:bloodroot",
+  "max": 2,
+  "min": 1
+}

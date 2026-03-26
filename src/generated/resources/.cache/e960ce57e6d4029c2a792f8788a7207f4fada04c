@@ -1,0 +1,4 @@
+// 1.21.1	2025-05-04T04:57:23.7495027	Tags for minecraft:enchantment mod id toxony
+b2be0550a98c4483c48f2bbbf1e9423fb252a4df data/c/tags/enchantment/increase_entity_drops.json
+c73aac794c0a5b32e27c967ec3bf79b22857b453 data/c/tags/enchantment/weapon_damage_enhancements.json
+d2c6ec8e441de956781f29736e02636ac4d1cc52 data/minecraft/tags/enchantment/in_enchanting_table.json

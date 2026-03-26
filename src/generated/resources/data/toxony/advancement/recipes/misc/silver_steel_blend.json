@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_silver_scrap": {
+      "conditions": {
+        "items": [
+          {
+            "items": "toxony:silver_scrap"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "toxony:silver_steel_blend"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_silver_scrap"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "toxony:silver_steel_blend"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "toxony:silver_steel_ingot"
+  },
+  "base": {
+    "item": "toxony:hunter_boots"
+  },
+  "result": {
+    "count": 1,
+    "id": "toxony:professional_hunter_boots"
+  },
+  "template": {
+    "item": "toxony:silver_steel_upgrade_smithing_template"
+  }
+}

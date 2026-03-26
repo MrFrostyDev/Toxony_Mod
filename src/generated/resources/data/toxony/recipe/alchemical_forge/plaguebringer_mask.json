@@ -1,0 +1,52 @@
+{
+  "type": "toxony:alchemical_forge",
+  "affinities": [
+    {
+      "items": [
+        "toxony:bog_bone",
+        "toxony:coldsnap",
+        "toxony:water_hemlock",
+        "minecraft:wither_rose",
+        "minecraft:rotten_flesh",
+        "toxony:decay_substance"
+      ],
+      "mutagens": [
+        "toxony:necrotic_mutagen"
+      ],
+      "name": "decay"
+    },
+    {
+      "items": [
+        "toxony:warproot"
+      ],
+      "mutagens": [
+        "toxony:spirit_mutagen"
+      ],
+      "name": "soul"
+    },
+    {
+      "items": [
+        "toxony:sunspot"
+      ],
+      "mutagens": [
+        "toxony:beast_mutagen",
+        "toxony:infernal_mutagen"
+      ],
+      "name": "sun"
+    }
+  ],
+  "auxiliary": [
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    }
+  ],
+  "main": {
+    "item": "toxony:plague_doctor_hood"
+  },
+  "result": {
+    "id": "toxony:plaguebringer_mask"
+  }
+}

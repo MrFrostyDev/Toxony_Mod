@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "toxony:mortar_pestle"
+    },
+    "R": {
+      "item": "minecraft:comparator"
+    },
+    "S": {
+      "item": "minecraft:chiseled_polished_blackstone"
+    }
+  },
+  "pattern": [
+    "SMS",
+    "CIC",
+    "CRC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "toxony:redstone_mortar"
+  }
+}
