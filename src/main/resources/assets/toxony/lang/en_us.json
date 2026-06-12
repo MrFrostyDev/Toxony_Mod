@@ -330,7 +330,8 @@
   "commands.tolerance.set.success": "Set tolerance of [%s] to %s",
   "commands.tolerance.add.success": "Added tolerance to [%s] by %s",
 
-  "toxony.networking.sync_tox.failed": "Failed to sync tox data to player: %s",
+  "toxony.networking.sync_tox.failed": "Failed to sync ONLY tox data to player: %s",
+  "toxony.networking.sync_tox_data.failed": "Failed to sync ALL tox data to player: %s",
   "toxony.networking.sync_affinity_map.failed": "Failed to sync affinity map to player: %s",
 
   "attribute.toxony.generic.effect_reduction": "Effect Reduction",

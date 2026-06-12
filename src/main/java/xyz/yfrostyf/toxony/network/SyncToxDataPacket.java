@@ -41,6 +41,7 @@ public record SyncToxDataPacket(ToxData toxData) implements CustomPacketPayload 
             ToxData clientToxData = ClientToxData.getToxData();
             context.player().setData(DataAttachmentRegistry.TOX_DATA, clientToxData);
 
+            /*
             ToxonyMain.LOGGER.debug("[New Client ToxData]: \nTox: {}, \nTol: {}, \nThreshold: {}, \nAffinities: {}, \nMutagens: {}, \nKnownIngreds: {}, \nDeathstate: {}",
                     clientToxData.getTox(),
                     clientToxData.getTolerance(),
@@ -49,6 +50,7 @@ public record SyncToxDataPacket(ToxData toxData) implements CustomPacketPayload 
                     clientToxData.getMutagens(),
                     clientToxData.getKnownIngredients(),
                     clientToxData.getDeathState());
+            */
 
         }).exceptionally(e -> {
             // Handle exception

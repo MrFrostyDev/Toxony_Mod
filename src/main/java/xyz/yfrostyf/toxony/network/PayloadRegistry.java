@@ -7,7 +7,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import xyz.yfrostyf.toxony.ToxonyMain;
 
-@EventBusSubscriber(modid = ToxonyMain.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ToxonyMain.MOD_ID)
 public class PayloadRegistry {
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event) {
